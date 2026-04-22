@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 228 22% 7%;
+    --surface: 228 20% 10%;
+    --surface-elevated: 228 18% 13%;
+    --border: 228 16% 20%;
+    --primary: 38 82% 52%;
+    --primary-glow: 38 82% 52%;
+    --secondary: 245 55% 59%;
+    --accent: 177 55% 55%;
+    --highlight: 335 75% 65%;
+    --text-primary: 220 20% 95%;
+    --text-muted: 220 10% 55%;
+    --text-subtle: 220 8% 40%;
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --danger: 0 72% 51%;
+    --info: 245 55% 59%;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0b0d14;
+    color: hsl(var(--text-primary));
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--text-subtle));
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-elevated {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 20px rgba(232, 160, 32, 0.30), 0 0 40px rgba(232, 160, 32, 0.12);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(123, 111, 212, 0.30), 0 0 40px rgba(123, 111, 212, 0.12);
+  }
+
+  .glow-teal {
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.30), 0 0 40px rgba(78, 205, 196, 0.12);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(232, 97, 154, 0.30), 0 0 40px rgba(232, 97, 154, 0.12);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #E8A020, #7B6FD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #E8A020, #C98A10);
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #C98A10, #A87010);
+    box-shadow: 0 0 20px rgba(232, 160, 32, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98) translateY(0);
+  }
+
+  .nav-active {
+    background: linear-gradient(135deg, rgba(232, 160, 32, 0.15), rgba(123, 111, 212, 0.10));
+    border: 1px solid rgba(232, 160, 32, 0.30);
+    box-shadow: 0 0 12px rgba(232, 160, 32, 0.12);
+  }
+
+  .status-dot-active {
+    animation: pulse-green 2s infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-hover {
+    transition: all 0.2s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(232, 160, 32, 0.30);
+    box-shadow: 0 8px 32px rgba(232, 160, 32, 0.12);
+  }
+
+  .radial-bg {
+    background: radial-gradient(ellipse at top left, rgba(232, 160, 32, 0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at bottom right, rgba(123, 111, 212, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at center, rgba(78, 205, 196, 0.03) 0%, transparent 70%),
+                #0b0d14;
+  }
+
+  .code-block {
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+  }
+
+  .step-active {
+    background: linear-gradient(135deg, rgba(232, 160, 32, 0.20), rgba(123, 111, 212, 0.15));
+    border-color: rgba(232, 160, 32, 0.55);
+  }
+
+  .step-complete {
+    background: rgba(78, 205, 196, 0.12);
+    border-color: rgba(78, 205, 196, 0.45);
+  }
+}
