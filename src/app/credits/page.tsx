@@ -17,7 +17,7 @@ const MOCK_TRANSACTIONS: CreditTransaction[] = [
   { id: 't2', type: 'usage', description: 'Web Chat — Alex persona', amount: -45, date: 'Apr 8, 2026', channel: 'Web Chat' },
   { id: 't3', type: 'usage', description: 'Voice AI — Maya persona', amount: -120, date: 'Apr 7, 2026', channel: 'Voice AI' },
   { id: 't4', type: 'bonus', description: 'Welcome bonus credits', amount: 200, date: 'Apr 6, 2026' },
-  { id: 't5', type: 'usage', description: 'WhatsApp — Leo persona', amount: -80, date: 'Apr 5, 2026', channel: 'WhatsApp' },
+  { id: 't5', type: 'usage', description: 'Voice AI — Leo persona', amount: -80, date: 'Apr 5, 2026', channel: 'Voice AI' },
   { id: 't6', type: 'usage', description: 'Web Chat — Alex persona', amount: -30, date: 'Apr 4, 2026', channel: 'Web Chat' },
   { id: 't7', type: 'purchase', description: '500 min Credit Pack', amount: 500, date: 'Apr 1, 2026' },
 ];
@@ -62,8 +62,7 @@ const SUBSCRIPTION_PLANS = [
 const CHANNEL_USAGE = [
   { channel: 'Web Chat', minutes: 175, color: '#38bdf8', icon: '💬' },
   { channel: 'Voice AI', minutes: 320, color: '#a78bfa', icon: '🎙️' },
-  { channel: 'WhatsApp', minutes: 80, color: '#34d399', icon: '📱' },
-  { channel: 'Avatar Chat', minutes: 45, color: '#f59e0b', icon: '🎭' },
+  { channel: 'SIP/Voice', minutes: 80, color: '#34d399', icon: '📞' },
 ];
 
 const totalUsed = CHANNEL_USAGE.reduce((s, c) => s + c.minutes, 0);

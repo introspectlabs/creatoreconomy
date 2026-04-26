@@ -365,7 +365,7 @@ export default function PersonaDetailDrawer({ persona, onClose }: DrawerProps) {
                 persona.channels.map((ch) => (
                   <div key={`drawer-ch-${ch}`} className="glass rounded-xl p-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{ch === 'WhatsApp' ? '📱' : ch === 'Web Chat' ? '💬' : ch === 'SIP' ? '📞' : '⚡'}</span>
+                      <span className="text-base">{ch === 'Web Chat' ? '💬' : ch === 'SIP' ? '📞' : '⚡'}</span>
                       <p className="text-sm font-500 text-white">{ch}</p>
                     </div>
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400">Connected</span>

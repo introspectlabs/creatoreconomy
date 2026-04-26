@@ -28,7 +28,7 @@ const plans = [
     storage: '10 GB',
     minutes: '2,000 min/mo',
     features: [
-      'All channels: Chat, WhatsApp, Voice, API',
+      'All channels: Chat, Voice, API',
       'Unlimited personas',
       '10 GB knowledge ingestion',
       '2,000 conversational minutes',
@@ -47,7 +47,7 @@ const plans = [
     storage: '100 GB',
     minutes: '10,000 min/mo',
     features: [
-      'All channels incl. SIP & Avatar Chat',
+      'All channels incl. SIP',
       'Unlimited personas',
       '100 GB knowledge ingestion',
       '10,000 conversational minutes',

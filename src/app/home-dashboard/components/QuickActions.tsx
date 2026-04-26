@@ -31,7 +31,7 @@ const actions = [
     id: 'qa-channel',
     icon: Radio,
     title: 'Connect Channel',
-    desc: 'Link WhatsApp, SIP, or Web Chat to a persona',
+    desc: 'Link SIP or Web Chat to a persona',
     href: '/channels-page',
     color: 'from-blue-500/15 to-blue-600/5',
     border: 'border-blue-500/20',

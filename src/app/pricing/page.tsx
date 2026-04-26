@@ -677,7 +677,6 @@ export default function PricingPage() {
                   { label: '8 GB knowledge storage (−10 GB included = 0 overage)', amount: '$0.00' },
                   { label: '1,800 chat minutes (within 2,000 included)', amount: '$0.00' },
                   { label: '300 Voice overage minutes × $0.012', amount: '$3.60' },
-                  { label: '120 WhatsApp overage minutes × $0.006', amount: '$0.72' },
                 ].map((row) => (
                   <div key={row.label} className="flex items-center justify-between">
                     <span className="text-xs text-white/50">{row.label}</span>
@@ -688,6 +687,7 @@ export default function PricingPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-white">Total</span>
                   <span className="text-sm font-bold text-[#a78bfa]">$82.60</span>
+
                 </div>
               </div>
               <p className="text-xs text-white/35">Overage is billed at the end of each billing cycle. Set spending caps to avoid surprises.</p>

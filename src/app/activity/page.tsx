@@ -7,7 +7,7 @@ import Icon from '@/components/ui/AppIcon';
 const allActivities = [
   { id: 'act-001', type: 'success', icon: Brain,    title: 'Persona "Aria Sales" activated',                   time: '2 min ago',  date: 'Today' },
   { id: 'act-002', type: 'warning', icon: Database, title: 'Knowledge sync failed — "Product Docs v3"',        time: '14 min ago', date: 'Today' },
-  { id: 'act-003', type: 'success', icon: Radio,    title: 'WhatsApp channel reconnected',                     time: '1 hr ago',   date: 'Today' },
+  { id: 'act-003', type: 'success', icon: Radio,    title: 'SIP channel reconnected',                          time: '1 hr ago',   date: 'Today' },
   { id: 'act-004', type: 'info',    icon: Code2,    title: 'New embed deployed on docs.acme.io',               time: '2 hr ago',   date: 'Today' },
   { id: 'act-005', type: 'warning', icon: Plug,     title: 'ElevenLabs quota at 87%',                          time: '3 hr ago',   date: 'Today' },
   { id: 'act-006', type: 'success', icon: Brain,    title: 'Persona "Support Bot v2" training complete',       time: '5 hr ago',   date: 'Today' },
@@ -19,7 +19,7 @@ const allActivities = [
   { id: 'act-012', type: 'success', icon: Plug,     title: 'OpenAI API key validated and saved',               time: '1 day ago',  date: 'Yesterday' },
   { id: 'act-013', type: 'info',    icon: Brain,    title: 'Persona "Aria Sales" updated — new voice model',   time: '2 days ago', date: '2 days ago' },
   { id: 'act-014', type: 'warning', icon: Database, title: 'PDF upload failed — file size exceeded 50MB',      time: '2 days ago', date: '2 days ago' },
-  { id: 'act-015', type: 'success', icon: Radio,    title: 'WhatsApp Business API verified',                   time: '3 days ago', date: '3 days ago' },
+  { id: 'act-015', type: 'success', icon: Radio,    title: 'SIP Business API verified',                        time: '3 days ago', date: '3 days ago' },
 ];
 
 const typeConfig: Record<string, { color: string; bg: string; StatusIcon: React.ElementType }> = {
