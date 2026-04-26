@@ -45,10 +45,10 @@ const plans = [
     storageDesc: 'Ingested document storage',
     minutes: '2,000 min/mo',
     minutesDesc: 'Conversational minutes',
-    channels: ['Chat', 'WhatsApp', 'Voice', 'API'],
+    channels: ['Chat', 'Voice', 'API'],
     personas: 'Unlimited personas',
     features: [
-      'All channels: Chat, WhatsApp, Voice, API',
+      'All channels: Chat, Voice, API',
       'Unlimited personas',
       '10 GB knowledge ingestion',
       '2,000 conversational minutes',
@@ -74,10 +74,10 @@ const plans = [
     storageDesc: 'Ingested document storage',
     minutes: '10,000 min/mo',
     minutesDesc: 'Conversational minutes',
-    channels: ['Chat', 'WhatsApp', 'Voice', 'SIP', 'Avatar Chat'],
+    channels: ['Chat', 'Voice', 'SIP'],
     personas: 'Unlimited personas',
     features: [
-      'All channels incl. SIP & Avatar Chat',
+      'All channels incl. SIP',
       'Unlimited personas',
       '100 GB knowledge ingestion',
       '10,000 conversational minutes',
@@ -156,7 +156,7 @@ const audiencePacks = [
     features: [
       '30 persona chat sessions',
       'Access to all public personas',
-      'Text, voice & avatar chat',
+      'Text & voice chat',
       'Chat history saved for 30 days',
       'Priority queue during peak hours',
       'No subscription required',
@@ -178,7 +178,7 @@ const audiencePacks = [
     features: [
       '100 persona chat sessions',
       'Access to all public & premium personas',
-      'Text, voice & avatar chat',
+      'Text & voice chat',
       'Unlimited chat history',
       'Priority queue always',
       'Early access to new personas',
@@ -191,10 +191,8 @@ const audiencePacks = [
 
 const channelRates = [
   { channel: 'Web Chat', icon: '💬', unit: 'per minute', rate: '$0.004', note: 'Text-based conversations' },
-  { channel: 'WhatsApp', icon: '📱', unit: 'per minute', rate: '$0.006', note: 'WhatsApp Business API' },
   { channel: 'Voice AI', icon: '🎙️', unit: 'per minute', rate: '$0.012', note: 'Real-time voice conversations' },
   { channel: 'SIP / Telephony', icon: '📞', unit: 'per minute', rate: '$0.015', note: 'SIP trunk integration' },
-  { channel: 'Avatar Chat', icon: '🎭', unit: 'per minute', rate: '$0.025', note: 'Video avatar conversations' },
 ];
 
 const storageRates = [
@@ -678,8 +676,8 @@ export default function PricingPage() {
                   { label: 'Growth plan base', amount: '$79.00' },
                   { label: '8 GB knowledge storage (−10 GB included = 0 overage)', amount: '$0.00' },
                   { label: '1,800 chat minutes (within 2,000 included)', amount: '$0.00' },
-                  { label: '300 WhatsApp overage minutes × $0.006', amount: '$1.80' },
-                  { label: '120 Voice overage minutes × $0.012', amount: '$1.44' },
+                  { label: '300 Voice overage minutes × $0.012', amount: '$3.60' },
+                  { label: '120 WhatsApp overage minutes × $0.006', amount: '$0.72' },
                 ].map((row) => (
                   <div key={row.label} className="flex items-center justify-between">
                     <span className="text-xs text-white/50">{row.label}</span>
@@ -689,7 +687,7 @@ export default function PricingPage() {
                 <div className="w-full h-px bg-white/10 my-2" />
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-white">Total</span>
-                  <span className="text-sm font-bold text-[#a78bfa]">$82.24</span>
+                  <span className="text-sm font-bold text-[#a78bfa]">$82.60</span>
                 </div>
               </div>
               <p className="text-xs text-white/35">Overage is billed at the end of each billing cycle. Set spending caps to avoid surprises.</p>
