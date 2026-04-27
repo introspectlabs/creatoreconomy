@@ -63,7 +63,7 @@ const activities = [
     id: 'act-007',
     type: 'info',
     icon: Database,
-    title: '4,200 new chunks indexed from OTT content library',
+    title: '4,200 new chunks indexed from creator content library',
     time: '7 hr ago',
     color: 'text-teal-400',
     bg: 'bg-teal-500/10',

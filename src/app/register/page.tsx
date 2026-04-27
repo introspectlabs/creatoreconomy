@@ -9,10 +9,10 @@ type Role = 'audience' | 'creator' | null;
 type Step = 'role' | 'account' | 'category' | 'social';
 
 const CATEGORIES = [
-  { id: 'creator', label: 'Creator Economy', emoji: '🎬', description: 'Build AI personas for your audience & followers' },
-  { id: 'ott-streaming', label: 'OTT & Streaming', emoji: '📺', description: 'Interactive character personas for streaming platforms' },
-  { id: 'healthcare', label: 'Healthcare', emoji: '🏥', description: 'Patient education and care navigation personas' },
-  { id: 'enterprise', label: 'Enterprise', emoji: '🏢', description: 'Scale AI personas across your organization' },
+  { id: 'finance-trading', label: 'Finance & Trading Creator', emoji: '📈', description: 'Share trading strategies, market analysis, and investment knowledge with your followers' },
+  { id: 'education-courses', label: 'Education & Course Creator', emoji: '🎓', description: 'Turn your course content into an interactive AI tutor for your students' },
+  { id: 'coach', label: 'Coach — Fitness, Career or Business', emoji: '💪', description: 'Scale your coaching with AI that handles intake, Q&A, and client engagement' },
+  { id: 'd2c-commerce', label: 'D2C Founder / Commerce Creator', emoji: '🛍️', description: 'Give every customer a personal shopping assistant that knows your products' },
 ];
 
 export default function RegisterPage() {

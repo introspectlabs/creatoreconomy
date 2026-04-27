@@ -6,23 +6,70 @@ import PublicFooter from '@/components/public/PublicFooter';
 
 const industries = [
   {
-    slug: 'creator-economy',
-    name: 'Creator Economy',
-    value: 'Turn your videos, knowledge, and expertise into an interactive AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.',
+    slug: 'finance-trading',
+    name: 'Finance & Trading Creators',
+    value: 'Let your followers ask about your trading strategies, market analysis, and investment frameworks — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
-        <path d="M10 8l6 4-6 4V8z" />
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
-    color: '#7c3aed',
-    bg: 'rgba(124,58,237,0.12)',
-    border: 'rgba(124,58,237,0.25)',
+    color: '#10b981',
+    bg: 'rgba(16,185,129,0.12)',
+    border: 'rgba(16,185,129,0.25)',
   },
+  {
+    slug: 'education-courses',
+    name: 'Education & Course Creators',
+    value: 'Turn your course content into an interactive AI tutor. Students get instant answers from your lessons, you reduce support load, and your content sells itself through conversations.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+    ),
+    color: '#3b82f6',
+    bg: 'rgba(59,130,246,0.12)',
+    border: 'rgba(59,130,246,0.25)',
+  },
+  {
+    slug: 'coaches',
+    name: 'Coaches — Fitness, Career & Business',
+    value: 'Scale your coaching without burning out. Your AI handles intake questions, shares your frameworks, and keeps clients engaged between sessions — so you can focus on high-value work.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    ),
+    color: '#f59e0b',
+    bg: 'rgba(245,158,11,0.12)',
+    border: 'rgba(245,158,11,0.25)',
+  },
+  {
+    slug: 'd2c-commerce',
+    name: 'D2C Founders & Commerce Creators',
+    value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+    color: '#ec4899',
+    bg: 'rgba(236,72,153,0.12)',
+    border: 'rgba(236,72,153,0.25)',
+  },
+];
+
+const comingSoonIndustries = [
   {
     slug: 'ott-streaming',
     name: 'OTT & Streaming',
-    value: 'Boost viewer engagement with AI personas that track characters, surface content insights, and create interactive experiences across your streaming platform.',
+    value: 'AI personas for streaming platforms — interactive characters, personalized content discovery, and viewer retention tools.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -36,8 +83,6 @@ const industries = [
   },
 ];
 
-const comingSoonIndustries: typeof industries = [];
-
 const channels = [
   { label: 'WhatsApp AI', icon: '💬', desc: 'Deploy personas on WhatsApp Business' },
   { label: 'Voice AI', icon: '📞', desc: 'Telephony-grade voice personas' },
@@ -48,8 +93,8 @@ const channels = [
 
 const differentiators = [
   {
-    title: 'Video-first AI',
-    desc: 'Deep understanding of video content — not just text. Personas trained on your video library.',
+    title: 'Content-first AI',
+    desc: 'Deep understanding of your videos, courses, and content — not just text. Personas trained on everything you\'ve created.',
     icon: '🎬',
   },
   {
@@ -63,9 +108,9 @@ const differentiators = [
     icon: '🧠',
   },
   {
-    title: 'Enterprise-ready',
-    desc: 'RBAC, multi-tenant, audit logs, and compliance controls built in from day one.',
-    icon: '🏢',
+    title: 'Creator-ready monetization',
+    desc: 'Subscription tiers, pay-per-message, and audience credits built in from day one.',
+    icon: '💰',
   },
 ];
 
@@ -117,7 +162,6 @@ function ComingSoonCard({ industry }: { industry: typeof comingSoonIndustries[0]
         borderColor: 'rgba(255,255,255,0.06)',
       }}
     >
-      {/* Coming Soon badge */}
       <div className="absolute top-4 right-4">
         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-white/5 border border-white/10 text-white/40">
           <span className="w-1 h-1 rounded-full bg-white/30" />
@@ -168,7 +212,6 @@ export default function IndustriesPage() {
 
       {/* Hero */}
       <section ref={heroRef} className="relative pt-32 pb-24 overflow-hidden">
-        {/* Background orbs */}
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px] opacity-15 pointer-events-none"
           style={{
@@ -179,25 +222,24 @@ export default function IndustriesPage() {
         />
         <div
           className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px] opacity-10 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #14b8a6 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, #10b981 0%, transparent 70%)' }}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              Creator Economy · OTT Engagement
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+              Creator Economy — 4 Verticals
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              AI Personas for{' '}
-              <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#14b8a6] bg-clip-text text-transparent">
-                Creators & Streamers
+              AI Personas Built for{' '}
+              <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#10b981] bg-clip-text text-transparent">
+                Creator Economy
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              AI Personas purpose-built for Creator Economy and OTT engagement — turn content into interactive AI experiences that grow audiences, deepen engagement, and unlock new revenue.
+              Whether you teach, trade, coach, or sell — turn your expertise into an AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -211,7 +253,7 @@ export default function IndustriesPage() {
                 href="/register"
                 className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200 w-full sm:w-auto text-center"
               >
-                Book Demo
+                Get Started Free
               </Link>
             </div>
           </div>
@@ -221,17 +263,29 @@ export default function IndustriesPage() {
       {/* Industries Grid */}
       <section id="industries" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-12">
-          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Industries</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Built for High-Impact Industries</h2>
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Creator Verticals</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Four verticals, one platform</h2>
           <p className="text-white/50 mt-3 max-w-xl">
-            Focused on industries where knowledge complexity directly impacts revenue and customer decisions.
+            Focused on the creator economy verticals where AI personas deliver the most immediate impact on audience engagement and revenue.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
           {industries.map((industry, i) => (
             <IndustryCard key={industry.slug} industry={industry} index={i} />
           ))}
         </div>
+
+        {/* Coming Soon */}
+        {comingSoonIndustries.length > 0 && (
+          <div className="mt-8">
+            <p className="text-xs font-semibold text-white/20 uppercase tracking-widest mb-4">Future Launch</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {comingSoonIndustries.map((industry) => (
+                <ComingSoonCard key={industry.slug} industry={industry} />
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* How It Works */}
@@ -239,143 +293,85 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Process</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">From knowledge to deployment</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">From content to live AI persona</h2>
+            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona for your audience</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connector line */}
             <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] opacity-30" />
-            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#3b82f6] to-[#14b8a6] opacity-30" />
+            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#3b82f6] to-[#10b981] opacity-30" />
 
             {[
               {
-                step: '01',
-                title: 'Upload Knowledge',
-                desc: 'Ingest videos, documents, and data.',
+                num: '01',
+                title: 'Build Your Persona',
+                desc: 'Set up your AI persona with your name, voice, and the topics you want it to cover. No technical skills needed.',
                 color: '#7c3aed',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="17 8 12 3 7 8" />
-                    <line x1="12" y1="3" x2="12" y2="15" />
-                  </svg>
-                ),
               },
               {
-                step: '02',
-                title: 'Create Persona',
-                desc: 'Define behavior, memory, and domain responses.',
+                num: '02',
+                title: 'Upload Your Content',
+                desc: 'Feed it your videos, courses, PDFs, or blog posts. Your AI learns from everything you\'ve already created.',
                 color: '#3b82f6',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                ),
               },
               {
-                step: '03',
-                title: 'Deploy Anywhere',
-                desc: 'Chat, voice, WhatsApp, APIs, embedded widgets.',
-                color: '#14b8a6',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                ),
+                num: '03',
+                title: 'Deploy & Earn',
+                desc: 'Share a link, embed it on your site, or connect to WhatsApp. Your audience can start chatting — and you start earning.',
+                color: '#10b981',
               },
             ].map((step) => (
               <div
-                key={step.step}
-                className="relative rounded-2xl p-8 border border-white/8 bg-white/[0.02] flex flex-col gap-5"
+                key={step.num}
+                className="relative rounded-2xl p-8 border border-white/8 bg-white/[0.02] flex flex-col gap-4"
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center"
-                    style={{ background: `${step.color}22`, color: step.color }}
-                  >
-                    {step.icon}
-                  </div>
-                  <span
-                    className="text-4xl font-black opacity-10 leading-none"
-                    style={{ color: step.color }}
-                  >
-                    {step.step}
-                  </span>
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg"
+                  style={{ background: `${step.color}20`, color: step.color, border: `1px solid ${step.color}30` }}
+                >
+                  {step.num}
                 </div>
-                <div>
-                  <h3 className="font-semibold text-white text-lg mb-2">{step.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{step.desc}</p>
-                </div>
+                <h3 className="font-semibold text-white text-base">{step.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Channels & Capabilities */}
+      {/* Why PersonaMatrix */}
       <section className="py-20 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Channels</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Meet users where they are
-              </h2>
-              <p className="text-white/50 leading-relaxed mb-8">
-                Deploy once and reach users across all channels without rebuilding workflows.
-              </p>
-              <Link
-                href="/register"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary"
-              >
-                Start Building
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 gap-3">
-              {channels.map((ch) => (
-                <div
-                  key={ch.label}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-white/8 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/12 transition-all duration-200"
-                >
-                  <span className="text-2xl">{ch.icon}</span>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{ch.label}</p>
-                    <p className="text-xs text-white/40">{ch.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="mb-12 text-center">
+            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Why PersonaMatrix</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Built differently for creators</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {differentiators.map((d) => (
+              <div key={d.title} className="rounded-2xl p-6 border border-white/8 bg-white/[0.02] flex flex-col gap-3">
+                <div className="text-2xl">{d.icon}</div>
+                <h3 className="font-semibold text-white text-sm">{d.title}</h3>
+                <p className="text-xs text-white/45 leading-relaxed">{d.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Why Persona Matrix */}
+      {/* Channels */}
       <section className="py-20 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12 text-center">
-            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Differentiation</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Why Persona Matrix</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto">
-              Built for real-world deployments, not chatbot demos.
-            </p>
+          <div className="mb-10 text-center">
+            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Channels</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Meet your audience where they are</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {differentiators.map((d) => (
-              <div
-                key={d.title}
-                className="p-6 rounded-2xl border border-white/8 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/12 transition-all duration-200 flex gap-5"
-              >
-                <span className="text-3xl flex-shrink-0">{d.icon}</span>
+          <div className="flex flex-wrap justify-center gap-4">
+            {channels.map((ch) => (
+              <div key={ch.label} className="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+                <span className="text-xl">{ch.icon}</span>
                 <div>
-                  <h3 className="font-semibold text-white mb-2">{d.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{d.desc}</p>
+                  <p className="text-sm font-medium text-white">{ch.label}</p>
+                  <p className="text-xs text-white/40">{ch.desc}</p>
                 </div>
               </div>
             ))}
@@ -384,32 +380,19 @@ export default function IndustriesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 border-t border-white/6">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="relative">
-            <div className="absolute inset-0 rounded-3xl blur-3xl opacity-20 bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] pointer-events-none" />
-            <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] p-8 sm:p-12 md:p-16">
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-                Build Your First AI Persona
-              </h2>
-              <p className="text-white/50 text-base sm:text-lg mb-8 sm:mb-10 max-w-lg mx-auto">
-                Start with high-impact use cases that drive real revenue.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  href="/register"
-                  className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-white text-sm btn-primary w-full sm:w-auto text-center"
-                >
-                  Start Free
-                </Link>
-                <Link
-                  href="/register"
-                  className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200 w-full sm:w-auto text-center"
-                >
-                  Book Demo
-                </Link>
-              </div>
-            </div>
+      <section className="py-20 border-t border-white/6">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
+          <p className="text-white/50 mb-8 max-w-xl mx-auto">
+            Join finance creators, educators, coaches, and D2C founders already using PersonaMatrix to scale their audience and income.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">
+              Get Started Free
+            </Link>
+            <Link href="/pricing" className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200">
+              View Pricing
+            </Link>
           </div>
         </div>
       </section>

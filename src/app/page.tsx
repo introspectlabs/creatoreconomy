@@ -249,8 +249,8 @@ export default function HomePage() {
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
               <p className="text-sm text-[#c4b5fd] leading-relaxed font-medium">
-                Built for <span className="text-white font-semibold">creators, OTT platforms, and media brands</span> who want to turn passive viewers into{' '}
-                <span className="text-white font-semibold">active, loyal fans</span> — without working more hours.
+                Built for <span className="text-white font-semibold">finance creators, course builders, coaches, and D2C founders</span> who want to turn their expertise into{' '}
+                <span className="text-white font-semibold">always-on, revenue-generating AI</span> — without working more hours.
               </p>
             </div>
 
@@ -350,38 +350,38 @@ export default function HomePage() {
             <p className="text-[11px] font-bold text-[#f87171] uppercase tracking-[0.2em] mb-3">Sound Familiar?</p>
             <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
               The problems every creator<br />
-              <span className="text-gradient">and OTT platform faces</span>
+              <span className="text-gradient">in the economy faces</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               {
                 emoji: '😩',
-                problem: 'Fans ask the same questions over and over',
-                fix: 'Your AI persona handles every question instantly — pulling answers straight from your content.',
+                problem: 'Followers ask the same questions over and over',
+                fix: 'Your AI persona handles every question instantly — pulling answers straight from your content, courses, and expertise.',
               },
               {
                 emoji: '📉',
-                problem: 'Viewers watch one episode and disappear',
-                fix: 'Personalized recommendations keep each viewer hooked on what they love most.',
+                problem: 'You spend hours on DMs instead of creating',
+                fix: 'Your AI version responds to fans, students, and clients 24/7 — so you can focus on what only you can do.',
               },
               {
                 emoji: '🕐',
-                problem: 'You can\'t be available to fans 24/7',
-                fix: 'Your AI version is always on — chatting, recommending, and engaging while you focus on creating.',
+                problem: 'You can\'t scale your time or knowledge',
+                fix: 'One AI persona can handle thousands of conversations simultaneously — your expertise, infinitely scalable.',
               },
               {
                 emoji: '💸',
-                problem: 'Hard to turn viewers into paying subscribers',
-                fix: 'Deeper engagement builds loyalty — and loyal fans are far more likely to subscribe and stay.',
+                problem: 'Hard to monetize beyond one-time content sales',
+                fix: 'Deeper engagement builds loyalty — and loyal followers are far more likely to buy courses, coaching, and products.',
               },
             ].map((item) => (
-              <div key={item.problem} className="glass-elevated rounded-2xl p-6 border border-white/8 flex gap-4 items-start">
-                <div className="text-3xl shrink-0">{item.emoji}</div>
-                <div>
-                  <p className="font-semibold text-white/80 text-sm mb-1.5">{item.problem}</p>
-                  <p className="text-[13px] text-[#14b8a6] leading-relaxed">{item.fix}</p>
+              <div key={item.problem} className="glass-elevated rounded-2xl p-6 border flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="text-3xl shrink-0">{item.emoji}</div>
+                  <h3 className="font-bold text-white text-base">{item.title}</h3>
                 </div>
+                <p className="text-sm text-white/50 leading-relaxed">{item.fix}</p>
               </div>
             ))}
           </div>
@@ -394,7 +394,7 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">What You Get</p>
             <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              Everything creators and OTT platforms{' '}
+              Everything creators in the economy{' '}
               <span className="text-gradient">actually need</span>
             </h2>
             <p className="mt-4 text-white/60 max-w-lg mx-auto text-[15px] leading-relaxed">
@@ -479,14 +479,14 @@ export default function HomePage() {
               {
                 step: '02',
                 title: 'Feed It Your Content',
-                desc: 'Upload your videos, podcasts, blog posts, or show episodes. Your AI learns from everything you\'ve already created.',
+                desc: 'Upload your videos, podcasts, blog posts, or course materials. Your AI learns from everything you\'ve already created.',
                 color: '#3b82f6',
                 bg: 'rgba(59,130,246,0.15)',
               },
               {
                 step: '03',
-                title: 'Share It with Your Fans',
-                desc: 'Add it to your website, share a link on social media, or connect it to WhatsApp. Your fans can start chatting right away.',
+                title: 'Share It with Your Audience',
+                desc: 'Add it to your website, share a link on social media, or connect it to WhatsApp. Your audience can start chatting right away.',
                 color: '#14b8a6',
                 bg: 'rgba(20,184,166,0.15)',
               },
@@ -508,53 +508,90 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── OTT SECTION ── */}
+      {/* ── CREATOR VERTICALS SECTION ── */}
       <section className="py-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#3b82f6]/4 to-transparent pointer-events-none" />
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/4 to-transparent pointer-events-none" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-10">
-            <p className="text-[11px] font-bold text-[#60a5fa] uppercase tracking-[0.2em] mb-3">For OTT Platforms</p>
+            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">Who It's Built For</p>
             <h2 className="text-4xl font-extrabold tracking-tight leading-[1.1]">
-              How OTT Platforms Use PersonaMatrix
+              Four creator verticals,<br />
+              <span className="text-gradient">one powerful platform</span>
             </h2>
             <p className="mt-4 text-white/55 max-w-xl mx-auto text-[15px] leading-relaxed">
-              Streaming platforms use AI personas to keep subscribers engaged, reduce churn, and help viewers discover content they'll love.
+              Whether you teach, trade, coach, or sell — PersonaMatrix turns your expertise into an AI that works for you around the clock.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
             {[
               {
-                icon: '🎬',
-                title: 'Show Characters Come Alive',
-                desc: 'Let fans chat with AI versions of their favourite show characters — deepening their connection to your content.',
+                emoji: '📈',
+                label: 'Finance & Trading Creators',
+                color: '#10b981',
+                border: 'rgba(16,185,129,0.25)',
+                bg: 'rgba(16,185,129,0.08)',
+                desc: 'Let your followers ask about your trading strategies, market analysis, and investment frameworks — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
+                examples: ['Stock & crypto strategy Q&A', 'Market analysis explainers', 'Paid community access'],
               },
               {
-                icon: '🔍',
-                title: 'Find the Perfect Show Instantly',
-                desc: 'Viewers describe what they\'re in the mood for and your AI recommends exactly the right content from your library.',
+                emoji: '🎓',
+                label: 'Education & Course Creators',
+                color: '#3b82f6',
+                border: 'rgba(59,130,246,0.25)',
+                bg: 'rgba(59,130,246,0.08)',
+                desc: 'Turn your course content into an interactive AI tutor. Students get instant answers from your lessons, you reduce support load, and your content sells itself through conversations.',
+                examples: ['Interactive course Q&A', 'Student support automation', 'Course upsell conversations'],
               },
               {
-                icon: '📺',
-                title: 'Keep Subscribers Watching Longer',
-                desc: 'Personalised suggestions and interactive experiences mean viewers spend more time on your platform — and stick around longer.',
+                emoji: '💪',
+                label: 'Coaches — Fitness, Career & Business',
+                color: '#f59e0b',
+                border: 'rgba(245,158,11,0.25)',
+                bg: 'rgba(245,158,11,0.08)',
+                desc: 'Scale your coaching without burning out. Your AI handles intake questions, shares your frameworks, and keeps clients engaged between sessions — so you can focus on high-value work.',
+                examples: ['Client intake & onboarding', 'Program Q&A between sessions', 'Lead qualification for 1:1 coaching'],
+              },
+              {
+                emoji: '🛍️',
+                label: 'D2C Founders & Commerce Creators',
+                color: '#ec4899',
+                border: 'rgba(236,72,153,0.25)',
+                bg: 'rgba(236,72,153,0.08)',
+                desc: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
+                examples: ['Product discovery & recommendations', 'Pre-purchase Q&A', 'Post-purchase support & upsells'],
               },
             ].map((item) => (
-              <div key={item.title} className="glass-elevated rounded-2xl p-6 border border-white/8 flex flex-col gap-3">
-                <div className="text-3xl">{item.icon}</div>
-                <h3 className="font-bold text-white text-base">{item.title}</h3>
-                <p className="text-[13px] text-white/50 leading-relaxed">{item.desc}</p>
+              <div
+                key={item.label}
+                className="glass-elevated rounded-2xl p-6 border flex flex-col gap-4"
+                style={{ borderColor: item.border, background: item.bg }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="text-3xl">{item.emoji}</div>
+                  <h3 className="font-bold text-white text-base" style={{ color: item.color }}>{item.label}</h3>
+                </div>
+                <p className="text-[13px] text-white/60 leading-relaxed">{item.desc}</p>
+                <ul className="flex flex-col gap-1.5">
+                  {item.examples.map((ex) => (
+                    <li key={ex} className="flex items-center gap-2 text-[12px] text-white/50">
+                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                        <circle cx="7" cy="7" r="6" fill="rgba(255,255,255,0.08)" />
+                        <path d="M4.5 7l2 2 3-3" stroke={item.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {ex}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
           <div className="text-center">
-            <a
-              href="https://personamatrix-uxe3i53.public.builtwithrocket.new/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/register"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm shadow-[0_0_24px_rgba(124,58,237,0.35)] hover:shadow-[0_0_32px_rgba(124,58,237,0.5)]"
             >
-              Try Live Demo →
-            </a>
+              Start Building Your AI Persona →
+            </Link>
           </div>
         </div>
       </section>
@@ -568,11 +605,11 @@ export default function HomePage() {
             <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-[#3b82f6]/10 blur-3xl pointer-events-none" />
             <div className="relative z-10 flex flex-col items-center gap-6">
               <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-                Ready to turn your content<br />
-                <span className="text-gradient">into a fan experience?</span>
+                Ready to turn your expertise<br />
+                <span className="text-gradient">into a revenue engine?</span>
               </h2>
               <p className="text-white/50 max-w-md text-base">
-                Join creators and streaming platforms already using PersonaMatrix to keep their audiences engaged and growing.
+                Join finance creators, educators, coaches, and D2C founders already using PersonaMatrix to scale their audience and income.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link

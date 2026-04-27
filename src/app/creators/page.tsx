@@ -14,7 +14,7 @@ const statusColors: Record<string, string> = {
   archived: '#6b7280',
 };
 
-const categoryFilters = ['All', 'Sales', 'Support', 'HR', 'Creator', 'OTT', 'Retail', 'Voice'];
+const categoryFilters = ['All', 'Finance', 'Education', 'Coach', 'Commerce', 'Voice'];
 
 function matchesCategory(persona: Persona, category: string): boolean {
   if (category === 'All') return true;
