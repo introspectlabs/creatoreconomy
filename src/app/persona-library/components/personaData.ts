@@ -103,9 +103,9 @@ export const personas: Persona[] = [
   },
   {
     id: 'persona-006',
-    name: 'Demo Concierge',
+    name: 'OnRent Demo Concierge',
     slug: 'demo-concierge',
-    description: 'Product tour guide for new trial users — walks through key features interactively',
+    description: 'Interactive product tour guide for OnRent — showcases rental management features, workflows, and onboarding steps for new users',
     status: 'active',
     avatar: 'DC',
     channels: ['Web Chat', 'API'],
