@@ -12,7 +12,7 @@ const CREATOR_DATA = {
   username: 'personamatrix',
   displayName: 'PersonaMatrix Labs',
   tagline: 'Building AI personas that actually understand your business',
-  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across sales, support, HR, finance, and education — each grounded in real domain knowledge, not generic prompts.
+  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across creator economy, OTT engagement, sales, support, and HR — each grounded in real domain knowledge, not generic prompts.
 
 Our personas are used by 200+ companies worldwide to handle millions of conversations monthly. Every persona we build goes through rigorous knowledge curation, voice calibration, and real-world testing before going live.`,
   location: 'San Francisco, CA',

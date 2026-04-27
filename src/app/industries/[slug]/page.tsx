@@ -78,6 +78,59 @@ const industryData: Record<string, IndustryData> = {
       },
     ],
   },
+  'ott-streaming': {
+    name: 'OTT & Streaming',
+    tagline: 'Supercharge Viewer Engagement with AI Personas',
+    description:
+      'PersonaMatrix brings your content to life — enabling viewers to interact with characters, explore storylines, and get personalized recommendations through AI personas trained on your video library.',
+    color: '#14b8a6',
+    bg: 'rgba(20,184,166,0.12)',
+    border: 'rgba(20,184,166,0.3)',
+    useCases: [
+      {
+        title: 'Interactive Character Personas',
+        description:
+          'Let viewers chat with AI versions of their favorite characters — answering questions in character, sharing backstory, and deepening the narrative experience beyond the screen.',
+        capabilities: ['In-character responses', 'Storyline exploration', 'Persona memory'],
+        channels: ['Web Chat', 'Mobile App', 'API'],
+        demoPersona: 'Detective Sarah Mitchell',
+        demoMessages: [
+          { role: 'user', text: "Sarah, how did you figure out Victor was the suspect so early?" },
+          { role: 'ai', text: "It was the timeline inconsistency in his alibi — he claimed to be at the diner at 9 PM, but the security footage showed his car leaving 40 minutes earlier. Small detail, but those are the ones that crack cases. What made you notice it?" },
+          { role: 'user', text: "I didn't catch that! Can you walk me through the evidence from episode 3?" },
+          { role: 'ai', text: "Of course. In episode 3, we found three key pieces: the partial fingerprint on the window latch, the phone records showing two calls to an unknown number, and the witness who placed him near the warehouse. Want me to break down how each piece connects?" },
+        ],
+      },
+      {
+        title: 'Personalized Content Discovery',
+        description:
+          'An AI persona that knows your viewing history and preferences — surfacing the right content at the right time and keeping viewers engaged across your entire catalog.',
+        capabilities: ['Viewing history analysis', 'Smart recommendations', 'Catalog navigation'],
+        channels: ['Web', 'Mobile App', 'Smart TV'],
+        demoPersona: 'StreamGuide AI',
+        demoMessages: [
+          { role: 'user', text: "I just finished Season 2 of Dark Matter. What should I watch next?" },
+          { role: 'ai', text: "Based on your watch history, you'll love 'Severance' — same psychological tension and mind-bending plot twists. You've also been watching a lot of sci-fi thrillers lately, so 'Pantheon' is another strong match. Want me to add both to your watchlist?" },
+          { role: 'user', text: "Yes! Also, are there any new releases this week I'd like?" },
+          { role: 'ai', text: "Two new releases match your taste profile: 'The Peripheral' Season 2 dropped yesterday — you rated the first season 4.5 stars — and 'Constellation' is a new psychological thriller that's trending in your genre. Starting either one now?" },
+        ],
+      },
+      {
+        title: 'Viewer Retention & Loyalty',
+        description:
+          'Keep viewers coming back with AI-powered engagement — episode recaps, behind-the-scenes insights, cast Q&As, and exclusive content delivered through conversational personas.',
+        capabilities: ['Episode recaps', 'Behind-the-scenes access', 'Loyalty rewards'],
+        channels: ['Web Chat', 'WhatsApp', 'Push Notifications'],
+        demoPersona: 'ShowInsider AI',
+        demoMessages: [
+          { role: 'user', text: "I missed last week's episode of The Crown. Can you give me a quick recap?" },
+          { role: 'ai', text: "Of course! Episode 6 focused on the tension between the Palace and the press following the Fayed relationship. Key moments: the private meeting between Diana and her advisors, the leaked memo that caused a diplomatic incident, and the cliffhanger ending with the phone call. Ready to watch Episode 7?" },
+          { role: 'user', text: "Yes! Is there any behind-the-scenes content for this season?" },
+          { role: 'ai', text: "Great news — you're a Premium subscriber, so you have access to the full 'Making of Season 6' documentary, 3 cast interviews, and the director's commentary for every episode. I've added them all to your library. The cast interview with the lead actress is especially worth watching first." },
+        ],
+      },
+    ],
+  },
   healthcare: {
     name: 'Healthcare',
     tagline: 'Informed patients, better outcomes',
@@ -101,73 +154,6 @@ const industryData: Record<string, IndustryData> = {
           { role: 'ai', text: "Focus on reducing refined carbs and sugary drinks — those spike blood sugar fastest. I'll share a simple food guide. But first, has your doctor mentioned an HbA1c target for you?" },
         ],
       },
-      {
-        title: 'Symptom Triage Assistant',
-        description:
-          'A first-response AI that helps patients assess symptom urgency and routes them to the right care level — reducing unnecessary ER visits.',
-        capabilities: ['Symptom assessment', 'Urgency routing', 'Appointment booking'],
-        channels: ['Web', 'WhatsApp', 'Voice AI'],
-        demoPersona: 'CareNavigator',
-        demoMessages: [
-          { role: 'user', text: "I've had a headache for 3 days and some neck stiffness." },
-          { role: 'ai', text: "I want to make sure you're okay. Neck stiffness combined with a persistent headache can sometimes indicate something that needs prompt attention. Are you also experiencing fever, sensitivity to light, or nausea?" },
-          { role: 'user', text: 'A little light sensitivity, yes.' },
-          { role: 'ai', text: "Please seek medical attention today — not an emergency room necessarily, but an urgent care visit is recommended. I can help you find the nearest clinic and book an appointment right now." },
-        ],
-      },
-    ],
-  },
-  education: {
-    name: 'Education',
-    tagline: 'From inquiry to enrollment — guided by AI',
-    description:
-      'PersonaMatrix transforms course content, lecture videos, placement data, and FAQs into an AI-powered admission and student lifecycle platform — guiding students from discovery to enrollment and beyond.',
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.3)',
-    useCases: [
-      {
-        title: 'AI Admission Counselor',
-        description:
-          'Improves conversion from inquiry to enrollment by delivering personalized course recommendations based on student background, goals, and career aspirations. Reduces drop-offs by engaging students at every step with data-driven insights on career outcomes and ROI. Guides students with data-driven insights on career outcomes and ROI.',
-        capabilities: ['Course recommendations', 'Career path guidance', 'ROI & placement data'],
-        channels: ['Web Chat', 'WhatsApp', 'Voice'],
-        demoPersona: 'AdmissionBot',
-        demoMessages: [
-          { role: 'user', text: "I'm a commerce graduate interested in data analytics. Which course is right for me?" },
-          { role: 'ai', text: "Great fit! Our PG Program in Data Analytics is designed for non-engineering backgrounds. 87% of our commerce graduates land roles in business intelligence and product analytics within 3 months. Average salary jump is 2.4x. Want me to walk you through the curriculum and placement stats?" },
-          { role: 'user', text: 'Yes, and what about the MBA in Business Analytics?' },
-          { role: 'ai', text: "The PG in Data Analytics is more technical — Python, SQL, Power BI — and faster (6 months vs 18 months for the MBA). The MBA suits those targeting management roles, while the PG is better if you want hands-on analyst roles. Based on your profile, I'd recommend the PG. Shall I connect you with an alumni who made the same choice?" },
-        ],
-      },
-      {
-        title: 'Enrollment Funnel Assistant',
-        description:
-          'Tracks student intent across every touchpoint, identifies drop-offs in the application journey, and re-engages prospects automatically with personalized nudges. Ensures no prospective student is lost due to delayed responses.',
-        capabilities: ['Program comparison', 'Application guidance', 'Drop-off re-engagement'],
-        channels: ['Web', 'WhatsApp', 'Email'],
-        demoPersona: 'EnrollGuide',
-        demoMessages: [
-          { role: 'user', text: "I started the application last week but got stuck on the essay section." },
-          { role: 'ai', text: "I noticed you paused at Step 3 — the Statement of Purpose. Here's a simple framework: 3 sentences on your background, 2 on why this program, 1 on your career goal. Want me to share a sample SOP from a successful applicant in a similar profile?" },
-          { role: 'user', text: 'That would really help. Also, when is the next intake?' },
-          { role: 'ai', text: "Next intake is July 15th — applications close June 30th, so you have 3 weeks. I'm sending you the SOP sample now. If you complete your application today, you'll also qualify for the early-bird scholarship worth ₹25,000." },
-        ],
-      },
-      {
-        title: 'AI Course Tutor',
-        description:
-          'A personalized learning assistant available 24/7 that improves student engagement and retention by answering questions, explaining concepts, and generating practice problems. Transforms static course content into interactive learning experiences.',
-        capabilities: ['Concept explanation', 'Practice generation', 'Progress tracking'],
-        channels: ['LMS Embed', 'Web', 'WhatsApp'],
-        demoPersona: 'Prof. Ada (Physics)',
-        demoMessages: [
-          { role: 'user', text: "I don't understand why objects fall at the same rate regardless of mass." },
-          { role: 'ai', text: "Great question — this trips up a lot of students. Gravity pulls harder on heavier objects, but heavier objects also resist acceleration more (inertia). These two effects cancel out perfectly, so all objects accelerate at 9.8 m/s² in a vacuum. Want to see the math?" },
-          { role: 'user', text: 'Yes, show me the equation.' },
-          { role: 'ai', text: "F = ma, and F_gravity = mg. So: mg = ma → g = a. Mass cancels! That's why a feather and a hammer fall together on the Moon (no air resistance). Try this: what would happen if you doubled the mass?" },
-        ],
-      },
     ],
   },
 };
@@ -181,7 +167,9 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
     setIsPlaying(true);
   };
 
-  const tryDemoLabel = slug === 'creator-economy' ? 'Talk to an AI Creator' : 'Get Course Recommendations';
+  const tryDemoLabel =
+    slug === 'creator-economy' ? 'Talk to an AI Creator' :
+    slug === 'ott-streaming'? 'Try Live Demo' : 'Try Demo';
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -248,7 +236,7 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
         )}
         {!isPlaying && visibleCount === 0 && (
           <div className="flex items-center justify-center h-32 text-white/30 text-sm">
-            Click "Try Demo" to see a live preview
+            Click &quot;Try Demo&quot; to see a live preview
           </div>
         )}
       </div>
@@ -272,7 +260,9 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
 function UseCaseCard({ useCase, color, isFirst, slug }: { useCase: UseCase; color: string; isFirst: boolean; slug?: string }) {
   const [expanded, setExpanded] = useState(isFirst);
 
-  const primaryCTALabel = slug === 'creator-economy' ? 'Experience the Persona' : 'Try Admission Counselor AI';
+  const primaryCTALabel =
+    slug === 'creator-economy' ? 'Experience the Persona' :
+    slug === 'ott-streaming'? 'Build Your OTT Persona' : 'Get Started';
 
   return (
     <div
@@ -427,19 +417,14 @@ export default function IndustryDetailPage() {
                 {industry.tagline}
               </h1>
               <p className="text-lg text-white/50 max-w-2xl leading-relaxed">{industry.description}</p>
-              {slug === 'real-estate' && (
-                <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
-                  Powered by multimodal AI that understands buyer intent, preferences, and decision context.
-                </p>
-              )}
               {slug === 'creator-economy' && (
                 <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
                   Powered by video-first multimodal AI with memory, context, and personality. Be present for every fan, without being online.
                 </p>
               )}
-              {slug === 'education' && (
+              {slug === 'ott-streaming' && (
                 <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
-                  Powered by multimodal AI that understands student intent, goals, and decision context.
+                  Powered by persona intelligence that understands your content at the scene, character, and storyline level — turning passive viewers into active participants.
                 </p>
               )}
             </div>
@@ -482,31 +467,11 @@ export default function IndustryDetailPage() {
                 </thead>
                 <tbody>
                   {[
-                    {
-                      capability: 'Audience Engagement',
-                      traditional: 'Scheduled posts, delayed replies, limited reach',
-                      pm: 'AI persona engages every fan instantly, 24/7, in your voice and style',
-                    },
-                    {
-                      capability: 'Monetization Potential',
-                      traditional: 'Ad revenue, sponsorships — dependent on algorithm',
-                      pm: 'Conversational monetization from courses, content, and expertise on demand',
-                    },
-                    {
-                      capability: 'Personalization',
-                      traditional: 'Generic broadcasts to entire audience',
-                      pm: 'Personalized 1:1 conversations tailored to each fan\'s interests and history',
-                    },
-                    {
-                      capability: 'Availability',
-                      traditional: 'Only when you\'re online or posting',
-                      pm: 'Always-on AI persona available across all channels, every hour of the day',
-                    },
-                    {
-                      capability: 'Interaction Depth',
-                      traditional: 'Comments, likes, and surface-level engagement',
-                      pm: 'Deep, contextual conversations that build loyalty and drive action',
-                    },
+                    { capability: 'Audience Engagement', traditional: 'Scheduled posts, delayed replies, limited reach', pm: 'AI persona engages every fan instantly, 24/7, in your voice and style' },
+                    { capability: 'Monetization Potential', traditional: 'Ad revenue, sponsorships — dependent on algorithm', pm: 'Conversational monetization from courses, content, and expertise on demand' },
+                    { capability: 'Personalization', traditional: 'Generic broadcasts to entire audience', pm: "Personalized 1:1 conversations tailored to each fan's interests and history" },
+                    { capability: 'Availability', traditional: "Only when you're online or posting", pm: 'Always-on AI persona available across all channels, every hour of the day' },
+                    { capability: 'Interaction Depth', traditional: 'Comments, likes, and surface-level engagement', pm: 'Deep, contextual conversations that build loyalty and drive action' },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/6 last:border-0">
                       <td className="px-6 py-4 text-white/70 font-medium">{row.capability}</td>
@@ -521,84 +486,40 @@ export default function IndustryDetailPage() {
         </section>
       )}
 
-      {/* Why PersonaMatrix for Real Estate — Comparison Table */}
-      {slug === 'real-estate' && (
+      {/* Why PersonaMatrix for OTT — Comparison Table */}
+      {slug === 'ott-streaming' && (
         <section className="py-16 border-t border-white/6">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-10">
               <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Differentiation</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Why PersonaMatrix for Real Estate</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Why PersonaMatrix for OTT Platforms</h2>
+              <p className="text-sm text-white/40 mt-2">Transform passive viewing into active, personalized engagement.</p>
             </div>
             <div className="overflow-x-auto rounded-2xl border border-white/8">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/8">
                     <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Capability</th>
-                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Traditional CRM / Tools</th>
-                    <th className="text-left px-6 py-4 font-semibold uppercase tracking-widest text-xs w-1/3 rounded-t-xl" style={{ color: '#10b981', background: 'rgba(16,185,129,0.08)' }}>PersonaMatrix</th>
+                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Traditional Streaming Tools</th>
+                    <th className="text-left px-6 py-4 font-semibold uppercase tracking-widest text-xs w-1/3 rounded-t-xl" style={{ color: '#14b8a6', background: 'rgba(20,184,166,0.08)' }}>PersonaMatrix</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    {
-                      capability: 'Property Discovery',
-                      traditional: 'Manual search filters, static listings',
-                      pm: 'Conversational AI that understands intent and recommends best-fit properties instantly',
-                    },
-                    {
-                      capability: 'Lead Qualification',
-                      traditional: 'Form fills, manual follow-up calls',
-                      pm: 'Automated scoring — identifies hot, warm, cold leads in real time',
-                    },
-                    {
-                      capability: 'Customer Engagement',
-                      traditional: 'Email blasts, delayed responses, scripted responses',
-                      pm: 'Personalized, real-time conversations across chat, voice, and WhatsApp',
-                    },
-                    {
-                      capability: 'Follow-ups',
-                      traditional: 'Scheduled reminders, agent-dependent',
-                      pm: 'Proactive AI-driven follow-ups triggered by buyer behavior and intent signals',
-                    },
-                    {
-                      capability: 'Channels',
-                      traditional: 'Website forms or phone calls only',
-                      pm: 'Web, WhatsApp, Voice AI, Facebook Messenger — all from one platform',
-                    },
+                    { capability: 'Viewer Engagement', traditional: 'Passive watching, static recommendations', pm: 'Interactive AI personas that viewers can converse with about content, characters, and storylines' },
+                    { capability: 'Content Discovery', traditional: 'Algorithm-based carousels, limited personalization', pm: 'Conversational discovery — viewers describe what they want and get instant, contextual recommendations' },
+                    { capability: 'Character Connection', traditional: 'No direct interaction with show characters', pm: 'AI character personas that respond in-character, deepening emotional investment and loyalty' },
+                    { capability: 'Retention', traditional: 'Push notifications and email reminders', pm: 'Proactive AI engagement — recaps, teasers, and personalized nudges that bring viewers back' },
+                    { capability: 'Data Insights', traditional: 'View counts and completion rates only', pm: 'Rich conversational data revealing what viewers love, question, and want more of' },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/6 last:border-0">
                       <td className="px-6 py-4 text-white/70 font-medium">{row.capability}</td>
                       <td className="px-6 py-4 text-white/40">{row.traditional}</td>
-                      <td className="px-6 py-4 font-medium" style={{ color: '#10b981', background: 'rgba(16,185,129,0.05)' }}>{row.pm}</td>
+                      <td className="px-6 py-4 font-medium" style={{ color: '#14b8a6', background: 'rgba(20,184,166,0.05)' }}>{row.pm}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Business Impact — Real Estate */}
-      {slug === 'real-estate' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Outcomes</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Business Impact</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { icon: '📈', text: 'Increase qualified leads by engaging every inbound inquiry instantly — no lead left behind.' },
-                { icon: '🏠', text: 'Improve site visit conversion rates with AI-guided property matching and instant scheduling.' },
-                { icon: '⚡', text: 'Reduce response time from hours to seconds across all buyer touchpoints.' },
-                { icon: '🤝', text: 'Accelerate deal closures by keeping buyers engaged and informed throughout the decision journey.' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.02]">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.text}</p>
-                </div>
-              ))}
             </div>
           </div>
         </section>
@@ -629,8 +550,8 @@ export default function IndustryDetailPage() {
         </section>
       )}
 
-      {/* Business Impact — Education */}
-      {slug === 'education' && (
+      {/* Business Impact — OTT */}
+      {slug === 'ott-streaming' && (
         <section className="py-16 border-t border-white/6">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-8">
@@ -639,10 +560,10 @@ export default function IndustryDetailPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { icon: '📈', text: 'Increase enrollment conversion rates by guiding every prospective student from inquiry to application with personalized AI support.' },
-                { icon: '🎯', text: 'Reduce admission drop-offs by automatically re-engaging students who pause or abandon the application journey.' },
-                { icon: '📚', text: 'Improve student engagement and retention with 24/7 AI tutoring that transforms static content into interactive learning.' },
-                { icon: '💰', text: 'Reduce operational and support costs by automating counseling, FAQs, and enrollment guidance at scale.' },
+                { icon: '📺', text: 'Increase watch time and session depth by turning passive viewers into active participants.' },
+                { icon: '🎭', text: 'Build deeper character and storyline connections that drive subscription renewals and word-of-mouth.' },
+                { icon: '🔍', text: 'Improve content discovery and catalog utilization with conversational AI recommendations.' },
+                { icon: '📊', text: 'Unlock rich viewer intent data from conversations to inform content strategy and acquisition decisions.' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.02]">
                   <span className="text-2xl flex-shrink-0">{item.icon}</span>
@@ -654,28 +575,28 @@ export default function IndustryDetailPage() {
         </section>
       )}
 
-      {/* Student Lifecycle AI — Education */}
-      {slug === 'education' && (
-        <section className="py-12 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(245,158,11,0.12)', color: '#f59e0b' }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1">Student Lifecycle AI</h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  PersonaMatrix provides continuous AI guidance across the entire student journey — from the moment a student discovers your institution to long after they enroll.
-                </p>
-              </div>
-            </div>
+      {/* Use Cases */}
+      <section className="py-16 border-t border-white/6">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10">
+            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Use Cases</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              {slug === 'creator-economy' ? 'How Creators Use PersonaMatrix' : 'How OTT Platforms Use PersonaMatrix'}
+            </h2>
           </div>
-        </section>
-      )}
+          <div className="space-y-4">
+            {industry.useCases.map((useCase, i) => (
+              <UseCaseCard
+                key={useCase.title}
+                useCase={useCase}
+                color={industry.color}
+                isFirst={i === 0}
+                slug={slug}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-20 border-t border-white/6">
@@ -685,12 +606,16 @@ export default function IndustryDetailPage() {
               Deploy your AI persona across websites, apps, and messaging platforms in minutes.
             </p>
           )}
+          {slug === 'ott-streaming' && (
+            <p className="text-xs font-medium text-white/40 mb-4">
+              Launch your first OTT persona in under 30 minutes — no engineering required.
+            </p>
+          )}
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {slug === 'creator-economy' ? 'Build Your AI Persona' : `Ready to build for ${industry.name}?`}
+            {slug === 'creator-economy' ? 'Build Your AI Persona' : 'Engage Your Viewers with AI'}
           </h2>
           <p className="text-white/50 mb-8 max-w-lg mx-auto">
-            {slug === 'creator-economy' ?'Start free and launch your AI creator persona in minutes. No technical skills required.'
-              : `Start with a pre-configured ${industry.name} persona template and go live in under 30 minutes.`}
+            {slug === 'creator-economy' ?'Start free and launch your AI creator persona in minutes. No technical skills required.' :'Start with a pre-configured OTT persona template and go live in under 30 minutes.'}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -711,9 +636,9 @@ export default function IndustryDetailPage() {
               Create your first persona — free, no credit card required.
             </p>
           )}
-          {slug === 'education' && (
+          {slug === 'ott-streaming' && (
             <p className="mt-6 text-xs text-white/30">
-              Enterprise-ready, scalable, and built for modern education institutions.
+              Enterprise-ready, scalable, and built for modern streaming platforms.
             </p>
           )}
         </div>

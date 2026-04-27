@@ -23,7 +23,7 @@ const initialPlugins: Plugin[] = [
   { id: 'plugin-006', personaName: 'Maya HR', types: ['Chat'], domain: 'hr.internal.acme.io', status: 'paused', sessions: 440, created: 'Feb 5, 2026' },
   { id: 'plugin-007', personaName: 'Nova Customer Success', types: ['Voice'], domain: 'success.acme.io', status: 'live', sessions: 210, created: 'Mar 20, 2026' },
   { id: 'plugin-008', personaName: 'Multilingual Welcome', types: ['Avatar', 'Voice'], domain: 'global.acme.io', status: 'live', sessions: 3400, created: 'Mar 15, 2026' },
-  { id: 'plugin-009', personaName: 'Edu Tutor (v1)', types: ['Chat'], domain: 'learn.acme.io', status: 'draft', sessions: 0, created: 'Apr 2, 2026' },
+    { id: 'plugin-009', personaName: 'StreamGuide — Crime Drama', types: ['Chat'], domain: 'stream.acme.io', status: 'live', sessions: 1840, created: 'Apr 2, 2026' },
   { id: 'plugin-010', personaName: 'Aria Sales', types: ['Chat', 'Avatar'], domain: 'landing.acme.io', status: 'live', sessions: 2800, created: 'Mar 28, 2026' },
 ];
 

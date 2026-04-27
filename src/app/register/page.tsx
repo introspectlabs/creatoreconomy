@@ -9,9 +9,9 @@ type Role = 'audience' | 'creator' | null;
 type Step = 'role' | 'account' | 'category' | 'social';
 
 const CATEGORIES = [
-  { id: 'creator', label: 'Creator', emoji: '🎥', description: 'Build AI personas for your audience & followers' },
-  { id: 'real-estate', label: 'Real Estate', emoji: '🏠', description: 'AI agents for property listings & client outreach' },
-  { id: 'education', label: 'Education', emoji: '🎓', description: 'Tutors, course assistants & learning companions' },
+  { id: 'creator', label: 'Creator Economy', emoji: '🎬', description: 'Build AI personas for your audience & followers' },
+  { id: 'ott-streaming', label: 'OTT & Streaming', emoji: '📺', description: 'Interactive character personas for streaming platforms' },
+  { id: 'healthcare', label: 'Healthcare', emoji: '🏥', description: 'Patient education and care navigation personas' },
   { id: 'enterprise', label: 'Enterprise', emoji: '🏢', description: 'Scale AI personas across your organization' },
 ];
 

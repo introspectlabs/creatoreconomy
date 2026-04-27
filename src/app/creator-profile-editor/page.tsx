@@ -40,7 +40,7 @@ const INITIAL_DATA: ProfileData = {
   displayName: 'PersonaMatrix Labs',
   username: 'personamatrix',
   tagline: 'Building AI personas that actually understand your business',
-  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across sales, support, HR, finance, and education — each grounded in real domain knowledge, not generic prompts.\n\nOur personas are used by 200+ companies worldwide to handle millions of conversations monthly. Every persona we build goes through rigorous knowledge curation, voice calibration, and real-world testing before going live.`,
+  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across creator economy, OTT engagement, sales, support, and HR — each grounded in real domain knowledge, not generic prompts.\n\nOur personas are used by 200+ companies worldwide to handle millions of conversations monthly. Every persona we build goes through rigorous knowledge curation, voice calibration, and real-world testing before going live.`,
   location: 'San Francisco, CA',
   website: 'https://personamatrix.ai',
   expertise: [
@@ -381,7 +381,7 @@ export default function CreatorProfileEditorPage() {
                     {[
                       'Natural Language Processing', 'Conversational AI', 'Prompt Engineering',
                       'RAG Systems', 'LLM Fine-tuning', 'Customer Experience',
-                      'B2B SaaS', 'Healthcare AI', 'Legal Tech', 'EdTech',
+                      'B2B SaaS', 'Healthcare AI', 'Creator Economy', 'OTT Engagement',
                     ].filter((t) => !data.expertise.includes(t)).map((tag) => (
                       <button
                         key={tag}

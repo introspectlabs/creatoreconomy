@@ -345,7 +345,7 @@ export default function AudienceSettingsPage() {
                     <div className="pt-4 border-t border-white/8">
                       <h4 className="text-sm font-semibold text-white mb-3">Interests</h4>
                       <div className="flex flex-wrap gap-2">
-                        {['Education', 'Health', 'Finance', 'Entertainment', 'Food', 'Technology'].map((interest) => (
+                        {['Creator Economy', 'Health', 'Finance', 'Entertainment', 'OTT & Streaming', 'Technology'].map((interest) => (
                           <button
                             key={interest}
                             className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#6b7ff0]/30 bg-[#6b7ff0]/10 text-[#6b7ff0] hover:bg-[#6b7ff0]/20 transition-all"

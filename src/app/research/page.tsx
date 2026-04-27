@@ -821,13 +821,24 @@ export default function ResearchPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                industry: 'EdTech',
-                tagline: 'Talk to lectures and generate personalized learning paths',
-                desc: 'Students interact directly with lecture videos through a persona that understands the full course content — asking follow-up questions, requesting explanations, and receiving personalized learning paths grounded in the actual instructional material.',
+                industry: 'Creator Economy',
+                tagline: 'Turn content into a 24/7 interactive AI persona',
+                desc: 'Creators deploy AI personas trained on their video library — fans can ask questions, explore content, and engage in personalized conversations that mirror the creator\'s voice, style, and expertise at any hour.',
                 color: '#7c3aed',
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M10 8l6 4-6 4V8z"/>
+                  </svg>
+                ),
+              },
+              {
+                industry: 'OTT & Streaming',
+                tagline: 'Interactive character personas that deepen viewer engagement',
+                desc: 'OTT platforms deploy AI personas for characters, shows, and content discovery — viewers interact with storylines, ask characters questions, and receive personalized recommendations grounded in the actual video content.',
+                color: '#14b8a6',
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
                   </svg>
                 ),
               },
@@ -835,7 +846,7 @@ export default function ResearchPage() {
                 industry: 'Healthcare',
                 tagline: 'Guide patients through clinical knowledge and care pathways',
                 desc: 'Patients and clinicians interact with medical content through a persona trained on clinical documentation — asking questions about diagnoses, medications, and procedures while receiving compliant, evidence-grounded responses.',
-                color: '#14b8a6',
+                color: '#3b82f6',
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>

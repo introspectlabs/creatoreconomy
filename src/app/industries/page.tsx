@@ -20,18 +20,19 @@ const industries = [
     border: 'rgba(124,58,237,0.25)',
   },
   {
-    slug: 'education',
-    name: 'Education',
-    value: 'Enable students to interact with courses and receive instant guidance. Improve engagement and scale personalized learning.',
+    slug: 'ott-streaming',
+    name: 'OTT & Streaming',
+    value: 'Boost viewer engagement with AI personas that track characters, surface content insights, and create interactive experiences across your streaming platform.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
       </svg>
     ),
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.25)',
+    color: '#14b8a6',
+    bg: 'rgba(20,184,166,0.12)',
+    border: 'rgba(20,184,166,0.25)',
   },
 ];
 
@@ -186,17 +187,17 @@ export default function IndustriesPage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              2 Industries · High-Impact Use Cases
+              Creator Economy · OTT Engagement
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
               AI Personas for{' '}
               <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#14b8a6] bg-clip-text text-transparent">
-                Every Industry
+                Creators & Streamers
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              AI Personas for high-impact industries — Creator Economy and Education. Turn knowledge into interactive assistants that improve decisions, engagement, and revenue.
+              AI Personas purpose-built for Creator Economy and OTT engagement — turn content into interactive AI experiences that grow audiences, deepen engagement, and unlock new revenue.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

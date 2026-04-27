@@ -83,7 +83,7 @@ const steps: Step[] = [
     number: '04',
     title: 'Audiences Engage & Subscribe',
     description:
-      'Fans, students, and professionals discover your persona, ask questions, and subscribe to unlock deeper access to your knowledge.',
+      'Fans, viewers, and followers discover your persona, ask questions, and subscribe to unlock deeper access to your content and expertise.',
     details: [
       'Audiences search and discover personas by topic or creator',
       'Free-tier users get a preview of your knowledge',

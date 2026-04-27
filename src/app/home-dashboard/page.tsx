@@ -12,7 +12,7 @@ export default function HomeDashboardPage() {
     <AppLayout>
       <Topbar
         title="Welcome back, Arjun"
-        subtitle="Manage personas, knowledge, and integrations — last updated Apr 3, 2026 at 6:16 PM"
+        subtitle="Manage creator personas, OTT content, and audience engagement — last updated Apr 27, 2026 at 7:33 AM"
       />
       <DashboardMetrics />
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">
