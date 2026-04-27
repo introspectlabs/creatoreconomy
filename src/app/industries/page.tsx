@@ -49,9 +49,11 @@ const industries = [
   },
 ];
 
+const comingSoonIndustries: typeof industries = [];
+
 const channels = [
   { label: 'WhatsApp AI', icon: '💬', desc: 'Deploy personas on WhatsApp Business' },
-  { label: 'Voice AI (SIP)', icon: '📞', desc: 'Telephony-grade voice personas' },
+  { label: 'Voice AI', icon: '📞', desc: 'Telephony-grade voice personas' },
   { label: 'Web Chat', icon: '🌐', desc: 'Embeddable JS widgets for any site' },
   { label: 'API Integrations', icon: '⚡', desc: 'REST APIs for custom deployments' },
   { label: 'Video Avatars', icon: '🎭', desc: 'Lifelike video persona responses' },

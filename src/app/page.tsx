@@ -122,7 +122,7 @@ const features = [
       </svg>
     ),
     title: 'Omnichannel AI Deployment',
-    desc: 'Deploy personas across WhatsApp, voice (SIP), web chat, APIs, and video—ensuring consistent experiences across all touchpoints.',
+    desc: 'Deploy personas across WhatsApp, voice, web chat, APIs, and video—ensuring consistent experiences across all touchpoints.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
   },
@@ -263,7 +263,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Build, deploy, and scale AI personas across chat, SIP trunking, WhatsApp, voice, avatars, and APIs—grounded in your knowledge and ready to run everywhere.
+              Build, deploy, and scale AI personas across chat, WhatsApp, voice, avatars, and APIs—grounded in your knowledge and ready to run everywhere.
             </p>
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
@@ -331,7 +331,7 @@ export default function HomePage() {
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Pro includes unlimited personas, all channels (WhatsApp, SIP, API), embeds, and priority support. Want me to walk you through setup?
+                      Pro includes unlimited personas, all channels (WhatsApp, Voice AI, API), embeds, and priority support. Want me to walk you through setup?
                     </div>
                   </div>
                   {/* Typing indicator */}
