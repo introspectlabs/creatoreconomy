@@ -17,8 +17,6 @@ export default function PublicHeader() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/creators', label: 'Creators' },
-    { href: '/industries', label: 'Industries' },
-    { href: '/shopify-ecommerce', label: 'Shopify' },
     { href: '/how-it-works', label: 'How It Works' },
     { href: '/pricing', label: 'Pricing' },
   ];
