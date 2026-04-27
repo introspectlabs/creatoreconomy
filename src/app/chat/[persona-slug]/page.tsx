@@ -682,6 +682,111 @@ function AvatarChatView({ persona, initials }: {persona: any;initials: string;})
 
 }
 
+function getPersonaPrompts(persona: { slug: string; description: string; name: string }): string[] {
+  const slug = persona.slug.toLowerCase();
+  const desc = persona.description.toLowerCase();
+
+  if (slug.includes('concierge') || slug.includes('onrent') || desc.includes('tour') || desc.includes('rental')) {
+    return [
+      'Show me a product tour 🎬',
+      'How do I get started with OnRent?',
+      'What are the key features?',
+      'Walk me through the onboarding steps',
+    ];
+  }
+  if (slug.includes('sales') || desc.includes('sales') || desc.includes('leads') || desc.includes('demo')) {
+    return [
+      'Tell me about your pricing plans',
+      'Can you book a demo for me?',
+      'What problems do you solve?',
+      'How does the free trial work?',
+    ];
+  }
+  if (slug.includes('support') || desc.includes('support') || desc.includes('ticket') || desc.includes('faq')) {
+    return [
+      'I need help with my account',
+      'How do I reset my password?',
+      'Track my recent order',
+      'Escalate to a human agent',
+    ];
+  }
+  if (slug.includes('hr') || desc.includes('hr') || desc.includes('onboarding') || desc.includes('leave')) {
+    return [
+      'How do I apply for leave?',
+      'What is the remote work policy?',
+      'Walk me through onboarding steps',
+      'Who do I contact for payroll queries?',
+    ];
+  }
+  if (slug.includes('voice') || desc.includes('voice') || desc.includes('call')) {
+    return [
+      'How does the voice agent work?',
+      'Can you handle inbound calls?',
+      'What languages do you support?',
+      'Set up an outbound campaign',
+    ];
+  }
+  if (slug.includes('research') || desc.includes('research') || desc.includes('analys')) {
+    return [
+      'Summarise the latest market trends',
+      'Compare top competitors in this space',
+      'Give me a SWOT analysis',
+      'What data sources do you use?',
+    ];
+  }
+  if (slug.includes('content') || desc.includes('content') || desc.includes('blog') || desc.includes('copy')) {
+    return [
+      'Write a LinkedIn post for me',
+      'Generate 5 blog title ideas',
+      'Create a product description',
+      'Draft an email newsletter',
+    ];
+  }
+  // Generic fallback
+  return [
+    `What can you help me with?`,
+    'Tell me about yourself',
+    'Show me what you can do',
+    'Get me started quickly',
+  ];
+}
+
+interface ClickablePromptsProps {
+  persona: { slug: string; description: string; name: string };
+  onSelect: (prompt: string) => void;
+}
+
+function ClickablePrompts({ persona, onSelect }: ClickablePromptsProps) {
+  const prompts = getPersonaPrompts(persona);
+
+  return (
+    <div className="px-3 sm:px-4 pb-3">
+      <p className="text-[10px] font-semibold uppercase tracking-widest mb-2.5" style={{ color: 'rgba(255,255,255,0.25)' }}>
+        Suggested prompts
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {prompts.map((prompt, i) => (
+          <button
+            key={i}
+            onClick={() => onSelect(prompt)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 hover:scale-105 active:scale-95 text-left"
+            style={{
+              background: 'rgba(124,58,237,0.1)',
+              border: '1px solid rgba(124,58,237,0.25)',
+              color: 'rgba(255,255,255,0.65)',
+            }}
+          >
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(167,139,250,0.8)" strokeWidth="2.5" className="flex-shrink-0">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+            {prompt}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function PersonaChatPage() {
   const params = useParams();
   const slug = params['persona-slug'] as string;
@@ -1203,13 +1308,12 @@ export default function PersonaChatPage() {
                   border: activeSession === session.id ? '1px solid rgba(124,58,237,0.25)' : '1px solid transparent'
                 }}>
 
-                    <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{
-                    background: session.mode === 'voice' ? 'rgba(0,245,196,0.15)' :
-                    session.mode === 'avatar' ? 'rgba(168,85,247,0.15)' : 'rgba(255,255,255,0.06)',
-                    color: session.mode === 'voice' ? '#00f5c4' : session.mode === 'avatar' ? '#a855f7' : 'rgba(255,255,255,0.4)'
-                  }}>
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+              style={{
+                background: session.mode === 'voice' ? 'rgba(0,245,196,0.15)' :
+                session.mode === 'avatar' ? 'rgba(168,85,247,0.15)' : 'rgba(255,255,255,0.06)',
+                color: session.mode === 'voice' ? '#00f5c4' : session.mode === 'avatar' ? '#a855f7' : 'rgba(255,255,255,0.4)'
+              }}>
 
                     <ModeIcon mode={session.mode} size={12} />
                   </div>
@@ -1419,6 +1523,16 @@ export default function PersonaChatPage() {
                 <div
                 className="sticky bottom-0 left-0 right-0 border-t border-white/6 backdrop-blur-2xl"
                 style={{ background: 'rgba(8,10,16,0.85)' }}>
+
+                  {/* Clickable prompt suggestions — shown only before first user message */}
+                  {!limitReached && messageCount === 0 && !loading && (
+                    <ClickablePrompts
+                      persona={persona}
+                      onSelect={(prompt) => {
+                        setInput(prompt);
+                      }}
+                    />
+                  )}
 
                   <div className="px-3 sm:px-4 py-3">
                     {!isAvailable && !limitReached &&
