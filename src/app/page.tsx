@@ -240,7 +240,7 @@ export default function HomePage() {
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
               Turn Your Content into a 24/7 AI for{' '}
-              <span className="text-gradient">Discovery, Conversation, and Conversion</span>
+              <span className="text-gradient">Conversation, Discovery and Conversion</span>
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
