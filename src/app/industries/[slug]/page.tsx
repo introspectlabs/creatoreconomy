@@ -246,12 +246,23 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
         <div className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/8 text-sm text-white/30">
           Type a message...
         </div>
-        <button
-          onClick={startDemo}
-          className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex-shrink-0"
-        >
-          {isPlaying ? 'Playing...' : visibleCount > 0 ? 'Replay' : tryDemoLabel}
-        </button>
+        {slug === 'ott-streaming' ? (
+          <a
+            href="https://personamatrix-uxe3i53.public.builtwithrocket.new/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex-shrink-0"
+          >
+            Try Live Demo
+          </a>
+        ) : (
+          <button
+            onClick={startDemo}
+            className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex-shrink-0"
+          >
+            {isPlaying ? 'Playing...' : visibleCount > 0 ? 'Replay' : tryDemoLabel}
+          </button>
+        )}
       </div>
     </div>
   );
