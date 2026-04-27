@@ -30,33 +30,19 @@ function FeatureCard({
   return (
     <div
       className={`group relative glass-elevated rounded-2xl p-6 flex flex-col gap-4 border border-white/8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] cursor-default overflow-hidden ${className}`}
-      style={
-        {
-          '--accent-color': accentColor,
-        } as React.CSSProperties
-      }
+      style={{ '--accent-color': accentColor } as React.CSSProperties}
     >
-      {/* Hover glow overlay */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-        style={{
-          background: `radial-gradient(ellipse at 30% 20%, ${accentColor}18 0%, transparent 65%)`,
-        }}
+        style={{ background: `radial-gradient(ellipse at 30% 20%, ${accentColor}18 0%, transparent 65%)` }}
       />
-      {/* Top edge accent line */}
       <div
         className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)`,
-        }}
+        style={{ background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)` }}
       />
-
       <div
         className="relative w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg"
-        style={{
-          background: accent,
-          boxShadow: `0 0 0 0 ${accentColor}00`,
-        }}
+        style={{ background: accent, boxShadow: `0 0 0 0 ${accentColor}00` }}
       >
         <div
           className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -64,7 +50,6 @@ function FeatureCard({
         />
         {icon}
       </div>
-
       <div className="relative flex flex-col gap-1.5">
         <h3 className="font-bold text-white text-base tracking-tight leading-snug group-hover:text-white transition-colors duration-200">
           {title}
@@ -81,13 +66,12 @@ const features = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-        <path d="M7 10h2M11 10h6" strokeDasharray="2 2" />
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
       </svg>
     ),
-    title: 'Cloud-Agnostic Multi-Model AI',
-    desc: 'Run AI workloads across any cloud or on-premise using multiple LLMs and models—optimized for performance, cost, and flexibility.',
+    title: 'Your Content Becomes a Talking AI',
+    desc: 'Upload your videos, podcasts, or articles and instantly create an AI version of yourself that fans can chat with — anytime, even while you sleep.',
     accent: 'rgba(124,58,237,0.25)',
     accentColor: '#7c3aed',
   },
@@ -98,22 +82,10 @@ const features = [
         <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
       </svg>
     ),
-    title: 'Video-First Deep RAG Engine',
-    desc: 'Transform videos, documents, and media into searchable, conversational intelligence with ultra-deep retrieval across frames and context.',
+    title: 'Fans Get Answers from Your Videos',
+    desc: 'Viewers can ask questions and get instant answers pulled directly from your video library — no more rewatching hours of content to find one moment.',
     accent: 'rgba(239,68,68,0.25)',
     accentColor: '#ef4444',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
-    title: 'AI Personas with Memory & Context',
-    desc: 'Create persistent, intelligent personas that understand users, retain context, and deliver personalized interactions over time.',
-    accent: 'rgba(59,130,246,0.25)',
-    accentColor: '#3b82f6',
   },
   {
     icon: (
@@ -121,22 +93,10 @@ const features = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
       </svg>
     ),
-    title: 'Omnichannel AI Deployment',
-    desc: 'Deploy personas across WhatsApp, voice, web chat, APIs, and video—ensuring consistent experiences across all touchpoints.',
+    title: 'Reach Fans on WhatsApp & Voice',
+    desc: 'Your AI persona can chat with fans on WhatsApp, answer calls, or appear as a video avatar — meeting your audience wherever they already are.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-    title: 'Embeddable AI via JS SDK',
-    desc: 'Integrate AI personas into any website or application using lightweight JavaScript plugins with secure, domain-restricted access.',
-    accent: 'rgba(124,58,237,0.25)',
-    accentColor: '#7c3aed',
   },
   {
     icon: (
@@ -147,46 +107,10 @@ const features = [
         <line x1="8" y1="23" x2="16" y2="23" />
       </svg>
     ),
-    title: 'Real-Time Voice & Avatar AI',
-    desc: 'Enable human-like interactions using speech-to-speech AI, voice synthesis, and avatar-based conversations powered by external services.',
+    title: 'Lifelike Voice & Video Conversations',
+    desc: 'Your AI persona speaks and looks like you — giving fans a real, personal experience without you having to be online 24/7.',
     accent: 'rgba(245,158,11,0.25)',
     accentColor: '#f59e0b',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-    title: 'Enterprise-Grade RBAC & Multi-Tenancy',
-    desc: 'Securely manage teams, roles, and permissions with full organization-level control and isolation across tenants.',
-    accent: 'rgba(16,185,129,0.25)',
-    accentColor: '#10b981',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-      </svg>
-    ),
-    title: 'Extensible AI Integrations Layer',
-    desc: 'Seamlessly connect with AI providers like Heygen, Tavus, Omnidimension, and ElevenLabs through a unified integration layer.',
-    accent: 'rgba(59,130,246,0.25)',
-    accentColor: '#3b82f6',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <ellipse cx="12" cy="5" rx="9" ry="3" />
-        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-      </svg>
-    ),
-    title: 'Scalable Knowledge Ingestion Pipeline',
-    desc: 'Ingest and process large-scale content (PDFs, videos, audio, web) with automated parsing, chunking, and indexing pipelines.',
-    accent: 'rgba(239,68,68,0.25)',
-    accentColor: '#ef4444',
   },
   {
     icon: (
@@ -196,10 +120,70 @@ const features = [
         <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
-    title: 'Analytics & Usage Intelligence',
-    desc: 'Track persona performance, user interactions, and channel activity with actionable insights and real-time metrics.',
+    title: 'Know What Your Audience Loves',
+    desc: 'See exactly what fans are asking, which topics spark the most conversations, and what content keeps them coming back — all in one simple dashboard.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    title: 'Add to Your Website in One Click',
+    desc: 'Drop your AI persona onto your website, streaming platform, or fan community with a simple copy-paste — no developers needed.',
+    accent: 'rgba(124,58,237,0.25)',
+    accentColor: '#7c3aed',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    title: 'Keep Your Brand Safe & In Control',
+    desc: 'Set clear boundaries on what your AI persona can and cannot say — so your brand voice stays consistent and your audience always gets the right message.',
+    accent: 'rgba(16,185,129,0.25)',
+    accentColor: '#10b981',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+      </svg>
+    ),
+    title: 'Feed It All Your Content',
+    desc: 'Upload videos, podcasts, PDFs, or links. Your AI persona learns from everything you\'ve created and keeps getting smarter as you add more.',
+    accent: 'rgba(239,68,68,0.25)',
+    accentColor: '#ef4444',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+      </svg>
+    ),
+    title: 'Personalized Viewing Recommendations',
+    desc: 'Your AI persona learns each viewer\'s taste and suggests the right content at the right time — keeping them watching longer and coming back for more.',
+    accent: 'rgba(59,130,246,0.25)',
+    accentColor: '#3b82f6',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+      </svg>
+    ),
+    title: 'Works with Your Existing Tools',
+    desc: 'Connect PersonaMatrix to the platforms you already use — streaming services, community apps, or your own website — without rebuilding anything.',
+    accent: 'rgba(59,130,246,0.25)',
+    accentColor: '#3b82f6',
   },
 ];
 
@@ -229,7 +213,6 @@ export default function HomePage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
       >
-        {/* Background orbs */}
         <AnimatedGradientOrb className="w-[600px] h-[600px] bg-[#7c3aed] -top-32 -left-32" />
         <AnimatedGradientOrb className="w-[400px] h-[400px] bg-[#3b82f6] bottom-0 right-0" />
         <div
@@ -238,8 +221,6 @@ export default function HomePage() {
             background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(124,58,237,0.06), transparent 60%)`,
           }}
         />
-
-        {/* Grid overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -258,17 +239,18 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
-              Transform Content into{' '}
-              <span className="text-gradient">Interactive AI Personas</span>
+              Let Your Fans Talk to{' '}
+              <span className="text-gradient">Your Content — 24/7</span>
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Build, deploy, and scale AI personas across chat, WhatsApp, voice, avatars, and APIs—grounded in your knowledge and ready to run everywhere.
+              Turn your videos, podcasts, and shows into an AI that chats with your audience, answers their questions, and keeps them engaged — even when you're offline.
             </p>
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
               <p className="text-sm text-[#c4b5fd] leading-relaxed font-medium">
-                PersonaMatrix is a <span className="text-white font-semibold">video-first, multimodal AI platform</span> that transforms content into <span className="text-white font-semibold">interactive, memory-driven personas</span> with <span className="text-white font-semibold">causal reasoning</span>.
+                Built for <span className="text-white font-semibold">creators, OTT platforms, and media brands</span> who want to turn passive viewers into{' '}
+                <span className="text-white font-semibold">active, loyal fans</span> — without working more hours.
               </p>
             </div>
 
@@ -283,12 +265,12 @@ export default function HomePage() {
                 href="/developers"
                 className="px-6 py-3 rounded-xl font-semibold text-white/80 border border-white/12 hover:border-white/25 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm"
               >
-                View Demo →
+                See How It Works →
               </Link>
             </div>
 
             <div className="flex items-center gap-6 pt-2">
-              {['No credit card', 'Deploy in minutes', 'SOC 2 ready'].map((t) => (
+              {['No credit card needed', 'Ready in minutes', 'Your brand, your rules'].map((t) => (
                 <div key={t} className="flex items-center gap-1.5">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <circle cx="7" cy="7" r="6" fill="rgba(20,184,166,0.2)" />
@@ -303,38 +285,34 @@ export default function HomePage() {
           {/* Right — product preview */}
           <div className="flex-1 flex items-center justify-center w-full max-w-lg">
             <div className="relative w-full">
-              {/* Glow behind card */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#7c3aed]/20 to-[#3b82f6]/10 blur-2xl scale-105" />
               <div className="relative glass-elevated rounded-3xl border border-white/10 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.6)]">
-                {/* Fake topbar */}
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/8">
                   <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                   <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                   <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                   <div className="ml-3 flex-1 h-5 rounded-md bg-white/5 text-[10px] text-white/25 flex items-center px-2">
-                    personamatrix.ai/chat/aria
+                    personamatrix.ai/chat/alex
                   </div>
                 </div>
-                {/* Chat preview */}
                 <div className="p-5 flex flex-col gap-3 min-h-[280px]">
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Hi! I'm Aria, your AI product specialist. How can I help you today?
+                      Hey! I'm Alex's AI. Ask me anything about his fitness content or latest episodes!
                     </div>
                   </div>
                   <div className="flex justify-end">
                     <div className="bg-[#7c3aed]/20 border border-[#7c3aed]/30 rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      What's included in the Pro plan?
+                      Which episode covers meal prep for beginners?
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Pro includes unlimited personas, all channels (WhatsApp, Voice AI, API), embeds, and priority support. Want me to walk you through setup?
+                      That's Episode 12 — "Meal Prep Made Simple". Alex walks through a full week of meals in under 30 minutes. Want me to send you the link?
                     </div>
                   </div>
-                  {/* Typing indicator */}
                   <div className="flex items-center gap-2 pl-11">
                     <div className="flex gap-1">
                       {[0, 1, 2].map((i) => (
@@ -345,13 +323,12 @@ export default function HomePage() {
                         />
                       ))}
                     </div>
-                    <span className="text-[11px] text-white/25">Aria is typing…</span>
+                    <span className="text-[11px] text-white/25">Alex AI is typing…</span>
                   </div>
                 </div>
-                {/* Input bar */}
                 <div className="px-4 pb-4">
                   <div className="flex items-center gap-2 glass rounded-xl px-4 py-2.5 border border-white/8">
-                    <span className="text-sm text-white/25 flex-1">Ask Aria anything…</span>
+                    <span className="text-sm text-white/25 flex-1">Ask Alex anything…</span>
                     <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                         <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -365,23 +342,67 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── PAIN POINTS ── */}
+      <section className="py-16 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#ef4444]/3 to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-10">
+            <p className="text-[11px] font-bold text-[#f87171] uppercase tracking-[0.2em] mb-3">Sound Familiar?</p>
+            <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
+              The problems every creator<br />
+              <span className="text-gradient">and OTT platform faces</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              {
+                emoji: '😩',
+                problem: 'Fans ask the same questions over and over',
+                fix: 'Your AI persona handles every question instantly — pulling answers straight from your content.',
+              },
+              {
+                emoji: '📉',
+                problem: 'Viewers watch one episode and disappear',
+                fix: 'Personalized recommendations keep each viewer hooked on what they love most.',
+              },
+              {
+                emoji: '🕐',
+                problem: 'You can\'t be available to fans 24/7',
+                fix: 'Your AI version is always on — chatting, recommending, and engaging while you focus on creating.',
+              },
+              {
+                emoji: '💸',
+                problem: 'Hard to turn viewers into paying subscribers',
+                fix: 'Deeper engagement builds loyalty — and loyal fans are far more likely to subscribe and stay.',
+              },
+            ].map((item) => (
+              <div key={item.problem} className="glass-elevated rounded-2xl p-6 border border-white/8 flex gap-4 items-start">
+                <div className="text-3xl shrink-0">{item.emoji}</div>
+                <div>
+                  <p className="font-semibold text-white/80 text-sm mb-1.5">{item.problem}</p>
+                  <p className="text-[13px] text-[#14b8a6] leading-relaxed">{item.fix}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── FEATURES BENTO ── */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">Platform Capabilities</p>
+            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">What You Get</p>
             <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              Everything you need to ship{' '}
-              <span className="text-gradient">AI personas</span>
+              Everything creators and OTT platforms{' '}
+              <span className="text-gradient">actually need</span>
             </h2>
             <p className="mt-4 text-white/60 max-w-lg mx-auto text-[15px] leading-relaxed">
-              From knowledge ingestion to omnichannel deployment — the full stack, in one platform.
+              From uploading your first video to engaging thousands of fans — all in one place.
             </p>
           </div>
 
-          {/* Bento grid — asymmetric with connecting lines */}
           <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* SVG connecting lines overlay — visible on lg screens */}
             <svg
               className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-10"
               preserveAspectRatio="none"
@@ -411,40 +432,9 @@ export default function HomePage() {
                   </feMerge>
                 </filter>
               </defs>
-              {/* Horizontal connector: card 0 (col-span-2) → card 1 */}
-              <line
-                x1="66.7%"
-                y1="25%"
-                x2="100%"
-                y2="25%"
-                stroke="url(#line-grad-1)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Vertical connector: card 1 → card 4 */}
-              <line
-                x1="83.3%"
-                y1="50%"
-                x2="83.3%"
-                y2="75%"
-                stroke="url(#line-grad-2)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Horizontal connector: card 2 → card 3 (col-span-2) */}
-              <line
-                x1="0%"
-                y1="75%"
-                x2="33.3%"
-                y2="75%"
-                stroke="url(#line-grad-3)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Dot nodes at connection points */}
+              <line x1="66.7%" y1="25%" x2="100%" y2="25%" stroke="url(#line-grad-1)" strokeWidth="1" strokeDasharray="4 6" filter="url(#glow)" />
+              <line x1="83.3%" y1="50%" x2="83.3%" y2="75%" stroke="url(#line-grad-2)" strokeWidth="1" strokeDasharray="4 6" filter="url(#glow)" />
+              <line x1="0%" y1="75%" x2="33.3%" y2="75%" stroke="url(#line-grad-3)" strokeWidth="1" strokeDasharray="4 6" filter="url(#glow)" />
               <circle cx="66.7%" cy="25%" r="3" fill="#7c3aed" opacity="0.6" filter="url(#glow)" />
               <circle cx="100%" cy="25%" r="3" fill="#3b82f6" opacity="0.6" filter="url(#glow)" />
               <circle cx="83.3%" cy="75%" r="3" fill="#3b82f6" opacity="0.6" filter="url(#glow)" />
@@ -452,78 +442,16 @@ export default function HomePage() {
               <circle cx="33.3%" cy="75%" r="3" fill="#7c3aed" opacity="0.6" filter="url(#glow)" />
             </svg>
 
-            <FeatureCard
-              className="lg:col-span-2 lg:row-span-1"
-              icon={features[0].icon}
-              title={features[0].title}
-              desc={features[0].desc}
-              accent={features[0].accent}
-              accentColor={features[0].accentColor}
-            />
-            <FeatureCard
-              icon={features[1].icon}
-              title={features[1].title}
-              desc={features[1].desc}
-              accent={features[1].accent}
-              accentColor={features[1].accentColor}
-            />
-            <FeatureCard
-              icon={features[2].icon}
-              title={features[2].title}
-              desc={features[2].desc}
-              accent={features[2].accent}
-              accentColor={features[2].accentColor}
-            />
-            <FeatureCard
-              className="lg:col-span-2"
-              icon={features[3].icon}
-              title={features[3].title}
-              desc={features[3].desc}
-              accent={features[3].accent}
-              accentColor={features[3].accentColor}
-            />
-            <FeatureCard
-              icon={features[4].icon}
-              title={features[4].title}
-              desc={features[4].desc}
-              accent={features[4].accent}
-              accentColor={features[4].accentColor}
-            />
-            <FeatureCard
-              icon={features[5].icon}
-              title={features[5].title}
-              desc={features[5].desc}
-              accent={features[5].accent}
-              accentColor={features[5].accentColor}
-            />
-            <FeatureCard
-              icon={features[6].icon}
-              title={features[6].title}
-              desc={features[6].desc}
-              accent={features[6].accent}
-              accentColor={features[6].accentColor}
-            />
-            <FeatureCard
-              icon={features[7].icon}
-              title={features[7].title}
-              desc={features[7].desc}
-              accent={features[7].accent}
-              accentColor={features[7].accentColor}
-            />
-            <FeatureCard
-              icon={features[8].icon}
-              title={features[8].title}
-              desc={features[8].desc}
-              accent={features[8].accent}
-              accentColor={features[8].accentColor}
-            />
-            <FeatureCard
-              icon={features[9].icon}
-              title={features[9].title}
-              desc={features[9].desc}
-              accent={features[9].accent}
-              accentColor={features[9].accentColor}
-            />
+            <FeatureCard className="lg:col-span-2 lg:row-span-1" icon={features[0].icon} title={features[0].title} desc={features[0].desc} accent={features[0].accent} accentColor={features[0].accentColor} />
+            <FeatureCard icon={features[1].icon} title={features[1].title} desc={features[1].desc} accent={features[1].accent} accentColor={features[1].accentColor} />
+            <FeatureCard icon={features[2].icon} title={features[2].title} desc={features[2].desc} accent={features[2].accent} accentColor={features[2].accentColor} />
+            <FeatureCard className="lg:col-span-2" icon={features[3].icon} title={features[3].title} desc={features[3].desc} accent={features[3].accent} accentColor={features[3].accentColor} />
+            <FeatureCard icon={features[4].icon} title={features[4].title} desc={features[4].desc} accent={features[4].accent} accentColor={features[4].accentColor} />
+            <FeatureCard icon={features[5].icon} title={features[5].title} desc={features[5].desc} accent={features[5].accent} accentColor={features[5].accentColor} />
+            <FeatureCard icon={features[6].icon} title={features[6].title} desc={features[6].desc} accent={features[6].accent} accentColor={features[6].accentColor} />
+            <FeatureCard icon={features[7].icon} title={features[7].title} desc={features[7].desc} accent={features[7].accent} accentColor={features[7].accentColor} />
+            <FeatureCard icon={features[8].icon} title={features[8].title} desc={features[8].desc} accent={features[8].accent} accentColor={features[8].accentColor} />
+            <FeatureCard icon={features[9].icon} title={features[9].title} desc={features[9].desc} accent={features[9].accent} accentColor={features[9].accentColor} />
           </div>
         </div>
       </section>
@@ -534,32 +462,31 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold text-[#14b8a6] uppercase tracking-widest mb-3">How It Works</p>
-            <h2 className="text-4xl font-extrabold tracking-tight">From idea to deployed in three steps</h2>
+            <h2 className="text-4xl font-extrabold tracking-tight">Up and running in three simple steps</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connector line */}
             <div className="hidden md:block absolute top-10 left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] h-px bg-gradient-to-r from-[#7c3aed]/40 via-[#3b82f6]/40 to-[#14b8a6]/40" />
 
             {[
               {
                 step: '01',
-                title: 'Create Persona',
-                desc: 'Define your AI persona — name, personality, system prompt, and behavioral guardrails.',
+                title: 'Build Your AI Persona',
+                desc: 'Give it a name, a personality, and tell it what it should and shouldn\'t talk about. Think of it as setting up a digital version of yourself.',
                 color: '#7c3aed',
                 bg: 'rgba(124,58,237,0.15)',
               },
               {
                 step: '02',
-                title: 'Attach Knowledge',
-                desc: 'Upload PDFs, videos, URLs, or connect live data sources. Your persona learns from your content.',
+                title: 'Feed It Your Content',
+                desc: 'Upload your videos, podcasts, blog posts, or show episodes. Your AI learns from everything you\'ve already created.',
                 color: '#3b82f6',
                 bg: 'rgba(59,130,246,0.15)',
               },
               {
                 step: '03',
-                title: 'Deploy Anywhere',
-                desc: 'Publish to WhatsApp, embed on your site, expose via REST API, or launch a video avatar.',
+                title: 'Share It with Your Fans',
+                desc: 'Add it to your website, share a link on social media, or connect it to WhatsApp. Your fans can start chatting right away.',
                 color: '#14b8a6',
                 bg: 'rgba(20,184,166,0.15)',
               },
@@ -581,6 +508,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── OTT SECTION ── */}
+      <section className="py-16 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#3b82f6]/4 to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-10">
+            <p className="text-[11px] font-bold text-[#60a5fa] uppercase tracking-[0.2em] mb-3">For OTT Platforms</p>
+            <h2 className="text-4xl font-extrabold tracking-tight leading-[1.1]">
+              How OTT Platforms Use PersonaMatrix
+            </h2>
+            <p className="mt-4 text-white/55 max-w-xl mx-auto text-[15px] leading-relaxed">
+              Streaming platforms use AI personas to keep subscribers engaged, reduce churn, and help viewers discover content they'll love.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            {[
+              {
+                icon: '🎬',
+                title: 'Show Characters Come Alive',
+                desc: 'Let fans chat with AI versions of their favourite show characters — deepening their connection to your content.',
+              },
+              {
+                icon: '🔍',
+                title: 'Find the Perfect Show Instantly',
+                desc: 'Viewers describe what they\'re in the mood for and your AI recommends exactly the right content from your library.',
+              },
+              {
+                icon: '📺',
+                title: 'Keep Subscribers Watching Longer',
+                desc: 'Personalised suggestions and interactive experiences mean viewers spend more time on your platform — and stick around longer.',
+              },
+            ].map((item) => (
+              <div key={item.title} className="glass-elevated rounded-2xl p-6 border border-white/8 flex flex-col gap-3">
+                <div className="text-3xl">{item.icon}</div>
+                <h3 className="font-bold text-white text-base">{item.title}</h3>
+                <p className="text-[13px] text-white/50 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a
+              href="https://personamatrix-uxe3i53.public.builtwithrocket.new/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm shadow-[0_0_24px_rgba(124,58,237,0.35)] hover:shadow-[0_0_32px_rgba(124,58,237,0.5)]"
+            >
+              Try Live Demo →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA SECTION ── */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
@@ -590,11 +568,11 @@ export default function HomePage() {
             <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-[#3b82f6]/10 blur-3xl pointer-events-none" />
             <div className="relative z-10 flex flex-col items-center gap-6">
               <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-                Start building your<br />
-                <span className="text-gradient">AI Persona today</span>
+                Ready to turn your content<br />
+                <span className="text-gradient">into a fan experience?</span>
               </h2>
               <p className="text-white/50 max-w-md text-base">
-                Join thousands of creators and enterprises already using PersonaMatrix to automate conversations at scale.
+                Join creators and streaming platforms already using PersonaMatrix to keep their audiences engaged and growing.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
