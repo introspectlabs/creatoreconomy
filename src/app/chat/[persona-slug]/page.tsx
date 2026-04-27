@@ -674,7 +674,7 @@ function AvatarChatView({ persona, initials }: {persona: any;initials: string;})
 
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            <polygon points="22 2 18 22 11 13 2 9 22 2" />
           </svg>
         </button>
       </div>
@@ -702,13 +702,29 @@ export default function PersonaChatPage() {
 
   useEffect(() => {
     if (persona) {
+      const isConcierge = persona.slug === 'demo-concierge';
       setMessages([
       {
         id: '0',
         role: 'assistant',
         content: `Hey! I'm ${persona.name} ✦ ${persona.description}. You have ${FREE_MESSAGE_LIMIT} free messages. What's on your mind?`,
         timestamp: new Date(),
-        mode: 'text'
+        mode: 'text',
+        media: isConcierge ? [
+        {
+          type: 'video',
+          url: '',
+          platform: 'youtube',
+          videoId: 'dQw4w9WgXcQ',
+          alt: 'Demo Concierge product tour introduction video',
+          thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1b9a63fe0-1765276611891.png",
+          seekPoints: [
+          { label: 'Welcome', seconds: 0 },
+          { label: 'Key Features', seconds: 30 },
+          { label: 'Getting Started', seconds: 60 }]
+
+        }] :
+        undefined
       }]
       );
       setMessageCount(0);
@@ -744,6 +760,66 @@ export default function PersonaChatPage() {
       const isNearLimit = newCount === FREE_MESSAGE_LIMIT - 1;
 
       // Cycle through multimodal response demos
+      const isConcierge = persona.slug === 'demo-concierge';
+
+      const conciergeResponses: Partial<Message>[] = [
+      {
+        content: `Great question! Let me walk you through that with a quick video clip — I've marked the key chapters so you can jump straight to what matters most:`,
+        media: [
+        {
+          type: 'video',
+          url: '',
+          platform: 'youtube',
+          videoId: 'dQw4w9WgXcQ',
+          alt: 'Demo Concierge product tour — key features walkthrough',
+          thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1a0df884d-1766743183482.png",
+          seekPoints: [
+          { label: 'Overview', seconds: 0 },
+          { label: 'Core Features', seconds: 30 },
+          { label: 'Setup Guide', seconds: 60 },
+          { label: 'Pro Tips', seconds: 90 }]
+        }]
+      },
+      {
+        content: `Here's a step-by-step tutorial clip that covers exactly what you need. Use the chapter markers to skip ahead:`,
+        media: [
+        {
+          type: 'video',
+          url: '',
+          platform: 'youtube',
+          videoId: 'LXb3EKWsInQ',
+          alt: 'Full onboarding tutorial with chapter markers',
+          thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_113e83763-1769665855852.png",
+          seekPoints: [
+          { label: 'Intro', seconds: 0 },
+          { label: 'Dashboard Tour', seconds: 120 },
+          { label: 'Integrations', seconds: 240 },
+          { label: 'Advanced Settings', seconds: 360 },
+          { label: 'Q&A', seconds: 480 }]
+        }]
+      },
+      {
+        content: `I've put together a visual guide for this. Watch the clip and check out the screenshots below for a quick reference:`,
+        media: [
+        {
+          type: 'video',
+          url: '',
+          platform: 'youtube',
+          videoId: 'dQw4w9WgXcQ',
+          alt: 'Visual guide video clip',
+          thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+          seekPoints: [
+          { label: 'Start Here', seconds: 0 },
+          { label: 'Key Concepts', seconds: 45 },
+          { label: 'Live Demo', seconds: 90 }]
+        },
+        {
+          type: 'image',
+          url: "https://img.rocket.new/generatedImages/rocket_gen_img_194625d93-1772217102353.png",
+          alt: 'AI interface dashboard showing analytics and data visualization panels'
+        }]
+      }];
+
       const demoResponses: Partial<Message>[] = [
       {
         content: `Thanks for reaching out! As ${persona.name}, I'm here to help. Here's a quick overview video to get you started:`,
@@ -803,16 +879,16 @@ export default function PersonaChatPage() {
 
       }];
 
-
-      const demoIndex = (newCount - 1) % demoResponses.length;
+      const activeResponses = isConcierge ? conciergeResponses : demoResponses;
+      const demoIndex = (newCount - 1) % activeResponses.length;
 
       const reply: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: isLimit ?
         `You've reached the free message limit! Sign up free to continue chatting with ${persona.name} with unlimited messages. 🚀` :
-        demoResponses[demoIndex].content || `Thanks for reaching out! As ${persona.name}, I'm here to help. 🚀`,
-        media: isLimit ? undefined : demoResponses[demoIndex].media,
+        activeResponses[demoIndex].content || `Thanks for reaching out! As ${persona.name}, I'm here to help. 🚀`,
+        media: isLimit ? undefined : activeResponses[demoIndex].media,
         timestamp: new Date(),
         mode: 'text'
       };
@@ -1036,7 +1112,7 @@ export default function PersonaChatPage() {
             <div className="flex-1 overflow-y-auto px-3 py-3 space-y-2">
               <button
               onClick={() => {setActiveSession(null);setShowHistory(false);}}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all hover:bg-white/5 active:scale-98"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all hover:bg-white/5 group"
               style={{ border: '1px dashed rgba(124,58,237,0.4)' }}>
 
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -1059,18 +1135,17 @@ export default function PersonaChatPage() {
                 border: activeSession === session.id ? '1px solid rgba(124,58,237,0.3)' : '1px solid rgba(255,255,255,0.05)'
               }}>
 
-                  <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                style={{
-                  background: session.mode === 'voice' ? 'rgba(0,245,196,0.15)' :
-                  session.mode === 'avatar' ? 'rgba(168,85,247,0.15)' : 'rgba(255,255,255,0.06)',
-                  color: session.mode === 'voice' ? '#00f5c4' : session.mode === 'avatar' ? '#a855f7' : 'rgba(255,255,255,0.4)'
-                }}>
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
+              style={{
+                background: session.mode === 'voice' ? 'rgba(0,245,196,0.15)' :
+                session.mode === 'avatar' ? 'rgba(168,85,247,0.15)' : 'rgba(255,255,255,0.06)',
+                color: session.mode === 'voice' ? '#00f5c4' : session.mode === 'avatar' ? '#a855f7' : 'rgba(255,255,255,0.4)'
+              }}>
 
                     <ModeIcon mode={session.mode} size={12} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-white/75 truncate">{session.title}</p>
+                    <p className="text-sm font-semibold text-white/70 truncate">{session.title}</p>
                     <p className="text-xs text-white/35 truncate mt-0.5">{session.preview}</p>
                     <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.25)' }}>
                       {formatRelativeTime(session.timestamp)}
@@ -1136,16 +1211,16 @@ export default function PersonaChatPage() {
                     color: session.mode === 'voice' ? '#00f5c4' : session.mode === 'avatar' ? '#a855f7' : 'rgba(255,255,255,0.4)'
                   }}>
 
-                      <ModeIcon mode={session.mode} size={12} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-white/70 truncate">{session.title}</p>
-                      <p className="text-[10px] text-white/30 truncate mt-0.5">{session.preview}</p>
-                      <p className="text-[10px] mt-1" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                        {formatRelativeTime(session.timestamp)}
-                      </p>
-                    </div>
-                  </button>
+                    <ModeIcon mode={session.mode} size={12} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-white/70 truncate">{session.title}</p>
+                    <p className="text-[10px] text-white/30 truncate mt-0.5">{session.preview}</p>
+                    <p className="text-[10px] mt-1" style={{ color: 'rgba(255,255,255,0.2)' }}>
+                      {formatRelativeTime(session.timestamp)}
+                    </p>
+                  </div>
+                </button>
               )}
               </div>
             </div>
@@ -1202,7 +1277,7 @@ export default function PersonaChatPage() {
                     style={{ color: '#25d366' }}>
 
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                          <path d="M22 12 11 17l-4-9 9-4 11 13-4 9z" />
                         </svg>
                         WhatsApp
                       </a>
@@ -1282,22 +1357,11 @@ export default function PersonaChatPage() {
                       className="px-3 py-2.5 rounded-xl text-sm leading-relaxed"
                       style={
                       msg.role === 'user' ?
-                      {
-                        background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-                        color: 'white',
-                        borderRadius: '18px 18px 4px 18px',
-                        boxShadow: '0 4px 20px rgba(124,58,237,0.3)'
-                      } :
-                      {
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        color: 'rgba(255,255,255,0.85)',
-                        borderRadius: '18px 18px 18px 4px',
-                        backdropFilter: 'blur(8px)'
-                      }
+                      { background: 'linear-gradient(135deg, #7c3aed, #6d28d9)', color: 'white', borderRadius: '18px 18px 4px 18px' } :
+                      { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.85)', borderRadius: '18px 18px 18px 4px' }
                       }>
 
-                          {msg.media && msg.media.length > 0 ?
+                {msg.media && msg.media.length > 0 ?
                       <MultimodalContent msg={msg} /> :
 
                       msg.content
@@ -1326,7 +1390,7 @@ export default function PersonaChatPage() {
                   {/* Soft sign-up nudge (1 message left) */}
                   {showSignUpPrompt && !limitReached &&
                 <div
-                  className="mx-auto max-w-sm w-full rounded-2xl p-4 border border-[#7c3aed]/30 flex flex-col items-center gap-3 text-center"
+                  className="mx-auto max-w-sm w-full rounded-2xl p-4 border border-[#7c3aed]/30 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left"
                   style={{ background: 'rgba(124,58,237,0.08)' }}>
 
                       <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(124,58,237,0.2)' }}>
@@ -1419,7 +1483,7 @@ export default function PersonaChatPage() {
 
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <line x1="22" y1="2" x2="11" y2="13" />
-                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            <polygon points="22 2 18 22 11 13 2 9 22 2" />
                           </svg>
                         </button>
                       </div>
