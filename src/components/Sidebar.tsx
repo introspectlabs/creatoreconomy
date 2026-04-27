@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Brain, Sparkles, Database, Radio, Plug, Building2, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, FileText, Film, MessagesSquare, BarChart2, Menu, X, BookOpen, UserCircle } from 'lucide-react';
+import { LayoutDashboard, Brain, Sparkles, Database, Radio, Plug, Building2, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, FileText, Film, MessagesSquare, BarChart2, Menu, X, BookOpen, UserCircle, ShoppingBag } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
@@ -18,6 +18,7 @@ const navItems = [
   { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
   { href: '/channels-page', icon: Radio, label: 'Channels', group: 'deploy', badge: 2 },
   { href: '/services-page', icon: Plug, label: 'Services', group: 'deploy' },
+  { href: '/shopify-ecommerce', icon: ShoppingBag, label: 'Shopify / E-commerce', group: 'deploy' },
   { href: '/organization-rbac', icon: Building2, label: 'Organization', group: 'manage' },
   { href: '/embeds-plugins', icon: Code2, label: 'Embeds / Plugins', group: 'manage' },
   { href: '/api-keys', icon: Key, label: 'API Keys', group: 'manage' },
