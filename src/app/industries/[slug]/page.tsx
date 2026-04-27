@@ -499,6 +499,167 @@ export default function IndustrySlugPage() {
         </div>
       </section>
 
+      {/* Shopify Integration — D2C only */}
+      {slug === 'd2c-commerce' && (
+        <section className="py-16 border-t border-white/6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            {/* Section header */}
+            <div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold mb-4"
+                  style={{ borderColor: 'rgba(236,72,153,0.3)', background: 'rgba(236,72,153,0.12)', color: '#ec4899' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                  Shopify Integration
+                </div>
+                <h2 className="text-3xl font-bold text-white">Connect Your Shopify Store</h2>
+                <p className="text-white/50 mt-3 max-w-xl leading-relaxed">
+                  D2C founders can plug PersonaMatrix directly into their Shopify store. Your AI learns your product catalog, handles customer questions, and guides shoppers to checkout — all without leaving your store.
+                </p>
+              </div>
+              <div className="shrink-0">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#96bf48]/10 border border-[#96bf48]/25 text-[#96bf48] text-sm font-semibold">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.337 23.979l7.453-1.667S19.948 7.486 19.93 7.348c-.018-.139-.14-.231-.264-.231-.122 0-2.293-.046-2.293-.046s-1.527-1.485-1.688-1.643v18.551zM12.396 6.9s-.937-.275-2.473-.275c-3.937 0-5.836 2.469-5.836 4.896 0 2.696 1.763 4.01 3.395 5.133 1.27.867 1.688 1.47 1.688 2.258 0 .9-.72 1.413-1.895 1.413-1.31 0-2.55-.418-2.55-.418l-.464 2.143s1.12.418 1.96.418c.74 0 1.3-.32 1.3-.97 0-2.14-2.57-2.01-2.57-4.87 0-2.51 1.8-4.94 5.42-4.94.7 0 1.82.23 1.82.23z"/>
+                  </svg>
+                  Shopify Compatible
+                </span>
+              </div>
+            </div>
+
+            {/* How it works steps */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+              {[
+                {
+                  step: '01',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <rect x="2" y="3" width="20" height="14" rx="2" />
+                      <path d="M8 21h8M12 17v4" />
+                    </svg>
+                  ),
+                  title: 'Connect Your Store',
+                  desc: 'Link your Shopify store to PersonaMatrix in one click. No coding required.',
+                },
+                {
+                  step: '02',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M4 7h16M4 12h10M4 17h7" />
+                      <circle cx="19" cy="17" r="3" />
+                    </svg>
+                  ),
+                  title: 'AI Learns Your Catalog',
+                  desc: 'Your product names, descriptions, prices, and variants are automatically loaded into your AI.',
+                },
+                {
+                  step: '03',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                  ),
+                  title: 'Customers Chat & Buy',
+                  desc: 'Shoppers ask questions, get recommendations, and are guided to the right product — all in chat.',
+                },
+                {
+                  step: '04',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                  ),
+                  title: 'Track & Optimise',
+                  desc: 'See which questions drive the most sales and improve your AI over time from your dashboard.',
+                },
+              ].map(({ step, icon, title, desc }) => (
+                <div key={step} className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-4 hover:border-[#ec4899]/30 transition-colors duration-200">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-[#ec4899]"
+                      style={{ background: 'rgba(236,72,153,0.12)', border: '1px solid rgba(236,72,153,0.2)' }}>
+                      {icon}
+                    </div>
+                    <span className="text-3xl font-black text-white/5">{step}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white mb-1">{title}</h4>
+                    <p className="text-xs text-white/45 leading-relaxed">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Feature highlights */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left: feature list */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-white">What your AI can do inside Shopify</h3>
+                <ul className="flex flex-col gap-4">
+                  {[
+                    { label: 'Answer product questions instantly', detail: 'Ingredients, sizing, materials, compatibility — your AI knows it all.' },
+                    { label: 'Recommend the right product', detail: 'Based on what the customer tells you, the AI suggests the best match from your catalog.' },
+                    { label: 'Handle objections & close sales', detail: 'Price concerns, comparison questions, return policy — your AI responds confidently.' },
+                    { label: 'Upsell & cross-sell naturally', detail: 'Suggest bundles, accessories, or complementary products in a conversational way.' },
+                    { label: 'Reduce support tickets', detail: 'Common post-purchase questions (shipping, tracking, returns) are answered automatically.' },
+                  ].map(({ label, detail }) => (
+                    <li key={label} className="flex items-start gap-3">
+                      <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: 'rgba(236,72,153,0.15)', border: '1px solid rgba(236,72,153,0.25)' }}>
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M2 5l2.5 2.5 3.5-4" stroke="#ec4899" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white/85">{label}</p>
+                        <p className="text-xs text-white/40 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: embed preview card */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-white">Embed anywhere in your store</h3>
+                <p className="text-sm text-white/45 leading-relaxed">
+                  Add your AI as a chat widget on any page — product pages, collection pages, the cart, or the homepage. Customers get help exactly where they need it.
+                </p>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { page: 'Product Page', desc: 'Answer questions before the customer bounces', badge: 'Most Popular' },
+                    { page: 'Collection Page', desc: 'Help shoppers narrow down the right product', badge: '' },
+                    { page: 'Cart Page', desc: 'Reduce abandonment with last-minute reassurance', badge: '' },
+                    { page: 'Homepage', desc: 'Greet new visitors and guide them to bestsellers', badge: '' },
+                  ].map(({ page, desc, badge }) => (
+                    <div key={page} className="flex items-center gap-4 px-4 py-3 rounded-xl border border-white/6 bg-white/[0.03]">
+                      <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#ec4899' }} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-semibold text-white/80">{page}</span>
+                          {badge && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                              style={{ background: 'rgba(236,72,153,0.15)', color: '#ec4899' }}>
+                              {badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-white/35 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-auto pt-4 border-t border-white/6">
+                  <p className="text-xs text-white/30 leading-relaxed">
+                    Installation takes under 5 minutes. Copy a single script tag into your Shopify theme — no developer needed.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="py-20 border-t border-white/6">
         <div className="max-w-3xl mx-auto px-6 text-center">
