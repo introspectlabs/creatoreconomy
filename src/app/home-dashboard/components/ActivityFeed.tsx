@@ -27,7 +27,7 @@ const activities = [
     id: 'act-003',
     type: 'success',
     icon: Radio,
-    title: 'SIP channel reconnected',
+    title: 'WhatsApp channel reconnected',
     time: '1 hr ago',
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',

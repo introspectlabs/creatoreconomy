@@ -2,6 +2,7 @@ import React from 'react';
 import { CheckCircle, AlertTriangle, XCircle, Activity } from 'lucide-react';
 
 const services = [
+  { id: 'sh-whatsapp', name: 'WhatsApp', status: 'operational', latency: '42ms' },
   { id: 'sh-elevenlabs', name: 'ElevenLabs', status: 'degraded', latency: '310ms' },
   { id: 'sh-heygen', name: 'Heygen', status: 'operational', latency: '88ms' },
   { id: 'sh-tavus', name: 'Tavus', status: 'operational', latency: '65ms' },

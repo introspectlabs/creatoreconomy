@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Phone, Settings, RefreshCw, X, CheckCircle, Clock, PauseCircle, FileEdit, Plus, AlertCircle, Trash2, Hash, Copy, Check, Search, ChevronDown, ChevronUp, Edit2,  } from 'lucide-react';
+import { MessageCircle, Phone, Settings, RefreshCw, X, CheckCircle, Clock, PauseCircle, FileEdit, Plus, AlertCircle, Trash2, Hash, Copy, Check, Search, ChevronDown, ChevronUp, Edit2,  } from 'lucide-react';
 import { toast } from 'sonner';
 import { personas } from '@/app/persona-library/components/personaData';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type ChannelType = 'sip';
+type ChannelType = 'whatsapp' | 'sip';
 
 interface PersonaNumberAssignment {
   personaId: string;
@@ -36,6 +36,13 @@ const CHANNEL_META: Record<ChannelType, {
   borderColor: string;
   accentBorder: string;
 }> = {
+  whatsapp: {
+    icon: MessageCircle,
+    color: 'text-emerald-400',
+    iconBg: 'bg-emerald-500/15',
+    borderColor: 'border-emerald-500/20',
+    accentBorder: 'border-emerald-500/30',
+  },
   sip: {
     icon: Phone,
     color: 'text-purple-400',
@@ -48,6 +55,23 @@ const CHANNEL_META: Record<ChannelType, {
 // ─── Initial Data ─────────────────────────────────────────────────────────────
 
 const initialChannelGroups: ChannelGroup[] = [
+  {
+    type: 'whatsapp',
+    name: 'WhatsApp Business',
+    provider: 'Meta Business API',
+    status: 'connected',
+    webhookUrl: 'https://api.personamatrix.ai/webhooks/whatsapp',
+    apiVersion: 'v18.0',
+    messagesDay: '2,841',
+    uptime: '99.8%',
+    lastEvent: '2 min ago',
+    assignments: [
+      { personaId: 'persona-003', phoneNumber: '+91 98765 43210' },
+      { personaId: 'persona-008', phoneNumber: '+91 98765 43211' },
+      { personaId: 'persona-011', phoneNumber: '+1 415 555 0101' },
+      { personaId: 'persona-012', phoneNumber: '+1 415 555 0102' },
+    ],
+  },
   {
     type: 'sip',
     name: 'SIP / Voice',
@@ -714,7 +738,7 @@ export default function ChannelsGrid() {
         <div>
           <p className="text-xs font-600 text-amber-300">Unique number per persona</p>
           <p className="text-[11px] text-white/40 mt-0.5">
-            Every persona must have its own dedicated phone number. Numbers cannot be shared across personas — this ensures clean conversation routing and compliance with SIP provider policies.
+            Every persona must have its own dedicated phone number. Numbers cannot be shared across personas — this ensures clean conversation routing and compliance with WhatsApp Business and SIP provider policies.
           </p>
         </div>
       </div>

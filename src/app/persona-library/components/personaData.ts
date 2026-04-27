@@ -15,6 +15,7 @@ export interface Persona {
   createdAt: string;
   voice: string;
   language: string;
+  whatsappNumber?: string;
   sipNumber?: string;
 }
 
@@ -26,7 +27,7 @@ export const personas: Persona[] = [
     description: 'Outbound sales assistant for SaaS leads — qualifies prospects and books demos',
     status: 'active',
     avatar: 'AS',
-    channels: ['Web Chat', 'API'],
+    channels: ['WhatsApp', 'Web Chat', 'API'],
     services: ['ElevenLabs', 'Heygen'],
     knowledgeChunks: 4820,
     messagesTotal: 28430,
@@ -34,6 +35,7 @@ export const personas: Persona[] = [
     createdAt: 'Jan 12, 2026',
     voice: 'Aria (ElevenLabs)',
     language: 'English',
+    whatsappNumber: '+1 (415) 555-0101',
   },
   {
     id: 'persona-002',
@@ -58,7 +60,7 @@ export const personas: Persona[] = [
     description: 'Internal HR assistant for policy Q&A, onboarding, and leave management',
     status: 'active',
     avatar: 'MH',
-    channels: ['SIP', 'Web Chat'],
+    channels: ['WhatsApp'],
     services: ['Omnidimension'],
     knowledgeChunks: 3100,
     messagesTotal: 7820,
@@ -66,7 +68,7 @@ export const personas: Persona[] = [
     createdAt: 'Feb 5, 2026',
     voice: 'Maya (Omnidimension)',
     language: 'English, Hindi',
-    sipNumber: 'sip:maya@personamatrix.ai',
+    whatsappNumber: '+91 98765 43210',
   },
   {
     id: 'persona-004',
@@ -140,7 +142,7 @@ export const personas: Persona[] = [
     description: 'E-commerce shopping assistant with product discovery and order tracking',
     status: 'active',
     avatar: 'ZR',
-    channels: ['Web Chat', 'SIP'],
+    channels: ['WhatsApp', 'Web Chat'],
     services: ['ElevenLabs', 'Omnidimension'],
     knowledgeChunks: 8920,
     messagesTotal: 41200,
@@ -148,7 +150,7 @@ export const personas: Persona[] = [
     createdAt: 'Dec 14, 2025',
     voice: 'Zara (ElevenLabs)',
     language: 'English, Arabic',
-    sipNumber: 'sip:zara@personamatrix.ai',
+    whatsappNumber: '+971 50 123 4567',
   },
   {
     id: 'persona-009',
@@ -189,7 +191,7 @@ export const personas: Persona[] = [
     description: 'Proactive success outreach — NPS follow-ups, renewal reminders, upsell conversations',
     status: 'active',
     avatar: 'NC',
-    channels: ['SIP', 'API'],
+    channels: ['WhatsApp', 'API'],
     services: ['Omnidimension', 'Heygen'],
     knowledgeChunks: 5100,
     messagesTotal: 18900,
@@ -197,7 +199,7 @@ export const personas: Persona[] = [
     createdAt: 'Feb 10, 2026',
     voice: 'Nova (ElevenLabs)',
     language: 'English',
-    sipNumber: 'sip:nova@personamatrix.ai',
+    whatsappNumber: '+1 (650) 555-0188',
   },
   {
     id: 'persona-012',
@@ -206,7 +208,7 @@ export const personas: Persona[] = [
     description: 'First-touch multilingual greeter for global product onboarding flows',
     status: 'active',
     avatar: 'MW',
-    channels: ['Web Chat', 'SIP'],
+    channels: ['Web Chat', 'WhatsApp'],
     services: ['ElevenLabs', 'Tavus'],
     knowledgeChunks: 2800,
     messagesTotal: 11400,
@@ -214,6 +216,6 @@ export const personas: Persona[] = [
     createdAt: 'Mar 15, 2026',
     voice: 'Multilingual (ElevenLabs)',
     language: 'EN, ES, FR, DE, JA',
-    sipNumber: 'sip:welcome@personamatrix.ai',
+    whatsappNumber: '+1 (800) 555-0199',
   },
 ];

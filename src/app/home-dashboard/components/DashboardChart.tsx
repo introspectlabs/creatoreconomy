@@ -4,20 +4,20 @@ import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,  } from 'recharts';
 
 const data = [
-  { date: 'Mar 21', voice: 420, webchat: 310, api: 180, sip: 90 },
-  { date: 'Mar 22', voice: 380, webchat: 290, api: 210, sip: 110 },
-  { date: 'Mar 23', voice: 510, webchat: 340, api: 195, sip: 85 },
-  { date: 'Mar 24', voice: 460, webchat: 380, api: 240, sip: 120 },
-  { date: 'Mar 25', voice: 390, webchat: 290, api: 180, sip: 95 },
-  { date: 'Mar 26', voice: 340, webchat: 250, api: 160, sip: 70 },
-  { date: 'Mar 27', voice: 550, webchat: 420, api: 290, sip: 140 },
-  { date: 'Mar 28', voice: 620, webchat: 480, api: 320, sip: 155 },
-  { date: 'Mar 29', voice: 590, webchat: 450, api: 305, sip: 130 },
-  { date: 'Mar 30', voice: 680, webchat: 510, api: 350, sip: 170 },
-  { date: 'Mar 31', voice: 720, webchat: 530, api: 380, sip: 190 },
-  { date: 'Apr 1', voice: 650, webchat: 495, api: 340, sip: 160 },
-  { date: 'Apr 2', voice: 780, webchat: 560, api: 410, sip: 200 },
-  { date: 'Apr 3', voice: 840, webchat: 610, api: 440, sip: 215 },
+  { date: 'Mar 21', whatsapp: 420, webchat: 310, api: 180, sip: 90 },
+  { date: 'Mar 22', whatsapp: 380, webchat: 290, api: 210, sip: 110 },
+  { date: 'Mar 23', whatsapp: 510, webchat: 340, api: 195, sip: 85 },
+  { date: 'Mar 24', whatsapp: 460, webchat: 380, api: 240, sip: 120 },
+  { date: 'Mar 25', whatsapp: 390, webchat: 290, api: 180, sip: 95 },
+  { date: 'Mar 26', whatsapp: 340, webchat: 250, api: 160, sip: 70 },
+  { date: 'Mar 27', whatsapp: 550, webchat: 420, api: 290, sip: 140 },
+  { date: 'Mar 28', whatsapp: 620, webchat: 480, api: 320, sip: 155 },
+  { date: 'Mar 29', whatsapp: 590, webchat: 450, api: 305, sip: 130 },
+  { date: 'Mar 30', whatsapp: 680, webchat: 510, api: 350, sip: 170 },
+  { date: 'Mar 31', whatsapp: 720, webchat: 530, api: 380, sip: 190 },
+  { date: 'Apr 1', whatsapp: 650, webchat: 495, api: 340, sip: 160 },
+  { date: 'Apr 2', whatsapp: 780, webchat: 560, api: 410, sip: 200 },
+  { date: 'Apr 3', whatsapp: 840, webchat: 610, api: 440, sip: 215 },
 ];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -51,7 +51,7 @@ export default function DashboardChart() {
       <ResponsiveContainer width="100%" height={240}>
         <AreaChart data={data} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
           <defs>
-            <linearGradient id="gradVoice" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="gradWhatsapp" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#7c3aed" stopOpacity={0.35} />
               <stop offset="95%" stopColor="#7c3aed" stopOpacity={0} />
             </linearGradient>
@@ -72,7 +72,7 @@ export default function DashboardChart() {
           <XAxis dataKey="date" tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} />
           <YAxis tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 11 }} axisLine={false} tickLine={false} />
           <Tooltip content={<CustomTooltip />} />
-          <Area type="monotone" dataKey="voice" stroke="#7c3aed" strokeWidth={2} fill="url(#gradVoice)" />
+          <Area type="monotone" dataKey="whatsapp" stroke="#7c3aed" strokeWidth={2} fill="url(#gradWhatsapp)" />
           <Area type="monotone" dataKey="webchat" stroke="#3b82f6" strokeWidth={2} fill="url(#gradWebchat)" />
           <Area type="monotone" dataKey="api" stroke="#14b8a6" strokeWidth={2} fill="url(#gradApi)" />
           <Area type="monotone" dataKey="sip" stroke="#f59e0b" strokeWidth={1.5} fill="url(#gradSip)" />
@@ -80,7 +80,7 @@ export default function DashboardChart() {
       </ResponsiveContainer>
       <div className="flex flex-wrap items-center gap-3 sm:gap-5 mt-3 pt-3 border-t border-white/5">
         {[
-          { key: 'chart-voice', label: 'Voice AI', color: '#7c3aed' },
+          { key: 'chart-whatsapp', label: 'WhatsApp', color: '#7c3aed' },
           { key: 'chart-webchat', label: 'Web Chat', color: '#3b82f6' },
           { key: 'chart-api', label: 'API', color: '#14b8a6' },
           { key: 'chart-sip', label: 'SIP/Voice', color: '#f59e0b' },
