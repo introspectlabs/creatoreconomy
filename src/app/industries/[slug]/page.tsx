@@ -170,59 +170,6 @@ const industryData: Record<string, IndustryData> = {
       },
     ],
   },
-  'real-estate': {
-    name: 'Real Estate',
-    tagline: 'Smarter property journeys, faster closings',
-    description:
-      'PersonaMatrix transforms real estate content — brochures, walkthrough videos, pricing sheets, and CRM data — into an AI Property Advisor that understands buyer intent, enables conversational property discovery, and leverages video and CRM intelligence to guide users from inquiry to site visit.',
-    color: '#10b981',
-    bg: 'rgba(16,185,129,0.12)',
-    border: 'rgba(16,185,129,0.3)',
-    useCases: [
-      {
-        title: 'AI Property Advisor',
-        description:
-          'Delivers faster property discovery and better matching by understanding buyer intent — budget, location, urgency — and recommending best-fit properties instantly. Guides buyers through objection handling and decision-making, and schedules site visits without manual follow-up. Recommends best-fit properties instantly and guides buyers to schedule site visits.',
-        capabilities: ['Intent-based recommendations', 'Objection handling', 'Site visit scheduling'],
-        channels: ['Web Chat', 'WhatsApp', 'Voice AI'],
-        demoPersona: 'HomeFind AI',
-        demoMessages: [
-          { role: 'user', text: "I'm looking for a 3-bedroom home near good schools, budget around ₹80L." },
-          { role: 'ai', text: "Based on your budget and school preference, I've shortlisted 3 properties in Whitefield and Sarjapur — both are top-rated school zones. The closest match is a 3BHK at ₹78L with a large garden and 2 covered parking spots. Want me to schedule a site visit this weekend?" },
-          { role: 'user', text: 'Yes, Saturday afternoon works. Also, is the price negotiable?' },
-          { role: 'ai', text: "The builder has offered a 2% flexibility on ready-to-move units — so you could potentially close at ₹76.4L. I've booked a site visit for Saturday at 2 PM with our advisor Priya. I'll send you the property brochure, location map, and a checklist of what to verify during the visit." },
-        ],
-      },
-      {
-        title: 'Lead Scoring & Qualification Bot',
-        description:
-          'Identifies high-intent buyers by automatically engaging inbound leads and qualifying their financing readiness and purchase timeline. Prioritizes leads as hot, warm, or cold so sales teams focus only on high-value prospects — improving sales efficiency and reducing time wasted on unqualified inquiries.',
-        capabilities: ['Hot/warm/cold lead scoring', 'Financing pre-check', 'Conversion trend insights'],
-        channels: ['Web', 'WhatsApp', 'Facebook Messenger'],
-        demoPersona: 'LeadQual',
-        demoMessages: [
-          { role: 'user', text: "I saw your listing on MG Road. Is it still available?" },
-          { role: 'ai', text: "Yes, the MG Road property is still available! It's a 4BHK listed at ₹1.2Cr. Are you looking to buy in the next 1–3 months, or still in the early research phase?" },
-          { role: 'user', text: "We're ready to move. Pre-approved for ₹1.3Cr." },
-          { role: 'ai', text: "Excellent — you're a hot lead and in a strong position. I'm flagging you for our senior advisor right now. In the meantime, would you like a full property report including recent comparable sales and neighborhood insights?" },
-        ],
-      },
-      {
-        title: 'Virtual Tour & FAQ Guide',
-        description:
-          'Delivers real-time answers to buyer questions during virtual property tours — covering listings, neighborhoods, and amenities with consistent, scalable engagement. Handles unlimited concurrent buyer interactions across chat, voice, and WhatsApp without additional staffing.',
-        capabilities: ['Virtual tour narration', 'Neighborhood insights', 'Instant FAQ'],
-        channels: ['Web', 'WhatsApp', 'Voice AI'],
-        demoPersona: 'TourGuide AI',
-        demoMessages: [
-          { role: 'user', text: "What are the maintenance charges for this apartment?" },
-          { role: 'ai', text: "Maintenance is ₹4/sq ft per month — for a 1,200 sq ft unit that's ₹4,800/month. This covers 24/7 security, gym, swimming pool, and landscaping. There's also a one-time sinking fund deposit of ₹50,000. Want a full breakdown of all charges?" },
-          { role: 'user', text: "How's the connectivity to the tech park?" },
-          { role: 'ai', text: "Very convenient — the property is 4 km from Electronic City Phase 1 and 6 km from Whitefield IT hub. There's a dedicated shuttle service from the complex. Average commute during peak hours is 20–25 minutes. Want me to show the route on a map?" },
-        ],
-      },
-    ],
-  },
 };
 
 function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 'ai'; text: string }[]; persona: string; slug?: string }) {
@@ -234,7 +181,7 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
     setIsPlaying(true);
   };
 
-  const tryDemoLabel = slug === 'creator-economy' ? 'Talk to an AI Creator' : slug === 'education' ? 'Get Course Recommendations' : 'Find Your Ideal Property';
+  const tryDemoLabel = slug === 'creator-economy' ? 'Talk to an AI Creator' : 'Get Course Recommendations';
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -325,7 +272,7 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
 function UseCaseCard({ useCase, color, isFirst, slug }: { useCase: UseCase; color: string; isFirst: boolean; slug?: string }) {
   const [expanded, setExpanded] = useState(isFirst);
 
-  const primaryCTALabel = slug === 'creator-economy' ? 'Experience the Persona' : slug === 'education' ? 'Try Admission Counselor AI' : 'Try AI Property Advisor';
+  const primaryCTALabel = slug === 'creator-economy' ? 'Experience the Persona' : 'Try Admission Counselor AI';
 
   return (
     <div

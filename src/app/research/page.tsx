@@ -821,17 +821,6 @@ export default function ResearchPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                industry: 'Real Estate',
-                tagline: 'Query property videos and simulate spatial understanding',
-                desc: 'Agents and buyers can interrogate property walkthrough videos — asking questions about layout, dimensions, and features — while the system simulates spatial relationships and generates structured property intelligence from raw video.',
-                color: '#3b82f6',
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                  </svg>
-                ),
-              },
-              {
                 industry: 'EdTech',
                 tagline: 'Talk to lectures and generate personalized learning paths',
                 desc: 'Students interact directly with lecture videos through a persona that understands the full course content — asking follow-up questions, requesting explanations, and receiving personalized learning paths grounded in the actual instructional material.',
@@ -843,10 +832,10 @@ export default function ResearchPage() {
                 ),
               },
               {
-                industry: 'Insurance',
-                tagline: 'Reconstruct scenarios and explain risk through video intelligence',
-                desc: 'Claims adjusters and underwriters use PersonaMatrix to reconstruct incident scenarios from video evidence — tracing causal chains, identifying contributing factors, and generating explainable risk assessments grounded in temporal video analysis.',
-                color: '#34d399',
+                industry: 'Healthcare',
+                tagline: 'Guide patients through clinical knowledge and care pathways',
+                desc: 'Patients and clinicians interact with medical content through a persona trained on clinical documentation — asking questions about diagnoses, medications, and procedures while receiving compliant, evidence-grounded responses.',
+                color: '#14b8a6',
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>

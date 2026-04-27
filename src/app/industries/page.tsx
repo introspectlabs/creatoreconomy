@@ -20,20 +20,6 @@ const industries = [
     border: 'rgba(124,58,237,0.25)',
   },
   {
-    slug: 'real-estate',
-    name: 'Real Estate',
-    value: 'Guide buyers through discovery, virtual tours, and qualification. Increase lead conversion and accelerate deal closure.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-    color: '#14b8a6',
-    bg: 'rgba(20,184,166,0.12)',
-    border: 'rgba(20,184,166,0.25)',
-  },
-  {
     slug: 'education',
     name: 'Education',
     value: 'Enable students to interact with courses and receive instant guidance. Improve engagement and scale personalized learning.',
@@ -200,7 +186,7 @@ export default function IndustriesPage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              3 Industries · High-Impact Use Cases
+              2 Industries · High-Impact Use Cases
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
@@ -210,7 +196,7 @@ export default function IndustriesPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              AI Personas for high-impact industries — Creator Economy, Real Estate, and Education. Turn knowledge into interactive assistants that improve decisions, engagement, and revenue.
+              AI Personas for high-impact industries — Creator Economy and Education. Turn knowledge into interactive assistants that improve decisions, engagement, and revenue.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
