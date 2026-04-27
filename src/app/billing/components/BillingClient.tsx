@@ -47,7 +47,7 @@ const plans = [
     storage: '100 GB',
     minutes: '10,000 min/mo',
     features: [
-      'All channels incl. SIP & Avatar Chat',
+      'All channels incl. Avatar Chat',
       'Unlimited personas',
       '100 GB knowledge ingestion',
       '10,000 conversational minutes',

@@ -100,7 +100,7 @@ const FEATURED_PERSONAS: Persona[] = [
     creator: 'PersonaMatrix',
     category: 'Voice',
     emoji: '🎙️',
-    description: 'SIP-based voice IVR replacement with natural language understanding.',
+    description: 'AI voice agent with natural language understanding for inbound and outbound calls.',
     followers: '15.6k',
     isFollowing: false,
     rating: 4.8,

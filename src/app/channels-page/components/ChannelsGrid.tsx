@@ -7,7 +7,7 @@ import { personas } from '@/app/persona-library/components/personaData';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type ChannelType = 'whatsapp' | 'sip';
+type ChannelType = 'whatsapp';
 
 interface PersonaNumberAssignment {
   personaId: string;
@@ -43,13 +43,6 @@ const CHANNEL_META: Record<ChannelType, {
     borderColor: 'border-emerald-500/20',
     accentBorder: 'border-emerald-500/30',
   },
-  sip: {
-    icon: Phone,
-    color: 'text-purple-400',
-    iconBg: 'bg-purple-500/15',
-    borderColor: 'border-purple-500/20',
-    accentBorder: 'border-purple-500/30',
-  },
 };
 
 // ─── Initial Data ─────────────────────────────────────────────────────────────
@@ -70,20 +63,6 @@ const initialChannelGroups: ChannelGroup[] = [
       { personaId: 'persona-008', phoneNumber: '+91 98765 43211' },
       { personaId: 'persona-011', phoneNumber: '+1 415 555 0101' },
       { personaId: 'persona-012', phoneNumber: '+1 415 555 0102' },
-    ],
-  },
-  {
-    type: 'sip',
-    name: 'SIP / Voice',
-    provider: 'Twilio SIP',
-    status: 'connected',
-    webhookUrl: 'https://api.personamatrix.ai/webhooks/sip',
-    apiVersion: null,
-    messagesDay: '312',
-    uptime: '99.2%',
-    lastEvent: '22 min ago',
-    assignments: [
-      { personaId: 'persona-004', phoneNumber: '+1 415 555 0142' },
     ],
   },
 ];
@@ -738,7 +717,7 @@ export default function ChannelsGrid() {
         <div>
           <p className="text-xs font-600 text-amber-300">Unique number per persona</p>
           <p className="text-[11px] text-white/40 mt-0.5">
-            Every persona must have its own dedicated phone number. Numbers cannot be shared across personas — this ensures clean conversation routing and compliance with WhatsApp Business and SIP provider policies.
+            Every persona must have its own dedicated phone number. Numbers cannot be shared across personas — this ensures clean conversation routing and compliance with WhatsApp Business provider policies.
           </p>
         </div>
       </div>

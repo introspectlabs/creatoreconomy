@@ -16,7 +16,6 @@ export interface Persona {
   voice: string;
   language: string;
   whatsappNumber?: string;
-  sipNumber?: string;
 }
 
 export const personas: Persona[] = [
@@ -74,10 +73,10 @@ export const personas: Persona[] = [
     id: 'persona-004',
     name: 'Kai Voice Agent',
     slug: 'kai-voice-agent',
-    description: 'SIP-based voice IVR replacement with natural language understanding',
+    description: 'AI voice agent with natural language understanding for inbound and outbound calls',
     status: 'active',
     avatar: 'KV',
-    channels: ['SIP', 'API'],
+    channels: ['Voice AI', 'API'],
     services: ['ElevenLabs', 'Tavus'],
     knowledgeChunks: 2240,
     messagesTotal: 15600,
@@ -85,7 +84,6 @@ export const personas: Persona[] = [
     createdAt: 'Mar 1, 2026',
     voice: 'Kai (ElevenLabs)',
     language: 'English',
-    sipNumber: 'sip:kai@personamatrix.ai',
   },
   {
     id: 'persona-005',

@@ -66,7 +66,7 @@ const plans = [
     badge: null,
     monthlyPrice: 249,
     yearlyPrice: 199,
-    desc: 'High-volume deployments with avatar and SIP channels.',
+    desc: 'High-volume deployments with avatar channels.',
     color: '#34d399',
     accentBg: 'from-[#34d399]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -74,10 +74,10 @@ const plans = [
     storageDesc: 'Ingested document storage',
     minutes: '10,000 min/mo',
     minutesDesc: 'Conversational minutes',
-    channels: ['Chat', 'WhatsApp', 'Voice', 'SIP', 'Avatar Chat'],
+    channels: ['Chat', 'WhatsApp', 'Voice', 'Avatar Chat'],
     personas: 'Unlimited personas',
     features: [
-      'All channels incl. SIP & Avatar Chat',
+      'All channels incl. Avatar Chat',
       'Unlimited personas',
       '100 GB knowledge ingestion',
       '10,000 conversational minutes',
@@ -193,7 +193,6 @@ const channelRates = [
   { channel: 'Web Chat', icon: '💬', unit: 'per minute', rate: '$0.004', note: 'Text-based conversations' },
   { channel: 'WhatsApp', icon: '📱', unit: 'per minute', rate: '$0.006', note: 'WhatsApp Business API' },
   { channel: 'Voice AI', icon: '🎙️', unit: 'per minute', rate: '$0.012', note: 'Real-time voice conversations' },
-  { channel: 'SIP / Telephony', icon: '📞', unit: 'per minute', rate: '$0.015', note: 'SIP trunk integration' },
   { channel: 'Avatar Chat', icon: '🎭', unit: 'per minute', rate: '$0.025', note: 'Video avatar conversations' },
 ];
 

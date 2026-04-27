@@ -106,7 +106,7 @@ const industryData: Record<string, IndustryData> = {
         description:
           'A first-response AI that helps patients assess symptom urgency and routes them to the right care level — reducing unnecessary ER visits.',
         capabilities: ['Symptom assessment', 'Urgency routing', 'Appointment booking'],
-        channels: ['Web', 'WhatsApp', 'Voice (SIP)'],
+        channels: ['Web', 'WhatsApp', 'Voice AI'],
         demoPersona: 'CareNavigator',
         demoMessages: [
           { role: 'user', text: "I've had a headache for 3 days and some neck stiffness." },
@@ -184,7 +184,7 @@ const industryData: Record<string, IndustryData> = {
         description:
           'Delivers faster property discovery and better matching by understanding buyer intent — budget, location, urgency — and recommending best-fit properties instantly. Guides buyers through objection handling and decision-making, and schedules site visits without manual follow-up. Recommends best-fit properties instantly and guides buyers to schedule site visits.',
         capabilities: ['Intent-based recommendations', 'Objection handling', 'Site visit scheduling'],
-        channels: ['Web Chat', 'WhatsApp', 'Voice'],
+        channels: ['Web Chat', 'WhatsApp', 'Voice AI'],
         demoPersona: 'HomeFind AI',
         demoMessages: [
           { role: 'user', text: "I'm looking for a 3-bedroom home near good schools, budget around ₹80L." },
@@ -212,7 +212,7 @@ const industryData: Record<string, IndustryData> = {
         description:
           'Delivers real-time answers to buyer questions during virtual property tours — covering listings, neighborhoods, and amenities with consistent, scalable engagement. Handles unlimited concurrent buyer interactions across chat, voice, and WhatsApp without additional staffing.',
         capabilities: ['Virtual tour narration', 'Neighborhood insights', 'Instant FAQ'],
-        channels: ['Web', 'WhatsApp', 'Voice'],
+        channels: ['Web', 'WhatsApp', 'Voice AI'],
         demoPersona: 'TourGuide AI',
         demoMessages: [
           { role: 'user', text: "What are the maintenance charges for this apartment?" },
@@ -616,7 +616,7 @@ export default function IndustryDetailPage() {
                     {
                       capability: 'Channels',
                       traditional: 'Website forms or phone calls only',
-                      pm: 'Web, WhatsApp, Voice, Facebook Messenger — all from one platform',
+                      pm: 'Web, WhatsApp, Voice AI, Facebook Messenger — all from one platform',
                     },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/6 last:border-0">

@@ -12,7 +12,7 @@ const allActivities = [
   { id: 'act-005', type: 'warning', icon: Plug,     title: 'ElevenLabs quota at 87%',                          time: '3 hr ago',   date: 'Today' },
   { id: 'act-006', type: 'success', icon: Brain,    title: 'Persona "Support Bot v2" training complete',       time: '5 hr ago',   date: 'Today' },
   { id: 'act-007', type: 'info',    icon: Database, title: '3,200 new chunks indexed from Notion',             time: '7 hr ago',   date: 'Today' },
-  { id: 'act-008', type: 'success', icon: Radio,    title: 'SIP channel "Sales Line" connected',               time: '9 hr ago',   date: 'Today' },
+  { id: 'act-008', type: 'success', icon: Radio,    title: 'WhatsApp channel "Support Line" connected',         time: '9 hr ago',   date: 'Today' },
   { id: 'act-009', type: 'info',    icon: Brain,    title: 'Persona "HR Assistant" created',                   time: '11 hr ago',  date: 'Today' },
   { id: 'act-010', type: 'warning', icon: Code2,    title: 'Embed script on shop.acme.io returned 404',        time: '1 day ago',  date: 'Yesterday' },
   { id: 'act-011', type: 'success', icon: Database, title: 'Website crawl completed — 512 pages indexed',      time: '1 day ago',  date: 'Yesterday' },
