@@ -93,8 +93,8 @@ const features = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
       </svg>
     ),
-    title: 'Reach Fans on WhatsApp & Voice',
-    desc: 'Your AI persona can chat with fans on WhatsApp, answer calls, or appear as a video avatar — meeting your audience wherever they already are.',
+    title: 'Embed Your AI Anywhere Your Audience Is',
+    desc: 'Drop your AI persona onto your website, community platform, or fan page with a simple embed — your audience can start chatting wherever they already spend time.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
   },
@@ -107,8 +107,8 @@ const features = [
         <line x1="8" y1="23" x2="16" y2="23" />
       </svg>
     ),
-    title: 'Lifelike Voice & Video Conversations',
-    desc: 'Your AI persona speaks and looks like you — giving fans a real, personal experience without you having to be online 24/7.',
+    title: 'Lifelike Video Avatar Conversations',
+    desc: 'Your AI persona can appear as a video avatar that looks and sounds like you — giving fans a personal, face-to-face experience without you needing to be online.',
     accent: 'rgba(245,158,11,0.25)',
     accentColor: '#f59e0b',
   },
@@ -168,8 +168,8 @@ const features = [
         <path d="M8 21h8M12 17v4" />
       </svg>
     ),
-    title: 'Personalized Viewing Recommendations',
-    desc: 'Your AI persona learns each viewer\'s taste and suggests the right content at the right time — keeping them watching longer and coming back for more.',
+    title: 'Surface Your Content Through Conversation',
+    desc: 'Fans discover your back-catalogue naturally by asking questions — your AI guides them to the right video, episode, or article based on what they\'re looking for.',
     accent: 'rgba(59,130,246,0.25)',
     accentColor: '#3b82f6',
   },
@@ -180,8 +180,8 @@ const features = [
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
       </svg>
     ),
-    title: 'Works with Your Existing Tools',
-    desc: 'Connect PersonaMatrix to the platforms you already use — streaming services, community apps, or your own website — without rebuilding anything.',
+    title: 'Connect to Your Website & Community',
+    desc: 'Embed PersonaMatrix on your own website or community platform using a simple widget — no rebuilding required, works alongside the tools you already use.',
     accent: 'rgba(59,130,246,0.25)',
     accentColor: '#3b82f6',
   },
@@ -373,7 +373,7 @@ export default function HomePage() {
               {
                 emoji: '💸',
                 problem: 'Hard to monetize beyond one-time content sales',
-                fix: 'Deeper engagement builds loyalty — and loyal followers are far more likely to buy courses, coaching, and products.',
+                fix: 'Your AI persona drives deeper conversations that naturally lead fans to your courses, coaching offers, and products — turning passive viewers into paying customers.',
               },
             ].map((item) => (
               <div key={item.problem} className="glass-elevated rounded-2xl p-6 border flex flex-col gap-4">
@@ -609,7 +609,7 @@ export default function HomePage() {
                 <span className="text-gradient">into a revenue engine?</span>
               </h2>
               <p className="text-white/50 max-w-md text-base">
-                Join finance creators, educators, coaches, and D2C founders already using PersonaMatrix to scale their audience and income.
+                Join finance creators, educators, coaches, and D2C founders building with PersonaMatrix to scale their audience and income.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
