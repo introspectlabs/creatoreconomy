@@ -10,22 +10,22 @@ const plans = [
     badge: null,
     monthlyPrice: 0,
     yearlyPrice: 0,
-    desc: 'Explore AI personas with generous free limits.',
+    desc: 'Try your AI Sales Agent with generous free limits.',
     color: '#38bdf8',
     accentBg: 'from-[#38bdf8]/8 to-transparent',
     borderColor: 'border-white/8',
     storage: '500 MB',
-    storageDesc: 'Ingested document storage',
+    storageDesc: 'Product catalog & content storage',
     minutes: '200 min/mo',
     minutesDesc: 'Conversational minutes',
     channels: ['Web Chat'],
-    personas: '3 personas',
+    personas: '1 AI agent',
     features: [
       'Web Chat channel',
-      '3 AI Personas',
-      '500 MB knowledge ingestion',
+      '1 AI Sales Agent',
+      '500 MB product catalog ingestion',
       '200 conversational minutes',
-      'PDF, DOCX, TXT support',
+      'PDF, DOCX, CSV support',
       'Community support',
     ],
     cta: 'Start free',
@@ -37,22 +37,23 @@ const plans = [
     badge: 'Most Popular',
     monthlyPrice: 79,
     yearlyPrice: 63,
-    desc: 'For teams deploying personas across multiple channels.',
+    desc: 'For D2C brands deploying across multiple channels.',
     color: '#a78bfa',
     accentBg: 'from-[#7c3aed]/12 to-[#38bdf8]/5',
     borderColor: 'border-[#7c3aed]/40',
     storage: '10 GB',
-    storageDesc: 'Ingested document storage',
+    storageDesc: 'Product catalog & content storage',
     minutes: '2,000 min/mo',
     minutesDesc: 'Conversational minutes',
-    channels: ['Chat', 'WhatsApp', 'Voice', 'API'],
-    personas: 'Unlimited personas',
+    channels: ['Web Chat', 'WhatsApp', 'Voice', 'API'],
+    personas: 'Unlimited agents',
     features: [
-      'All channels: Chat, WhatsApp, Voice, API',
-      'Unlimited personas',
-      '10 GB knowledge ingestion',
+      'All channels: Web, WhatsApp, Voice, API',
+      'Unlimited AI Sales Agents',
+      '10 GB product catalog ingestion',
       '2,000 conversational minutes',
       'Video, audio, PDF, web scraping',
+      'Shopify plugin integration',
       'Embeddable JS widgets',
       'Webhooks & streaming',
       'Priority email support',
@@ -71,15 +72,15 @@ const plans = [
     accentBg: 'from-[#34d399]/8 to-transparent',
     borderColor: 'border-white/8',
     storage: '100 GB',
-    storageDesc: 'Ingested document storage',
+    storageDesc: 'Product catalog & content storage',
     minutes: '10,000 min/mo',
     minutesDesc: 'Conversational minutes',
-    channels: ['Chat', 'WhatsApp', 'Voice', 'Avatar Chat'],
-    personas: 'Unlimited personas',
+    channels: ['Web Chat', 'WhatsApp', 'Voice', 'Avatar Chat'],
+    personas: 'Unlimited agents',
     features: [
       'All channels incl. Avatar Chat',
-      'Unlimited personas',
-      '100 GB knowledge ingestion',
+      'Unlimited AI Sales Agents',
+      '100 GB product catalog ingestion',
       '10,000 conversational minutes',
       'AI Video Avatars (Tavus)',
       'Video generation pipeline',
@@ -105,7 +106,7 @@ const plans = [
     minutes: 'Unlimited',
     minutesDesc: 'Custom minute pools',
     channels: ['All channels', 'Custom'],
-    personas: 'Unlimited personas',
+    personas: 'Unlimited agents',
     features: [
       'Everything in Scale',
       'Custom storage & minute pools',
@@ -121,7 +122,7 @@ const plans = [
   },
 ];
 
-const audiencePacks = [
+const agencyPacks = [
   {
     name: 'Starter Pack',
     badge: null,
@@ -131,10 +132,10 @@ const audiencePacks = [
     color: '#38bdf8',
     accentBg: 'from-[#38bdf8]/8 to-transparent',
     borderColor: 'border-white/8',
-    desc: 'Try out a few AI personas before committing.',
+    desc: 'Test the AI Sales Agent experience before committing.',
     features: [
-      '10 persona chat sessions',
-      'Access to all public personas',
+      '10 demo chat sessions',
+      'Access to all live agent demos',
       'Text & voice chat',
       'Chat history saved for 7 days',
       'No subscription required',
@@ -144,7 +145,7 @@ const audiencePacks = [
     popular: false,
   },
   {
-    name: 'Fan Pack',
+    name: 'Agency Pack',
     badge: 'Best Value',
     chats: 30,
     price: 9.99,
@@ -152,16 +153,16 @@ const audiencePacks = [
     color: '#a78bfa',
     accentBg: 'from-[#7c3aed]/12 to-[#38bdf8]/5',
     borderColor: 'border-[#7c3aed]/40',
-    desc: 'For fans who regularly engage with their favourite personas.',
+    desc: 'For agencies evaluating the platform for multiple clients.',
     features: [
-      '30 persona chat sessions',
-      'Access to all public personas',
+      '30 demo chat sessions',
+      'Access to all live agent demos',
       'Text, voice & avatar chat',
       'Chat history saved for 30 days',
       'Priority queue during peak hours',
       'No subscription required',
     ],
-    cta: 'Buy Fan Pack',
+    cta: 'Buy Agency Pack',
     ctaHref: '/register',
     popular: true,
   },
@@ -174,14 +175,14 @@ const audiencePacks = [
     color: '#34d399',
     accentBg: 'from-[#34d399]/8 to-transparent',
     borderColor: 'border-white/8',
-    desc: 'Heavy users who want the lowest per-chat rate.',
+    desc: 'Heavy evaluation for large agencies and enterprise teams.',
     features: [
-      '100 persona chat sessions',
-      'Access to all public & premium personas',
+      '100 demo chat sessions',
+      'Access to all public & premium demos',
       'Text, voice & avatar chat',
       'Unlimited chat history',
       'Priority queue always',
-      'Early access to new personas',
+      'Early access to new features',
     ],
     cta: 'Buy Power Pack',
     ctaHref: '/register',
@@ -206,7 +207,7 @@ const storageRates = [
 export default function PricingPage() {
   const [yearly, setYearly] = useState(false);
   const [activeTab, setActiveTab] = useState<'plans' | 'usage'>('plans');
-  const [buyerType, setBuyerType] = useState<'creator' | 'audience'>('creator');
+  const [buyerType, setBuyerType] = useState<'brand' | 'agency'>('brand');
 
   return (
     <div className="min-h-screen bg-[#080a10] text-white overflow-x-hidden">
@@ -214,52 +215,52 @@ export default function PricingPage() {
 
       {/* Hero */}
       <section className="relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-[#7c3aed]/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-[#10b981]/10 rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute top-10 right-1/4 w-[400px] h-[250px] bg-[#38bdf8]/8 rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-5xl mx-auto relative z-10 text-center">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 text-[#a78bfa] text-xs font-semibold tracking-widest uppercase mb-6">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#10b981]/30 bg-[#10b981]/10 text-[#10b981] text-xs font-semibold tracking-widest uppercase mb-6">
             Pricing
           </span>
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-5 leading-tight">
-            Pay for what you<br />
-            <span className="bg-gradient-to-r from-[#a78bfa] via-[#38bdf8] to-[#34d399] bg-clip-text text-transparent">
-              actually use
+            Simple pricing for<br />
+            <span className="bg-gradient-to-r from-[#10b981] via-[#38bdf8] to-[#a78bfa] bg-clip-text text-transparent">
+              every stage of growth
             </span>
           </h1>
           <p className="text-base sm:text-lg text-white/50 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-            Whether you&apos;re building AI personas or chatting with them — we have a plan that fits.
+            Deploy your AI Sales Agent and pay only for what you use. No hidden fees, no lock-in.
           </p>
 
           {/* Buyer type toggle */}
           <div className="inline-flex items-center gap-1 p-1 rounded-2xl border border-white/10 bg-white/4 mb-8">
             <button
-              onClick={() => setBuyerType('creator')}
+              onClick={() => setBuyerType('brand')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                buyerType === 'creator' ?'bg-gradient-to-r from-[#7c3aed] to-[#6d28d9] text-white shadow-[0_0_16px_rgba(124,58,237,0.4)]' :'text-white/45 hover:text-white'
+                buyerType === 'brand' ? 'bg-gradient-to-r from-[#10b981] to-[#059669] text-white shadow-[0_0_16px_rgba(16,185,129,0.4)]' : 'text-white/45 hover:text-white'
               }`}
             >
-              <span>🏗️</span>
-              <span>For Creators &amp; Orgs</span>
+              <span>🛍️</span>
+              <span>For D2C Brands</span>
             </button>
             <button
-              onClick={() => setBuyerType('audience')}
+              onClick={() => setBuyerType('agency')}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                buyerType === 'audience' ?'bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white shadow-[0_0_16px_rgba(56,189,248,0.4)]' :'text-white/45 hover:text-white'
+                buyerType === 'agency' ? 'bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] text-white shadow-[0_0_16px_rgba(56,189,248,0.4)]' : 'text-white/45 hover:text-white'
               }`}
             >
-              <span>🎭</span>
-              <span>For Audience / Fans</span>
+              <span>🏢</span>
+              <span>For Agencies &amp; Evaluators</span>
             </button>
           </div>
 
-          {/* Sub-tabs — only show for creator view */}
-          {buyerType === 'creator' && (
+          {/* Sub-tabs — only show for brand view */}
+          {buyerType === 'brand' && (
             <>
               <div className="inline-flex items-center gap-1 p-1 rounded-xl border border-white/8 bg-white/4 mb-6 ml-4">
                 <button
                   onClick={() => setActiveTab('plans')}
                   className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
-                    activeTab === 'plans' ? 'bg-[#7c3aed] text-white shadow-[0_0_12px_rgba(124,58,237,0.4)]' : 'text-white/40 hover:text-white'
+                    activeTab === 'plans' ? 'bg-[#10b981] text-white shadow-[0_0_12px_rgba(16,185,129,0.4)]' : 'text-white/40 hover:text-white'
                   }`}
                 >
                   Plans
@@ -267,7 +268,7 @@ export default function PricingPage() {
                 <button
                   onClick={() => setActiveTab('usage')}
                   className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
-                    activeTab === 'usage' ? 'bg-[#7c3aed] text-white shadow-[0_0_12px_rgba(124,58,237,0.4)]' : 'text-white/40 hover:text-white'
+                    activeTab === 'usage' ? 'bg-[#10b981] text-white shadow-[0_0_12px_rgba(16,185,129,0.4)]' : 'text-white/40 hover:text-white'
                   }`}
                 >
                   Usage Rates
@@ -302,28 +303,28 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── AUDIENCE CREDIT PACKS ── */}
-      {buyerType === 'audience' && (
+      {/* ── AGENCY / EVALUATOR PACKS ── */}
+      {buyerType === 'agency' && (
         <section className="pb-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
 
             {/* Section header */}
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#38bdf8]/30 bg-[#38bdf8]/10 text-[#38bdf8] text-xs font-semibold tracking-widest uppercase mb-4">
-                Audience Credit Packs
+                Evaluation Packs
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-                Chat with any AI persona.<br />
+                Evaluate before you commit.<br />
                 <span className="bg-gradient-to-r from-[#38bdf8] to-[#a78bfa] bg-clip-text text-transparent">No subscription needed.</span>
               </h2>
               <p className="text-sm text-white/45 max-w-xl mx-auto leading-relaxed">
-                Buy a credit pack once and use it whenever you like. Each chat session with an AI persona uses one credit — no monthly commitment, no expiry on Power Pack credits.
+                Buy a demo pack to explore live AI Sales Agent demos across different D2C verticals. Each session uses one credit — no monthly commitment.
               </p>
             </div>
 
-            {/* Credit pack cards */}
+            {/* Pack cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch mb-10">
-              {audiencePacks.map((pack) => (
+              {agencyPacks.map((pack) => (
                 <div
                   key={pack.name}
                   className={`relative flex flex-col rounded-2xl border p-7 transition-all duration-200 bg-gradient-to-b ${pack.accentBg} ${pack.borderColor} ${
@@ -336,14 +337,12 @@ export default function PricingPage() {
                     </div>
                   )}
 
-                  {/* Pack header */}
                   <div className="mb-5">
                     <div className="w-7 h-0.5 rounded-full mb-3" style={{ background: pack.color }} />
                     <h3 className="text-lg font-bold text-white mb-1">{pack.name}</h3>
                     <p className="text-xs text-white/40 leading-relaxed">{pack.desc}</p>
                   </div>
 
-                  {/* Price */}
                   <div className="mb-6">
                     <div className="flex items-end gap-1 mb-1">
                       <span className="text-3xl font-extrabold text-white">${pack.price}</span>
@@ -351,14 +350,13 @@ export default function PricingPage() {
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/8">
                       <span className="text-lg font-bold" style={{ color: pack.color }}>{pack.chats}</span>
-                      <span className="text-xs text-white/45">chat sessions</span>
+                      <span className="text-xs text-white/45">demo sessions</span>
                       <span className="text-white/20 mx-0.5">·</span>
                       <span className="text-xs font-semibold" style={{ color: pack.color }}>{pack.perChat}</span>
-                      <span className="text-xs text-white/45">per chat</span>
+                      <span className="text-xs text-white/45">per session</span>
                     </div>
                   </div>
 
-                  {/* Features */}
                   <ul className="flex flex-col gap-2.5 mb-7 flex-1">
                     {pack.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
@@ -385,34 +383,12 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* How credits work */}
-            <div className="rounded-2xl border border-white/8 bg-white/3 p-6 mb-6">
-              <h3 className="text-sm font-bold text-white mb-4">💡 How credits work</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { step: '1', title: 'Buy a pack', desc: 'One-time purchase — no recurring charges unless you choose to top up.' },
-                  { step: '2', title: 'Start chatting', desc: 'Each conversation with an AI persona uses 1 credit, regardless of length.' },
-                  { step: '3', title: 'Top up anytime', desc: 'Running low? Buy another pack. Credits stack — they never expire on Power Pack.' },
-                ].map((item) => (
-                  <div key={item.step} className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/25 flex items-center justify-center text-xs font-bold text-[#38bdf8] shrink-0">
-                      {item.step}
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white mb-0.5">{item.title}</div>
-                      <div className="text-xs text-white/40 leading-relaxed">{item.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Trust row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { icon: '🔒', title: 'Secure one-time payment', desc: 'Powered by Stripe. No card stored after purchase.' },
-                { icon: '♾️', title: 'Credits never expire', desc: 'Power Pack credits roll over forever. Starter & Fan valid 90 days.' },
-                { icon: '🎭', title: 'Access all personas', desc: 'Use credits across any public persona on the platform.' },
+                { icon: '♾️', title: 'Credits never expire', desc: 'Power Pack credits roll over forever. Starter & Agency valid 90 days.' },
+                { icon: '🛍️', title: 'Access all demos', desc: 'Use credits across any live AI Sales Agent demo on the platform.' },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl p-5 border border-white/6 bg-white/3 flex items-start gap-4">
                   <span className="text-xl">{item.icon}</span>
@@ -424,22 +400,22 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* Switch to creator CTA */}
+            {/* Switch to brand CTA */}
             <div className="mt-8 text-center">
-              <p className="text-sm text-white/40 mb-3">Are you a creator or business building AI personas?</p>
+              <p className="text-sm text-white/40 mb-3">Ready to deploy your own AI Sales Agent?</p>
               <button
-                onClick={() => setBuyerType('creator')}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-[#7c3aed]/35 text-[#a78bfa] text-sm font-semibold hover:bg-[#7c3aed]/10 transition-all duration-200"
+                onClick={() => setBuyerType('brand')}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-[#10b981]/35 text-[#10b981] text-sm font-semibold hover:bg-[#10b981]/10 transition-all duration-200"
               >
-                🏗️ View Creator &amp; Organization Plans →
+                🛍️ View D2C Brand Plans →
               </button>
             </div>
           </div>
         </section>
       )}
 
-      {/* ── CREATOR / ORG PLANS ── */}
-      {buyerType === 'creator' && activeTab === 'plans' && (
+      {/* ── BRAND PLANS ── */}
+      {buyerType === 'brand' && activeTab === 'plans' && (
         <section className="pb-24 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-stretch">
@@ -451,19 +427,17 @@ export default function PricingPage() {
                   }`}
                 >
                   {plan.badge && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#38bdf8] text-[11px] font-bold text-white shadow-[0_0_16px_rgba(124,58,237,0.5)] whitespace-nowrap">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#10b981] to-[#38bdf8] text-[11px] font-bold text-white shadow-[0_0_16px_rgba(16,185,129,0.5)] whitespace-nowrap">
                       {plan.badge}
                     </div>
                   )}
 
-                  {/* Plan header */}
                   <div className="mb-5">
                     <div className="w-7 h-0.5 rounded-full mb-3" style={{ background: plan.color }} />
                     <h3 className="text-lg font-bold text-white mb-1">{plan.name}</h3>
                     <p className="text-xs text-white/40 leading-relaxed">{plan.desc}</p>
                   </div>
 
-                  {/* Price */}
                   <div className="mb-6">
                     {plan.monthlyPrice === null ? (
                       <div className="text-3xl font-extrabold text-white">Custom</div>
@@ -484,7 +458,6 @@ export default function PricingPage() {
                     )}
                   </div>
 
-                  {/* Usage limits */}
                   <div className="mb-5 p-3 rounded-xl bg-white/4 border border-white/6 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] text-white/40">📦 Storage</span>
@@ -508,7 +481,6 @@ export default function PricingPage() {
                     </div>
                   </div>
 
-                  {/* Features */}
                   <ul className="flex flex-col gap-2.5 mb-7 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
@@ -525,7 +497,7 @@ export default function PricingPage() {
                     href={plan.ctaHref}
                     className={`w-full py-2.5 rounded-xl text-sm font-semibold text-center transition-all duration-200 ${
                       plan.popular
-                        ? 'bg-gradient-to-r from-[#7c3aed] to-[#38bdf8] text-white shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_28px_rgba(124,58,237,0.5)]'
+                        ? 'bg-gradient-to-r from-[#10b981] to-[#38bdf8] text-white shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_28px_rgba(16,185,129,0.5)]'
                         : 'border border-white/12 text-white/65 hover:border-white/25 hover:text-white hover:bg-white/5'
                     }`}
                   >
@@ -563,14 +535,14 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* Switch to audience CTA */}
+            {/* Switch to agency CTA */}
             <div className="mt-8 text-center">
-              <p className="text-sm text-white/40 mb-3">Just here to chat with AI personas?</p>
+              <p className="text-sm text-white/40 mb-3">Evaluating for a client or want to explore demos first?</p>
               <button
-                onClick={() => setBuyerType('audience')}
+                onClick={() => setBuyerType('agency')}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-[#38bdf8]/35 text-[#38bdf8] text-sm font-semibold hover:bg-[#38bdf8]/10 transition-all duration-200"
               >
-                🎭 View Audience Credit Packs →
+                🏢 View Agency &amp; Evaluation Packs →
               </button>
             </div>
           </div>
@@ -578,7 +550,7 @@ export default function PricingPage() {
       )}
 
       {/* Usage Rates Tab */}
-      {buyerType === 'creator' && activeTab === 'usage' && (
+      {buyerType === 'brand' && activeTab === 'usage' && (
         <section className="pb-24 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto space-y-10">
 
@@ -589,7 +561,6 @@ export default function PricingPage() {
                 <p className="text-sm text-white/45">Billed per minute of active conversation. Rates vary by channel complexity.</p>
               </div>
               <div className="rounded-2xl border border-white/8 overflow-hidden">
-                {/* Desktop header */}
                 <div className="hidden sm:grid sm:grid-cols-4 px-5 py-3 bg-white/4 border-b border-white/8">
                   <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Channel</span>
                   <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Rate</span>
@@ -601,7 +572,6 @@ export default function PricingPage() {
                     key={row.channel}
                     className={`${i < channelRates.length - 1 ? 'border-b border-white/6' : ''} hover:bg-white/3 transition-colors`}
                   >
-                    {/* Mobile card layout */}
                     <div className="sm:hidden px-4 py-4 flex items-start justify-between gap-3">
                       <div className="flex items-center gap-2.5 min-w-0">
                         <span className="text-xl flex-shrink-0">{row.icon}</span>
@@ -615,7 +585,6 @@ export default function PricingPage() {
                         <p className="text-xs text-white/35 mt-0.5">{row.unit}</p>
                       </div>
                     </div>
-                    {/* Desktop row */}
                     <div className="hidden sm:grid sm:grid-cols-4 px-5 py-4 items-center">
                       <div className="flex items-center gap-2.5">
                         <span className="text-base">{row.icon}</span>
@@ -635,10 +604,9 @@ export default function PricingPage() {
             <div>
               <div className="mb-5">
                 <h2 className="text-2xl font-bold text-white mb-1">Knowledge Ingestion Storage</h2>
-                <p className="text-sm text-white/45">Charged on total ingested and indexed document size. Supports PDF, DOCX, TXT, video transcripts, web pages.</p>
+                <p className="text-sm text-white/45">Charged on total ingested and indexed content size. Supports product catalogs, PDFs, videos, web pages.</p>
               </div>
               <div className="rounded-2xl border border-white/8 overflow-hidden">
-                {/* Desktop header */}
                 <div className="hidden sm:grid sm:grid-cols-3 px-5 py-3 bg-white/4 border-b border-white/8">
                   <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Storage Tier</span>
                   <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Rate</span>
@@ -649,7 +617,6 @@ export default function PricingPage() {
                     key={row.tier}
                     className={`${i < storageRates.length - 1 ? 'border-b border-white/6' : ''} hover:bg-white/3 transition-colors`}
                   >
-                    {/* Mobile card layout */}
                     <div className="sm:hidden px-4 py-4 flex items-center justify-between gap-3">
                       <div className="min-w-0">
                         <p className="text-sm font-semibold text-white">{row.tier}</p>
@@ -657,7 +624,6 @@ export default function PricingPage() {
                       </div>
                       <span className="text-sm font-bold text-[#34d399] flex-shrink-0">{row.rate}</span>
                     </div>
-                    {/* Desktop row */}
                     <div className="hidden sm:grid sm:grid-cols-3 px-5 py-4 items-center">
                       <span className="text-sm font-semibold text-white">{row.tier}</span>
                       <span className="text-sm font-bold text-[#34d399]">{row.rate}</span>
@@ -670,12 +636,12 @@ export default function PricingPage() {
             </div>
 
             {/* Example bill */}
-            <div className="rounded-2xl border border-[#7c3aed]/25 bg-gradient-to-br from-[#7c3aed]/8 to-[#38bdf8]/5 p-6">
+            <div className="rounded-2xl border border-[#10b981]/25 bg-gradient-to-br from-[#10b981]/8 to-[#38bdf8]/5 p-6">
               <h3 className="text-base font-bold text-white mb-4">📋 Example monthly bill (Growth plan)</h3>
               <div className="space-y-2.5 mb-5">
                 {[
                   { label: 'Growth plan base', amount: '$79.00' },
-                  { label: '8 GB knowledge storage (−10 GB included = 0 overage)', amount: '$0.00' },
+                  { label: '8 GB product catalog storage (−10 GB included = 0 overage)', amount: '$0.00' },
                   { label: '1,800 chat minutes (within 2,000 included)', amount: '$0.00' },
                   { label: '300 WhatsApp overage minutes × $0.006', amount: '$1.80' },
                   { label: '120 Voice overage minutes × $0.012', amount: '$1.44' },
@@ -688,7 +654,7 @@ export default function PricingPage() {
                 <div className="w-full h-px bg-white/10 my-2" />
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-white">Total</span>
-                  <span className="text-sm font-bold text-[#a78bfa]">$82.24</span>
+                  <span className="text-sm font-bold text-[#10b981]">$82.24</span>
                 </div>
               </div>
               <p className="text-xs text-white/35">Overage is billed at the end of each billing cycle. Set spending caps to avoid surprises.</p>
@@ -697,9 +663,9 @@ export default function PricingPage() {
             <div className="text-center">
               <Link
                 href="/register"
-                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#38bdf8] text-white text-sm font-semibold shadow-[0_0_24px_rgba(124,58,237,0.35)] hover:shadow-[0_0_32px_rgba(124,58,237,0.5)] transition-all duration-200"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#10b981] to-[#38bdf8] text-white text-sm font-semibold shadow-[0_0_24px_rgba(16,185,129,0.35)] hover:shadow-[0_0_32px_rgba(16,185,129,0.5)] transition-all duration-200"
               >
-                Get started free →
+                Book a Demo →
               </Link>
             </div>
           </div>
