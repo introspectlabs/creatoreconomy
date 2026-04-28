@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Brain, Radio, Database, Code2, Plug } from 'lucide-react';
+import { Brain, Database, Plug, BookOpen, ShoppingBag, TrendingUp } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
@@ -9,8 +9,8 @@ const activities = [
     id: 'act-001',
     type: 'success',
     icon: Brain,
-    title: 'Persona "Creator Persona — Alex" activated',
-    time: '2 min ago',
+    title: 'Persona "FinanceCoach — Priya" activated for investor Q&A',
+    time: '3 min ago',
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',
   },
@@ -18,16 +18,16 @@ const activities = [
     id: 'act-002',
     type: 'warning',
     icon: Database,
-    title: 'Knowledge sync failed — "Creator Video Library v3"',
-    time: '14 min ago',
+    title: 'Knowledge sync failed — "Course Module 7: Advanced Options"',
+    time: '18 min ago',
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
   },
   {
     id: 'act-003',
     type: 'success',
-    icon: Radio,
-    title: 'WhatsApp channel reconnected',
+    icon: BookOpen,
+    title: 'Course Builder persona answered 42 student questions',
     time: '1 hr ago',
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',
@@ -35,8 +35,8 @@ const activities = [
   {
     id: 'act-004',
     type: 'info',
-    icon: Code2,
-    title: 'New embed deployed on streamplatform.io',
+    icon: ShoppingBag,
+    title: 'D2C persona "BrandBot — Zara Skin" drove 8 product sales',
     time: '2 hr ago',
     color: 'text-purple-400',
     bg: 'bg-purple-500/10',
@@ -45,7 +45,7 @@ const activities = [
     id: 'act-005',
     type: 'warning',
     icon: Plug,
-    title: 'ElevenLabs quota at 87%',
+    title: 'ElevenLabs voice quota at 84% — coaching calls affected',
     time: '3 hr ago',
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
@@ -53,8 +53,8 @@ const activities = [
   {
     id: 'act-006',
     type: 'success',
-    icon: Brain,
-    title: 'Persona "StreamGuide — Crime Drama" training complete',
+    icon: TrendingUp,
+    title: 'Coach persona "MindsetPro — Arjun" training complete',
     time: '5 hr ago',
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',
@@ -63,7 +63,7 @@ const activities = [
     id: 'act-007',
     type: 'info',
     icon: Database,
-    title: '4,200 new chunks indexed from creator content library',
+    title: '2,800 new chunks indexed from finance newsletter archive',
     time: '7 hr ago',
     color: 'text-teal-400',
     bg: 'bg-teal-500/10',

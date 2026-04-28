@@ -53,32 +53,32 @@ const statusColors: Record<string, string> = {
 const MOCK_HISTORY: ChatSession[] = [
 {
   id: 'h1',
-  title: 'Product features deep dive',
-  preview: 'Can you explain the main features...',
+  title: 'How to start investing in index funds',
+  preview: 'What is the best way to start with SIPs?',
   timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
   mode: 'text',
   messages: []
 },
 {
   id: 'h2',
-  title: 'Pricing & plans',
-  preview: 'What are the available pricing tiers?',
+  title: 'Course pricing strategy',
+  preview: 'How should I price my first cohort course?',
   timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
   mode: 'voice',
   messages: []
 },
 {
   id: 'h3',
-  title: 'Onboarding walkthrough',
-  preview: 'Help me get started with the platform',
+  title: 'Coaching intake process',
+  preview: 'What questions should I ask in a discovery call?',
   timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48),
   mode: 'avatar',
   messages: []
 },
 {
   id: 'h4',
-  title: 'Integration questions',
-  preview: 'How do I connect my CRM?',
+  title: 'D2C product launch checklist',
+  preview: 'Walk me through launching my digital product',
   timestamp: new Date(Date.now() - 1000 * 60 * 60 * 72),
   mode: 'text',
   messages: []
@@ -694,6 +694,38 @@ function getPersonaPrompts(persona: { slug: string; description: string; name: s
       'Walk me through the onboarding steps',
     ];
   }
+  if (slug.includes('finance') || desc.includes('finance') || desc.includes('invest') || desc.includes('stock') || desc.includes('wealth') || desc.includes('trading')) {
+    return [
+      'How do I start investing with ₹5,000/month?',
+      'Explain SIP vs lump sum investing',
+      'What is your take on index funds?',
+      'How do I build an emergency fund?',
+    ];
+  }
+  if (slug.includes('course') || desc.includes('course') || desc.includes('curriculum') || desc.includes('student') || desc.includes('lesson')) {
+    return [
+      'What modules are covered in this course?',
+      'How long does it take to complete?',
+      'Do I get lifetime access?',
+      'Is there a community or live Q&A?',
+    ];
+  }
+  if (slug.includes('coach') || desc.includes('coach') || desc.includes('mentor') || desc.includes('mindset') || desc.includes('goal')) {
+    return [
+      'How does your coaching program work?',
+      'What results have your clients achieved?',
+      'Book a free discovery call',
+      'What is your coaching philosophy?',
+    ];
+  }
+  if (slug.includes('d2c') || slug.includes('brand') || desc.includes('product') || desc.includes('store') || desc.includes('shop') || desc.includes('founder')) {
+    return [
+      'Tell me about your bestselling products',
+      'What makes your brand different?',
+      'Do you offer bundles or subscriptions?',
+      'How do I track my order?',
+    ];
+  }
   if (slug.includes('sales') || desc.includes('sales') || desc.includes('leads') || desc.includes('demo')) {
     return [
       'Tell me about your pricing plans',
@@ -710,34 +742,10 @@ function getPersonaPrompts(persona: { slug: string; description: string; name: s
       'Escalate to a human agent',
     ];
   }
-  if (slug.includes('hr') || desc.includes('hr') || desc.includes('onboarding') || desc.includes('leave')) {
-    return [
-      'How do I apply for leave?',
-      'What is the remote work policy?',
-      'Walk me through onboarding steps',
-      'Who do I contact for payroll queries?',
-    ];
-  }
-  if (slug.includes('voice') || desc.includes('voice') || desc.includes('call')) {
-    return [
-      'How does the voice agent work?',
-      'Can you handle inbound calls?',
-      'What languages do you support?',
-      'Set up an outbound campaign',
-    ];
-  }
-  if (slug.includes('research') || desc.includes('research') || desc.includes('analys')) {
-    return [
-      'Summarise the latest market trends',
-      'Compare top competitors in this space',
-      'Give me a SWOT analysis',
-      'What data sources do you use?',
-    ];
-  }
   if (slug.includes('content') || desc.includes('content') || desc.includes('blog') || desc.includes('copy')) {
     return [
       'Write a LinkedIn post for me',
-      'Generate 5 blog title ideas',
+      'Generate 5 content ideas for this week',
       'Create a product description',
       'Draft an email newsletter',
     ];
