@@ -244,7 +244,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Turn your videos, podcasts, and shows into an AI that chats with your audience, answers their questions, and keeps them engaged — even when you're offline.
+              Turn your content into a 24/7 AI that engages visitors, answers questions, and drives conversions — even when you're offline.
             </p>
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
