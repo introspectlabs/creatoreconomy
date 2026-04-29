@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
+import { ChevronDown, ChevronUp, Zap, FileText, ShoppingBag, Upload } from 'lucide-react';
 
 type Step = 'details' | 'knowledge' | 'review';
 
 interface PersonaForm {
   name: string;
-  type: 'shopping-assistant' | 'founder-persona';
   tone: 'friendly' | 'expert' | 'premium';
-  knowledgeSource: 'shopify' | 'upload' | 'both';
+  prompt: string;
+  knowledgeSource: 'shopify' | 'upload' | 'both' | 'kb';
   shopifyConnected: boolean;
   uploadedFiles: string[];
+  attachedKbIds: string[];
 }
 
 const toneOptions = [
@@ -21,33 +23,60 @@ const toneOptions = [
   { value: 'premium', label: 'Premium', desc: 'Sophisticated, exclusive, refined', emoji: '✨' },
 ] as const;
 
-const typeOptions = [
+interface QuickTemplate {
+  id: string;
+  label: string;
+  icon: string;
+  prompt: string;
+}
+
+const quickTemplates: QuickTemplate[] = [
   {
-    value: 'shopping-assistant',
-    label: 'Shopping Assistant',
-    desc: 'Helps visitors find products, compare options, and complete purchases',
-    emoji: '🛍️',
-    recommended: true,
+    id: 'tone-behaviour',
+    label: 'Tone & Behaviour',
+    icon: '🎭',
+    prompt: `You are a friendly and helpful shopping assistant for our D2C brand. Always greet customers warmly, use a conversational tone, and be empathetic to their needs. Avoid being pushy — focus on helping customers find the right product for them. Use simple, clear language and keep responses concise.`,
   },
   {
-    value: 'founder-persona',
-    label: 'Founder Persona',
-    desc: 'Represents the brand founder — shares story, values, and vision',
-    emoji: '👤',
-    recommended: false,
+    id: 'capabilities',
+    label: 'Capabilities',
+    icon: '⚡',
+    prompt: `You can help customers with: (1) Finding the right product based on their needs and preferences, (2) Comparing products and explaining differences, (3) Answering questions about ingredients, materials, or specifications, (4) Checking product availability and pricing, (5) Explaining shipping, returns, and policies, (6) Recommending bundles or complementary products.`,
   },
-] as const;
+  {
+    id: 'call-flow',
+    label: 'Call Flow',
+    icon: '🔄',
+    prompt: `Follow this conversation flow: 1) Greet the customer and ask how you can help. 2) Understand their need or problem. 3) Ask 1-2 clarifying questions if needed. 4) Recommend 1-3 relevant products with brief explanations. 5) Handle objections or questions. 6) Guide them toward adding to cart or completing purchase. 7) Offer post-purchase support if needed.`,
+  },
+  {
+    id: 'objectives',
+    label: 'Objectives',
+    icon: '🎯',
+    prompt: `Primary objective: Help customers find and purchase the right product. Secondary objectives: (1) Increase average order value through relevant upsells, (2) Reduce cart abandonment by addressing concerns proactively, (3) Build brand trust through accurate, helpful information, (4) Collect customer preferences to personalize recommendations. Always prioritize customer satisfaction over immediate sales.`,
+  },
+];
+
+// Mock KB documents for attachment
+const kbDocuments = [
+  { id: 'kb-1', name: 'Product_FAQ_v3.pdf', type: 'pdf', size: '2.4 MB' },
+  { id: 'kb-2', name: 'Sales_Playbook_2024.docx', type: 'docx', size: '1.1 MB' },
+  { id: 'kb-4', name: 'Competitor_Analysis_Q4.csv', type: 'csv', size: '890 KB' },
+  { id: 'kb-6', name: 'Brand_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
+];
 
 export default function CreatePersonaPage() {
   const [step, setStep] = useState<Step>('details');
   const [form, setForm] = useState<PersonaForm>({
     name: '',
-    type: 'shopping-assistant',
     tone: 'friendly',
+    prompt: '',
     knowledgeSource: 'shopify',
     shopifyConnected: false,
     uploadedFiles: [],
+    attachedKbIds: [],
   });
+  const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
 
   const steps: { key: Step; label: string; num: string }[] = [
     { key: 'details', label: 'Persona Details', num: '1' },
@@ -65,6 +94,22 @@ export default function CreatePersonaPage() {
   const handleBack = () => {
     if (step === 'knowledge') setStep('details');
     else if (step === 'review') setStep('knowledge');
+  };
+
+  const injectTemplate = (template: QuickTemplate) => {
+    setForm((prev) => ({
+      ...prev,
+      prompt: prev.prompt ? `${prev.prompt}\n\n${template.prompt}` : template.prompt,
+    }));
+  };
+
+  const toggleKbDoc = (id: string) => {
+    setForm((prev) => ({
+      ...prev,
+      attachedKbIds: prev.attachedKbIds.includes(id)
+        ? prev.attachedKbIds.filter((k) => k !== id)
+        : [...prev.attachedKbIds, id],
+    }));
   };
 
   return (
@@ -111,7 +156,7 @@ export default function CreatePersonaPage() {
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-6">
             <div>
               <h2 className="text-base font-semibold text-white mb-1">Persona Details</h2>
-              <p className="text-sm text-white/45">Give your AI persona a name and personality.</p>
+              <p className="text-sm text-white/45">Give your AI persona a name, personality, and behaviour.</p>
             </div>
 
             {/* Name */}
@@ -126,32 +171,18 @@ export default function CreatePersonaPage() {
               />
             </div>
 
-            {/* Type */}
+            {/* Type — Shopping Assistant only */}
             <div className="flex flex-col gap-2">
               <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Persona Type</label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {typeOptions.map((t) => (
-                  <button
-                    key={t.value}
-                    onClick={() => setForm({ ...form, type: t.value })}
-                    className={`relative flex flex-col gap-2 p-4 rounded-xl border text-left transition-all ${
-                      form.type === t.value
-                        ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10'
-                        : 'border-white/8 bg-white/3 hover:border-white/15'
-                    }`}
-                  >
-                    {t.recommended && (
-                      <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30">
-                        Default
-                      </span>
-                    )}
-                    <span className="text-2xl">{t.emoji}</span>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.label}</p>
-                      <p className="text-xs text-white/45 mt-0.5 leading-relaxed">{t.desc}</p>
-                    </div>
-                  </button>
-                ))}
+              <div className="flex items-center gap-3 p-4 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/8">
+                <span className="text-2xl">🛍️</span>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-white">Shopping Assistant</p>
+                  <p className="text-xs text-white/45 mt-0.5">Helps visitors find products, compare options, and complete purchases</p>
+                </div>
+                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30">
+                  Default
+                </span>
               </div>
             </div>
 
@@ -175,6 +206,62 @@ export default function CreatePersonaPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Prompt / System Instructions */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-white/60 uppercase tracking-wider">System Prompt / Instructions</label>
+                <span className="text-[10px] text-white/30">Optional</span>
+              </div>
+
+              {/* Quick Start Templates */}
+              <div className="flex flex-col gap-2">
+                <p className="text-xs text-white/45">Quick Start Templates — click to inject into prompt:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {quickTemplates.map((tpl) => (
+                    <div key={tpl.id} className="rounded-xl border border-white/8 bg-white/[0.02] overflow-hidden">
+                      <button
+                        onClick={() => setExpandedTemplate(expandedTemplate === tpl.id ? null : tpl.id)}
+                        className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/4 transition-colors"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">{tpl.icon}</span>
+                          <span className="text-xs font-medium text-white/70">{tpl.label}</span>
+                        </div>
+                        {expandedTemplate === tpl.id ? (
+                          <ChevronUp size={13} className="text-white/30" />
+                        ) : (
+                          <ChevronDown size={13} className="text-white/30" />
+                        )}
+                      </button>
+                      {expandedTemplate === tpl.id && (
+                        <div className="px-3 pb-3 flex flex-col gap-2">
+                          <p className="text-[11px] text-white/40 leading-relaxed line-clamp-3">{tpl.prompt}</p>
+                          <button
+                            onClick={() => { injectTemplate(tpl); setExpandedTemplate(null); }}
+                            className="flex items-center gap-1.5 self-start px-2.5 py-1.5 rounded-lg bg-[#7c3aed]/15 border border-[#7c3aed]/30 text-[11px] font-semibold text-[#a78bfa] hover:bg-[#7c3aed]/25 transition-all"
+                          >
+                            <Zap size={11} />
+                            Inject Template
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <textarea
+                value={form.prompt}
+                onChange={(e) => setForm({ ...form, prompt: e.target.value })}
+                placeholder="Define how your AI persona should behave, what it knows, and how it should respond to customers..."
+                rows={6}
+                className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all resize-none leading-relaxed"
+              />
+              <p className="text-[11px] text-white/30">
+                {form.prompt.length} characters · You can combine multiple templates and customize further
+              </p>
             </div>
 
             <button
@@ -201,20 +288,24 @@ export default function CreatePersonaPage() {
                 form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both'
                   ? 'border-[#14b8a6]/40 bg-[#14b8a6]/8' :'border-white/8 bg-white/3 hover:border-white/15'
               }`}
-              onClick={() => setForm({ ...form, knowledgeSource: form.knowledgeSource === 'upload' ? 'both' : 'shopify' })}
+              onClick={() =>
+                setForm({ ...form, knowledgeSource: form.knowledgeSource === 'upload' ? 'both' : 'shopify' })
+              }
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">🛍️</span>
+                  <ShoppingBag size={22} className="text-[#14b8a6]" />
                   <div>
                     <p className="text-sm font-semibold text-white">Auto-sync Shopify</p>
                     <p className="text-xs text-white/45">Recommended · Syncs your full product catalog automatically</p>
                   </div>
                 </div>
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                  form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both'
-                    ? 'border-[#14b8a6] bg-[#14b8a6]' :'border-white/20'
-                }`}>
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                    form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both'
+                      ? 'border-[#14b8a6] bg-[#14b8a6]' :'border-white/20'
+                  }`}
+                >
                   {(form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both') && (
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
                       <polyline points="20 6 9 17 4 12" />
@@ -224,7 +315,10 @@ export default function CreatePersonaPage() {
               </div>
               {(form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both') && (
                 <button
-                  onClick={(e) => { e.stopPropagation(); setForm({ ...form, shopifyConnected: !form.shopifyConnected }); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setForm({ ...form, shopifyConnected: !form.shopifyConnected });
+                  }}
                   className={`mt-2 text-xs px-3 py-1.5 rounded-lg border transition-all ${
                     form.shopifyConnected
                       ? 'border-[#34d399]/40 text-[#34d399] bg-[#34d399]/10'
@@ -236,26 +330,30 @@ export default function CreatePersonaPage() {
               )}
             </div>
 
-            {/* Upload */}
+            {/* Upload files */}
             <div
               className={`p-4 rounded-xl border transition-all cursor-pointer ${
                 form.knowledgeSource === 'upload' || form.knowledgeSource === 'both'
                   ? 'border-[#7c3aed]/40 bg-[#7c3aed]/8' :'border-white/8 bg-white/3 hover:border-white/15'
               }`}
-              onClick={() => setForm({ ...form, knowledgeSource: form.knowledgeSource === 'shopify' ? 'both' : 'upload' })}
+              onClick={() =>
+                setForm({ ...form, knowledgeSource: form.knowledgeSource === 'shopify' ? 'both' : 'upload' })
+              }
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">📄</span>
+                  <Upload size={22} className="text-[#a78bfa]" />
                   <div>
-                    <p className="text-sm font-semibold text-white">Upload PDFs / Docs</p>
-                    <p className="text-xs text-white/45">Product guides, FAQs, brand docs, videos (optional)</p>
+                    <p className="text-sm font-semibold text-white">Upload Documents</p>
+                    <p className="text-xs text-white/45">PDFs, DOCX, MP4, CSV, and more</p>
                   </div>
                 </div>
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                  form.knowledgeSource === 'upload' || form.knowledgeSource === 'both'
-                    ? 'border-[#7c3aed] bg-[#7c3aed]' :'border-white/20'
-                }`}>
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                    form.knowledgeSource === 'upload' || form.knowledgeSource === 'both'
+                      ? 'border-[#7c3aed] bg-[#7c3aed]' :'border-white/20'
+                  }`}
+                >
                   {(form.knowledgeSource === 'upload' || form.knowledgeSource === 'both') && (
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
                       <polyline points="20 6 9 17 4 12" />
@@ -265,8 +363,58 @@ export default function CreatePersonaPage() {
               </div>
             </div>
 
+            {/* Attach from Knowledge Base */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <FileText size={14} className="text-white/40" />
+                <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Attach from Knowledge Base</label>
+              </div>
+              <div className="flex flex-col gap-2">
+                {kbDocuments.map((doc) => {
+                  const isAttached = form.attachedKbIds.includes(doc.id);
+                  return (
+                    <button
+                      key={doc.id}
+                      onClick={() => toggleKbDoc(doc.id)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
+                        isAttached
+                          ? 'border-[#7c3aed]/40 bg-[#7c3aed]/8'
+                          : 'border-white/8 bg-white/[0.02] hover:border-white/15'
+                      }`}
+                    >
+                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                        doc.type === 'pdf' ? 'bg-red-500/10 text-red-400' :
+                        doc.type === 'docx'? 'bg-blue-500/10 text-blue-400' : 'bg-emerald-500/10 text-emerald-400'
+                      }`}>
+                        <FileText size={13} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-white truncate">{doc.name}</p>
+                        <p className="text-[10px] text-white/35">{doc.size}</p>
+                      </div>
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                        isAttached ? 'border-[#7c3aed] bg-[#7c3aed]' : 'border-white/20'
+                      }`}>
+                        {isAttached && (
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+              <Link href="/knowledge-base" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors self-start">
+                Manage Knowledge Base →
+              </Link>
+            </div>
+
             <div className="flex gap-3">
-              <button onClick={handleBack} className="px-5 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all">
+              <button
+                onClick={handleBack}
+                className="px-5 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all"
+              >
                 ← Back
               </button>
               <button onClick={handleNext} className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
@@ -287,7 +435,7 @@ export default function CreatePersonaPage() {
             <div className="flex flex-col gap-3">
               {[
                 { label: 'Name', value: form.name || '(unnamed)' },
-                { label: 'Type', value: typeOptions.find((t) => t.value === form.type)?.label || '' },
+                { label: 'Type', value: 'Shopping Assistant 🛍️' },
                 { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
                 {
                   label: 'Knowledge',
@@ -296,10 +444,21 @@ export default function CreatePersonaPage() {
                       ? 'Shopify sync'
                       : form.knowledgeSource === 'upload' ?'File uploads' :'Shopify sync + File uploads',
                 },
+                {
+                  label: 'KB Docs Attached',
+                  value: form.attachedKbIds.length > 0 ? `${form.attachedKbIds.length} document(s)` : 'None',
+                },
+                {
+                  label: 'System Prompt',
+                  value: form.prompt.trim() ? `${form.prompt.slice(0, 60)}${form.prompt.length > 60 ? '...' : ''}` : 'Not set',
+                },
               ].map((row) => (
-                <div key={row.label} className="flex items-center justify-between py-2.5 border-b border-white/5 last:border-0">
-                  <span className="text-sm text-white/45">{row.label}</span>
-                  <span className="text-sm font-medium text-white">{row.value}</span>
+                <div
+                  key={row.label}
+                  className="flex items-start justify-between py-2.5 border-b border-white/5 last:border-0 gap-4"
+                >
+                  <span className="text-sm text-white/45 flex-shrink-0">{row.label}</span>
+                  <span className="text-sm font-medium text-white text-right">{row.value}</span>
                 </div>
               ))}
             </div>
@@ -311,7 +470,10 @@ export default function CreatePersonaPage() {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={handleBack} className="px-5 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all">
+              <button
+                onClick={handleBack}
+                className="px-5 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all"
+              >
                 ← Back
               </button>
               <Link href="/dashboard" className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
