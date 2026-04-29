@@ -119,9 +119,9 @@
   }
 
   .nav-active {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(99, 102, 241, 0.12));
-    border: 1px solid rgba(168, 85, 247, 0.30);
-    box-shadow: 0 0 12px rgba(168, 85, 247, 0.12);
+    background: linear-gradient(135deg, rgba(232, 160, 32, 0.15), rgba(123, 111, 212, 0.10));
+    border: 1px solid rgba(232, 160, 32, 0.30);
+    box-shadow: 0 0 12px rgba(232, 160, 32, 0.12);
   }
 
   .status-dot-active {
