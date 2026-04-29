@@ -1,9 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
-import { ChevronDown, ChevronUp, Zap, FileText } from 'lucide-react';
+import { ChevronDown, ChevronUp, Zap, FileText, ShoppingBag } from 'lucide-react';
 
 type Step = 'details' | 'knowledge' | 'review';
 
@@ -62,6 +62,32 @@ const kbDocuments = [
   { id: 'kb-6', name: 'Brand_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
 ];
 
+interface ShopifyStoreOption {
+  id: string;
+  name: string;
+  domain: string;
+  products: number;
+}
+
+const STORES_STORAGE_KEY = 'kb_shopify_stores';
+
+function loadShopifyStores(): ShopifyStoreOption[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(STORES_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as Array<{ id: string; name: string; domain: string; products: number; status: string }>;
+      return parsed.filter((s) => s.status === 'connected').map((s) => ({
+        id: s.id,
+        name: s.name,
+        domain: s.domain,
+        products: s.products,
+      }));
+    }
+  } catch {}
+  return [];
+}
+
 export default function CreatePersonaPage() {
   const [step, setStep] = useState<Step>('details');
   const [form, setForm] = useState<PersonaForm>({
@@ -71,6 +97,14 @@ export default function CreatePersonaPage() {
     attachedKbIds: [],
   });
   const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
+  const [shopifyStores, setShopifyStores] = useState<ShopifyStoreOption[]>([]);
+
+  // Load Shopify stores from localStorage when reaching knowledge step
+  React.useEffect(() => {
+    if (step === 'knowledge') {
+      setShopifyStores(loadShopifyStores());
+    }
+  }, [step]);
 
   const steps: { key: Step; label: string; num: string }[] = [
     { key: 'details', label: 'Persona Details', num: '1' },
@@ -321,6 +355,57 @@ export default function CreatePersonaPage() {
               <Link href="/knowledge-base" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors self-start">
                 Manage Knowledge Base →
               </Link>
+            </div>
+
+            {/* Shopify Stores */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <ShoppingBag size={14} className="text-white/40" />
+                <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Shopify Stores</label>
+              </div>
+              {shopifyStores.length === 0 ? (
+                <div className="flex items-center gap-3 p-4 rounded-xl border border-white/8 bg-white/[0.02]">
+                  <ShoppingBag size={16} className="text-white/20 flex-shrink-0" />
+                  <p className="text-xs text-white/35">No Shopify stores connected yet.</p>
+                  <Link href="/knowledge-base" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors ml-auto flex-shrink-0">
+                    Connect a store →
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  {shopifyStores.map((store) => {
+                    const isAttached = form.attachedKbIds.includes(store.id);
+                    return (
+                      <button
+                        key={store.id}
+                        onClick={() => toggleKbDoc(store.id)}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
+                          isAttached
+                            ? 'border-[#14b8a6]/40 bg-[#14b8a6]/8'
+                            : 'border-white/8 bg-white/[0.02] hover:border-white/15'
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-[#14b8a6]/10 flex items-center justify-center flex-shrink-0 text-[#14b8a6]">
+                          <ShoppingBag size={13} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-white truncate">{store.name}</p>
+                          <p className="text-[10px] text-white/35">{store.domain} · {store.products} products</p>
+                        </div>
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          isAttached ? 'border-[#14b8a6] bg-[#14b8a6]' : 'border-white/20'
+                        }`}>
+                          {isAttached && (
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             <div className="flex gap-3">

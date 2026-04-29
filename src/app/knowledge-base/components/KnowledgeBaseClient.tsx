@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import {
   Upload, FileText, File, Trash2, Search, CheckCircle2, AlertCircle, Clock,
   Plus, Database, X, Loader2, ShoppingBag, Link2, RefreshCw, Video, FileSpreadsheet,
@@ -82,6 +82,23 @@ const initialStores: ShopifyStore[] = [
   { id: 'store-1', name: 'Glow Skincare', domain: 'glow-skincare.myshopify.com', status: 'connected', products: 124, lastSync: '2 hours ago' },
 ];
 
+const STORES_STORAGE_KEY = 'kb_shopify_stores';
+
+function loadStores(): ShopifyStore[] {
+  if (typeof window === 'undefined') return initialStores;
+  try {
+    const raw = localStorage.getItem(STORES_STORAGE_KEY);
+    if (raw) return JSON.parse(raw) as ShopifyStore[];
+  } catch {}
+  return initialStores;
+}
+
+function saveStores(stores: ShopifyStore[]) {
+  try {
+    localStorage.setItem(STORES_STORAGE_KEY, JSON.stringify(stores));
+  } catch {}
+}
+
 export default function KnowledgeBaseClient() {
   const [files, setFiles] = useState<KBFile[]>(initialFiles);
   const [stores, setStores] = useState<ShopifyStore[]>(initialStores);
@@ -90,11 +107,17 @@ export default function KnowledgeBaseClient() {
   const [statusFilter, setStatusFilter] = useState<FileStatus | 'ALL'>('ALL');
   const [activeTab, setActiveTab] = useState<ActiveTab>('documents');
   const [shopifyUrl, setShopifyUrl] = useState('');
+  const [shopifyStoreName, setShopifyStoreName] = useState('');
   const [shopifyApiKey, setShopifyApiKey] = useState('');
   const [connectingShopify, setConnectingShopify] = useState(false);
   const [showConnectForm, setShowConnectForm] = useState(false);
   const [syncingStore, setSyncingStore] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load stores from localStorage on mount
+  React.useEffect(() => {
+    setStores(loadStores());
+  }, []);
 
   const handleDragOver = useCallback((e: React.DragEvent) => { e.preventDefault(); setIsDragging(true); }, []);
   const handleDragLeave = useCallback((e: React.DragEvent) => { e.preventDefault(); setIsDragging(false); }, []);
@@ -147,20 +170,25 @@ export default function KnowledgeBaseClient() {
   };
 
   const handleConnectShopify = () => {
-    if (!shopifyUrl.trim()) return;
+    if (!shopifyUrl.trim() || !shopifyStoreName.trim()) return;
     setConnectingShopify(true);
     setTimeout(() => {
       const domain = shopifyUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
       const newStore: ShopifyStore = {
         id: `store-${Date.now()}`,
-        name: domain.split('.')[0].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+        name: shopifyStoreName.trim(),
         domain,
         status: 'connected',
         products: Math.floor(Math.random() * 200) + 20,
         lastSync: 'Just now',
       };
-      setStores((prev) => [...prev, newStore]);
+      setStores((prev) => {
+        const updated = [...prev, newStore];
+        saveStores(updated);
+        return updated;
+      });
       setShopifyUrl('');
+      setShopifyStoreName('');
       setShopifyApiKey('');
       setConnectingShopify(false);
       setShowConnectForm(false);
@@ -171,19 +199,25 @@ export default function KnowledgeBaseClient() {
     setSyncingStore(storeId);
     setStores((prev) => prev.map((s) => s.id === storeId ? { ...s, status: 'syncing' } : s));
     setTimeout(() => {
-      setStores((prev) =>
-        prev.map((s) =>
+      setStores((prev) => {
+        const updated = prev.map((s) =>
           s.id === storeId
-            ? { ...s, status: 'connected', lastSync: 'Just now', products: s.products + Math.floor(Math.random() * 5) }
+            ? { ...s, status: 'connected' as const, lastSync: 'Just now', products: s.products + Math.floor(Math.random() * 5) }
             : s
-        )
-      );
+        );
+        saveStores(updated);
+        return updated;
+      });
       setSyncingStore(null);
     }, 2500);
   };
 
   const handleDisconnectStore = (storeId: string) => {
-    setStores((prev) => prev.filter((s) => s.id !== storeId));
+    setStores((prev) => {
+      const updated = prev.filter((s) => s.id !== storeId);
+      saveStores(updated);
+      return updated;
+    });
   };
 
   const filtered = files.filter((f) => {
@@ -390,7 +424,17 @@ export default function KnowledgeBaseClient() {
               <div className="mb-5 p-4 rounded-xl border border-[#7c3aed]/25 bg-[#7c3aed]/6 flex flex-col gap-3">
                 <h4 className="text-xs font-semibold text-white/70 uppercase tracking-wider">Connect Shopify Store</h4>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs text-white/50">Store URL</label>
+                  <label className="text-xs text-white/50">Store Name <span className="text-red-400">*</span></label>
+                  <input
+                    type="text"
+                    value={shopifyStoreName}
+                    onChange={(e) => setShopifyStoreName(e.target.value)}
+                    placeholder="e.g. Glow Skincare, My Fashion Store..."
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 transition-all"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs text-white/50">Store URL <span className="text-red-400">*</span></label>
                   <div className="relative">
                     <Link2 size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
                     <input
@@ -415,14 +459,14 @@ export default function KnowledgeBaseClient() {
                 <div className="flex gap-2 mt-1">
                   <button
                     onClick={handleConnectShopify}
-                    disabled={!shopifyUrl.trim() || connectingShopify}
+                    disabled={!shopifyUrl.trim() || !shopifyStoreName.trim() || connectingShopify}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {connectingShopify ? <Loader2 size={14} className="animate-spin" /> : <ShoppingBag size={14} />}
                     {connectingShopify ? 'Connecting...' : 'Connect Store'}
                   </button>
                   <button
-                    onClick={() => { setShowConnectForm(false); setShopifyUrl(''); setShopifyApiKey(''); }}
+                    onClick={() => { setShowConnectForm(false); setShopifyUrl(''); setShopifyStoreName(''); setShopifyApiKey(''); }}
                     className="px-4 py-2 rounded-xl text-sm font-medium border border-white/10 text-white/50 hover:text-white transition-all"
                   >
                     Cancel
