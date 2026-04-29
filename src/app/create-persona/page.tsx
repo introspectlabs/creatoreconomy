@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
-import { ChevronDown, ChevronUp, Zap, FileText, ShoppingBag, Upload } from 'lucide-react';
+import { ChevronDown, ChevronUp, Zap, FileText } from 'lucide-react';
 
 type Step = 'details' | 'knowledge' | 'review';
 
@@ -11,9 +11,6 @@ interface PersonaForm {
   name: string;
   tone: 'friendly' | 'expert' | 'premium';
   prompt: string;
-  knowledgeSource: 'shopify' | 'upload' | 'both' | 'kb';
-  shopifyConnected: boolean;
-  uploadedFiles: string[];
   attachedKbIds: string[];
 }
 
@@ -71,9 +68,6 @@ export default function CreatePersonaPage() {
     name: '',
     tone: 'friendly',
     prompt: '',
-    knowledgeSource: 'shopify',
-    shopifyConnected: false,
-    uploadedFiles: [],
     attachedKbIds: [],
   });
   const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
@@ -279,88 +273,7 @@ export default function CreatePersonaPage() {
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-6">
             <div>
               <h2 className="text-base font-semibold text-white mb-1">Knowledge Source</h2>
-              <p className="text-sm text-white/45">Tell your AI what to know about your products and brand.</p>
-            </div>
-
-            {/* Shopify sync */}
-            <div
-              className={`p-4 rounded-xl border transition-all cursor-pointer ${
-                form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both'
-                  ? 'border-[#14b8a6]/40 bg-[#14b8a6]/8' :'border-white/8 bg-white/3 hover:border-white/15'
-              }`}
-              onClick={() =>
-                setForm({ ...form, knowledgeSource: form.knowledgeSource === 'upload' ? 'both' : 'shopify' })
-              }
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <ShoppingBag size={22} className="text-[#14b8a6]" />
-                  <div>
-                    <p className="text-sm font-semibold text-white">Auto-sync Shopify</p>
-                    <p className="text-xs text-white/45">Recommended · Syncs your full product catalog automatically</p>
-                  </div>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both'
-                      ? 'border-[#14b8a6] bg-[#14b8a6]' :'border-white/20'
-                  }`}
-                >
-                  {(form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both') && (
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  )}
-                </div>
-              </div>
-              {(form.knowledgeSource === 'shopify' || form.knowledgeSource === 'both') && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setForm({ ...form, shopifyConnected: !form.shopifyConnected });
-                  }}
-                  className={`mt-2 text-xs px-3 py-1.5 rounded-lg border transition-all ${
-                    form.shopifyConnected
-                      ? 'border-[#34d399]/40 text-[#34d399] bg-[#34d399]/10'
-                      : 'border-[#14b8a6]/40 text-[#14b8a6] hover:bg-[#14b8a6]/10'
-                  }`}
-                >
-                  {form.shopifyConnected ? '✓ Shopify Connected' : 'Connect Shopify Store →'}
-                </button>
-              )}
-            </div>
-
-            {/* Upload files */}
-            <div
-              className={`p-4 rounded-xl border transition-all cursor-pointer ${
-                form.knowledgeSource === 'upload' || form.knowledgeSource === 'both'
-                  ? 'border-[#7c3aed]/40 bg-[#7c3aed]/8' :'border-white/8 bg-white/3 hover:border-white/15'
-              }`}
-              onClick={() =>
-                setForm({ ...form, knowledgeSource: form.knowledgeSource === 'shopify' ? 'both' : 'upload' })
-              }
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Upload size={22} className="text-[#a78bfa]" />
-                  <div>
-                    <p className="text-sm font-semibold text-white">Upload Documents</p>
-                    <p className="text-xs text-white/45">PDFs, DOCX, MP4, CSV, and more</p>
-                  </div>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    form.knowledgeSource === 'upload' || form.knowledgeSource === 'both'
-                      ? 'border-[#7c3aed] bg-[#7c3aed]' :'border-white/20'
-                  }`}
-                >
-                  {(form.knowledgeSource === 'upload' || form.knowledgeSource === 'both') && (
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  )}
-                </div>
-              </div>
+              <p className="text-sm text-white/45">Attach documents from your Knowledge Base to power this persona.</p>
             </div>
 
             {/* Attach from Knowledge Base */}
@@ -437,13 +350,6 @@ export default function CreatePersonaPage() {
                 { label: 'Name', value: form.name || '(unnamed)' },
                 { label: 'Type', value: 'Shopping Assistant 🛍️' },
                 { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
-                {
-                  label: 'Knowledge',
-                  value:
-                    form.knowledgeSource === 'shopify'
-                      ? 'Shopify sync'
-                      : form.knowledgeSource === 'upload' ?'File uploads' :'Shopify sync + File uploads',
-                },
                 {
                   label: 'KB Docs Attached',
                   value: form.attachedKbIds.length > 0 ? `${form.attachedKbIds.length} document(s)` : 'None',
