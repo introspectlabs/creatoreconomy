@@ -5,7 +5,7 @@ import Link from 'next/link';
 import PublicHeader from '@/components/public/PublicHeader';
 import PublicFooter from '@/components/public/PublicFooter';
 
-type CreatorVertical = 'Finance Creator' | 'Course Builder' | 'Coach' | 'D2C Founder';
+type CreatorVertical = 'Finance Creator' | 'Course Builder' | 'Coach' | 'D2C Brand';
 
 interface Creator {
   id: string;
@@ -126,7 +126,7 @@ const creators: Creator[] = [
     name: 'Sasha Skin',
     slug: 'sasha-skin',
     handle: '@sashaskin',
-    vertical: 'D2C Founder',
+    vertical: 'D2C Brand',
     tagline: 'Clean skincare built for melanin-rich skin',
     description: 'Recommends products from her own line, answers ingredient questions, and guides customers to their perfect routine.',
     avatar: 'SS',
@@ -142,7 +142,7 @@ const creators: Creator[] = [
     name: 'Theo Gear',
     slug: 'theo-gear',
     handle: '@theogear',
-    vertical: 'D2C Founder',
+    vertical: 'D2C Brand',
     tagline: 'Minimalist everyday carry for remote workers',
     description: 'Helps customers choose the right bag, accessories, and workspace setup from his curated product line.',
     avatar: 'TG',
@@ -187,13 +187,13 @@ const creators: Creator[] = [
   },
 ];
 
-const verticalFilters = ['All', 'Finance Creator', 'Course Builder', 'Coach', 'D2C Founder'] as const;
+const verticalFilters = ['All', 'Finance Creator', 'Course Builder', 'Coach', 'D2C Brand'] as const;
 
 const verticalMeta: Record<string, { icon: string; color: string; bg: string }> = {
   'Finance Creator': { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
   'Course Builder': { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
   'Coach': { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
-  'D2C Founder': { icon: '🛍️', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
+  'D2C Brand': { icon: '🛍️', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
 };
 
 const statusColors: Record<string, string> = {
