@@ -1,240 +1,150 @@
 'use client';
+import React from 'react';
+import AppLayout from '@/components/AppLayout';
+import Topbar from '@/components/Topbar';
+import Link from 'next/link';
 
-import React, { useState } from 'react';
-import { CreditCard, Zap, Users, Brain, CheckCircle, ArrowUpRight, AlertCircle } from 'lucide-react';
+const currentPlan = {
+  name: 'Growth',
+  price: '₹14,999',
+  period: '/month',
+  renewsOn: 'May 29, 2026',
+  personas: { used: 3, total: 5 },
+  conversations: { used: 1284, total: 5000 },
+  channels: 'Web + WhatsApp',
+};
 
-const plans = [
-  {
-    name: 'Starter',
-    monthlyPrice: 0,
-    annualPrice: 0,
-    storage: '500 MB',
-    minutes: '200 min/mo',
-    features: [
-      'Web Chat channel',
-      '3 AI Personas',
-      '500 MB knowledge ingestion',
-      '200 conversational minutes',
-      'PDF, DOCX, TXT support',
-      'Community support',
-    ],
-    current: false,
-    color: '#38bdf8',
-  },
-  {
-    name: 'Growth',
-    monthlyPrice: 79,
-    annualPrice: 63,
-    storage: '10 GB',
-    minutes: '2,000 min/mo',
-    features: [
-      'All channels: Chat, WhatsApp, Voice, API',
-      'Unlimited personas',
-      '10 GB knowledge ingestion',
-      '2,000 conversational minutes',
-      'Video, audio, PDF, web scraping',
-      'Embeddable JS widgets',
-      'Webhooks & streaming',
-      'Priority email support',
-    ],
-    current: true,
-    color: '#a78bfa',
-  },
-  {
-    name: 'Scale',
-    monthlyPrice: 249,
-    annualPrice: 199,
-    storage: '100 GB',
-    minutes: '10,000 min/mo',
-    features: [
-      'All channels incl. Avatar Chat',
-      'Unlimited personas',
-      '100 GB knowledge ingestion',
-      '10,000 conversational minutes',
-      'AI Video Avatars (Tavus)',
-      'Video generation pipeline',
-      'RBAC & audit logs',
-      'SSO / SAML',
-      'SLA + dedicated support',
-    ],
-    current: false,
-    color: '#34d399',
-  },
-  {
-    name: 'Enterprise',
-    monthlyPrice: null,
-    annualPrice: null,
-    storage: 'Unlimited',
-    minutes: 'Unlimited',
-    features: [
-      'Everything in Scale',
-      'Custom storage & minute pools',
-      'Dedicated infrastructure',
-      'Custom integrations & connectors',
-      'White-label deployment',
-      'On-premise / private cloud',
-      'Named CSM + 24/7 support',
-    ],
-    current: false,
-    color: '#f59e0b',
-  },
+const invoices = [
+  { id: 'INV-2026-04', date: 'Apr 1, 2026', amount: '₹14,999', status: 'paid' },
+  { id: 'INV-2026-03', date: 'Mar 1, 2026', amount: '₹14,999', status: 'paid' },
+  { id: 'INV-2026-02', date: 'Feb 1, 2026', amount: '₹3,999', status: 'paid' },
 ];
 
-const usageStats = [
-  { label: 'Storage Used', usedLabel: '3.2 GB', totalLabel: '10 GB', pct: 32, icon: Brain, color: 'purple' },
-  { label: 'Conv. Minutes', usedLabel: '1,240', totalLabel: '2,000', pct: 62, icon: Zap, color: 'blue' },
-  { label: 'Team Members', usedLabel: '4', totalLabel: '10', pct: 40, icon: Users, color: 'emerald' },
-];
-
-export default function BillingClient() {
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
-
+export default function BillingPage() {
   return (
-    <div className="p-4 sm:p-6 max-w-5xl mx-auto space-y-6 sm:space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-xl sm:text-2xl font-bold text-white">Billing</h1>
-        <p className="text-sm text-white/40 mt-1">Manage your subscription, usage, and payment methods.</p>
-      </div>
-
-      {/* Current Plan Banner */}
-      <div
-        className="rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-        style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(59,130,246,0.10) 100%)', border: '1px solid rgba(139,92,246,0.25)' }}
-      >
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-            <Zap size={18} className="text-purple-400" />
-          </div>
-          <div>
-            <p className="text-xs text-white/40 uppercase tracking-widest">Current Plan</p>
-            <p className="text-base sm:text-lg font-bold text-white">Growth — $79/mo</p>
-            <p className="text-xs text-white/40 mt-0.5">Renews on May 3, 2026 · Next invoice: <span className="text-white/60">$79.00</span></p>
-          </div>
-        </div>
-        <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-500/20 border border-purple-500/30 text-purple-300 text-sm font-medium hover:bg-purple-500/30 transition-all self-start sm:self-auto">
-          Manage Plan <ArrowUpRight size={13} />
-        </button>
-      </div>
-
-      {/* Usage */}
-      <div>
-        <h2 className="text-sm font-semibold text-white/60 uppercase tracking-widest mb-4">Usage This Cycle</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {usageStats.map((stat) => {
-            const StatIcon = stat.icon;
-            const barColor = stat.color === 'purple' ? 'bg-purple-500' : stat.color === 'blue' ? 'bg-blue-500' : 'bg-emerald-500';
-            const iconBg = stat.color === 'purple' ? 'bg-purple-500/15 text-purple-400' : stat.color === 'blue' ? 'bg-blue-500/15 text-blue-400' : 'bg-emerald-500/15 text-emerald-400';
-            return (
-              <div key={stat.label} className="rounded-2xl p-4 space-y-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="flex items-center justify-between">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${iconBg}`}>
-                    <StatIcon size={15} />
-                  </div>
-                  <span className="text-xs text-white/40">{stat.pct}%</span>
+    <AppLayout>
+      <Topbar title="Billing" subtitle="Manage your plan and usage" />
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        {/* Current plan */}
+        <div className="xl:col-span-2 flex flex-col gap-5">
+          <div className="rounded-2xl border border-[#7c3aed]/30 bg-[#7c3aed]/6 p-6">
+            <div className="flex items-start justify-between mb-5">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <h2 className="text-base font-bold text-white">{currentPlan?.name} Plan</h2>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#34d399]/20 text-[#34d399] border border-[#34d399]/30">
+                    Active
+                  </span>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{stat.label}</p>
-                  <p className="text-xs text-white/40 mt-0.5">{stat.usedLabel} / {stat.totalLabel}</p>
+                <p className="text-xs text-white/45">Renews on {currentPlan?.renewsOn}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-extrabold text-white">{currentPlan?.price}</p>
+                <p className="text-xs text-white/40">{currentPlan?.period}</p>
+              </div>
+            </div>
+
+            {/* Usage bars */}
+            <div className="flex flex-col gap-4">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-xs text-white/50">Personas</span>
+                  <span className="text-xs font-semibold text-white">
+                    {currentPlan?.personas?.used} / {currentPlan?.personas?.total}
+                  </span>
                 </div>
-                <div className="w-full h-1.5 rounded-full bg-white/5">
-                  <div className={`h-1.5 rounded-full ${barColor} transition-all`} style={{ width: `${stat.pct}%` }} />
+                <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-[#7c3aed] to-[#a78bfa]"
+                    style={{ width: `${(currentPlan?.personas?.used / currentPlan?.personas?.total) * 100}%` }}
+                  />
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-xs text-white/50">Conversations this month</span>
+                  <span className="text-xs font-semibold text-white">
+                    {currentPlan?.conversations?.used?.toLocaleString()} / {currentPlan?.conversations?.total?.toLocaleString()}
+                  </span>
+                </div>
+                <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-[#14b8a6] to-[#34d399]"
+                    style={{ width: `${(currentPlan?.conversations?.used / currentPlan?.conversations?.total) * 100}%` }}
+                  />
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-white/50">Channels</span>
+                <span className="text-xs font-semibold text-white">{currentPlan?.channels}</span>
+              </div>
+            </div>
 
-      {/* Plans */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-white/60 uppercase tracking-widest">Plans</h2>
-          <div className="flex items-center gap-1 p-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.05)' }}>
-            {(['monthly', 'annual'] as const).map((c) => (
-              <button
-                key={c}
-                onClick={() => setBillingCycle(c)}
-                className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${billingCycle === c ? 'bg-purple-500/30 text-purple-300' : 'text-white/40 hover:text-white/60'}`}
-              >
-                {c === 'monthly' ? 'Monthly' : 'Annual (−20%)'}
+            <div className="flex gap-3 mt-5 pt-5 border-t border-white/8">
+              <Link href="/pricing" className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary">
+                Upgrade Plan
+              </Link>
+              <button className="px-4 py-2 rounded-xl text-sm font-medium border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all">
+                Cancel Plan
               </button>
-            ))}
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {plans.map((plan) => {
-            const price = billingCycle === 'annual' ? plan.annualPrice : plan.monthlyPrice;
-            return (
-              <div
-                key={plan.name}
-                className={`rounded-2xl p-5 flex flex-col gap-4 relative ${plan.current ? 'ring-1 ring-purple-500/40' : ''}`}
-                style={{ background: plan.current ? 'rgba(139,92,246,0.08)' : 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
-              >
-                {plan.current && (
-                  <span className="absolute top-3 right-3 text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full px-2 py-0.5">Current</span>
-                )}
-                <div>
-                  <div className="w-5 h-0.5 rounded-full mb-2" style={{ background: plan.color }} />
-                  <p className="text-sm font-semibold text-white">{plan.name}</p>
-                  <p className="text-2xl font-bold text-white mt-1">
-                    {price === null ? (
-                      'Custom'
-                    ) : price === 0 ? (
-                      'Free'
-                    ) : (
-                      <>
-                        ${price}
-                        <span className="text-sm font-normal text-white/40">/mo</span>
-                      </>
-                    )}
-                  </p>
-                  <p className="text-[11px] text-white/35 mt-1">{plan.storage} · {plan.minutes}</p>
-                </div>
-                <ul className="space-y-2 flex-1">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-xs text-white/60">
-                      <CheckCircle size={12} className="text-purple-400 flex-shrink-0 mt-0.5" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`w-full py-2 rounded-xl text-xs font-semibold transition-all ${
-                    plan.current
-                      ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30 cursor-default'
-                      : plan.name === 'Enterprise' ?'bg-white/5 text-white/60 border border-white/10 hover:bg-white/10' :'bg-purple-600 text-white hover:bg-purple-500'
-                  }`}
-                >
-                  {plan.current ? 'Current Plan' : plan.name === 'Enterprise' ? 'Contact Sales' : plan.name === 'Starter' ? 'Downgrade' : 'Upgrade'}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Payment Method */}
-      <div>
-        <h2 className="text-sm font-semibold text-white/60 uppercase tracking-widest mb-4">Payment Method</h2>
-        <div className="rounded-2xl p-4 flex items-center justify-between gap-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-7 rounded-md bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-              <CreditCard size={14} className="text-white" />
+          {/* Invoices */}
+          <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
+            <div className="px-5 py-4 border-b border-white/6">
+              <h2 className="text-sm font-semibold text-white">Invoices</h2>
             </div>
-            <div>
-              <p className="text-sm text-white font-medium">Visa ending in 4242</p>
-              <p className="text-xs text-white/40">Expires 08/2027</p>
+            <div className="divide-y divide-white/5">
+              {invoices?.map((inv) => (
+                <div key={inv?.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/2 transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-white">{inv?.id}</p>
+                    <p className="text-xs text-white/40">{inv?.date}</p>
+                  </div>
+                  <p className="text-sm font-semibold text-white">{inv?.amount}</p>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#34d399]/15 text-[#34d399] border border-[#34d399]/25">
+                    {inv?.status}
+                  </span>
+                  <button className="text-xs text-white/40 hover:text-white transition-colors">
+                    Download
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 text-xs text-emerald-400">
-              <AlertCircle size={11} /> Default
-            </span>
-            <button className="px-3 py-1.5 rounded-lg text-xs text-white/50 border border-white/10 hover:bg-white/5 transition-all">Update</button>
+        </div>
+
+        {/* Upgrade CTA */}
+        <div className="flex flex-col gap-4">
+          <div
+            className="rounded-2xl border border-white/10 p-5"
+            style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.10) 0%, rgba(124,58,237,0.08) 100%)' }}
+          >
+            <h3 className="text-sm font-bold text-white mb-2">Upgrade to Enterprise</h3>
+            <p className="text-xs text-white/50 leading-relaxed mb-4">
+              Unlimited personas, all channels, custom Shopify integrations, and a dedicated account manager.
+            </p>
+            <Link href="/pricing" className="block text-center px-4 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
+              View Enterprise Plans
+            </Link>
+          </div>
+
+          <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
+            <h3 className="text-sm font-semibold text-white mb-3">Payment Method</h3>
+            <div className="flex items-center gap-3 p-3 rounded-xl border border-white/8 bg-white/3">
+              <div className="w-8 h-5 rounded bg-gradient-to-r from-[#1a1f6e] to-[#2d3a9e] flex items-center justify-center">
+                <span className="text-[8px] font-bold text-white">VISA</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-xs font-medium text-white">•••• •••• •••• 4242</p>
+                <p className="text-[10px] text-white/40">Expires 12/27</p>
+              </div>
+              <button className="text-[10px] text-white/40 hover:text-white transition-colors">Update</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

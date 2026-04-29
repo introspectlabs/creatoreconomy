@@ -4,25 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Brain, Sparkles, Database, Radio, Plug, Building2, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, FileText, Film, MessagesSquare, BarChart2, Menu, X, BookOpen, UserCircle } from 'lucide-react';
+import { LayoutDashboard, Brain, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
 const navItems = [
-  { href: '/home-dashboard', icon: LayoutDashboard, label: 'Home', group: 'main' },
-  { href: '/persona-library', icon: Brain, label: 'Persona Library', group: 'main', badge: 12 },
-  { href: '/avatar-studio', icon: Sparkles, label: 'Avatar Studio', group: 'main' },
-  { href: '/video-generation', icon: Film, label: 'Video Generation', group: 'main' },
-  { href: '/knowledge-base', icon: Database, label: 'Knowledge Base', group: 'main' },
-  { href: '/conversation-history', icon: MessagesSquare, label: 'Conversation History', group: 'main' },
+  { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', group: 'main' },
+  { href: '/create-persona', icon: Brain, label: 'Create Persona', group: 'main' },
   { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
-  { href: '/channels-page', icon: Radio, label: 'Channels', group: 'deploy', badge: 2 },
-  { href: '/services-page', icon: Plug, label: 'Services', group: 'deploy' },
-  { href: '/organization-rbac', icon: Building2, label: 'Organization', group: 'manage' },
-  { href: '/embeds-plugins', icon: Code2, label: 'Embeds / Plugins', group: 'manage' },
+  { href: '/deploy', icon: Rocket, label: 'Deploy', group: 'deploy' },
+  { href: '/embeds', icon: Code2, label: 'Embeds', group: 'deploy' },
   { href: '/api-keys', icon: Key, label: 'API Keys', group: 'manage' },
-  { href: '/api-docs', icon: BookOpen, label: 'API Docs', group: 'manage' },
-  { href: '/creator-profile-editor', icon: UserCircle, label: 'Creator Profile', group: 'manage' },
 ];
 
 const groupLabels: Record<string, string> = {
@@ -37,12 +29,10 @@ export default function Sidebar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Close mobile sidebar on route change
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
-  // Prevent body scroll when mobile sidebar is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -84,6 +74,7 @@ export default function Sidebar() {
       <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-2 space-y-0.5">
         {groups.map((group) => {
           const items = navItems.filter((i) => i.group === group);
+          if (items.length === 0) return null;
           return (
             <div key={`group-${group}`} className="mb-4">
               {(!collapsed || isMobile) && (
@@ -92,7 +83,7 @@ export default function Sidebar() {
                 </p>
               )}
               {items.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
                 const Icon = item.icon;
                 return (
                   <Link
@@ -113,20 +104,44 @@ export default function Sidebar() {
                     {(!collapsed || isMobile) && (
                       <span className="text-sm font-medium truncate flex-1">{item.label}</span>
                     )}
-                    {(!collapsed || isMobile) && item.badge && (
-                      <span className="text-[10px] font-600 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full px-1.5 py-0.5 tabular-nums">
-                        {item.badge}
-                      </span>
-                    )}
-                    {collapsed && !isMobile && item.badge && (
-                      <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-purple-500" />
-                    )}
                   </Link>
                 );
               })}
             </div>
           );
         })}
+
+        {/* Chat personas shortcut */}
+        {(!collapsed || isMobile) && (
+          <div className="mb-4">
+            <p className="text-[10px] font-600 tracking-widest text-white/50 px-3 mb-2 uppercase">PERSONAS</p>
+            {[
+              { href: '/chat/glow-ai', label: 'Glow AI', emoji: '🧴' },
+              { href: '/chat/founder-ai', label: 'Founder Persona', emoji: '👤' },
+            ].map((p) => {
+              const isActive = pathname === p.href;
+              return (
+                <Link
+                  key={p.href}
+                  href={p.href}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl mb-0.5 transition-all duration-150 group ${
+                    isActive ? 'nav-active text-white' : 'text-white/50 hover:text-white/80 hover:bg-white/5'
+                  }`}
+                >
+                  <span className="text-base flex-shrink-0">{p.emoji}</span>
+                  <span className="text-sm font-medium truncate flex-1">{p.label}</span>
+                </Link>
+              );
+            })}
+            <Link
+              href="/create-persona"
+              className="flex items-center gap-3 px-3 py-2 rounded-xl mb-0.5 transition-all duration-150 text-white/30 hover:text-white/60 hover:bg-white/5"
+            >
+              <span className="text-base flex-shrink-0">+</span>
+              <span className="text-xs font-medium truncate flex-1">New Persona</span>
+            </Link>
+          </div>
+        )}
       </nav>
 
       {/* Collapse Toggle — desktop only */}
@@ -170,9 +185,6 @@ export default function Sidebar() {
             <Link href="/billing" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all">
               <Receipt size={13} /> Billing
             </Link>
-            <Link href="/invoice" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all">
-              <FileText size={13} /> Invoices
-            </Link>
             <Link href="/settings" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all">
               <Settings size={13} /> Settings
             </Link>
@@ -187,7 +199,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile hamburger button — shown only on mobile */}
+      {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
         className="lg:hidden fixed top-4 left-4 z-50 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
