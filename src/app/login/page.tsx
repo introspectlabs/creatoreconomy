@@ -5,163 +5,190 @@ import { useRouter } from 'next/navigation';
 import PublicHeader from '@/components/public/PublicHeader';
 import PublicFooter from '@/components/public/PublicFooter';
 
-type LoginRole = 'audience' | 'creator';
-
 export default function LoginPage() {
   const router = useRouter();
-  const [role, setRole] = useState<LoginRole>('creator');
   const [email, setEmail] = useState('');
-  const [subdomain, setSubdomain] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (role === 'audience' && (!email || !password)) {
+    if (!email || !password) {
       setError('Please fill in all fields.');
-      return;
-    }
-    if (role === 'creator' && !subdomain) {
-      setError('Please enter your subdomain.');
       return;
     }
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1000));
     setLoading(false);
-    router.push(role === 'audience' ? '/audience-dashboard' : '/home-dashboard');
+    router.push('/home-dashboard');
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'radial-gradient(ellipse at 50% 40%, #1a2535 0%, #0d1520 60%, #0a1018 100%)' }}>
+    <div
+      className="min-h-screen flex flex-col"
+      style={{ background: 'radial-gradient(ellipse at 50% 0%, #12192b 0%, #0a0e1a 55%, #060810 100%)' }}
+    >
       <PublicHeader />
 
-      <main className="flex-1 flex items-center justify-center px-4 pt-20 pb-10">
-        <div className="w-full max-w-md">
-          <div className="rounded-2xl border border-white/10 p-10 shadow-2xl" style={{ background: 'rgba(15, 22, 35, 0.85)', backdropFilter: 'blur(20px)' }}>
-            {/* Logo */}
-            <div className="flex justify-center mb-6">
-              <img
-                src="/assets/images/image-1775312226237.png"
-                alt="PersonaMatrix Logo"
-                className="h-16 w-auto object-contain"
-              />
-            </div>
+      <main className="flex-1 flex items-center justify-center px-4 pt-20 pb-12">
+        <div className="w-full max-w-[420px]">
+          {/* Card */}
+          <div
+            className="rounded-2xl border border-white/10 p-10 shadow-2xl relative overflow-hidden"
+            style={{ background: 'rgba(12, 18, 32, 0.88)', backdropFilter: 'blur(24px)' }}
+          >
+            {/* Ambient glow */}
+            <div className="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-[#6b7ff0]/12 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-44 h-44 rounded-full bg-[#7c3aed]/8 blur-3xl pointer-events-none" />
 
-            {/* Role toggle */}
-            <div className="flex rounded-xl overflow-hidden border border-white/10 mb-7 p-1 gap-1" style={{ background: 'rgba(10,15,25,0.6)' }}>
-              <button
-                type="button"
-                onClick={() => { setRole('audience'); setError(''); }}
-                className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 ${
-                  role === 'audience' ?'bg-[#6b7ff0] text-white shadow-md' :'text-white/40 hover:text-white/70'
-                }`}
-              >
-                🎧 Audience
-              </button>
-              <button
-                type="button"
-                onClick={() => { setRole('creator'); setError(''); }}
-                className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 ${
-                  role === 'creator' ?'bg-[#7c3aed] text-white shadow-md' :'text-white/40 hover:text-white/70'
-                }`}
-              >
-                🚀 Creator/Org
-              </button>
-            </div>
-
-            {/* Title */}
-            <h1 className="text-2xl font-bold text-center mb-1.5" style={{ color: '#7b8ff7' }}>
-              {role === 'audience' ? 'Welcome back' : 'Enter your organization'}
-            </h1>
-            <p className="text-center text-white/50 text-sm mb-7">
-              {role === 'audience' ? 'Sign in to your audience account' : 'Continue to your workspace'}
-            </p>
-
-            {/* Error */}
-            {error && (
-              <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400 flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M7 4v3M7 9.5v.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                {error}
+            <div className="relative z-10">
+              {/* Logo */}
+              <div className="flex justify-center mb-7">
+                <img
+                  src="/assets/images/image-1775312226237.png"
+                  alt="PersonaMatrix Logo"
+                  className="h-14 w-auto object-contain"
+                />
               </div>
-            )}
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              {role === 'audience' ? (
-                <>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-semibold text-white">Email</label>
-                    <input
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-4 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#6b7ff0]/60 transition-all duration-150"
-                      style={{ background: 'rgba(10, 15, 25, 0.8)', border: '1px solid rgba(255,255,255,0.12)' }}
-                      autoComplete="email"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-semibold text-white">Password</label>
-                    <input
-                      type="password"
-                      placeholder="Your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-4 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#6b7ff0]/60 transition-all duration-150"
-                      style={{ background: 'rgba(10, 15, 25, 0.8)', border: '1px solid rgba(255,255,255,0.12)' }}
-                      autoComplete="current-password"
-                    />
-                  </div>
-                </>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-semibold text-white">Subdomain</label>
-                  <input
-                    type="text"
-                    placeholder="Enter your subdomain"
-                    value={subdomain}
-                    onChange={(e) => setSubdomain(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#7b8ff7]/60 transition-all duration-150"
-                    style={{ background: 'rgba(10, 15, 25, 0.8)', border: '1px solid rgba(255,255,255,0.12)' }}
-                  />
+              {/* Heading */}
+              <h1 className="text-2xl font-bold text-center text-white mb-1.5">Welcome back</h1>
+              <p className="text-center text-white/45 text-sm mb-8">Sign in to your workspace</p>
+
+              {/* Error */}
+              {error && (
+                <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400 flex items-center gap-2">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M7 4v3M7 9.5v.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  {error}
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 rounded-2xl font-semibold text-white/90 text-base disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-150"
-                style={{
-                  background: role === 'audience' ? 'rgba(107,127,240,0.75)' : 'rgba(100, 90, 200, 0.7)',
-                  border: role === 'audience' ? '1px solid rgba(107,127,240,0.4)' : '1px solid rgba(130, 110, 220, 0.4)',
-                }}
-              >
-                {loading ? (
-                  <>
-                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="6" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
-                      <path d="M8 2a6 6 0 0 1 6 6" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
-                    Loading…
-                  </>
-                ) : (
-                  'Continue'
-                )}
-              </button>
-            </form>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                {/* Email */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold text-white/80">Work Email</label>
+                  <input
+                    type="email"
+                    placeholder="you@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/25 text-sm focus:outline-none transition-all duration-150"
+                    style={{
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                    }}
+                    autoComplete="email"
+                  />
+                </div>
 
-            <p className="mt-7 text-center text-sm text-white/60">
-              Don&apos;t have an account?{' '}
-              <Link href="/register" className="text-white font-semibold underline hover:text-white/80 transition-colors">
-                Sign up
-              </Link>
-            </p>
+                {/* Password */}
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-semibold text-white/80">Password</label>
+                    <button
+                      type="button"
+                      className="text-xs text-[#6b7ff0] hover:text-[#a78bfa] transition-colors"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-3.5 pr-11 rounded-xl text-white placeholder-white/25 text-sm focus:outline-none transition-all duration-150"
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                      }}
+                      autoComplete="current-password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                    >
+                      {showPassword ? (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
+                          <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                      ) : (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3.5 rounded-xl font-semibold text-white text-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-150 mt-1"
+                  style={{
+                    background: 'linear-gradient(135deg, #6b7ff0 0%, #7c3aed 100%)',
+                    boxShadow: '0 4px 20px rgba(107,127,240,0.25)',
+                  }}
+                >
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin" width="15" height="15" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="6" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
+                        <path d="M8 2a6 6 0 0 1 6 6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                      Signing in…
+                    </>
+                  ) : (
+                    'Sign In'
+                  )}
+                </button>
+              </form>
+
+              {/* Divider */}
+              <div className="flex items-center gap-3 my-6">
+                <div className="flex-1 h-px bg-white/8" />
+                <span className="text-xs text-white/25">or</span>
+                <div className="flex-1 h-px bg-white/8" />
+              </div>
+
+              {/* SSO hint */}
+              <button
+                type="button"
+                className="w-full py-3 rounded-xl text-sm font-medium text-white/50 border border-white/10 hover:bg-white/5 hover:text-white/70 transition-all duration-150 flex items-center justify-center gap-2"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0110 0v4" />
+                </svg>
+                Continue with SSO
+              </button>
+
+              <p className="mt-7 text-center text-sm text-white/45">
+                Don&apos;t have an account?{' '}
+                <Link href="/register" className="text-[#6b7ff0] font-semibold hover:text-[#a78bfa] transition-colors">
+                  Start free trial
+                </Link>
+              </p>
+            </div>
           </div>
+
+          <p className="mt-5 text-center text-xs text-white/20">
+            By signing in you agree to our{' '}
+            <span className="underline cursor-pointer hover:text-white/40 transition-colors">Terms of Service</span>
+            {' '}and{' '}
+            <span className="underline cursor-pointer hover:text-white/40 transition-colors">Privacy Policy</span>
+          </p>
         </div>
       </main>
 
