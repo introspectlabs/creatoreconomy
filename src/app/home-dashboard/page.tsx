@@ -12,7 +12,7 @@ export default function HomeDashboardPage() {
     <AppLayout>
       <Topbar
         title="Welcome back, Arjun"
-        subtitle="Manage your creator personas, course content, coaching frameworks, and audience engagement — last updated Apr 28, 2026 at 7:20 AM"
+        subtitle="Manage your D2C AI Sales Agents, product knowledge base, and storefront deployments — last updated Apr 29, 2026 at 7:20 AM"
       />
       <DashboardMetrics />
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">

@@ -15,16 +15,16 @@ interface Plugin {
 }
 
 const initialPlugins: Plugin[] = [
-  { id: 'plugin-001', personaName: 'Aria Sales', types: ['Chat', 'Voice'], domain: 'docs.acme.io', status: 'live', sessions: 1240, created: 'Mar 15, 2026' },
-  { id: 'plugin-002', personaName: 'Support Bot v2', types: ['Chat'], domain: 'app.acme.io', status: 'live', sessions: 4820, created: 'Feb 10, 2026' },
-  { id: 'plugin-003', personaName: 'Kai Voice Agent', types: ['Voice', 'Avatar'], domain: 'portal.acme.io', status: 'live', sessions: 320, created: 'Mar 1, 2026' },
-  { id: 'plugin-004', personaName: 'Demo Concierge', types: ['Avatar', 'Chat'], domain: 'demo.acme.io', status: 'live', sessions: 890, created: 'Feb 20, 2026' },
-  { id: 'plugin-005', personaName: 'Zara Retail', types: ['Chat', 'Voice', 'Avatar'], domain: 'shop.acme.io', status: 'live', sessions: 6100, created: 'Dec 14, 2025' },
-  { id: 'plugin-006', personaName: 'Maya HR', types: ['Chat'], domain: 'hr.internal.acme.io', status: 'paused', sessions: 440, created: 'Feb 5, 2026' },
-  { id: 'plugin-007', personaName: 'Nova Customer Success', types: ['Voice'], domain: 'success.acme.io', status: 'live', sessions: 210, created: 'Mar 20, 2026' },
-  { id: 'plugin-008', personaName: 'Multilingual Welcome', types: ['Avatar', 'Voice'], domain: 'global.acme.io', status: 'live', sessions: 3400, created: 'Mar 15, 2026' },
-    { id: 'plugin-009', personaName: 'StreamGuide — Crime Drama', types: ['Chat'], domain: 'stream.acme.io', status: 'live', sessions: 1840, created: 'Apr 2, 2026' },
-  { id: 'plugin-010', personaName: 'Aria Sales', types: ['Chat', 'Avatar'], domain: 'landing.acme.io', status: 'live', sessions: 2800, created: 'Mar 28, 2026' },
+  { id: 'plugin-001', personaName: 'ZaraSkin Sales Agent', types: ['Chat', 'Voice'], domain: 'zaraskin.com', status: 'live', sessions: 4820, created: 'Mar 15, 2026' },
+  { id: 'plugin-002', personaName: 'NutriBlend Store Bot', types: ['Chat'], domain: 'nutriblend.in', status: 'live', sessions: 9100, created: 'Feb 10, 2026' },
+  { id: 'plugin-003', personaName: 'FitFuel Voice Agent', types: ['Voice', 'Avatar'], domain: 'fitfuel.com', status: 'live', sessions: 3200, created: 'Mar 1, 2026' },
+  { id: 'plugin-004', personaName: 'TheoGear Product Concierge', types: ['Avatar', 'Chat'], domain: 'theogear.com', status: 'live', sessions: 1890, created: 'Feb 20, 2026' },
+  { id: 'plugin-005', personaName: 'GlowUp Beauty Agent', types: ['Chat', 'Voice', 'Avatar'], domain: 'glowup.in', status: 'live', sessions: 6100, created: 'Dec 14, 2025' },
+  { id: 'plugin-006', personaName: 'StyleHouse Fashion Bot', types: ['Chat'], domain: 'stylehouse.co', status: 'paused', sessions: 2440, created: 'Feb 5, 2026' },
+  { id: 'plugin-007', personaName: 'LuxeScent Fragrance Bot', types: ['Voice'], domain: 'luxescent.com', status: 'live', sessions: 1210, created: 'Mar 20, 2026' },
+  { id: 'plugin-008', personaName: 'GlobalShop Multilingual', types: ['Avatar', 'Voice'], domain: 'globalshop.io', status: 'live', sessions: 3400, created: 'Mar 15, 2026' },
+  { id: 'plugin-009', personaName: 'StreamGuide — Crime Drama', types: ['Chat'], domain: 'streamguide.tv', status: 'live', sessions: 1840, created: 'Apr 2, 2026' },
+  { id: 'plugin-010', personaName: 'ZaraSkin Sales Agent', types: ['Chat', 'Avatar'], domain: 'zaraskin.com/landing', status: 'live', sessions: 2800, created: 'Mar 28, 2026' },
 ];
 
 const typeConfig: Record<string, { icon: React.ReactNode; label: string; color: string; bg: string }> = {

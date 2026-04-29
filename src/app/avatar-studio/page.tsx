@@ -8,7 +8,7 @@ export default function AvatarStudioPage() {
     <AppLayout>
       <Topbar
         title="Avatar Studio"
-        subtitle="Create Tavus-powered replicas from training video & ElevenLabs voice, or pick a stock avatar to attach to any persona"
+        subtitle="Create brand-face avatars for your D2C AI Sales Agents — upload a training video or pick a stock avatar"
       />
       <AvatarStudioClient />
     </AppLayout>

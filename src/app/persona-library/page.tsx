@@ -7,8 +7,8 @@ export default function PersonaLibraryPage() {
   return (
     <AppLayout>
       <Topbar
-        title="Persona Library"
-        subtitle="12 personas · 9 active · 2 in training · 1 draft"
+        title="AI Sales Agents"
+        subtitle="12 agents · 9 active · 2 in training · 1 draft — D2C brand AI agents trained on your product catalog"
       />
       <PersonaLibraryClient />
     </AppLayout>

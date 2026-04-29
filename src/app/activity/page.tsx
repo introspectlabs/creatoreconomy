@@ -5,21 +5,21 @@ import Icon from '@/components/ui/AppIcon';
 
 
 const allActivities = [
-  { id: 'act-001', type: 'success', icon: Brain,    title: 'Persona "Aria Sales" activated',                   time: '2 min ago',  date: 'Today' },
-  { id: 'act-002', type: 'warning', icon: Database, title: 'Knowledge sync failed — "Product Docs v3"',        time: '14 min ago', date: 'Today' },
-  { id: 'act-003', type: 'success', icon: Radio,    title: 'WhatsApp channel reconnected',                     time: '1 hr ago',   date: 'Today' },
-  { id: 'act-004', type: 'info',    icon: Code2,    title: 'New embed deployed on docs.acme.io',               time: '2 hr ago',   date: 'Today' },
-  { id: 'act-005', type: 'warning', icon: Plug,     title: 'ElevenLabs quota at 87%',                          time: '3 hr ago',   date: 'Today' },
-  { id: 'act-006', type: 'success', icon: Brain,    title: 'Persona "Support Bot v2" training complete',       time: '5 hr ago',   date: 'Today' },
-  { id: 'act-007', type: 'info',    icon: Database, title: '3,200 new chunks indexed from Notion',             time: '7 hr ago',   date: 'Today' },
-  { id: 'act-008', type: 'success', icon: Radio,    title: 'WhatsApp channel "Support Line" connected',         time: '9 hr ago',   date: 'Today' },
-  { id: 'act-009', type: 'info',    icon: Brain,    title: 'Persona "HR Assistant" created',                   time: '11 hr ago',  date: 'Today' },
-  { id: 'act-010', type: 'warning', icon: Code2,    title: 'Embed script on shop.acme.io returned 404',        time: '1 day ago',  date: 'Yesterday' },
-  { id: 'act-011', type: 'success', icon: Database, title: 'Website crawl completed — 512 pages indexed',      time: '1 day ago',  date: 'Yesterday' },
-  { id: 'act-012', type: 'success', icon: Plug,     title: 'OpenAI API key validated and saved',               time: '1 day ago',  date: 'Yesterday' },
-  { id: 'act-013', type: 'info',    icon: Brain,    title: 'Persona "Aria Sales" updated — new voice model',   time: '2 days ago', date: '2 days ago' },
-  { id: 'act-014', type: 'warning', icon: Database, title: 'PDF upload failed — file size exceeded 50MB',      time: '2 days ago', date: '2 days ago' },
-  { id: 'act-015', type: 'success', icon: Radio,    title: 'WhatsApp Business API verified',                   time: '3 days ago', date: '3 days ago' },
+  { id: 'act-001', type: 'success', icon: Brain,    title: 'AI Sales Agent "ZaraSkin Sales Agent" activated — live on storefront',  time: '2 min ago',  date: 'Today' },
+  { id: 'act-002', type: 'warning', icon: Database, title: 'Product catalog sync failed — "StyleHouse Summer Collection 2026"',      time: '14 min ago', date: 'Today' },
+  { id: 'act-003', type: 'success', icon: Radio,    title: 'WhatsApp channel reconnected — NutriBlend Store Bot active',             time: '1 hr ago',   date: 'Today' },
+  { id: 'act-004', type: 'info',    icon: Code2,    title: 'New embed deployed on zaraskin.com/products',                           time: '2 hr ago',   date: 'Today' },
+  { id: 'act-005', type: 'warning', icon: Plug,     title: 'ElevenLabs quota at 87% — voice responses may be delayed',              time: '3 hr ago',   date: 'Today' },
+  { id: 'act-006', type: 'success', icon: Brain,    title: 'AI Sales Agent "FitFuel Voice Agent" training complete — ready to deploy', time: '5 hr ago', date: 'Today' },
+  { id: 'act-007', type: 'info',    icon: Database, title: '3,200 new product chunks indexed from Shopify export — GlowUp Beauty',  time: '7 hr ago',   date: 'Today' },
+  { id: 'act-008', type: 'success', icon: Radio,    title: 'WhatsApp channel "StyleHouse Support Line" connected',                  time: '9 hr ago',   date: 'Today' },
+  { id: 'act-009', type: 'info',    icon: Brain,    title: 'AI Sales Agent "PureHome Decor Bot" created — catalog upload pending',  time: '11 hr ago',  date: 'Today' },
+  { id: 'act-010', type: 'warning', icon: Code2,    title: 'Embed script on theogear.com/shop returned 404 — check domain config',  time: '1 day ago',  date: 'Yesterday' },
+  { id: 'act-011', type: 'success', icon: Database, title: 'Product catalog crawl completed — 512 SKU pages indexed for NutriBlend', time: '1 day ago', date: 'Yesterday' },
+  { id: 'act-012', type: 'success', icon: Plug,     title: 'OpenAI API key validated and saved',                                    time: '1 day ago',  date: 'Yesterday' },
+  { id: 'act-013', type: 'info',    icon: Brain,    title: 'AI Sales Agent "ZaraSkin Sales Agent" updated — new voice model applied', time: '2 days ago', date: '2 days ago' },
+  { id: 'act-014', type: 'warning', icon: Database, title: 'PDF upload failed — file size exceeded 50MB (product lookbook)',        time: '2 days ago', date: '2 days ago' },
+  { id: 'act-015', type: 'success', icon: Radio,    title: 'WhatsApp Business API verified — LuxeScent Fragrance Bot live',         time: '3 days ago', date: '3 days ago' },
 ];
 
 const typeConfig: Record<string, { color: string; bg: string; StatusIcon: React.ElementType }> = {

@@ -8,8 +8,8 @@ const actions = [
   {
     id: 'qa-persona',
     icon: Brain,
-    title: 'Build Your AI Persona',
-    desc: 'Create a finance, coaching, course, or D2C persona trained on your content and voice',
+    title: 'Build Your AI Sales Agent',
+    desc: 'Create a D2C sales agent trained on your product catalog, FAQs, and brand voice to drive conversions 24/7',
     href: '/persona-library',
     color: 'from-purple-500/20 to-purple-600/10',
     border: 'border-purple-500/20',
@@ -19,8 +19,8 @@ const actions = [
   {
     id: 'qa-knowledge',
     icon: Database,
-    title: 'Upload Your Content',
-    desc: 'Add course modules, coaching frameworks, finance guides, or product FAQs to train your persona',
+    title: 'Upload Product Catalog',
+    desc: 'Add product feeds, FAQs, size guides, and brand content to train your AI agent on your full catalog',
     href: '/knowledge-base',
     color: 'from-teal-500/15 to-teal-600/5',
     border: 'border-teal-500/20',
@@ -30,8 +30,8 @@ const actions = [
   {
     id: 'qa-channel',
     icon: Radio,
-    title: 'Connect a Channel',
-    desc: 'Deploy your persona on WhatsApp, Web Chat, or your course platform',
+    title: 'Connect Your Storefront',
+    desc: 'Deploy your AI agent on WhatsApp, Web Chat, or your Shopify / standalone store',
     href: '/channels-page',
     color: 'from-blue-500/15 to-blue-600/5',
     border: 'border-blue-500/20',
@@ -41,8 +41,8 @@ const actions = [
   {
     id: 'qa-embed',
     icon: Code2,
-    title: 'Embed on Your Site',
-    desc: 'Add a chat widget to your landing page, course portal, or D2C storefront',
+    title: 'Embed on Your Store',
+    desc: 'Add a chat widget to your product pages, landing page, or D2C storefront in minutes',
     href: '/embeds-plugins',
     color: 'from-indigo-500/15 to-indigo-600/5',
     border: 'border-indigo-500/20',

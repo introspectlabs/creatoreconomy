@@ -1,12 +1,12 @@
 import React from 'react';
-import { Brain, MessageSquare, Database, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Clock, Coins } from 'lucide-react';
+import { Brain, MessageSquare, Database, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Coins, ShoppingBag } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
 const metrics = [
   {
     id: 'metric-personas',
-    label: 'Active AI Personas',
+    label: 'Active AI Sales Agents',
     value: '4',
     change: '+1 this week',
     trend: 'up',
@@ -16,7 +16,7 @@ const metrics = [
   },
   {
     id: 'metric-messages',
-    label: 'Audience Chats (24h)',
+    label: 'Product Conversations (24h)',
     value: '3,218',
     change: '+22.6% vs yesterday',
     trend: 'up',
@@ -25,23 +25,23 @@ const metrics = [
     alert: false,
   },
   {
-    id: 'metric-response-time',
-    label: 'Avg Response Time',
-    value: '1.4s',
-    change: '-0.2s vs last week',
-    trend: 'up',
-    icon: Clock,
-    color: 'teal',
-    alert: false,
-  },
-  {
-    id: 'metric-success-rate',
-    label: 'Lead Conversion Rate',
+    id: 'metric-conversions',
+    label: 'Conversion Rate',
     value: '18.3%',
     change: '+2.1% this week',
     trend: 'up',
     icon: CheckCircle,
     color: 'emerald',
+    alert: false,
+  },
+  {
+    id: 'metric-aov',
+    label: 'Avg Order Value',
+    value: '₹2,840',
+    change: '+₹320 vs last week',
+    trend: 'up',
+    icon: ShoppingBag,
+    color: 'teal',
     alert: false,
   },
   {
@@ -56,7 +56,7 @@ const metrics = [
   },
   {
     id: 'metric-knowledge',
-    label: 'Content Chunks',
+    label: 'Product Catalog Chunks',
     value: '12,540',
     change: '1 source failed sync',
     trend: 'warning',

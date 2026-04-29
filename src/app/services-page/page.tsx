@@ -8,7 +8,7 @@ export default function ServicesPage() {
     <AppLayout>
       <Topbar
         title="Services"
-        subtitle="Integrate external AI capabilities — voice, video, and omnichannel infrastructure"
+        subtitle="Connect AI voice, video, and omnichannel services to power your D2C AI Sales Agents"
       />
       <ServicesGrid />
     </AppLayout>

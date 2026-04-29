@@ -62,14 +62,14 @@ const stockAvatars: StockAvatar[] = [
 },
 {
   id: 's3', name: 'Zoe', style: 'Friendly', gender: 'Female',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1ff98651f-1763298723262.png",
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1b47d599d-1763299033167.png",
   thumbnailAlt: 'Friendly young woman smiling, stock avatar',
   accent: 'text-teal-400', accentBg: 'bg-teal-500/15', accentBorder: 'border-teal-500/30',
   tags: ['Support', 'Warm', 'Multilingual']
 },
 {
   id: 's4', name: 'Kai', style: 'Authoritative', gender: 'Male',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1883b5ac4-1763299482546.png",
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1a9f87946-1763296338448.png",
   thumbnailAlt: 'Authoritative man with glasses, stock avatar',
   accent: 'text-amber-400', accentBg: 'bg-amber-500/15', accentBorder: 'border-amber-500/30',
   tags: ['Technical', 'Expert', 'English']
@@ -83,7 +83,7 @@ const stockAvatars: StockAvatar[] = [
 },
 {
   id: 's6', name: 'Liam', style: 'Casual', gender: 'Male',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_11a4cb9bc-1763300642433.png",
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1cb74451b-1772790261242.png",
   thumbnailAlt: 'Casual young man with friendly demeanor, stock avatar',
   accent: 'text-cyan-400', accentBg: 'bg-cyan-500/15', accentBorder: 'border-cyan-500/30',
   tags: ['Retail', 'Casual', 'English']
@@ -100,31 +100,31 @@ const elevenLabsVoices = [
 
 
 const mockPersonas: Persona[] = [
-{ id: 'p1', name: 'Customer Support Lead', role: 'Support' },
-{ id: 'p2', name: 'Sales Advisor', role: 'Sales' },
-{ id: 'p3', name: 'Onboarding Guide', role: 'Onboarding' },
-{ id: 'p4', name: 'Technical Expert', role: 'Technical' }];
+{ id: 'p1', name: 'ZaraSkin Sales Agent', role: 'D2C Skincare' },
+{ id: 'p2', name: 'NutriBlend Store Bot', role: 'D2C Nutrition' },
+{ id: 'p3', name: 'StyleHouse Fashion Bot', role: 'D2C Fashion' },
+{ id: 'p4', name: 'GlowUp Beauty Agent', role: 'D2C Beauty' }];
 
 
 const initialAvatars: CreatedAvatar[] = [
 {
-  id: 'ca1', name: 'Aria — Custom Replica', type: 'replica', status: 'ready',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1d4831167-1775243818306.png",
-  thumbnailAlt: 'Custom replica avatar Aria',
+  id: 'ca1', name: 'ZaraSkin — Brand Face', type: 'replica', status: 'ready',
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_15a9eef26-1777435375891.png",
+  thumbnailAlt: 'Custom replica avatar for ZaraSkin D2C skincare brand',
   accent: 'text-purple-400', accentBg: 'bg-purple-500/15', accentBorder: 'border-purple-500/30',
-  voice: 'ElevenLabs — Rachel', attachedPersona: 'Customer Support Lead', createdAt: '2 days ago'
+  voice: 'ElevenLabs — Rachel', attachedPersona: 'ZaraSkin Sales Agent', createdAt: '2 days ago'
 },
 {
-  id: 'ca2', name: 'Marcus — Stock', type: 'stock', status: 'ready',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1941e4a67-1763293099718.png",
-  thumbnailAlt: 'Stock avatar Marcus',
+  id: 'ca2', name: 'NutriBlend — Store Host', type: 'stock', status: 'ready',
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1b1237fe4-1777435374992.png",
+  thumbnailAlt: 'Stock avatar for NutriBlend nutrition D2C store',
   accent: 'text-blue-400', accentBg: 'bg-blue-500/15', accentBorder: 'border-blue-500/30',
   voice: 'ElevenLabs — Adam', createdAt: '5 days ago'
 },
 {
-  id: 'ca3', name: 'Zoe — Training', type: 'replica', status: 'training',
-  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_12be48796-1775243820018.png",
-  thumbnailAlt: 'Replica avatar Zoe in training',
+  id: 'ca3', name: 'StyleHouse — Fashion Guide', type: 'replica', status: 'training',
+  thumbnail: "https://img.rocket.new/generatedImages/rocket_gen_img_1b426e5ea-1772129317776.png",
+  thumbnailAlt: 'Replica avatar for StyleHouse fashion D2C brand in training',
   accent: 'text-teal-400', accentBg: 'bg-teal-500/15', accentBorder: 'border-teal-500/30',
   voice: 'ElevenLabs — Bella', createdAt: '1 hour ago'
 }];
@@ -304,31 +304,31 @@ export default function AvatarStudioClient() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
         {avatars.map((av) => {
-          const ss = statusStyle(av.status);
-          const isSelected = selectedAvatarId === av.id;
-          return (
-            <div
-              key={av.id}
-              onClick={() => setSelectedAvatarId(isSelected ? null : av.id)}
-              className={`glass rounded-2xl border p-3.5 cursor-pointer transition-all duration-150 ${
-              isSelected ? `${av.accentBorder} shadow-lg` : 'border-white/8 hover:border-white/15'}`
-              }>
+            const ss = statusStyle(av.status);
+            const isSelected = selectedAvatarId === av.id;
+            return (
+              <div
+                key={av.id}
+                onClick={() => setSelectedAvatarId(isSelected ? null : av.id)}
+                className={`glass rounded-2xl border p-3.5 cursor-pointer transition-all duration-150 ${
+                isSelected ? `${av.accentBorder} shadow-lg` : 'border-white/8 hover:border-white/15'}`
+                }>
               
               <div className="flex items-center gap-3">
                 <div className="relative flex-shrink-0">
                   <img src={av.thumbnail} alt={av.thumbnailAlt} className="w-10 h-10 rounded-xl object-cover" />
                   {av.status === 'training' &&
-                  <div className="absolute inset-0 rounded-xl bg-black/50 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-xl bg-black/50 flex items-center justify-center">
                       <div className="w-3 h-3 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
                     </div>
-                  }
+                    }
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-600 text-white truncate">{av.name}</p>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-600 uppercase tracking-wide ${
-                    av.type === 'replica' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'}`
-                    }>
+                      av.type === 'replica' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'}`
+                      }>
                       {av.type === 'replica' ? 'Tavus' : 'Stock'}
                     </span>
                   </div>
@@ -341,34 +341,34 @@ export default function AvatarStudioClient() {
                   {ss.label}
                 </span>
                 {av.attachedPersona ?
-                <span className="text-[10px] text-white/40 truncate max-w-[80px]">{av.attachedPersona}</span> :
+                  <span className="text-[10px] text-white/40 truncate max-w-[80px]">{av.attachedPersona}</span> :
 
-                <span className="text-[10px] text-white/20">No persona</span>
-                }
+                  <span className="text-[10px] text-white/20">No persona</span>
+                  }
               </div>
 
               {isSelected &&
-              <div className="mt-3 pt-3 border-t border-white/8 flex gap-2">
+                <div className="mt-3 pt-3 border-t border-white/8 flex gap-2">
                   {av.attachedPersona ?
-                <button
-                  onClick={(e) => {e.stopPropagation();handleDetach(av.id);}}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-white/10 text-[10px] text-white/40 hover:text-rose-400 hover:border-rose-500/30 transition-all">
+                  <button
+                    onClick={(e) => {e.stopPropagation();handleDetach(av.id);}}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-white/10 text-[10px] text-white/40 hover:text-rose-400 hover:border-rose-500/30 transition-all">
                   
                       <Unlink2 size={10} /> Detach
                     </button> :
 
-                <button
-                  onClick={(e) => {e.stopPropagation();setAttachTarget(av.id);setAttachModalOpen(true);}}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-purple-500/30 text-[10px] text-purple-400 hover:bg-purple-500/10 transition-all">
+                  <button
+                    onClick={(e) => {e.stopPropagation();setAttachTarget(av.id);setAttachModalOpen(true);}}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-purple-500/30 text-[10px] text-purple-400 hover:bg-purple-500/10 transition-all">
                   
                       <Link2 size={10} /> Attach Persona
                     </button>
-                }
+                  }
                 </div>
-              }
+                }
             </div>);
 
-        })}
+          })}
         </div>
       </div>
 
