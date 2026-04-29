@@ -22,35 +22,36 @@ interface Feature {
 const steps: Step[] = [
   {
     number: '01',
-    title: 'Creator Signs Up & Builds Their Persona',
+    title: 'Set Up Your AI Brand Assistant',
     description:
-      'Creators register on PersonaMatrix, complete their profile, and configure their AI persona with their unique knowledge, style, and expertise.',
+      'Create your account, configure your AI brand assistant with your brand name, voice, and product focus. No technical skills required — live in minutes.',
     details: [
-      'Create an account and verify your identity',
-      'Set up your creator profile with bio, expertise areas, and certifications',
-      'Link your social profiles for authenticity verification',
-      "Configure your AI persona's tone, style, and response behavior",
+      'Create an account and set up your brand profile',
+      'Configure your AI\'s tone, style, and response behavior',
+      'Set guardrails on what your AI can and cannot say',
+      'Define your product categories and brand positioning',
     ],
-    accentColor: '#7c3aed',
+    accentColor: '#ec4899',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
       </svg>
     ),
   },
   {
     number: '02',
-    title: 'Upload & Train on Your Knowledge',
+    title: 'Upload Your Product Knowledge',
     description:
-      'Feed your persona with your authentic content — documents, videos, web pages, and more. The AI learns your expertise deeply.',
+      'Feed your AI with your product catalog, FAQs, size guides, ingredient lists, brand story, and any content that helps customers make purchase decisions.',
     details: [
-      'Upload PDFs, articles, research papers, and documents',
-      'Import YouTube videos and transcripts automatically',
-      'Add web pages and blog posts via URL',
-      'Declare copyright ownership to ensure content authenticity',
+      'Upload product descriptions, specs, and FAQs',
+      'Add size guides, ingredient lists, and how-to content',
+      'Import your brand story, values, and differentiators',
+      'Add web pages, blog posts, and landing pages via URL',
     ],
-    accentColor: '#0ea5e9',
+    accentColor: '#7c3aed',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -61,36 +62,35 @@ const steps: Step[] = [
   },
   {
     number: '03',
-    title: 'Publish Your AI Persona',
+    title: 'Embed on Your Shopify Store & Website',
     description:
-      'Once trained, your persona goes live on the PersonaMatrix marketplace. Audiences can discover and interact with your AI-powered knowledge.',
+      'Deploy your AI brand assistant on your Shopify store, website, or WhatsApp with a simple embed. Your customers can start getting answers — and you start converting more sales.',
     details: [
-      'Review and test your persona\'s responses before publishing',
-      'Set access tiers — free preview or paid subscription',
-      'Your persona appears in the public creator directory',
-      'Embed your persona on your own website via plugin',
+      'Add the JS widget to your Shopify store in one click',
+      'Embed on product pages, cart, and landing pages',
+      'Connect to WhatsApp Business for post-purchase support',
+      'Test your AI\'s responses before going live',
     ],
-    accentColor: '#10b981',
+    accentColor: '#0ea5e9',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
   },
   {
     number: '04',
-    title: 'Audiences Engage & Subscribe',
+    title: 'Customers Engage & Convert',
     description:
-      'Fans, viewers, and followers discover your persona, ask questions, and subscribe to unlock deeper access to your content and expertise.',
+      'Shoppers ask questions, get instant personalized answers, and are guided to the right product — reducing cart abandonment and support tickets while increasing conversions.',
     details: [
-      'Audiences search and discover personas by topic or creator',
-      'Free-tier users get a preview of your knowledge',
-      'Subscribers unlock unlimited conversations and premium content',
-      'Audience credits system enables flexible monetization',
+      'Customers get instant answers on product pages',
+      'AI handles objections and recommends the right product',
+      'Upsell and cross-sell happen naturally in conversation',
+      'Post-purchase support reduces returns and tickets',
     ],
-    accentColor: '#f59e0b',
+    accentColor: '#10b981',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -102,20 +102,21 @@ const steps: Step[] = [
   },
   {
     number: '05',
-    title: 'Creators Earn & Grow',
+    title: 'Optimize & Scale Revenue',
     description:
-      'Every interaction generates revenue for creators. Track analytics, optimize your persona, and grow your audience over time.',
+      'Track what customers ask, which questions lead to purchases, and where buyers drop off. Use insights to improve your store copy and AI responses — continuously increasing conversions.',
     details: [
-      'Earn revenue from subscriptions and per-message credits',
-      'Access detailed analytics on engagement and earnings',
-      'Continuously improve your persona with new knowledge uploads',
-      'Withdraw earnings via integrated billing and payout system',
+      'See exactly what questions customers ask before buying',
+      'Identify which products get the most objections',
+      'Track conversion rates from AI conversations',
+      'Continuously improve your AI with new product knowledge',
     ],
-    accentColor: '#ec4899',
+    accentColor: '#f59e0b',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <line x1="12" y1="1" x2="12" y2="23" />
-        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
   },
@@ -123,37 +124,8 @@ const steps: Step[] = [
 
 const forCreators: Feature[] = [
   {
-    title: 'Multi-Model AI Engine',
-    description: 'Your persona is powered by the latest LLMs — GPT-4, Claude, Gemini — ensuring the most accurate and nuanced responses.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Knowledge Authenticity',
-    description: 'Every piece of content is tied to your verified identity. Copyright declarations and source tracking ensure your knowledge is yours.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Flexible Monetization',
-    description: 'Set your own pricing. Offer free previews, subscription tiers, or pay-per-message — you control how your knowledge is accessed.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-        <line x1="1" y1="10" x2="23" y2="10" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Embeds & Plugins',
-    description: 'Embed your AI persona directly on your website, blog, or platform with a single line of code.',
+    title: 'Shopify & Website Embed',
+    description: 'Drop your AI brand assistant onto your Shopify store or any website with a single line of code. Works on product pages, cart, and landing pages.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <polyline points="16 18 22 12 16 6" />
@@ -161,12 +133,43 @@ const forCreators: Feature[] = [
       </svg>
     ),
   },
+  {
+    title: 'Product Catalog Training',
+    description: 'Your AI learns from your entire product catalog — descriptions, specs, FAQs, size guides, and brand story — and keeps getting smarter as you add more.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Brand-Safe AI',
+    description: 'Set guardrails on what your AI can and cannot say. Your brand tone, product claims, and messaging stay consistent across every customer conversation.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Conversion Analytics',
+    description: 'Track what customers ask, which questions lead to purchases, and where buyers drop off — so you can optimize your store and AI responses.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+      </svg>
+    ),
+  },
 ];
 
 const forAudiences: Feature[] = [
   {
-    title: 'Discover Expert Personas',
-    description: 'Browse a curated marketplace of AI personas built by real creators, educators, and industry experts.',
+    title: 'Instant Product Answers',
+    description: 'Shoppers get instant, accurate answers about products — ingredients, sizing, compatibility, and use cases — without waiting for a support agent.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <circle cx="11" cy="11" r="8" />
@@ -175,8 +178,8 @@ const forAudiences: Feature[] = [
     ),
   },
   {
-    title: 'Ask Anything, Anytime',
-    description: 'Get instant, in-depth answers from your favorite creator\'s knowledge base — available 24/7 without scheduling.',
+    title: 'Personalized Recommendations',
+    description: 'The AI asks the right questions and recommends the perfect product for each customer\'s specific needs — reducing returns and increasing satisfaction.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -184,8 +187,8 @@ const forAudiences: Feature[] = [
     ),
   },
   {
-    title: 'Verified Knowledge Sources',
-    description: 'Every response is grounded in content the creator uploaded and verified — no hallucinations from generic AI.',
+    title: 'Always Available Support',
+    description: 'Get help with orders, returns, and product questions 24/7 — on the website, WhatsApp, or voice — without waiting for business hours.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <polyline points="20 6 9 17 4 12" />
@@ -193,8 +196,8 @@ const forAudiences: Feature[] = [
     ),
   },
   {
-    title: 'Credits-Based Access',
-    description: 'Use credits to access premium personas. Flexible plans let you pay only for what you use.',
+    title: 'Confident Purchase Decisions',
+    description: 'Customers buy with confidence when all their questions are answered. The AI handles objections and provides the social proof needed to convert.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <circle cx="12" cy="12" r="10" />
@@ -213,7 +216,7 @@ export default function HowItWorksPage() {
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-purple-600/10 blur-3xl pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ec4899]/30 bg-[#ec4899]/10 text-[#f9a8d4] text-xs font-medium mb-6">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" />
             </svg>
@@ -221,13 +224,13 @@ export default function HowItWorksPage() {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
             How{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#ec4899] via-[#7c3aed] to-[#3b82f6] bg-clip-text text-transparent">
               PersonaMatrix
             </span>{' '}
-            Works
+            Works for D2C Brands
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-            From creator signup to audience engagement — understand the complete journey of how AI personas are built, published, and monetized on our platform.
+            From setting up your AI brand assistant to converting more customers — understand the complete journey of how D2C brands on Shopify deploy AI to drive revenue.
           </p>
         </div>
       </section>
@@ -298,27 +301,29 @@ export default function HowItWorksPage() {
       <section className="px-6 pb-24 border-t border-white/5">
         <div className="max-w-5xl mx-auto pt-20">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for Everyone</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for D2C Brands & Their Customers</h2>
             <p className="text-white/45 text-base max-w-xl mx-auto">
-              Whether you're sharing your expertise or seeking knowledge, PersonaMatrix has you covered.
+              Whether you're a D2C brand deploying AI or a customer getting instant answers — PersonaMatrix has you covered.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-10">
-            {/* For Creators */}
+            {/* For Brands */}
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2">
-                    <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                <div className="w-8 h-8 rounded-lg bg-[#ec4899]/20 border border-[#ec4899]/30 flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f9a8d4" strokeWidth="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold text-white">For Creators</h3>
+                <h3 className="text-lg font-bold text-white">For D2C Brands</h3>
               </div>
               <div className="flex flex-col gap-4">
                 {forCreators.map((f, i) => (
                   <div key={i} className="flex gap-4 p-4 rounded-xl border border-white/6 bg-white/[0.02] hover:border-white/12 transition-all">
-                    <div className="w-9 h-9 rounded-lg bg-purple-500/15 flex items-center justify-center flex-shrink-0">
+                    <div className="w-9 h-9 rounded-lg bg-[#ec4899]/15 flex items-center justify-center flex-shrink-0">
                       {f.icon}
                     </div>
                     <div>
@@ -330,7 +335,7 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            {/* For Audiences */}
+            {/* For Customers */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-500/30 flex items-center justify-center">
@@ -339,7 +344,7 @@ export default function HowItWorksPage() {
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold text-white">For Audiences</h3>
+                <h3 className="text-lg font-bold text-white">For Customers</h3>
               </div>
               <div className="flex flex-col gap-4">
                 {forAudiences.map((f, i) => (
@@ -365,20 +370,20 @@ export default function HowItWorksPage() {
           <div className="p-10 rounded-3xl border border-purple-500/20 bg-gradient-to-b from-purple-500/10 to-transparent">
             <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-white/45 mb-8 text-base">
-              Join thousands of creators already monetizing their expertise on PersonaMatrix.
+              Join D2C brands on Shopify already using PersonaMatrix to answer customer questions, reduce returns, and drive more revenue — automatically.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/register"
                 className="px-8 py-3 rounded-xl text-sm font-semibold text-white btn-primary"
               >
-                Create Your Persona
+                Build Your AI Brand Assistant
               </Link>
               <Link
-                href="/creators"
+                href="/industries/d2c-commerce"
                 className="px-8 py-3 rounded-xl text-sm font-semibold text-white/70 border border-white/15 hover:border-white/30 hover:text-white transition-all"
               >
-                Browse Creators
+                See D2C Use Cases
               </Link>
             </div>
           </div>

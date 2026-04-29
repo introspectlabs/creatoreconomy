@@ -6,6 +6,22 @@ import PublicFooter from '@/components/public/PublicFooter';
 
 const industries = [
   {
+    slug: 'd2c-commerce',
+    name: 'D2C Brands on Shopify & Websites',
+    value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically. Embed on Shopify or any website in minutes.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+    color: '#ec4899',
+    bg: 'rgba(236,72,153,0.12)',
+    border: 'rgba(236,72,153,0.25)',
+    badge: 'Primary Focus',
+  },
+  {
     slug: 'finance-trading',
     name: 'Finance & Trading Creators',
     value: 'Let your followers ask about your trading strategies, market analysis, and investment frameworks — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
@@ -19,6 +35,7 @@ const industries = [
     color: '#10b981',
     bg: 'rgba(16,185,129,0.12)',
     border: 'rgba(16,185,129,0.25)',
+    badge: null,
   },
   {
     slug: 'education-courses',
@@ -33,6 +50,7 @@ const industries = [
     color: '#3b82f6',
     bg: 'rgba(59,130,246,0.12)',
     border: 'rgba(59,130,246,0.25)',
+    badge: null,
   },
   {
     slug: 'coaches',
@@ -47,29 +65,15 @@ const industries = [
     color: '#f59e0b',
     bg: 'rgba(245,158,11,0.12)',
     border: 'rgba(245,158,11,0.25)',
-  },
-  {
-    slug: 'd2c-commerce',
-    name: 'D2C Founders & Commerce Creators',
-    value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
-      </svg>
-    ),
-    color: '#ec4899',
-    bg: 'rgba(236,72,153,0.12)',
-    border: 'rgba(236,72,153,0.25)',
+    badge: null,
   },
 ];
 
 const comingSoonIndustries = [
   {
     slug: 'ott-streaming',
-    name: 'OTT & Streaming',
-    value: 'AI personas for streaming platforms — interactive characters, personalized content discovery, and viewer retention tools.',
+    name: 'OTT & Streaming Platforms',
+    value: 'AI personas for streaming platforms — interactive characters, personalized content discovery, and viewer retention tools for media companies.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -80,6 +84,22 @@ const comingSoonIndustries = [
     color: '#14b8a6',
     bg: 'rgba(20,184,166,0.12)',
     border: 'rgba(20,184,166,0.25)',
+  },
+  {
+    slug: 'influencers',
+    name: 'Influencers & Social Creators',
+    value: 'AI personas for influencers — engage your followers at scale, monetize your audience, and turn social traffic into revenue through conversational AI.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      </svg>
+    ),
+    color: '#a78bfa',
+    bg: 'rgba(167,139,250,0.12)',
+    border: 'rgba(167,139,250,0.25)',
   },
 ];
 
@@ -122,13 +142,21 @@ function IndustryCard({ industry, index }: { industry: typeof industries[0]; ind
       className="relative rounded-2xl p-6 flex flex-col gap-4 cursor-pointer transition-all duration-300 border"
       style={{
         background: hovered ? industry.bg : 'rgba(255,255,255,0.03)',
-        borderColor: hovered ? industry.border : 'rgba(255,255,255,0.08)',
+        borderColor: hovered ? industry.border : industry.badge ? industry.border : 'rgba(255,255,255,0.08)',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered ? `0 16px 48px ${industry.bg}, 0 0 0 1px ${industry.border}` : 'none',
+        boxShadow: hovered ? `0 16px 48px ${industry.bg}, 0 0 0 1px ${industry.border}` : industry.badge ? `0 0 0 1px ${industry.border}` : 'none',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {industry.badge && (
+        <div
+          className="absolute top-4 right-4 text-[10px] font-bold px-2.5 py-1 rounded-full border"
+          style={{ color: industry.color, borderColor: `${industry.color}40`, background: `${industry.color}15` }}
+        >
+          {industry.badge}
+        </div>
+      )}
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
         style={{ background: industry.bg, color: industry.color }}
@@ -228,18 +256,18 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-              Creator Economy — 4 Verticals
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ec4899] animate-pulse" />
+              D2C Brands — Primary Focus
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              AI Personas Built for{' '}
-              <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#10b981] bg-clip-text text-transparent">
-                Creator Economy
+              AI Brand Assistants for{' '}
+              <span className="bg-gradient-to-r from-[#ec4899] via-[#7c3aed] to-[#3b82f6] bg-clip-text text-transparent">
+                D2C Brands & Beyond
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              Whether you teach, trade, coach, or sell — turn your expertise into an AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.
+              Starting with D2C brands on Shopify and their websites — where AI has the most immediate impact on revenue. Expanding to creators, coaches, and OTT platforms.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -263,10 +291,10 @@ export default function IndustriesPage() {
       {/* Industries Grid */}
       <section id="industries" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-12">
-          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Creator Verticals</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Four verticals, one platform</h2>
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Use Cases</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">D2C brands first, creator economy next</h2>
           <p className="text-white/50 mt-3 max-w-xl">
-            Focused on the creator economy verticals where AI personas deliver the most immediate impact on audience engagement and revenue.
+            Focused on D2C brands on Shopify and their websites as the primary use case — where AI delivers the most immediate impact on conversions and customer support costs.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -278,7 +306,7 @@ export default function IndustriesPage() {
         {/* Coming Soon */}
         {comingSoonIndustries.length > 0 && (
           <div className="mt-8">
-            <p className="text-xs font-semibold text-white/20 uppercase tracking-widest mb-4">Future Launch</p>
+            <p className="text-xs font-semibold text-white/20 uppercase tracking-widest mb-4">Future Roadmap — Influencers & OTT</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {comingSoonIndustries.map((industry) => (
                 <ComingSoonCard key={industry.slug} industry={industry} />
@@ -293,31 +321,31 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Process</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">From content to live AI persona</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona for your audience</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">From product catalog to live AI assistant</h2>
+            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI brand assistant for your Shopify store or website</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] opacity-30" />
-            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#3b82f6] to-[#10b981] opacity-30" />
+            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#ec4899] to-[#7c3aed] opacity-30" />
+            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#7c3aed] to-[#10b981] opacity-30" />
 
             {[
               {
                 num: '01',
-                title: 'Build Your Persona',
-                desc: 'Set up your AI persona with your name, voice, and the topics you want it to cover. No technical skills needed.',
-                color: '#7c3aed',
+                title: 'Build Your AI Brand Assistant',
+                desc: 'Set up your AI with your brand name, voice, and the products and topics you want it to cover. No technical skills needed.',
+                color: '#ec4899',
               },
               {
                 num: '02',
-                title: 'Upload Your Content',
-                desc: 'Feed it your videos, courses, PDFs, or blog posts. Your AI learns from everything you\'ve already created.',
-                color: '#3b82f6',
+                title: 'Upload Your Product Knowledge',
+                desc: 'Feed it your product catalog, FAQs, size guides, ingredient lists, and brand story. Your AI learns from everything you\'ve already created.',
+                color: '#7c3aed',
               },
               {
                 num: '03',
-                title: 'Deploy & Earn',
-                desc: 'Share a link, embed it on your site, or connect to WhatsApp. Your audience can start chatting — and you start earning.',
+                title: 'Embed on Shopify & Convert',
+                desc: 'Add it to your Shopify store, website, or WhatsApp in minutes. Customers get instant answers — and you convert more sales.',
                 color: '#10b981',
               },
             ].map((step) => (
@@ -344,10 +372,31 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Why PersonaMatrix</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Built differently for creators</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Built for D2C brands first</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {differentiators.map((d) => (
+            {[
+              {
+                title: 'Shopify-native embed',
+                desc: 'Drop your AI brand assistant onto your Shopify store with a single line of code. Works on product pages, cart, and checkout.',
+                icon: '🛍️',
+              },
+              {
+                title: 'Product catalog AI',
+                desc: 'Deep understanding of your products, variants, and use cases — not just generic text. Trained on your actual catalog.',
+                icon: '📦',
+              },
+              {
+                title: 'Multi-channel deployment',
+                desc: 'One AI assistant, every channel. Web, WhatsApp, Voice, API — all from a single setup.',
+                icon: '🔀',
+              },
+              {
+                title: 'Conversion-focused',
+                desc: 'Built to reduce cart abandonment, handle objections, and increase AOV — not just answer questions.',
+                icon: '💰',
+              },
+            ].map((d) => (
               <div key={d.title} className="rounded-2xl p-6 border border-white/8 bg-white/[0.02] flex flex-col gap-3">
                 <div className="text-2xl">{d.icon}</div>
                 <h3 className="font-semibold text-white text-sm">{d.title}</h3>
@@ -363,7 +412,7 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-10 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Channels</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Meet your audience where they are</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Meet your customers where they shop</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {channels.map((ch) => (
@@ -382,9 +431,9 @@ export default function IndustriesPage() {
       {/* CTA */}
       <section className="py-20 border-t border-white/6">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI brand assistant?</h2>
           <p className="text-white/50 mb-8 max-w-xl mx-auto">
-            Join finance creators, educators, coaches, and D2C founders already using PersonaMatrix to scale their audience and income.
+            Join D2C brands on Shopify and their websites already using PersonaMatrix to answer customer questions, reduce returns, and drive more revenue — automatically.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">
