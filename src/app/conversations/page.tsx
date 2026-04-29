@@ -603,8 +603,9 @@ export default function ConversationsPage() {
             return (
               <div
                 key={conv.id}
-                className="rounded-2xl border border-white/8 p-4"
+                className="rounded-2xl border border-white/8 p-4 cursor-pointer hover:border-white/15 hover:bg-white/[0.03] transition-all"
                 style={{ background: 'rgba(255,255,255,0.02)' }}
+                onClick={() => setSelectedConv(conv)}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -625,12 +626,9 @@ export default function ConversationsPage() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <button
-                    onClick={() => setSelectedConv(conv)}
-                    className="text-[11px] font-600 text-purple-400 hover:text-purple-300 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 px-2.5 py-1 rounded-lg transition-all"
-                  >
+                  <span className="text-[11px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-lg">
                     {conv.personaId}
-                  </button>
+                  </span>
                   <div className="flex items-center gap-1.5">
                     <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
                     <span className="text-xs text-white/60">{conv.personaName}</span>
@@ -655,6 +653,7 @@ export default function ConversationsPage() {
                       <span>{conv.messageCount}</span>
                     </div>
                   </div>
+                  <div onClick={(e) => e.stopPropagation()}>
                   {isDeleting ? (
                     <div className="flex items-center gap-1">
                       <button
@@ -678,6 +677,7 @@ export default function ConversationsPage() {
                       <Trash2 size={12} className="text-white/30 group-hover:text-red-400 transition-colors" />
                     </button>
                   )}
+                  </div>
                 </div>
               </div>
             );
@@ -740,7 +740,8 @@ export default function ConversationsPage() {
                   return (
                     <tr
                       key={conv.id}
-                      className={`border-b border-white/5 transition-colors hover:bg-white/3 ${idx === paginated.length - 1 ? 'border-b-0' : ''}`}
+                      className={`border-b border-white/5 transition-colors hover:bg-white/3 cursor-pointer ${idx === paginated.length - 1 ? 'border-b-0' : ''}`}
+                      onClick={() => setSelectedConv(conv)}
                     >
                       <td className="px-4 py-3.5">
                         <div className="flex items-center gap-2.5">
@@ -757,12 +758,9 @@ export default function ConversationsPage() {
                       </td>
 
                       <td className="px-4 py-3.5">
-                        <button
-                          onClick={() => setSelectedConv(conv)}
-                          className="text-[11px] font-600 text-purple-400 hover:text-purple-300 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 px-2.5 py-1 rounded-lg transition-all"
-                        >
+                        <span className="text-[11px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-lg">
                           {conv.personaId}
-                        </button>
+                        </span>
                       </td>
 
                       <td className="px-4 py-3.5">
@@ -796,7 +794,7 @@ export default function ConversationsPage() {
                         </div>
                       </td>
 
-                      <td className="px-4 py-3.5">
+                      <td className="px-4 py-3.5" onClick={(e) => e.stopPropagation()}>
                         {isDeleting ? (
                           <div className="flex items-center gap-1">
                             <button
@@ -813,12 +811,20 @@ export default function ConversationsPage() {
                             </button>
                           </div>
                         ) : (
-                          <button
-                            onClick={() => setDeleteConfirmId(conv.id)}
-                            className="w-7 h-7 rounded-lg bg-white/4 border border-white/8 flex items-center justify-center hover:bg-red-500/10 hover:border-red-500/20 transition-all group"
-                          >
-                            <Trash2 size={12} className="text-white/30 group-hover:text-red-400 transition-colors" />
-                          </button>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              onClick={() => setSelectedConv(conv)}
+                              className="text-[10px] font-500 text-white/50 hover:text-white px-2.5 py-1 rounded-lg bg-white/4 border border-white/8 hover:border-white/20 transition-all"
+                            >
+                              View
+                            </button>
+                            <button
+                              onClick={() => setDeleteConfirmId(conv.id)}
+                              className="w-7 h-7 rounded-lg bg-white/4 border border-white/8 flex items-center justify-center hover:bg-red-500/10 hover:border-red-500/20 transition-all group"
+                            >
+                              <Trash2 size={12} className="text-white/30 group-hover:text-red-400 transition-colors" />
+                            </button>
+                          </div>
                         )}
                       </td>
                     </tr>

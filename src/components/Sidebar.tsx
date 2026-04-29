@@ -4,13 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Brain, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket, BookOpen, Users, MessagesSquare } from 'lucide-react';
+import { LayoutDashboard, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket, BookOpen, Users, MessagesSquare, Plus } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', group: 'main' },
-  { href: '/create-persona', icon: Brain, label: 'Create Persona', group: 'main' },
   { href: '/personas', icon: Users, label: 'Personas', group: 'main' },
   { href: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', group: 'main' },
   { href: '/conversations', icon: MessagesSquare, label: 'Conversations', group: 'main' },
@@ -73,8 +72,24 @@ export default function Sidebar() {
         )}
       </div>
 
+      {/* New Persona CTA */}
+      <div className={`px-2 pt-3 pb-1 ${!isMobile && collapsed ? 'flex justify-center' : ''}`}>
+        <Link
+          href="/create-persona"
+          className={`flex items-center gap-2 rounded-xl transition-all duration-150 font-semibold text-white text-xs btn-primary ${
+            !isMobile && collapsed
+              ? 'w-10 h-10 justify-center p-0'
+              : 'px-3 py-2.5 w-full'
+          }`}
+          title={(!isMobile && collapsed) ? 'New Persona' : undefined}
+        >
+          <Plus size={15} className="flex-shrink-0" />
+          {(!collapsed || isMobile) && <span>New Persona</span>}
+        </Link>
+      </div>
+
       {/* Nav Items */}
-      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-2 space-y-0.5">
+      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3 px-2 space-y-0.5">
         {groups.map((group) => {
           const items = navItems.filter((i) => i.group === group);
           if (items.length === 0) return null;
@@ -113,7 +128,6 @@ export default function Sidebar() {
             </div>
           );
         })}
-
       </nav>
 
       {/* Collapse Toggle — desktop only */}

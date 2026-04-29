@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import AppLayout from '@/components/AppLayout';
 import { User, Bell, Shield, Key, Globe, Palette, Save, Camera } from 'lucide-react';
+import Topbar from '@/components/Topbar';
 
 interface SettingsTab {
   id: string;
@@ -30,13 +31,11 @@ export default function SettingsPage() {
 
   return (
     <AppLayout>
+      <Topbar
+        title="Settings"
+        subtitle="Manage your account preferences and configurations"
+      />
       <div className="max-w-5xl mx-auto overflow-x-hidden">
-        {/* Header */}
-        <div className="mb-5 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl font-bold text-white">Settings</h1>
-          <p className="text-white/50 text-sm mt-1">Manage your account preferences and configurations</p>
-        </div>
-
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           {/* Tab Nav — horizontal scroll on mobile/tablet, vertical on desktop */}
           <div className="lg:w-52 lg:flex-shrink-0 w-full overflow-x-auto">

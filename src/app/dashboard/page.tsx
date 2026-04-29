@@ -88,7 +88,7 @@ export default function DashboardPage() {
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            Create Persona
+            New Persona
           </Link>
         }
       />
@@ -162,12 +162,12 @@ export default function DashboardPage() {
             <h2 className="text-sm font-semibold text-white mb-4">Quick Actions</h2>
             <div className="flex flex-col gap-2">
               {[
-                { href: '/create-persona', label: 'Create New Persona', icon: '✨', color: '#7c3aed' },
-                { href: '/personas', label: 'Manage Personas', icon: '🤖', color: '#a78bfa' },
-                { href: '/deploy', label: 'Deploy to Shopify', icon: '🛍️', color: '#14b8a6' },
-                { href: '/embeds', label: 'Get Embed Code', icon: '💻', color: '#0ea5e9' },
+                { href: '/personas', label: 'Manage Personas', icon: '🤖', color: '#7c3aed' },
+                { href: '/deploy', label: 'Deploy to Channel', icon: '🚀', color: '#14b8a6' },
+                { href: '/embeds', label: 'Manage Embeds', icon: '💻', color: '#0ea5e9' },
                 { href: '/analytics', label: 'View Analytics', icon: '📊', color: '#34d399' },
                 { href: '/knowledge-base', label: 'Knowledge Base', icon: '📚', color: '#f59e0b' },
+                { href: '/conversations', label: 'View Conversations', icon: '💬', color: '#a78bfa' },
               ]?.map((action) => (
                 <Link
                   key={action?.href}
