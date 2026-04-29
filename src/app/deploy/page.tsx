@@ -4,227 +4,501 @@ import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
 
-const deployOptions = [
+const personas = [
+  { id: 'aria-sales', name: 'Aria Sales', role: 'Sales Assistant', initials: 'AS', color: 'from-purple-500 to-blue-500' },
+  { id: 'support-bot', name: 'Support Bot v2', role: 'Customer Support', initials: 'SB', color: 'from-teal-500 to-emerald-500' },
+  { id: 'kai-voice', name: 'Kai Voice Agent', role: 'Voice Support', initials: 'KV', color: 'from-orange-500 to-pink-500' },
+  { id: 'demo-concierge', name: 'Demo Concierge', role: 'Product Demo', initials: 'DC', color: 'from-blue-500 to-cyan-500' },
+  { id: 'zara-retail', name: 'Zara Retail', role: 'Retail Assistant', initials: 'ZR', color: 'from-pink-500 to-rose-500' },
+  { id: 'nova-cs', name: 'Nova Customer Success', role: 'Customer Success', initials: 'NC', color: 'from-violet-500 to-purple-500' },
+];
+
+const channels = [
   {
     id: 'web',
     title: 'Web Embed',
-    desc: 'Add your AI persona to any website with a JS snippet',
+    desc: 'Add a floating chat widget to any website via JS snippet',
     icon: '💻',
-    color: '#7c3aed',
-    primary: false,
+    tag: null,
+    color: 'border-purple-500/40 bg-purple-500/8',
+    activeColor: 'border-purple-500/60 bg-purple-500/15',
   },
   {
     id: 'shopify',
     title: 'Shopify Plugin',
-    desc: 'Install directly into your Shopify store — recommended for D2C brands',
+    desc: 'Install directly into your Shopify store theme',
     icon: '🛍️',
-    color: '#14b8a6',
-    primary: true,
+    tag: 'Recommended',
+    color: 'border-teal-500/40 bg-teal-500/8',
+    activeColor: 'border-teal-500/60 bg-teal-500/15',
   },
   {
     id: 'whatsapp',
     title: 'WhatsApp',
-    desc: 'Connect your WhatsApp Business number to deploy on WhatsApp',
+    desc: 'Deploy on WhatsApp Business via API integration',
     icon: '📱',
-    color: '#34d399',
-    primary: false,
+    tag: null,
+    color: 'border-emerald-500/40 bg-emerald-500/8',
+    activeColor: 'border-emerald-500/60 bg-emerald-500/15',
+  },
+  {
+    id: 'slack',
+    title: 'Slack',
+    desc: 'Add your persona as a Slack bot in your workspace',
+    icon: '💬',
+    tag: 'Beta',
+    color: 'border-amber-500/40 bg-amber-500/8',
+    activeColor: 'border-amber-500/60 bg-amber-500/15',
   },
 ];
 
-const webSnippet = `<!-- PersonaMatrix AI Widget -->
+const STEPS = ['Select Persona', 'Choose Channel', 'Configure & Deploy'];
+
+function StepIndicator({ current }: { current: number }) {
+  return (
+    <div className="flex items-center gap-0 mb-8">
+      {STEPS.map((label, i) => (
+        <React.Fragment key={label}>
+          <div className="flex items-center gap-2.5">
+            <div
+              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${
+                i < current
+                  ? 'bg-[#34d399] text-[#0a0c12]'
+                  : i === current
+                  ? 'bg-[#7c3aed] text-white'
+                  : 'bg-white/8 text-white/30'
+              }`}
+            >
+              {i < current ? (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                i + 1
+              )}
+            </div>
+            <span
+              className={`text-xs font-medium hidden sm:block ${
+                i === current ? 'text-white' : i < current ? 'text-white/50' : 'text-white/25'
+              }`}
+            >
+              {label}
+            </span>
+          </div>
+          {i < STEPS.length - 1 && (
+            <div
+              className={`flex-1 h-px mx-3 max-w-16 transition-all ${
+                i < current ? 'bg-[#34d399]/40' : 'bg-white/10'
+              }`}
+            />
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+export default function DeployPage() {
+  const [step, setStep] = useState(0);
+  const [selectedPersona, setSelectedPersona] = useState('');
+  const [selectedChannel, setSelectedChannel] = useState('');
+  const [config, setConfig] = useState({ theme: 'dark', position: 'bottom-right', domain: '' });
+  const [copied, setCopied] = useState(false);
+  const [deployed, setDeployed] = useState(false);
+
+  const persona = personas.find((p) => p.id === selectedPersona);
+  const channel = channels.find((c) => c.id === selectedChannel);
+
+  const webSnippet = `<!-- PersonaMatrix AI Widget -->
 <script>
   window.PersonaMatrix = {
-    personaId: "glow-ai",
-    position: "bottom-right",
-    theme: "dark"
+    personaId: "${selectedPersona || 'your-persona-id'}",
+    position: "${config.position}",
+    theme: "${config.theme}",
+    allowedDomains: ["${config.domain || 'yourdomain.com'}"]
   };
 </script>
 <script src="https://cdn.personamatrix.ai/widget.js" async></script>`;
 
-const shopifySnippet = `{% comment %} PersonaMatrix Shopify App {% endcomment %}
+  const shopifySnippet = `{% comment %} PersonaMatrix Shopify App {% endcomment %}
 {{ 'personamatrix.js' | asset_url | script_tag }}
 <script>
-  PersonaMatrix.init({ personaId: "glow-ai" });
+  PersonaMatrix.init({
+    personaId: "${selectedPersona || 'your-persona-id'}",
+    theme: "${config.theme}"
+  });
 </script>`;
 
-export default function DeployPage() {
-  const [activeChannel, setActiveChannel] = useState<'web' | 'shopify' | 'whatsapp'>('shopify');
-  const [copied, setCopied] = useState(false);
+  const snippet = selectedChannel === 'shopify' ? shopifySnippet : webSnippet;
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(snippet).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
   };
 
-  const snippet = activeChannel === 'shopify' ? shopifySnippet : webSnippet;
+  const handleDeploy = () => {
+    setDeployed(true);
+  };
+
+  if (deployed) {
+    return (
+      <AppLayout>
+        <Topbar title="Deploy" subtitle="Get your AI persona live on your channels" />
+        <div className="max-w-lg mx-auto text-center py-16">
+          <div className="w-16 h-16 rounded-full bg-[#34d399]/15 border border-[#34d399]/30 flex items-center justify-center mx-auto mb-5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-white mb-2">Deployment Successful!</h2>
+          <p className="text-sm text-white/45 mb-2">
+            <span className="text-white font-medium">{persona?.name}</span> is now live on{' '}
+            <span className="text-white font-medium">{channel?.title}</span>
+          </p>
+          {config.domain && (
+            <p className="text-xs text-white/30 font-mono mb-8">{config.domain}</p>
+          )}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/embeds"
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary"
+            >
+              View All Embeds
+            </Link>
+            <button
+              onClick={() => { setStep(0); setSelectedPersona(''); setSelectedChannel(''); setDeployed(false); }}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all"
+            >
+              Deploy Another
+            </button>
+          </div>
+        </div>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>
       <Topbar
         title="Deploy"
-        subtitle="Get your AI salesperson live on your store"
+        subtitle="Deploy a persona to a channel in a few steps"
+        action={
+          <Link href="/embeds" className="text-xs text-white/40 hover:text-white transition-colors flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg>
+            Manage Embeds
+          </Link>
+        }
       />
 
-      {/* Channel selector */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        {deployOptions.map((opt) => (
-          <button
-            key={opt.id}
-            onClick={() => setActiveChannel(opt.id as 'web' | 'shopify' | 'whatsapp')}
-            className={`relative flex flex-col gap-3 p-5 rounded-2xl border text-left transition-all ${
-              activeChannel === opt.id
-                ? 'border-white/20 bg-white/6' :'border-white/8 bg-white/[0.03] hover:border-white/15'
-            }`}
-          >
-            {opt.primary && (
-              <span className="absolute top-3 right-3 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30">
-                Recommended
-              </span>
-            )}
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">{opt.icon}</span>
-              <div
-                className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ml-auto ${
-                  activeChannel === opt.id ? 'border-white bg-white' : 'border-white/20'
-                }`}
-              >
-                {activeChannel === opt.id && (
-                  <div className="w-2 h-2 rounded-full bg-[#0a0c12]" />
-                )}
-              </div>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-white">{opt.title}</p>
-              <p className="text-xs text-white/45 mt-0.5 leading-relaxed">{opt.desc}</p>
-            </div>
-          </button>
-        ))}
-      </div>
+      <div className="max-w-2xl mx-auto">
+        <StepIndicator current={step} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        {/* Code snippet */}
-        <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-            <div>
-              <h2 className="text-sm font-semibold text-white">
-                {activeChannel === 'shopify' ? 'Shopify Installation' : activeChannel === 'web' ? 'Web Embed Code' : 'WhatsApp Setup'}
-              </h2>
-              <p className="text-xs text-white/40 mt-0.5">
-                {activeChannel === 'shopify'
-                  ? 'Add to your Shopify theme.liquid file'
-                  : activeChannel === 'web' ?'Paste before the closing </body> tag' :'Connect your WhatsApp Business number'}
-              </p>
+        {/* Step 0: Select Persona */}
+        {step === 0 && (
+          <div>
+            <div className="mb-5">
+              <h2 className="text-base font-semibold text-white mb-1">Which persona do you want to deploy?</h2>
+              <p className="text-xs text-white/40">Select the AI persona that will power this deployment.</p>
             </div>
-            {activeChannel !== 'whatsapp' && (
-              <button
-                onClick={() => handleCopy(snippet)}
-                className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg border transition-all ${
-                  copied
-                    ? 'border-[#34d399]/40 text-[#34d399] bg-[#34d399]/10'
-                    : 'border-white/10 text-white/55 hover:text-white hover:border-white/25'
-                }`}
-              >
-                {copied ? (
-                  <>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="9" y="9" width="13" height="13" rx="2" />
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                    Copy Code
-                  </>
-                )}
-              </button>
-            )}
-          </div>
-
-          {activeChannel !== 'whatsapp' ? (
-            <div className="p-5">
-              <pre
-                className="text-xs text-[#a78bfa] leading-relaxed overflow-x-auto p-4 rounded-xl"
-                style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.15)' }}
-              >
-                {snippet}
-              </pre>
-            </div>
-          ) : (
-            <div className="p-5 flex flex-col gap-4">
-              <div className="p-4 rounded-xl border border-[#34d399]/20 bg-[#34d399]/6">
-                <p className="text-sm font-medium text-white mb-1">Connect WhatsApp Business</p>
-                <p className="text-xs text-white/50 leading-relaxed mb-3">
-                  Link your WhatsApp Business number to deploy your AI persona on WhatsApp. Requires WhatsApp Business API access.
-                </p>
-                <button className="text-xs px-4 py-2 rounded-lg border border-[#34d399]/40 text-[#34d399] hover:bg-[#34d399]/10 transition-all">
-                  Connect WhatsApp →
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Deployment checklist */}
-        <div className="flex flex-col gap-4">
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-            <h2 className="text-sm font-semibold text-white mb-4">Deployment Checklist</h2>
-            <div className="flex flex-col gap-3">
-              {[
-                { label: 'Persona created', done: true },
-                { label: 'Shopify catalog synced', done: true },
-                { label: 'Persona tested in chat', done: false },
-                { label: 'Embed code installed', done: false },
-                { label: 'Domain restriction set', done: false },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              {personas.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => setSelectedPersona(p.id)}
+                  className={`flex items-center gap-3 p-4 rounded-2xl border text-left transition-all ${
+                    selectedPersona === p.id
+                      ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10'
+                      : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/5'
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center text-white text-xs font-bold flex-shrink-0`}>
+                    {p.initials}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-white truncate">{p.name}</p>
+                    <p className="text-xs text-white/40 mt-0.5">{p.role}</p>
+                  </div>
                   <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                      item.done ? 'border-[#34d399] bg-[#34d399]' : 'border-white/20'
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                      selectedPersona === p.id ? 'border-[#7c3aed] bg-[#7c3aed]' : 'border-white/20'
                     }`}
                   >
-                    {item.done && (
+                    {selectedPersona === p.id && (
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     )}
                   </div>
-                  <span className={`text-sm ${item.done ? 'text-white/60 line-through' : 'text-white'}`}>
-                    {item.label}
-                  </span>
-                </div>
+                </button>
               ))}
             </div>
+            <div className="flex justify-end">
+              <button
+                disabled={!selectedPersona}
+                onClick={() => setStep(1)}
+                className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                  selectedPersona
+                    ? 'btn-primary text-white' :'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
+                }`}
+              >
+                Continue →
+              </button>
+            </div>
           </div>
+        )}
 
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-            <h2 className="text-sm font-semibold text-white mb-3">Quick Links</h2>
-            <div className="flex flex-col gap-2">
-              {[
-                { href: '/chat/glow-ai', label: 'Test Persona in Chat', icon: '💬' },
-                { href: '/embeds', label: 'Manage Embeds & Widgets', icon: '🔌' },
-                { href: '/analytics', label: 'View Conversion Analytics', icon: '📊' },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-white/6 hover:border-white/15 hover:bg-white/4 transition-all group"
+        {/* Step 1: Choose Channel */}
+        {step === 1 && (
+          <div>
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-1">
+                <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${persona?.color} flex items-center justify-center text-white text-[10px] font-bold`}>
+                  {persona?.initials}
+                </div>
+                <span className="text-xs text-white/50">Deploying <span className="text-white font-medium">{persona?.name}</span></span>
+              </div>
+              <h2 className="text-base font-semibold text-white mb-1">Where do you want to deploy?</h2>
+              <p className="text-xs text-white/40">Choose one channel for this deployment. You can add more later.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              {channels.map((ch) => (
+                <button
+                  key={ch.id}
+                  onClick={() => setSelectedChannel(ch.id)}
+                  className={`relative flex flex-col gap-3 p-4 rounded-2xl border text-left transition-all ${
+                    selectedChannel === ch.id
+                      ? ch.activeColor
+                      : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/5'
+                  }`}
                 >
-                  <span>{link.icon}</span>
-                  <span className="text-sm text-white/60 group-hover:text-white transition-colors">{link.label}</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-auto text-white/20 group-hover:text-white/50 transition-colors">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </Link>
+                  {ch.tag && (
+                    <span className={`absolute top-3 right-3 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                      ch.tag === 'Recommended' ?'bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30' :'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    }`}>
+                      {ch.tag}
+                    </span>
+                  )}
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{ch.icon}</span>
+                    <div
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ml-auto ${
+                        selectedChannel === ch.id ? 'border-white bg-white' : 'border-white/20'
+                      }`}
+                    >
+                      {selectedChannel === ch.id && (
+                        <div className="w-2 h-2 rounded-full bg-[#0a0c12]" />
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{ch.title}</p>
+                    <p className="text-xs text-white/45 mt-0.5 leading-relaxed">{ch.desc}</p>
+                  </div>
+                </button>
               ))}
             </div>
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setStep(0)}
+                className="px-4 py-2.5 rounded-xl text-sm text-white/40 hover:text-white transition-colors"
+              >
+                ← Back
+              </button>
+              <button
+                disabled={!selectedChannel}
+                onClick={() => setStep(2)}
+                className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                  selectedChannel
+                    ? 'btn-primary text-white' :'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
+                }`}
+              >
+                Continue →
+              </button>
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Step 2: Configure & Deploy */}
+        {step === 2 && (
+          <div>
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-1">
+                <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${persona?.color} flex items-center justify-center text-white text-[10px] font-bold`}>
+                  {persona?.initials}
+                </div>
+                <span className="text-xs text-white/50">
+                  <span className="text-white font-medium">{persona?.name}</span>
+                  <span className="mx-1.5 text-white/20">→</span>
+                  <span className="text-white font-medium">{channel?.icon} {channel?.title}</span>
+                </span>
+              </div>
+              <h2 className="text-base font-semibold text-white mb-1">Configure your deployment</h2>
+              <p className="text-xs text-white/40">Set up options and copy the embed code to go live.</p>
+            </div>
+
+            <div className="space-y-4 mb-6">
+              {/* WhatsApp special case */}
+              {selectedChannel === 'whatsapp' && (
+                <div className="rounded-2xl border border-[#34d399]/20 bg-[#34d399]/6 p-5">
+                  <p className="text-sm font-semibold text-white mb-1">Connect WhatsApp Business</p>
+                  <p className="text-xs text-white/50 leading-relaxed mb-4">
+                    Link your WhatsApp Business number to deploy <strong className="text-white/70">{persona?.name}</strong>. Requires WhatsApp Business API access.
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="text-xs text-white/40 block mb-1.5">Phone Number</label>
+                      <input
+                        type="text"
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#34d399]/40 transition-all"
+                      />
+                    </div>
+                    <button className="self-start text-xs px-4 py-2 rounded-lg border border-[#34d399]/40 text-[#34d399] hover:bg-[#34d399]/10 transition-all font-medium">
+                      Connect WhatsApp →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Slack special case */}
+              {selectedChannel === 'slack' && (
+                <div className="rounded-2xl border border-amber-500/20 bg-amber-500/6 p-5">
+                  <p className="text-sm font-semibold text-white mb-1">Connect Slack Workspace</p>
+                  <p className="text-xs text-white/50 leading-relaxed mb-4">
+                    Authorize PersonaMatrix to add <strong className="text-white/70">{persona?.name}</strong> as a bot in your Slack workspace.
+                  </p>
+                  <button className="self-start text-xs px-4 py-2 rounded-lg border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all font-medium">
+                    Add to Slack →
+                  </button>
+                </div>
+              )}
+
+              {/* Web / Shopify config */}
+              {(selectedChannel === 'web' || selectedChannel === 'shopify') && (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-medium text-white/50 block mb-2">Theme</label>
+                      <div className="flex gap-2">
+                        {['dark', 'light'].map((t) => (
+                          <button
+                            key={t}
+                            onClick={() => setConfig({ ...config, theme: t })}
+                            className={`flex-1 py-2 rounded-lg border text-xs font-medium capitalize transition-all ${
+                              config.theme === t
+                                ? 'border-[#7c3aed]/50 bg-[#7c3aed]/15 text-[#a78bfa]'
+                                : 'border-white/8 text-white/40 hover:bg-white/5'
+                            }`}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    {selectedChannel === 'web' && (
+                      <div>
+                        <label className="text-xs font-medium text-white/50 block mb-2">Position</label>
+                        <div className="flex gap-2">
+                          {['bottom-right', 'bottom-left'].map((pos) => (
+                            <button
+                              key={pos}
+                              onClick={() => setConfig({ ...config, position: pos })}
+                              className={`flex-1 py-2 rounded-lg border text-[11px] font-medium transition-all ${
+                                config.position === pos
+                                  ? 'border-[#7c3aed]/50 bg-[#7c3aed]/15 text-[#a78bfa]'
+                                  : 'border-white/8 text-white/40 hover:bg-white/5'
+                              }`}
+                            >
+                              {pos === 'bottom-right' ? '↘ Right' : '↙ Left'}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-medium text-white/50 block mb-2">Domain Restriction <span className="text-white/25 font-normal">(optional)</span></label>
+                    <input
+                      type="text"
+                      value={config.domain}
+                      onChange={(e) => setConfig({ ...config, domain: e.target.value })}
+                      placeholder="yourdomain.com"
+                      className="w-full px-3 py-2.5 rounded-lg border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/40 transition-all"
+                    />
+                    <p className="text-[10px] text-white/25 mt-1.5">Only allow the widget to load on this domain.</p>
+                  </div>
+
+                  {/* Embed code */}
+                  <div className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/6">
+                      <div>
+                        <p className="text-xs font-semibold text-white">
+                          {selectedChannel === 'shopify' ? 'Shopify Installation Code' : 'Embed Code'}
+                        </p>
+                        <p className="text-[10px] text-white/35 mt-0.5">
+                          {selectedChannel === 'shopify'
+                            ? 'Add to your theme.liquid file' :'Paste before the closing </body> tag'}
+                        </p>
+                      </div>
+                      <button
+                        onClick={handleCopy}
+                        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-all ${
+                          copied
+                            ? 'border-[#34d399]/40 text-[#34d399] bg-[#34d399]/10'
+                            : 'border-white/10 text-white/55 hover:text-white hover:border-white/25'
+                        }`}
+                      >
+                        {copied ? (
+                          <>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                            Copy Code
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <div className="p-4">
+                      <pre
+                        className="text-xs text-[#a78bfa] leading-relaxed overflow-x-auto p-3 rounded-xl"
+                        style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.12)' }}
+                      >
+                        {snippet}
+                      </pre>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setStep(1)}
+                className="px-4 py-2.5 rounded-xl text-sm text-white/40 hover:text-white transition-colors"
+              >
+                ← Back
+              </button>
+              <button
+                onClick={handleDeploy}
+                className="px-6 py-2.5 rounded-xl text-sm font-semibold btn-primary text-white flex items-center gap-2"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M22 2L11 13" /><path d="M22 2L15 22l-4-9-9-4 20-7z" />
+                </svg>
+                Deploy Now
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </AppLayout>
   );
