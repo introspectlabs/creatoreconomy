@@ -4,23 +4,64 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Brain, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket, BookOpen, Users } from 'lucide-react';
+import {
+  LayoutDashboard,
+  Brain,
+  Sparkles,
+  Film,
+  Database,
+  MessagesSquare,
+  BarChart2,
+  Radio,
+  Plug,
+  Building2,
+  CodeXml,
+  Key,
+  BookOpen,
+  CircleUser,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  User,
+  Settings,
+  LogOut,
+  Receipt,
+  Menu,
+  X,
+} from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
-const navItems = [
-  { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', group: 'main' },
-  { href: '/create-persona', icon: Brain, label: 'Create Persona', group: 'main' },
-  { href: '/personas', icon: Users, label: 'Personas', group: 'main' },
-  { href: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', group: 'main' },
-  { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
-  { href: '/deploy', icon: Rocket, label: 'Deploy', group: 'deploy' },
-  { href: '/embeds', icon: Code2, label: 'Embeds', group: 'deploy' },
+interface NavItem {
+  href: string;
+  icon: React.ElementType;
+  label: string;
+  group: string;
+  badge?: string;
+}
+
+const navItems: NavItem[] = [
+  // WORKSPACE
+  { href: '/home-dashboard', icon: LayoutDashboard, label: 'Home', group: 'workspace' },
+  { href: '/persona-library', icon: Brain, label: 'Persona Library', group: 'workspace', badge: '12' },
+  { href: '/avatar-studio', icon: Sparkles, label: 'Avatar Studio', group: 'workspace' },
+  { href: '/video-generation', icon: Film, label: 'Video Generation', group: 'workspace' },
+  { href: '/knowledge-base', icon: Database, label: 'Knowledge Base', group: 'workspace' },
+  { href: '/conversation-history', icon: MessagesSquare, label: 'Conversation History', group: 'workspace' },
+  { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'workspace' },
+  // DEPLOY
+  { href: '/channels-page', icon: Radio, label: 'Channels', group: 'deploy', badge: '2' },
+  { href: '/services-page', icon: Plug, label: 'Services', group: 'deploy' },
+  // MANAGE
+  { href: '/organization-rbac', icon: Building2, label: 'Organization', group: 'manage' },
+  { href: '/embeds-plugins', icon: CodeXml, label: 'Embeds / Plugins', group: 'manage' },
   { href: '/api-keys', icon: Key, label: 'API Keys', group: 'manage' },
+  { href: '/api-docs', icon: BookOpen, label: 'API Docs', group: 'manage' },
+  { href: '/creator-profile-editor', icon: CircleUser, label: 'Creator Profile', group: 'manage' },
 ];
 
 const groupLabels: Record<string, string> = {
-  main: 'WORKSPACE',
+  workspace: 'WORKSPACE',
   deploy: 'DEPLOY',
   manage: 'MANAGE',
 };
@@ -44,7 +85,7 @@ export default function Sidebar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const groups = ['main', 'deploy', 'manage'];
+  const groups = ['workspace', 'deploy', 'manage'];
 
   const SidebarContent = ({ isMobile = false }: { isMobile?: boolean }) => (
     <aside
@@ -106,13 +147,17 @@ export default function Sidebar() {
                     {(!collapsed || isMobile) && (
                       <span className="text-sm font-medium truncate flex-1">{item.label}</span>
                     )}
+                    {(!collapsed || isMobile) && item.badge && (
+                      <span className="text-[10px] font-600 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full px-1.5 py-0.5 tabular-nums">
+                        {item.badge}
+                      </span>
+                    )}
                   </Link>
                 );
               })}
             </div>
           );
         })}
-
       </nav>
 
       {/* Collapse Toggle — desktop only */}
