@@ -1,9 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
-import { MoreVertical, Pencil, Pause, Play, Trash2, X, AlertTriangle } from 'lucide-react';
 
 const metrics = [
   {
@@ -59,38 +58,9 @@ const metrics = [
   },
 ];
 
-interface Persona {
-  id: string;
-  name: string;
-  type: string;
-  status: 'active' | 'paused' | 'draft';
-  conversations: number;
-  conversion: string;
-  channel: string;
-  emoji: string;
-}
-
-const initialPersonas: Persona[] = [
-  {
-    id: 'glow-ai',
-    name: 'Glow AI',
-    type: 'Shopping Assistant',
-    status: 'active',
-    conversations: 842,
-    conversion: '9.2%',
-    channel: 'Web + WhatsApp',
-    emoji: '🧴',
-  },
-  {
-    id: 'support-ai',
-    name: 'Support AI',
-    type: 'Shopping Assistant',
-    status: 'draft',
-    conversations: 0,
-    conversion: '—',
-    channel: 'Not deployed',
-    emoji: '💬',
-  },
+const personasSummary = [
+  { id: 'glow-ai', name: 'Glow AI', status: 'active', conversations: 842, conversion: '9.2%', emoji: '🧴' },
+  { id: 'support-ai', name: 'Support AI', status: 'draft', conversations: 0, conversion: '—', emoji: '💬' },
 ];
 
 const recentActivity = [
@@ -101,44 +71,7 @@ const recentActivity = [
 ];
 
 export default function DashboardPage() {
-  const [personas, setPersonas] = useState<Persona[]>(initialPersonas);
-  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
-  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
-  const [editingPersona, setEditingPersona] = useState<Persona | null>(null);
-  const [editName, setEditName] = useState('');
-
-  const handleTogglePause = (id: string) => {
-    setPersonas((prev) =>
-      prev.map((p) =>
-        p.id === id
-          ? { ...p, status: p.status === 'active' ? 'paused' : 'active' }
-          : p
-      )
-    );
-    setOpenMenuId(null);
-  };
-
-  const handleDelete = (id: string) => {
-    setPersonas((prev) => prev.filter((p) => p.id !== id));
-    setDeleteConfirmId(null);
-    setOpenMenuId(null);
-  };
-
-  const handleEditOpen = (persona: Persona) => {
-    setEditingPersona(persona);
-    setEditName(persona.name);
-    setOpenMenuId(null);
-  };
-
-  const handleEditSave = () => {
-    if (!editingPersona || !editName.trim()) return;
-    setPersonas((prev) =>
-      prev.map((p) => p.id === editingPersona.id ? { ...p, name: editName.trim() } : p)
-    );
-    setEditingPersona(null);
-  };
-
-  const statusStyle = (status: Persona['status']) => {
+  const statusStyle = (status: string) => {
     if (status === 'active') return 'bg-[#34d399]/15 text-[#34d399] border-[#34d399]/25';
     if (status === 'paused') return 'bg-amber-500/15 text-amber-400 border-amber-500/25';
     return 'bg-white/8 text-white/40 border-white/10';
@@ -179,87 +112,44 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Personas list */}
+        {/* Personas summary */}
         <div className="xl:col-span-2">
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
               <h2 className="text-sm font-semibold text-white">Your Personas</h2>
-              <Link href="/create-persona" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors">
-                + New Persona
+              <Link href="/personas" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors">
+                View all →
               </Link>
             </div>
             <div className="divide-y divide-white/5">
-              {personas?.map((p) => (
-                <div key={p?.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/3 transition-colors relative">
+              {personasSummary.map((p) => (
+                <div key={p.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/3 transition-colors">
                   <div className="w-10 h-10 rounded-xl bg-white/6 border border-white/8 flex items-center justify-center text-xl flex-shrink-0">
-                    {p?.emoji}
+                    {p.emoji}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <p className="text-sm font-medium text-white truncate">{p?.name}</p>
+                      <p className="text-sm font-medium text-white truncate">{p.name}</p>
                       <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${statusStyle(p.status)}`}>
-                        {p?.status}
+                        {p.status}
                       </span>
                     </div>
-                    <p className="text-xs text-white/40">{p?.type} · {p?.channel}</p>
+                    <p className="text-xs text-white/40">Shopping Assistant</p>
                   </div>
                   <div className="hidden sm:flex flex-col items-end gap-0.5">
-                    <p className="text-sm font-semibold text-white">{p?.conversations?.toLocaleString()}</p>
+                    <p className="text-sm font-semibold text-white">{p.conversations.toLocaleString()}</p>
                     <p className="text-[10px] text-white/35">conversations</p>
                   </div>
                   <div className="hidden md:flex flex-col items-end gap-0.5">
-                    <p className="text-sm font-semibold text-[#34d399]">{p?.conversion}</p>
+                    <p className="text-sm font-semibold text-[#34d399]">{p.conversion}</p>
                     <p className="text-[10px] text-white/35">conversion</p>
                   </div>
-                  <div className="flex gap-2 flex-shrink-0 items-center">
-                    <Link
-                      href={`/chat/${p?.id}`}
-                      className="text-[11px] px-2.5 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
-                    >
-                      Test
-                    </Link>
-                    <Link
-                      href="/deploy"
-                      className="text-[11px] px-2.5 py-1.5 rounded-lg border border-[#7c3aed]/30 text-[#a78bfa] hover:bg-[#7c3aed]/10 transition-all"
-                    >
-                      Deploy
-                    </Link>
-                    {/* More menu */}
-                    <div className="relative">
-                      <button
-                        onClick={() => setOpenMenuId(openMenuId === p.id ? null : p.id)}
-                        className="w-7 h-7 rounded-lg border border-white/8 text-white/35 hover:text-white hover:border-white/20 flex items-center justify-center transition-all"
-                      >
-                        <MoreVertical size={13} />
-                      </button>
-                      {openMenuId === p.id && (
-                        <div className="absolute right-0 top-9 z-20 w-44 rounded-xl border border-white/10 bg-[#1a1025] shadow-2xl overflow-hidden">
-                          <button
-                            onClick={() => handleEditOpen(p)}
-                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-white/5 transition-colors"
-                          >
-                            <Pencil size={13} />
-                            Edit Persona
-                          </button>
-                          <button
-                            onClick={() => handleTogglePause(p.id)}
-                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-white/5 transition-colors"
-                          >
-                            {p.status === 'active' ? <Pause size={13} /> : <Play size={13} />}
-                            {p.status === 'active' ? 'Pause Persona' : 'Resume Persona'}
-                          </button>
-                          <div className="border-t border-white/8" />
-                          <button
-                            onClick={() => { setDeleteConfirmId(p.id); setOpenMenuId(null); }}
-                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-red-400 hover:bg-red-500/8 transition-colors"
-                          >
-                            <Trash2 size={13} />
-                            Delete Persona
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  <Link
+                    href="/personas"
+                    className="text-[11px] px-2.5 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all flex-shrink-0"
+                  >
+                    Manage
+                  </Link>
                 </div>
               ))}
             </div>
@@ -273,6 +163,7 @@ export default function DashboardPage() {
             <div className="flex flex-col gap-2">
               {[
                 { href: '/create-persona', label: 'Create New Persona', icon: '✨', color: '#7c3aed' },
+                { href: '/personas', label: 'Manage Personas', icon: '🤖', color: '#a78bfa' },
                 { href: '/deploy', label: 'Deploy to Shopify', icon: '🛍️', color: '#14b8a6' },
                 { href: '/embeds', label: 'Get Embed Code', icon: '💻', color: '#0ea5e9' },
                 { href: '/analytics', label: 'View Analytics', icon: '📊', color: '#34d399' },
@@ -309,98 +200,6 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-
-      {/* Click outside to close menu */}
-      {openMenuId && (
-        <div className="fixed inset-0 z-10" onClick={() => setOpenMenuId(null)} />
-      )}
-
-      {/* Delete Confirm Modal */}
-      {deleteConfirmId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-sm mx-4 rounded-2xl border border-white/10 bg-[#1a1025] p-6 flex flex-col gap-5">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
-                <AlertTriangle size={18} className="text-red-400" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-white">Delete Persona</h3>
-                <p className="text-xs text-white/50 mt-1 leading-relaxed">
-                  This will permanently delete the persona and all its conversation history. This action cannot be undone.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setDeleteConfirmId(null)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white transition-all"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => handleDelete(deleteConfirmId)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold bg-red-500/15 border border-red-500/30 text-red-400 hover:bg-red-500/25 transition-all"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Edit Persona Modal */}
-      {editingPersona && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md mx-4 rounded-2xl border border-white/10 bg-[#1a1025] p-6 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-white">Edit Persona</h3>
-              <button
-                onClick={() => setEditingPersona(null)}
-                className="w-7 h-7 rounded-lg border border-white/8 text-white/35 hover:text-white flex items-center justify-center transition-all"
-              >
-                <X size={13} />
-              </button>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Persona Name</label>
-              <input
-                type="text"
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
-                className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 transition-all"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Type</label>
-              <div className="flex items-center gap-3 p-3 rounded-xl border border-[#7c3aed]/30 bg-[#7c3aed]/6">
-                <span className="text-lg">🛍️</span>
-                <span className="text-sm text-white">Shopping Assistant</span>
-              </div>
-            </div>
-            <div className="p-3 rounded-xl border border-white/6 bg-white/[0.02]">
-              <p className="text-xs text-white/40">
-                For advanced edits (tone, prompt, knowledge base), use the full{' '}
-                <Link href="/create-persona" className="text-[#7c3aed] hover:text-[#a78bfa]">Create Persona</Link> flow.
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setEditingPersona(null)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white transition-all"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleEditSave}
-                disabled={!editName.trim()}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40"
-              >
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </AppLayout>
   );
 }
