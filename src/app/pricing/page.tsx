@@ -10,7 +10,7 @@ const plans = [
     badge: null,
     monthlyPrice: 0,
     yearlyPrice: 0,
-    desc: 'Try AI brand assistance for your Shopify store or website — no credit card needed.',
+    desc: 'Explore AI personas with generous free limits.',
     color: '#38bdf8',
     accentBg: 'from-[#38bdf8]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -22,8 +22,8 @@ const plans = [
     personas: '3 personas',
     features: [
       'Web Chat channel',
-      '3 AI brand assistants',
-      '500 MB product knowledge ingestion',
+      '3 AI Personas',
+      '500 MB knowledge ingestion',
       '200 conversational minutes',
       'PDF, DOCX, TXT support',
       'Community support',
@@ -37,7 +37,7 @@ const plans = [
     badge: 'Most Popular',
     monthlyPrice: 79,
     yearlyPrice: 63,
-    desc: 'For D2C brands deploying AI across their Shopify store, website, and WhatsApp.',
+    desc: 'For teams deploying personas across multiple channels.',
     color: '#a78bfa',
     accentBg: 'from-[#7c3aed]/12 to-[#38bdf8]/5',
     borderColor: 'border-[#7c3aed]/40',
@@ -49,11 +49,11 @@ const plans = [
     personas: 'Unlimited personas',
     features: [
       'All channels: Chat, WhatsApp, Voice, API',
-      'Unlimited AI brand assistants',
-      '10 GB product knowledge ingestion',
+      'Unlimited personas',
+      '10 GB knowledge ingestion',
       '2,000 conversational minutes',
       'Video, audio, PDF, web scraping',
-      'Embeddable JS widgets (Shopify-ready)',
+      'Embeddable JS widgets',
       'Webhooks & streaming',
       'Priority email support',
     ],
@@ -66,7 +66,7 @@ const plans = [
     badge: null,
     monthlyPrice: 249,
     yearlyPrice: 199,
-    desc: 'High-volume D2C brands with large catalogs and multi-channel customer support needs.',
+    desc: 'High-volume deployments with avatar channels.',
     color: '#34d399',
     accentBg: 'from-[#34d399]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -78,8 +78,8 @@ const plans = [
     personas: 'Unlimited personas',
     features: [
       'All channels incl. Avatar Chat',
-      'Unlimited AI brand assistants',
-      '100 GB product knowledge ingestion',
+      'Unlimited personas',
+      '100 GB knowledge ingestion',
       '10,000 conversational minutes',
       'AI Video Avatars (Tavus)',
       'Video generation pipeline',
@@ -96,7 +96,7 @@ const plans = [
     badge: null,
     monthlyPrice: null,
     yearlyPrice: null,
-    desc: 'Custom storage, minutes, and SLAs for large D2C brands and multi-brand organizations.',
+    desc: 'Custom storage, minutes, and SLAs for your organization.',
     color: '#f59e0b',
     accentBg: 'from-[#f59e0b]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -227,7 +227,7 @@ export default function PricingPage() {
             </span>
           </h1>
           <p className="text-base sm:text-lg text-white/50 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-            Whether you&apos;re a D2C brand deploying AI on Shopify or a customer chatting with an AI assistant — we have a plan that fits.
+            Whether you&apos;re building AI personas or chatting with them — we have a plan that fits.
           </p>
 
           {/* Buyer type toggle */}
@@ -238,8 +238,8 @@ export default function PricingPage() {
                 buyerType === 'creator' ?'bg-gradient-to-r from-[#7c3aed] to-[#6d28d9] text-white shadow-[0_0_16px_rgba(124,58,237,0.4)]' :'text-white/45 hover:text-white'
               }`}
             >
-              <span>🛍️</span>
-              <span>For D2C Brands &amp; Creators</span>
+              <span>🏗️</span>
+              <span>For Creators &amp; Orgs</span>
             </button>
             <button
               onClick={() => setBuyerType('audience')}
@@ -426,12 +426,12 @@ export default function PricingPage() {
 
             {/* Switch to creator CTA */}
             <div className="mt-8 text-center">
-              <p className="text-sm text-white/40 mb-3">Are you a D2C brand or creator building AI assistants?</p>
+              <p className="text-sm text-white/40 mb-3">Are you a creator or business building AI personas?</p>
               <button
                 onClick={() => setBuyerType('creator')}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-[#7c3aed]/35 text-[#a78bfa] text-sm font-semibold hover:bg-[#7c3aed]/10 transition-all duration-200"
               >
-                🛍️ View D2C Brand &amp; Creator Plans →
+                🏗️ View Creator &amp; Organization Plans →
               </button>
             </div>
           </div>
@@ -586,7 +586,7 @@ export default function PricingPage() {
             <div>
               <div className="mb-5">
                 <h2 className="text-2xl font-bold text-white mb-1">Conversational Minutes</h2>
-                <p className="text-sm text-white/45">Billed per minute of active conversation. Rates vary by channel complexity. Ideal for D2C brands handling customer Q&A at scale.</p>
+                <p className="text-sm text-white/45">Billed per minute of active conversation. Rates vary by channel complexity.</p>
               </div>
               <div className="rounded-2xl border border-white/8 overflow-hidden">
                 {/* Desktop header */}
@@ -635,7 +635,7 @@ export default function PricingPage() {
             <div>
               <div className="mb-5">
                 <h2 className="text-2xl font-bold text-white mb-1">Knowledge Ingestion Storage</h2>
-                <p className="text-sm text-white/45">Charged on total ingested and indexed content size. Supports product catalogs, PDFs, DOCX, TXT, video transcripts, and web pages.</p>
+                <p className="text-sm text-white/45">Charged on total ingested and indexed document size. Supports PDF, DOCX, TXT, video transcripts, web pages.</p>
               </div>
               <div className="rounded-2xl border border-white/8 overflow-hidden">
                 {/* Desktop header */}
@@ -671,11 +671,11 @@ export default function PricingPage() {
 
             {/* Example bill */}
             <div className="rounded-2xl border border-[#7c3aed]/25 bg-gradient-to-br from-[#7c3aed]/8 to-[#38bdf8]/5 p-6">
-              <h3 className="text-base font-bold text-white mb-4">📋 Example monthly bill (Growth plan — D2C brand)</h3>
+              <h3 className="text-base font-bold text-white mb-4">📋 Example monthly bill (Growth plan)</h3>
               <div className="space-y-2.5 mb-5">
                 {[
                   { label: 'Growth plan base', amount: '$79.00' },
-                  { label: '8 GB product catalog storage (−10 GB included = 0 overage)', amount: '$0.00' },
+                  { label: '8 GB knowledge storage (−10 GB included = 0 overage)', amount: '$0.00' },
                   { label: '1,800 chat minutes (within 2,000 included)', amount: '$0.00' },
                   { label: '300 WhatsApp overage minutes × $0.006', amount: '$1.80' },
                   { label: '120 Voice overage minutes × $0.012', amount: '$1.44' },

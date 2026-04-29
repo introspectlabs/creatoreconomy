@@ -66,25 +66,24 @@ const features = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
       </svg>
     ),
-    title: 'AI Shopping Assistant for Your Shopify Store',
-    desc: 'Deploy an AI that knows every product, variant, and use case — answering customer questions, handling objections, and guiding buyers to checkout automatically, 24/7.',
+    title: 'Your Content Becomes a Talking AI',
+    desc: 'Upload your videos, podcasts, or articles and instantly create an AI version of yourself that fans can chat with — anytime, even while you sleep.',
     accent: 'rgba(124,58,237,0.25)',
     accentColor: '#7c3aed',
   },
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+        <polygon points="23 7 16 12 23 17 23 7" />
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
       </svg>
     ),
-    title: 'Reduce Cart Abandonment & Returns',
-    desc: 'Customers abandon carts when they have unanswered questions. Your AI resolves doubts instantly — on the product page, in cart, or via WhatsApp — before they leave.',
+    title: 'Fans Get Answers from Your Videos',
+    desc: 'Viewers can ask questions and get instant answers pulled directly from your video library — no more rewatching hours of content to find one moment.',
     accent: 'rgba(239,68,68,0.25)',
     accentColor: '#ef4444',
   },
@@ -94,8 +93,8 @@ const features = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
       </svg>
     ),
-    title: 'Embed on Your Website in One Click',
-    desc: 'Drop your AI brand assistant onto your Shopify store, landing pages, or DTC website with a simple embed — no developers needed, live in minutes.',
+    title: 'Embed Your AI Anywhere Your Audience Is',
+    desc: 'Drop your AI persona onto your website, community platform, or fan page with a simple embed — your audience can start chatting wherever they already spend time.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
   },
@@ -108,8 +107,8 @@ const features = [
         <line x1="8" y1="23" x2="16" y2="23" />
       </svg>
     ),
-    title: 'WhatsApp & Voice for Post-Purchase Support',
-    desc: 'Handle order status, returns, and product questions on WhatsApp and Voice — reducing support tickets by up to 70% without hiring more agents.',
+    title: 'Lifelike Video Avatar Conversations',
+    desc: 'Your AI persona can appear as a video avatar that looks and sounds like you — giving fans a personal, face-to-face experience without you needing to be online.',
     accent: 'rgba(245,158,11,0.25)',
     accentColor: '#f59e0b',
   },
@@ -121,8 +120,8 @@ const features = [
         <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
-    title: 'Know What Customers Ask Before They Leave',
-    desc: 'See exactly what questions customers ask, which products get the most objections, and where buyers drop off — so you can fix your store copy and increase conversions.',
+    title: 'Know What Your Audience Loves',
+    desc: 'See exactly what fans are asking, which topics spark the most conversations, and what content keeps them coming back — all in one simple dashboard.',
     accent: 'rgba(20,184,166,0.25)',
     accentColor: '#14b8a6',
   },
@@ -133,8 +132,8 @@ const features = [
         <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
-    title: 'Shopify & Website Integration',
-    desc: 'Native Shopify embed widget plus JS snippet for any website. Your AI syncs with your product catalog and brand knowledge automatically.',
+    title: 'Add to Your Website in One Click',
+    desc: 'Drop your AI persona onto your website, streaming platform, or fan community with a simple copy-paste — no developers needed.',
     accent: 'rgba(124,58,237,0.25)',
     accentColor: '#7c3aed',
   },
@@ -144,8 +143,8 @@ const features = [
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    title: 'Brand-Safe AI — Your Voice, Your Rules',
-    desc: 'Set guardrails on what your AI can and cannot say. Your brand tone, product claims, and messaging stay consistent across every customer conversation.',
+    title: 'Keep Your Brand Safe & In Control',
+    desc: 'Set clear boundaries on what your AI persona can and cannot say — so your brand voice stays consistent and your audience always gets the right message.',
     accent: 'rgba(16,185,129,0.25)',
     accentColor: '#10b981',
   },
@@ -157,8 +156,8 @@ const features = [
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
       </svg>
     ),
-    title: 'Train on Your Entire Product Catalog',
-    desc: 'Upload product descriptions, FAQs, ingredient lists, size guides, and brand story. Your AI learns everything and keeps getting smarter as you add more.',
+    title: 'Feed It All Your Content',
+    desc: 'Upload videos, podcasts, PDFs, or links. Your AI persona learns from everything you\'ve created and keeps getting smarter as you add more.',
     accent: 'rgba(239,68,68,0.25)',
     accentColor: '#ef4444',
   },
@@ -169,8 +168,8 @@ const features = [
         <path d="M8 21h8M12 17v4" />
       </svg>
     ),
-    title: 'Upsell & Cross-Sell Automatically',
-    desc: 'Your AI recommends complementary products based on what customers are browsing — increasing average order value without any manual effort.',
+    title: 'Surface Your Content Through Conversation',
+    desc: 'Fans discover your back-catalogue naturally by asking questions — your AI guides them to the right video, episode, or article based on what they\'re looking for.',
     accent: 'rgba(59,130,246,0.25)',
     accentColor: '#3b82f6',
   },
@@ -181,8 +180,8 @@ const features = [
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
       </svg>
     ),
-    title: 'Works Alongside Your Existing Stack',
-    desc: 'Embed PersonaMatrix on Shopify, WooCommerce, or any custom website. Works alongside your existing tools — no rebuilding required.',
+    title: 'Connect to Your Website & Community',
+    desc: 'Embed PersonaMatrix on your own website or community platform using a simple widget — no rebuilding required, works alongside the tools you already use.',
     accent: 'rgba(59,130,246,0.25)',
     accentColor: '#3b82f6',
   },
@@ -240,17 +239,17 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
-              Give Your Shopify Store a 24/7{' '}
-              <span className="text-gradient">AI Brand Assistant</span>
+              Turn Your Content into a 24/7 AI Persona for{' '}
+              <span className="text-gradient">Engagement and Conversion</span>
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Turn your product catalog and brand knowledge into an AI that answers customer questions, reduces cart abandonment, and drives conversions — even when you're offline.
+              Turn your content into a 24/7 AI that engages visitors, answers questions, and drives conversions — even when you're offline.
             </p>
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
               <p className="text-sm text-[#c4b5fd] leading-relaxed font-medium">
-                Built for <span className="text-white font-semibold">D2C brands on Shopify and their websites</span> who want to turn their product knowledge into{' '}
+                Built for <span className="text-white font-semibold">finance creators, course builders, coaches, and D2C founders</span> who want to turn their expertise into{' '}
                 <span className="text-white font-semibold">always-on, revenue-generating AI</span> — without working more hours.
               </p>
             </div>
@@ -293,25 +292,25 @@ export default function HomePage() {
                   <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                   <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
                   <div className="ml-3 flex-1 h-5 rounded-md bg-white/5 text-[10px] text-white/25 flex items-center px-2">
-                    yourstore.com — AI Shopping Assistant
+                    personamatrix.ai/chat/alex
                   </div>
                 </div>
                 <div className="p-5 flex flex-col gap-3 min-h-[280px]">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#ec4899] flex items-center justify-center text-xs font-bold shrink-0">S</div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Hi! I'm the Sasha Skin AI. Ask me anything about our products or your skin concerns!
+                      Hey! I'm Alex's AI. Ask me anything about his fitness content or latest episodes!
                     </div>
                   </div>
                   <div className="flex justify-end">
                     <div className="bg-[#7c3aed]/20 border border-[#7c3aed]/30 rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      I have dry, sensitive skin. What moisturizer should I get?
+                      Which episode covers meal prep for beginners?
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#ec4899] flex items-center justify-center text-xs font-bold shrink-0">S</div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Our Barrier Repair Serum is perfect for you — fragrance-free, dermatologist-tested, and 89% of customers with dry sensitive skin see results in 2 weeks. Want me to add it to your cart with 20% off?
+                      That's Episode 12 — "Meal Prep Made Simple". Alex walks through a full week of meals in under 30 minutes. Want me to send you the link?
                     </div>
                   </div>
                   <div className="flex items-center gap-2 pl-11">
@@ -324,13 +323,13 @@ export default function HomePage() {
                         />
                       ))}
                     </div>
-                    <span className="text-[11px] text-white/25">AI Assistant is typing…</span>
+                    <span className="text-[11px] text-white/25">Alex AI is typing…</span>
                   </div>
                 </div>
                 <div className="px-4 pb-4">
                   <div className="flex items-center gap-2 glass rounded-xl px-4 py-2.5 border border-white/8">
-                    <span className="text-sm text-white/25 flex-1">Ask about our products…</span>
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#ec4899] flex items-center justify-center">
+                    <span className="text-sm text-white/25 flex-1">Ask Alex anything…</span>
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                         <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -350,38 +349,38 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <p className="text-[11px] font-bold text-[#f87171] uppercase tracking-[0.2em] mb-3">Sound Familiar?</p>
             <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              The problems every D2C brand<br />
-              <span className="text-gradient">on Shopify faces</span>
+              The problems every creator<br />
+              <span className="text-gradient">in the economy faces</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               {
-                emoji: '🛒',
-                problem: 'Customers abandon carts because they have unanswered questions',
-                fix: 'Your AI answers product questions instantly — on the product page, in cart, or via WhatsApp — before customers leave your store.',
+                emoji: '😩',
+                problem: 'Followers ask the same questions over and over',
+                fix: 'Your AI persona handles every question instantly — pulling answers straight from your content, courses, and expertise.',
               },
               {
-                emoji: '📦',
-                problem: 'Returns and support tickets eat into your margins',
-                fix: 'Your AI guides customers to the right product upfront, reducing wrong-size and wrong-product purchases — and handles post-purchase support automatically.',
+                emoji: '📉',
+                problem: 'You spend hours on DMs instead of creating',
+                fix: 'Your AI version responds to fans, students, and clients 24/7 — so you can focus on what only you can do.',
               },
               {
                 emoji: '🕐',
-                problem: 'You can\'t staff customer support 24/7 without burning cash',
-                fix: 'One AI brand assistant handles thousands of customer conversations simultaneously — your product knowledge, infinitely scalable.',
+                problem: 'You can\'t scale your time or knowledge',
+                fix: 'One AI persona can handle thousands of conversations simultaneously — your expertise, infinitely scalable.',
               },
               {
                 emoji: '💸',
-                problem: 'Hard to increase AOV without a dedicated sales team',
-                fix: 'Your AI recommends complementary products and upsells naturally in conversation — increasing average order value without any manual effort.',
+                problem: 'Hard to monetize beyond one-time content sales',
+                fix: 'Your AI persona drives deeper conversations that naturally lead fans to your courses, coaching offers, and products — turning passive viewers into paying customers.',
               },
             ].map((item) => (
               <div key={item.problem} className="glass-elevated rounded-2xl p-6 border flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <div className="text-3xl shrink-0">{item.emoji}</div>
+                  <h3 className="font-bold text-white text-base">{item.title}</h3>
                 </div>
-                <p className="text-sm font-semibold text-white">{item.problem}</p>
                 <p className="text-sm text-white/50 leading-relaxed">{item.fix}</p>
               </div>
             ))}
@@ -395,11 +394,11 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">What You Get</p>
             <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              Everything D2C brands{' '}
+              Everything creators in the economy{' '}
               <span className="text-gradient">actually need</span>
             </h2>
             <p className="mt-4 text-white/60 max-w-lg mx-auto text-[15px] leading-relaxed">
-              From uploading your product catalog to converting customers at scale — all in one place.
+              From uploading your first video to engaging thousands of fans — all in one place.
             </p>
           </div>
 
@@ -472,22 +471,22 @@ export default function HomePage() {
             {[
               {
                 step: '01',
-                title: 'Build Your AI Brand Assistant',
-                desc: 'Give it your brand name, voice, and set what it should and shouldn\'t talk about. Think of it as setting up a digital version of your best sales rep.',
+                title: 'Build Your AI Persona',
+                desc: 'Give it a name, a personality, and tell it what it should and shouldn\'t talk about. Think of it as setting up a digital version of yourself.',
                 color: '#7c3aed',
                 bg: 'rgba(124,58,237,0.15)',
               },
               {
                 step: '02',
-                title: 'Feed It Your Product Knowledge',
-                desc: 'Upload your product catalog, FAQs, size guides, ingredient lists, and brand story. Your AI learns from everything you\'ve already created.',
+                title: 'Feed It Your Content',
+                desc: 'Upload your videos, podcasts, blog posts, or course materials. Your AI learns from everything you\'ve already created.',
                 color: '#3b82f6',
                 bg: 'rgba(59,130,246,0.15)',
               },
               {
                 step: '03',
-                title: 'Embed on Your Store & Website',
-                desc: 'Add it to your Shopify store, website, or WhatsApp in minutes. Your customers can start getting answers — and you start converting more sales.',
+                title: 'Share It with Your Audience',
+                desc: 'Add it to your website, share a link on social media, or connect it to WhatsApp. Your audience can start chatting right away.',
                 color: '#14b8a6',
                 bg: 'rgba(20,184,166,0.15)',
               },
@@ -509,65 +508,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── USE CASES SECTION ── */}
+      {/* ── CREATOR VERTICALS SECTION ── */}
       <section className="py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/4 to-transparent pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-10">
-            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">Use Cases</p>
+            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">Who It's Built For</p>
             <h2 className="text-4xl font-extrabold tracking-tight leading-[1.1]">
-              Built for D2C brands,<br />
-              <span className="text-gradient">expanding to more</span>
+              Four creator verticals,<br />
+              <span className="text-gradient">one powerful platform</span>
             </h2>
             <p className="mt-4 text-white/55 max-w-xl mx-auto text-[15px] leading-relaxed">
-              Starting with Shopify and D2C brands — where AI has the most immediate impact on revenue. Expanding to creators, coaches, and OTT platforms.
+              Whether you teach, trade, coach, or sell — PersonaMatrix turns your expertise into an AI that works for you around the clock.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
             {[
               {
-                emoji: '🛍️',
-                label: 'D2C Brands on Shopify',
-                color: '#ec4899',
-                border: 'rgba(236,72,153,0.35)',
-                bg: 'rgba(236,72,153,0.10)',
-                badge: 'Primary Focus',
-                badgeColor: '#ec4899',
-                desc: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
-                examples: ['Product discovery & recommendations', 'Pre-purchase Q&A & objection handling', 'Post-purchase support & upsells', 'Cart abandonment recovery via WhatsApp'],
-              },
-              {
-                emoji: '🌐',
-                label: 'D2C Brand Websites',
-                color: '#7c3aed',
-                border: 'rgba(124,58,237,0.35)',
-                bg: 'rgba(124,58,237,0.10)',
-                badge: 'Primary Focus',
-                badgeColor: '#7c3aed',
-                desc: 'Embed your AI brand assistant on your website, landing pages, and product pages. Convert more visitors into buyers with instant, personalized responses — no live agent needed.',
-                examples: ['Landing page conversion assistant', 'Product page Q&A widget', 'Brand story & values conversations', 'Lead capture & email list growth'],
+                emoji: '📈',
+                label: 'Finance & Trading Creators',
+                color: '#10b981',
+                border: 'rgba(16,185,129,0.25)',
+                bg: 'rgba(16,185,129,0.08)',
+                desc: 'Let your followers ask about your trading strategies, market analysis, and investment frameworks — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
+                examples: ['Stock & crypto strategy Q&A', 'Market analysis explainers', 'Paid community access'],
               },
               {
                 emoji: '🎓',
-                label: 'Creators & Course Builders',
+                label: 'Education & Course Creators',
                 color: '#3b82f6',
-                border: 'rgba(59,130,246,0.20)',
-                bg: 'rgba(59,130,246,0.05)',
-                badge: 'Coming Soon',
-                badgeColor: '#3b82f6',
-                desc: 'Finance creators, course builders, and coaches who want to turn their expertise into an AI that engages their audience and monetizes their knowledge.',
-                examples: ['Course Q&A & student support', 'Finance strategy explainers', 'Coaching intake & onboarding'],
+                border: 'rgba(59,130,246,0.25)',
+                bg: 'rgba(59,130,246,0.08)',
+                desc: 'Turn your course content into an interactive AI tutor. Students get instant answers from your lessons, you reduce support load, and your content sells itself through conversations.',
+                examples: ['Interactive course Q&A', 'Student support automation', 'Course upsell conversations'],
               },
               {
-                emoji: '📺',
-                label: 'OTT & Streaming Platforms',
-                color: '#14b8a6',
-                border: 'rgba(20,184,166,0.20)',
-                bg: 'rgba(20,184,166,0.05)',
-                badge: 'Future Roadmap',
-                badgeColor: '#14b8a6',
-                desc: 'AI personas for streaming platforms — interactive characters, personalized content discovery, and viewer retention tools for OTT and media companies.',
-                examples: ['Interactive content discovery', 'Character-based engagement', 'Viewer retention & recommendations'],
+                emoji: '💪',
+                label: 'Coaches — Fitness, Career & Business',
+                color: '#f59e0b',
+                border: 'rgba(245,158,11,0.25)',
+                bg: 'rgba(245,158,11,0.08)',
+                desc: 'Scale your coaching without burning out. Your AI handles intake questions, shares your frameworks, and keeps clients engaged between sessions — so you can focus on high-value work.',
+                examples: ['Client intake & onboarding', 'Program Q&A between sessions', 'Lead qualification for 1:1 coaching'],
+              },
+              {
+                emoji: '🛍️',
+                label: 'D2C Founders & Commerce Creators',
+                color: '#ec4899',
+                border: 'rgba(236,72,153,0.25)',
+                bg: 'rgba(236,72,153,0.08)',
+                desc: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
+                examples: ['Product discovery & recommendations', 'Pre-purchase Q&A', 'Post-purchase support & upsells'],
               },
             ].map((item) => (
               <div
@@ -575,17 +566,9 @@ export default function HomePage() {
                 className="glass-elevated rounded-2xl p-6 border flex flex-col gap-4"
                 style={{ borderColor: item.border, background: item.bg }}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl">{item.emoji}</div>
-                    <h3 className="font-bold text-white text-base" style={{ color: item.color }}>{item.label}</h3>
-                  </div>
-                  <span
-                    className="text-[10px] font-bold px-2.5 py-1 rounded-full border shrink-0"
-                    style={{ color: item.badgeColor, borderColor: `${item.badgeColor}40`, background: `${item.badgeColor}12` }}
-                  >
-                    {item.badge}
-                  </span>
+                <div className="flex items-center gap-3">
+                  <div className="text-3xl">{item.emoji}</div>
+                  <h3 className="font-bold text-white text-base" style={{ color: item.color }}>{item.label}</h3>
                 </div>
                 <p className="text-[13px] text-white/60 leading-relaxed">{item.desc}</p>
                 <ul className="flex flex-col gap-1.5">
@@ -607,7 +590,7 @@ export default function HomePage() {
               href="/register"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm shadow-[0_0_24px_rgba(124,58,237,0.35)] hover:shadow-[0_0_32px_rgba(124,58,237,0.5)]"
             >
-              Start Building Your AI Brand Assistant →
+              Start Building Your AI Persona →
             </Link>
           </div>
         </div>
@@ -622,11 +605,11 @@ export default function HomePage() {
             <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-[#3b82f6]/10 blur-3xl pointer-events-none" />
             <div className="relative z-10 flex flex-col items-center gap-6">
               <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-                Ready to turn your store into<br />
-                <span className="text-gradient">a conversion machine?</span>
+                Ready to turn your expertise<br />
+                <span className="text-gradient">into a revenue engine?</span>
               </h2>
               <p className="text-white/50 max-w-md text-base">
-                Join D2C brands on Shopify and their websites using PersonaMatrix to answer customer questions, reduce returns, and drive more revenue — automatically.
+                Join finance creators, educators, coaches, and D2C founders building with PersonaMatrix to scale their audience and income.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link

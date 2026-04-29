@@ -185,10 +185,10 @@ const industryData: Record<string, IndustryData> = {
     ],
   },
   'd2c-commerce': {
-    name: 'D2C Brands on Shopify & Websites',
+    name: 'D2C Founders & Commerce Creators',
     tagline: 'Give Every Customer a Personal Shopping Assistant',
     description:
-      'PersonaMatrix creates an AI brand assistant that knows your products inside out — answering questions, handling objections, and guiding buyers from discovery to checkout automatically. Built for D2C brands on Shopify and their websites.',
+      'PersonaMatrix creates an AI that knows your products inside out — answering questions, handling objections, and guiding buyers from discovery to checkout automatically.',
     color: '#ec4899',
     bg: 'rgba(236,72,153,0.12)',
     border: 'rgba(236,72,153,0.3)',
@@ -196,10 +196,10 @@ const industryData: Record<string, IndustryData> = {
       {
         title: 'AI That Sells Your Products 24/7',
         description:
-          'Your AI knows every product detail, handles common objections, and guides customers to the right purchase — even when you\'re asleep. No more lost sales from unanswered questions on your Shopify store or website.',
-        capabilities: ['Product Q&A & objection handling', '24/7 purchase guidance', 'Shopify & website embed'],
+          'Your AI knows every product detail, handles common objections, and guides customers to the right purchase — even when you\'re asleep. No more lost sales from unanswered questions.',
+        capabilities: ['Product Q&A', 'Objection handling', '24/7 purchase guidance'],
         channels: ['Web Chat', 'WhatsApp', 'Shopify Embed'],
-        demoPersona: 'D2C Brand AI',
+        demoPersona: 'D2C Sales AI',
         demoMessages: [
           { role: 'user', text: "I'm looking for a protein powder but I'm lactose intolerant. Do any of yours work for me?" },
           { role: 'ai', text: "Absolutely — our Plant Power Blend is 100% dairy-free and perfect for lactose intolerance. It's made from pea and rice protein, gives you 25g of protein per serving, and has no artificial sweeteners. It's our #1 seller for customers with dietary restrictions. Would you like the chocolate or vanilla flavor? Both are equally popular." },
@@ -210,8 +210,8 @@ const industryData: Record<string, IndustryData> = {
       {
         title: 'Reduce Returns & Support Tickets',
         description:
-          'Most returns happen because customers bought the wrong product. Your AI asks the right questions upfront, recommends the perfect fit, and dramatically reduces costly returns and support volume — saving you money on every order.',
-        capabilities: ['Pre-purchase sizing & fit guidance', 'Product matching by customer needs', 'Return reduction & support deflection'],
+          'Most returns happen because customers bought the wrong product. Your AI asks the right questions upfront, recommends the perfect fit, and dramatically reduces costly returns and support volume.',
+        capabilities: ['Pre-purchase guidance', 'Size & fit recommendations', 'Return reduction'],
         channels: ['Web', 'WhatsApp', 'Product Page Widget'],
         demoPersona: 'Product Advisor AI',
         demoMessages: [
@@ -224,9 +224,9 @@ const industryData: Record<string, IndustryData> = {
       {
         title: 'Turn Followers Into Repeat Buyers',
         description:
-          'Your content and social presence builds trust — your AI converts that trust into sales. Engage your audience with an AI that knows your brand story, your products, and how to turn a curious visitor into a loyal repeat customer.',
-        capabilities: ['Brand story & values conversations', 'Follower-to-customer conversion', 'Post-purchase upsell & loyalty'],
-        channels: ['Web', 'WhatsApp', 'Instagram Link', 'Landing Page'],
+          'Your content builds trust — your AI converts that trust into sales. Engage your social audience with an AI that knows your brand story, your products, and how to turn a curious follower into a loyal customer.',
+        capabilities: ['Brand story conversations', 'Follower-to-customer conversion', 'Repeat purchase campaigns'],
+        channels: ['Web', 'WhatsApp', 'Instagram Link'],
         demoPersona: 'Brand Commerce AI',
         demoMessages: [
           { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
@@ -417,7 +417,7 @@ export default function IndustrySlugPage() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 5l-7 7 7 7" />
             </svg>
-            All Use Cases
+            All Creator Verticals
           </Link>
 
           <div className="max-w-3xl">
@@ -426,7 +426,7 @@ export default function IndustrySlugPage() {
               style={{ borderColor: industry.border, background: industry.bg, color: industry.color }}
             >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: industry.color }} />
-              {slug === 'd2c-commerce' ? 'Primary Focus — D2C Brands' : 'Creator Economy'}
+              Creator Economy
             </div>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.1] mb-4">
               {industry.tagline}
