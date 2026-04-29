@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Brain, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket, BookOpen, Users } from 'lucide-react';
+import { LayoutDashboard, Brain, Code2, Key, ChevronLeft, ChevronRight, Settings, LogOut, User, ChevronDown, Receipt, BarChart2, Menu, X, Rocket, BookOpen, Users, MessagesSquare } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
@@ -13,6 +13,7 @@ const navItems = [
   { href: '/create-persona', icon: Brain, label: 'Create Persona', group: 'main' },
   { href: '/personas', icon: Users, label: 'Personas', group: 'main' },
   { href: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', group: 'main' },
+  { href: '/conversations', icon: MessagesSquare, label: 'Conversations', group: 'main' },
   { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
   { href: '/deploy', icon: Rocket, label: 'Deploy', group: 'deploy' },
   { href: '/embeds', icon: Code2, label: 'Embeds', group: 'deploy' },
