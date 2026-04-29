@@ -124,21 +124,21 @@ export default function DevelopersPage() {
 
       {/* Hero */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#10b981]/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#3b82f6]/8 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#10b981]/30 bg-[#10b981]/10 mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#3b82f6]/30 bg-[#3b82f6]/10 mb-6">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <polyline points="2 6 5 9 10 3" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <polyline points="2 6 5 9 10 3" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-xs font-medium text-[#10b981]">Developer Platform</span>
+              <span className="text-xs font-medium text-[#60a5fa]">Developer Platform</span>
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
-              Embed your{' '}
-              <span className="text-gradient">AI Sales Agent</span>
+              Build with the{' '}
+              <span className="text-gradient">Persona API</span>
             </h1>
             <p className="text-base sm:text-lg text-white/55 leading-relaxed max-w-xl mb-8">
-              REST APIs, embeddable widgets, Shopify plugins, and real-time streaming. Everything you need to deploy your AI Sales Agent on any channel — web, WhatsApp, or voice.
+              REST APIs, embeddable widgets, webhooks, and real-time streaming. Everything you need to integrate AI personas into your product.
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link href="/register" className="px-5 sm:px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm">

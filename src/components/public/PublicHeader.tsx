@@ -16,7 +16,7 @@ export default function PublicHeader() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/industries', label: 'Use Cases' },
+    { href: '/creators', label: 'Creators' },
     { href: '/how-it-works', label: 'How It Works' },
     { href: '/pricing', label: 'Pricing' },
   ];

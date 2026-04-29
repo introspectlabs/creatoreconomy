@@ -28,7 +28,7 @@ import Icon from '@/components/ui/AppIcon';
 const summaryMetrics = [
   {
     id: 'sm-1',
-    label: 'Product Sources Indexed',
+    label: 'Domains Crawled',
     value: '14',
     change: '+3 this week',
     trend: 'up',
@@ -37,7 +37,7 @@ const summaryMetrics = [
   },
   {
     id: 'sm-2',
-    label: 'Total Product Pages',
+    label: 'Total Pages Indexed',
     value: '8,241',
     change: '+1,204 since last sync',
     trend: 'up',
@@ -46,7 +46,7 @@ const summaryMetrics = [
   },
   {
     id: 'sm-3',
-    label: 'Catalog Chunks',
+    label: 'Knowledge Chunks',
     value: '24,891',
     change: '1 source failed sync',
     trend: 'warning',
@@ -55,9 +55,9 @@ const summaryMetrics = [
   },
   {
     id: 'sm-4',
-    label: 'Agents Covered',
+    label: 'Personas Covered',
     value: '11 / 12',
-    change: '1 agent missing catalog',
+    change: '1 persona missing KB',
     trend: 'warning',
     icon: Brain,
     color: 'rose',
@@ -92,14 +92,14 @@ const colorMap: Record<string, { icon: string; bg: string; border: string }> = {
 };
 
 const domainCrawlData = [
-  { domain: 'zaraskin.com/products',    pages: 1240, chunks: 3820, status: 'healthy',  lastSync: '2h ago',   syncTime: '3m 44s' },
-  { domain: 'nutriblend.in/catalog',    pages: 980,  chunks: 2910, status: 'healthy',  lastSync: '2h ago',   syncTime: '2m 58s' },
-  { domain: 'stylehouse.co/collections', pages: 620, chunks: 1840, status: 'healthy',  lastSync: '6h ago',   syncTime: '1m 52s' },
-  { domain: 'fitfuel.com/supplements',  pages: 410,  chunks: 1220, status: 'warning',  lastSync: '14h ago',  syncTime: '5m 10s' },
-  { domain: 'glowup.in/beauty',         pages: 870,  chunks: 2580, status: 'healthy',  lastSync: '2h ago',   syncTime: '2m 34s' },
-  { domain: 'theogear.com/shop',        pages: 120,  chunks: 360,  status: 'failed',   lastSync: '3 days ago', syncTime: '—'    },
-  { domain: 'purehome.in/decor',        pages: 45,   chunks: 130,  status: 'healthy',  lastSync: '2h ago',   syncTime: '0m 28s' },
-  { domain: 'luxescent.com/fragrances', pages: 88,   chunks: 260,  status: 'healthy',  lastSync: '2h ago',   syncTime: '0m 44s' },
+  { domain: 'docs.acme.com',    pages: 1240, chunks: 3820, status: 'healthy',  lastSync: '2h ago',   syncTime: '3m 44s' },
+  { domain: 'support.acme.com', pages: 980,  chunks: 2910, status: 'healthy',  lastSync: '2h ago',   syncTime: '2m 58s' },
+  { domain: 'blog.acme.com',    pages: 620,  chunks: 1840, status: 'healthy',  lastSync: '6h ago',   syncTime: '1m 52s' },
+  { domain: 'api.acme.com',     pages: 410,  chunks: 1220, status: 'warning',  lastSync: '14h ago',  syncTime: '5m 10s' },
+  { domain: 'help.acme.com',    pages: 870,  chunks: 2580, status: 'healthy',  lastSync: '2h ago',   syncTime: '2m 34s' },
+  { domain: 'legal.acme.com',   pages: 120,  chunks: 360,  status: 'failed',   lastSync: '3 days ago', syncTime: '—'    },
+  { domain: 'pricing.acme.com', pages: 45,   chunks: 130,  status: 'healthy',  lastSync: '2h ago',   syncTime: '0m 28s' },
+  { domain: 'careers.acme.com', pages: 88,   chunks: 260,  status: 'healthy',  lastSync: '2h ago',   syncTime: '0m 44s' },
 ];
 
 const crawlTrendData = [
@@ -128,26 +128,26 @@ const chunkUsageData = [
 ];
 
 const topChunks = [
-  { id: 'tc-1', source: 'ZaraSkin_Product_Catalog_v3.pdf',     hits: 4821, persona: 'ZaraSkin Sales Agent',    domain: 'zaraskin.com/products'    },
-  { id: 'tc-2', source: 'NutriBlend_SKU_Feed_Apr2026.csv',     hits: 3640, persona: 'NutriBlend Store Bot',    domain: 'nutriblend.in/catalog'    },
-  { id: 'tc-3', source: 'StyleHouse_Summer_Collection_2026.pdf', hits: 2980, persona: 'StyleHouse Fashion Bot', domain: 'stylehouse.co/collections' },
-  { id: 'tc-4', source: 'FitFuel_Supplement_FAQ_v2.txt',       hits: 2410, persona: 'FitFuel Voice Agent',     domain: 'fitfuel.com/supplements'  },
-  { id: 'tc-5', source: 'Brand_Voice_Guidelines_D2C.pdf',      hits: 1870, persona: 'ZaraSkin Sales Agent',    domain: 'zaraskin.com/products'    },
+  { id: 'tc-1', source: 'Product_FAQ_v3.pdf',          hits: 4821, persona: 'Aria',   domain: 'docs.acme.com'    },
+  { id: 'tc-2', source: 'Pricing_Overview_2024.pdf',   hits: 3640, persona: 'Marcus', domain: 'pricing.acme.com' },
+  { id: 'tc-3', source: 'Onboarding_Guide.pdf',        hits: 2980, persona: 'Zoe',    domain: 'help.acme.com'    },
+  { id: 'tc-4', source: 'API_Reference_v2.txt',        hits: 2410, persona: 'Kai',    domain: 'api.acme.com'     },
+  { id: 'tc-5', source: 'Support_Runbook_Q1.docx',     hits: 1870, persona: 'Aria',   domain: 'support.acme.com' },
 ];
 
 const personaCoverageData = [
-  { name: 'ZaraSkin',    chunks: 9100, domains: 3, coverage: 94, status: 'healthy'  },
-  { name: 'NutriBlend',  chunks: 12400, domains: 2, coverage: 88, status: 'healthy'  },
-  { name: 'StyleHouse',  chunks: 8200, domains: 2, coverage: 82, status: 'healthy'  },
-  { name: 'FitFuel',     chunks: 5240, domains: 1, coverage: 61, status: 'warning'  },
-  { name: 'GlowUp',      chunks: 7840, domains: 3, coverage: 91, status: 'healthy'  },
-  { name: 'TheoGear',    chunks: 4600, domains: 2, coverage: 75, status: 'healthy'  },
-  { name: 'PureHome',    chunks: 8920, domains: 1, coverage: 48, status: 'warning'  },
-  { name: 'BrewCraft',   chunks: 3400, domains: 2, coverage: 86, status: 'healthy'  },
-  { name: 'ActiveWear',  chunks: 4200, domains: 3, coverage: 93, status: 'healthy'  },
-  { name: 'LuxeScent',   chunks: 5100, domains: 1, coverage: 38, status: 'critical' },
-  { name: 'GlobalShop',  chunks: 2800, domains: 2, coverage: 79, status: 'healthy'  },
-  { name: 'StreamGuide', chunks: 0,    domains: 0, coverage: 0,  status: 'no-kb'   },
+  { name: 'Aria',    chunks: 4200, domains: 3, coverage: 94, status: 'healthy'  },
+  { name: 'Marcus',  chunks: 3100, domains: 2, coverage: 88, status: 'healthy'  },
+  { name: 'Zoe',     chunks: 2800, domains: 2, coverage: 82, status: 'healthy'  },
+  { name: 'Kai',     chunks: 1900, domains: 1, coverage: 61, status: 'warning'  },
+  { name: 'Nova',    chunks: 3400, domains: 3, coverage: 91, status: 'healthy'  },
+  { name: 'Orion',   chunks: 2200, domains: 2, coverage: 75, status: 'healthy'  },
+  { name: 'Luna',    chunks: 1400, domains: 1, coverage: 48, status: 'warning'  },
+  { name: 'Atlas',   chunks: 2900, domains: 2, coverage: 86, status: 'healthy'  },
+  { name: 'Echo',    chunks: 3600, domains: 3, coverage: 93, status: 'healthy'  },
+  { name: 'Sage',    chunks: 1100, domains: 1, coverage: 38, status: 'critical' },
+  { name: 'Blaze',   chunks: 2600, domains: 2, coverage: 79, status: 'healthy'  },
+  { name: 'Cipher',  chunks: 0,    domains: 0, coverage: 0,  status: 'no-kb'   },
 ];
 
 const syncHistoryData = [
@@ -233,8 +233,8 @@ export default function AnalyticsPage() {
           {/* Header Row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h1 className="text-base sm:text-lg font-700 text-white">D2C Catalog & Agent Analytics</h1>
-              <p className="text-xs text-white/40 mt-0.5">Product catalog sync stats, chunk usage, agent coverage, and source health</p>
+              <h1 className="text-base sm:text-lg font-700 text-white">Knowledge & Crawl Analytics</h1>
+              <p className="text-xs text-white/40 mt-0.5">Domain crawl stats, chunk usage, persona coverage, and sync health</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               {(['7d', '30d', '90d'] as const).map((r) => (

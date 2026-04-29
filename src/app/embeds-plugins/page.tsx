@@ -8,7 +8,7 @@ export default function EmbedsPluginsPage() {
     <AppLayout>
       <Topbar
         title="Embeds & Plugins"
-        subtitle="Deploy your D2C AI Sales Agents on product pages, landing pages, and storefronts via embeddable widgets"
+        subtitle="Deploy personas into external websites and apps via embeddable JS widgets"
       />
       <EmbedsPluginsClient />
     </AppLayout>

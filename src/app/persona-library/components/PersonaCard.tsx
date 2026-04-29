@@ -115,7 +115,6 @@ export default function PersonaCard({ persona, view, onClick, onTopologyClick, o
               {persona.isPublic ? 'Public' : 'Private'}
             </span>
           </div>
-          <p className="text-[10px] font-500 text-purple-400/80 mb-0.5">{persona.subCategory}</p>
           <p className="text-xs text-white/40 truncate">{persona.description}</p>
           {/* Shareable URL for public personas */}
           {persona.isPublic && (
@@ -306,8 +305,7 @@ export default function PersonaCard({ persona, view, onClick, onTopologyClick, o
           </div>
         </div>
       </div>
-      <h3 className="text-sm font-600 text-white mb-0.5 truncate">{persona.name}</h3>
-      <p className="text-[10px] font-500 text-purple-400/80 mb-1">{persona.subCategory}</p>
+      <h3 className="text-sm font-600 text-white mb-1 truncate">{persona.name}</h3>
       <p className="text-xs text-white/40 leading-snug line-clamp-2 mb-3">{persona.description}</p>
 
       {/* Shareable URL for public personas */}

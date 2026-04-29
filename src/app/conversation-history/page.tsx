@@ -39,7 +39,6 @@ interface Conversation {
   userEmail: string;
   personaId: string;
   personaName: string;
-  personaSubCategory: string;
   conversationId: string;
   status: 'resolved' | 'ongoing' | 'escalated';
   channel: string;
@@ -53,10 +52,9 @@ const mockConversations: Conversation[] = [
   {
     id: 'conv-001',
     name: 'Priya Sharma',
-    userEmail: 'priya@gmail.com',
+    userEmail: 'priya@acme.com',
     personaId: 'PER-1001',
-    personaName: 'ZaraSkin Sales Agent',
-    personaSubCategory: 'D2C Skincare',
+    personaName: 'SalesBot Pro',
     conversationId: 'CONV-8821',
     status: 'resolved',
     channel: 'Web Widget',
@@ -64,52 +62,50 @@ const mockConversations: Conversation[] = [
     duration: '17 min',
     messageCount: 14,
     messages: [
-      { id: 'm1', role: 'user', content: "Hi, I'm looking for a moisturizer for combination skin — something lightweight.", timestamp: '2:34 PM' },
-      { id: 'm2', role: 'assistant', content: "Hi Priya! For combination skin, I'd recommend our Hydra-Balance Gel Moisturizer — it's oil-free, non-comedogenic, and loved by 4,200+ customers. It's ₹899 and ships in 2 days. Want me to add it to your cart?", timestamp: '2:34 PM' },
-      { id: 'm3', role: 'user', content: 'Does it work for sensitive skin too? I have some redness.', timestamp: '2:36 PM' },
-      { id: 'm4', role: 'assistant', content: "Yes! It's fragrance-free and dermatologist-tested for sensitive skin. For redness, I'd also suggest pairing it with our Calm & Repair Serum — together they're ₹1,499 as a bundle (save ₹200). Want the bundle?", timestamp: '2:36 PM' },
-      { id: 'm5', role: 'user', content: 'Yes, add the bundle please.', timestamp: '2:40 PM' },
-      { id: 'm6', role: 'assistant', content: "Done! Bundle added to cart. Use code GLOW10 for an extra 10% off your first order. Anything else I can help with?", timestamp: '2:41 PM' },
+      { id: 'm1', role: 'user', content: "Hi, I'm looking for pricing information for your enterprise plan.", timestamp: '2:34 PM' },
+      { id: 'm2', role: 'assistant', content: "Hello Priya! I'd be happy to walk you through our enterprise pricing. Our plans start at $499/month for up to 10 seats. Could you tell me more about your team size and use case?", timestamp: '2:34 PM' },
+      { id: 'm3', role: 'user', content: 'We have about 50 users and need CRM integration.', timestamp: '2:36 PM' },
+      { id: 'm4', role: 'assistant', content: "For 50 users with CRM integration, I'd recommend our Enterprise Plus plan at $1,299/month. This includes native Salesforce, HubSpot, and Pipedrive integrations, plus dedicated support. Would you like me to schedule a demo?", timestamp: '2:36 PM' },
+      { id: 'm5', role: 'user', content: 'Yes, please schedule a demo for next Tuesday.', timestamp: '2:40 PM' },
+      { id: 'm6', role: 'assistant', content: "Perfect! I've scheduled a demo for next Tuesday at 10 AM. You'll receive a calendar invite shortly. Is there anything else you'd like to know?", timestamp: '2:41 PM' },
     ],
   },
   {
     id: 'conv-002',
     name: 'Rahul Verma',
-    userEmail: 'rahul@gmail.com',
+    userEmail: 'rahul@techcorp.io',
     personaId: 'PER-1002',
-    personaName: 'NutriBlend Store Bot',
-    personaSubCategory: 'D2C Nutrition',
+    personaName: 'Support Agent',
     conversationId: 'CONV-8820',
     status: 'escalated',
-    channel: 'WhatsApp',
+    channel: 'PersonaMatrix',
     created: 'Apr 5, 2026 1:10 PM',
     duration: '18 min',
     messageCount: 9,
     messages: [
-      { id: 'm1', role: 'user', content: 'I ordered the whey protein 3 days ago but it still shows processing.', timestamp: '1:10 PM' },
-      { id: 'm2', role: 'assistant', content: "I'm sorry for the delay, Rahul. Let me check your order status. Can you share your order ID?", timestamp: '1:10 PM' },
-      { id: 'm3', role: 'user', content: 'Order #NB-20482', timestamp: '1:12 PM' },
-      { id: 'm4', role: 'assistant', content: "I can see order #NB-20482 is in our warehouse queue — there was a brief stock delay on the 2kg Chocolate variant. I'm escalating this to our fulfillment team to prioritize your shipment. You'll get a tracking update within 2 hours.", timestamp: '1:13 PM' },
+      { id: 'm1', role: 'user', content: 'My API key stopped working after the latest update.', timestamp: '1:10 PM' },
+      { id: 'm2', role: 'assistant', content: "I'm sorry to hear that, Rahul. Let me check your account status. Can you share the last 4 characters of your API key?", timestamp: '1:10 PM' },
+      { id: 'm3', role: 'user', content: 'It ends in ...4f2a', timestamp: '1:12 PM' },
+      { id: 'm4', role: 'assistant', content: "I can see your key was auto-rotated as part of our security update. I'm escalating this to our technical team to issue a new key immediately. You should receive an email within 15 minutes.", timestamp: '1:13 PM' },
     ],
   },
   {
     id: 'conv-003',
     name: 'Aisha Patel',
-    userEmail: 'aisha@gmail.com',
+    userEmail: 'aisha@startup.co',
     personaId: 'PER-1003',
-    personaName: 'StyleHouse Fashion Bot',
-    personaSubCategory: 'D2C Fashion',
+    personaName: 'Onboarding Guide',
     conversationId: 'CONV-8819',
     status: 'resolved',
-    channel: 'Web Widget',
-    created: 'Apr 5, 2026 11:22 AM',
-    duration: '12 min',
-    messageCount: 8,
+    channel: 'PersonaMatrix',
+    created: 'Apr 4, 2026 10:05 AM',
+    duration: '17 min',
+    messageCount: 11,
     messages: [
-      { id: 'm1', role: 'user', content: "What's the size guide for the linen co-ord set?", timestamp: '11:22 AM' },
-      { id: 'm2', role: 'assistant', content: "Great choice! The Linen Co-ord Set runs true to size. For a relaxed fit, go one size up. What's your usual size?", timestamp: '11:22 AM' },
-      { id: 'm3', role: 'user', content: 'I usually wear M but I have broader shoulders.', timestamp: '11:24 AM' },
-      { id: 'm4', role: 'assistant', content: "I'd recommend the L for the top and M for the pants — the set is sold as separates so you can mix sizes. The L top has a 42\" chest and relaxed shoulder seam. Want me to add both to your cart?", timestamp: '11:25 AM' },
+      { id: 'm1', role: 'user', content: 'How do I set up my first persona?', timestamp: '10:05 AM' },
+      { id: 'm2', role: 'assistant', content: "Welcome to PersonaMatrix, Aisha! Setting up your first persona is easy. Head to the Persona Library and click 'Create Persona'. You'll be guided through naming, personality traits, and knowledge base setup. Want me to walk you through each step?", timestamp: '10:05 AM' },
+      { id: 'm3', role: 'user', content: 'Yes please, walk me through it.', timestamp: '10:07 AM' },
+      { id: 'm4', role: 'assistant', content: "Step 1: Go to Persona Library → Click 'Create Persona'. Step 2: Enter a name and description. Step 3: Choose a personality template. Step 4: Upload your knowledge base documents. Step 5: Test and deploy!", timestamp: '10:08 AM' },
     ],
   },
   {
@@ -118,7 +114,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'marcus@enterprise.com',
     personaId: 'PER-1001',
     personaName: 'SalesBot Pro',
-    personaSubCategory: 'Sales Executive',
     conversationId: 'CONV-8818',
     status: 'ongoing',
     channel: 'Web Widget',
@@ -138,7 +133,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'yuki@globalco.jp',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
-    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8817',
     status: 'resolved',
     channel: 'API',
@@ -156,7 +150,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'carlos@latam.mx',
     personaId: 'PER-1003',
     personaName: 'Onboarding Guide',
-    personaSubCategory: 'Product Advisor',
     conversationId: 'CONV-8816',
     status: 'resolved',
     channel: 'Web Widget',
@@ -176,7 +169,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'sophie@paris.fr',
     personaId: 'PER-1004',
     personaName: 'HR Assistant',
-    personaSubCategory: 'HR Support Agent',
     conversationId: 'CONV-8815',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -194,7 +186,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'david@seoul.kr',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
-    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8814',
     status: 'escalated',
     channel: 'PersonaMatrix',
@@ -214,7 +205,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'emma@london.uk',
     personaId: 'PER-1001',
     personaName: 'SalesBot Pro',
-    personaSubCategory: 'Sales Executive',
     conversationId: 'CONV-8813',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -232,7 +222,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'liam@dublin.ie',
     personaId: 'PER-1003',
     personaName: 'Onboarding Guide',
-    personaSubCategory: 'Product Advisor',
     conversationId: 'CONV-8812',
     status: 'ongoing',
     channel: 'API',
@@ -250,7 +239,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'fatima@dubai.ae',
     personaId: 'PER-1004',
     personaName: 'HR Assistant',
-    personaSubCategory: 'HR Support Agent',
     conversationId: 'CONV-8811',
     status: 'resolved',
     channel: 'Web Widget',
@@ -268,7 +256,6 @@ const mockConversations: Conversation[] = [
     userEmail: 'noah@berlin.de',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
-    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8810',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -309,7 +296,7 @@ function FilterSelect({ icon: IconComp, options, value, onChange }: {
 }) {
   return (
     <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/8 transition-all cursor-pointer min-w-[140px]">
-      {IconComp && <IconComp size={13} className="text-white/40 flex-shrink-0" />}
+      <IconComp size={13} className="text-white/40 flex-shrink-0" />
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -340,7 +327,6 @@ function ConversationModal({ conv, onClose }: { conv: Conversation; onClose: () 
               <span className="text-[10px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-full">{conv.personaId}</span>
               <span className="text-xs font-600 text-white/80">{conv.personaName}</span>
             </div>
-            <p className="text-[10px] font-500 text-purple-400/70 mb-0.5">{conv.personaSubCategory}</p>
             <p className="text-[10px] text-white/35">
               Conversation with <span className="text-white/55">{conv.name}</span> · {conv.conversationId} · {conv.created}
             </p>
@@ -653,10 +639,7 @@ export default function ConversationHistoryPage() {
                   </button>
                   <div className="flex items-center gap-1.5">
                     <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
-                    <div>
-                      <span className="text-xs text-white/60">{conv.personaName}</span>
-                      <p className="text-[10px] text-purple-400/70">{conv.personaSubCategory}</p>
-                    </div>
+                    <span className="text-xs text-white/60">{conv.personaName}</span>
                   </div>
                   <span className={`text-[10px] font-500 px-2.5 py-1 rounded-full border ${channelColors[conv.channel] || 'bg-white/5 text-white/40 border-white/10'}`}>
                     {conv.channel}
@@ -796,10 +779,7 @@ export default function ConversationHistoryPage() {
                       <td className="px-4 py-3.5">
                         <div className="flex items-center gap-1.5">
                           <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
-                          <div className="min-w-0">
-                            <p className="text-xs text-white/60 truncate">{conv.personaName}</p>
-                            <p className="text-[10px] text-purple-400/70 truncate">{conv.personaSubCategory}</p>
-                          </div>
+                          <span className="text-xs text-white/60 truncate">{conv.personaName}</span>
                         </div>
                       </td>
 

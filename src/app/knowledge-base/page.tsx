@@ -7,8 +7,8 @@ export default function KnowledgeBasePage() {
   return (
     <AppLayout>
       <Topbar
-        title="Product Catalog"
-        subtitle="Upload product feeds, SKU data, FAQs, and brand content to train your D2C AI Sales Agents"
+        title="Knowledge Base"
+        subtitle="Upload and manage documents that power your personas — ground responses in your own data"
       />
       <KnowledgeBaseClient />
     </AppLayout>

@@ -8,7 +8,7 @@ export default function ChannelsPage() {
     <AppLayout>
       <Topbar
         title="Channels"
-        subtitle="Connect your D2C AI Sales Agents to WhatsApp, Web Chat, and your storefront channels"
+        subtitle="Connect AI personas to real-world communication endpoints"
       />
       <ChannelsGrid />
     </AppLayout>

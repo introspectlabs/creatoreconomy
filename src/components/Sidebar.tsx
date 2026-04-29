@@ -10,11 +10,11 @@ import Icon from '@/components/ui/AppIcon';
 
 const navItems = [
   { href: '/home-dashboard', icon: LayoutDashboard, label: 'Home', group: 'main' },
-  { href: '/persona-library', icon: Brain, label: 'AI Sales Agents', group: 'main', badge: 12 },
+  { href: '/persona-library', icon: Brain, label: 'Persona Library', group: 'main', badge: 12 },
   { href: '/avatar-studio', icon: Sparkles, label: 'Avatar Studio', group: 'main' },
   { href: '/video-generation', icon: Film, label: 'Video Generation', group: 'main' },
-  { href: '/knowledge-base', icon: Database, label: 'Product Catalog', group: 'main' },
-  { href: '/conversation-history', icon: MessagesSquare, label: 'Conversations', group: 'main' },
+  { href: '/knowledge-base', icon: Database, label: 'Knowledge Base', group: 'main' },
+  { href: '/conversation-history', icon: MessagesSquare, label: 'Conversation History', group: 'main' },
   { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
   { href: '/channels-page', icon: Radio, label: 'Channels', group: 'deploy', badge: 2 },
   { href: '/services-page', icon: Plug, label: 'Services', group: 'deploy' },
@@ -22,7 +22,7 @@ const navItems = [
   { href: '/embeds-plugins', icon: Code2, label: 'Embeds / Plugins', group: 'manage' },
   { href: '/api-keys', icon: Key, label: 'API Keys', group: 'manage' },
   { href: '/api-docs', icon: BookOpen, label: 'API Docs', group: 'manage' },
-  { href: '/creator-profile-editor', icon: UserCircle, label: 'Brand Profile', group: 'manage' },
+  { href: '/creator-profile-editor', icon: UserCircle, label: 'Creator Profile', group: 'manage' },
 ];
 
 const groupLabels: Record<string, string> = {

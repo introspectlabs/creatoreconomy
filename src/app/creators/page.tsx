@@ -229,22 +229,21 @@ export default function CreatorsDirectoryPage() {
       <section className="pt-32 pb-10 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-            <span className="text-xs font-medium text-white/60">{activeCount} Live AI Agents</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
+            <span className="text-xs font-medium text-white/60">{activeCount} Creators Live</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
-            Live{' '}
+            Meet the{' '}
             <span
               className="bg-clip-text text-transparent"
-              style={{ backgroundImage: 'linear-gradient(135deg, #10b981, #3b82f6)' }}
+              style={{ backgroundImage: 'linear-gradient(135deg, #a855f7, #0ea5e9)' }}
             >
-              AI Sales Agent
-            </span>{' '}
-            Demos
+              Creator Directory
+            </span>
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-            See AI Sales Agents in action across D2C brands, finance, education, and coaching — each trained on real product catalogs and content, driving real conversions 24/7.
+            Finance creators, course builders, coaches, and D2C founders — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
           </p>
 
           {/* Vertical pills — decorative overview */}
@@ -284,7 +283,7 @@ export default function CreatorsDirectoryPage() {
               placeholder="Search by name, topic, or niche..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#10b981]/50 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-white/30 focus:outline-none focus:border-purple-500/50 transition-all"
             />
           </div>
 
@@ -302,9 +301,9 @@ export default function CreatorsDirectoryPage() {
                       ? {
                           background: meta
                             ? meta.bg
-                            : 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(59,130,246,0.15))',
-                          color: meta ? meta.color : '#6ee7b7',
-                          borderColor: meta ? `${meta.color}40` : 'rgba(16,185,129,0.4)',
+                            : 'linear-gradient(135deg, rgba(168,85,247,0.2), rgba(14,165,233,0.15))',
+                          color: meta ? meta.color : '#c4b5fd',
+                          borderColor: meta ? `${meta.color}40` : 'rgba(168,85,247,0.4)',
                         }
                       : {
                           background: 'transparent',
@@ -333,7 +332,7 @@ export default function CreatorsDirectoryPage() {
                   <path d="M21 21l-4.35-4.35" />
                 </svg>
               </div>
-              <p className="text-white/40 text-sm">No agents found matching your search.</p>
+              <p className="text-white/40 text-sm">No creators found matching your search.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -350,19 +349,19 @@ export default function CreatorsDirectoryPage() {
         <div className="max-w-5xl mx-auto">
           <div
             className="rounded-2xl border border-white/10 p-8 text-center"
-            style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(59,130,246,0.08) 100%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(14,165,233,0.08) 100%)' }}
           >
-            <h2 className="text-2xl font-bold text-white mb-2">Deploy your own AI Sales Agent</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Build your AI persona</h2>
             <p className="text-white/50 text-sm mb-6 max-w-lg mx-auto">
-              Connect your product catalog, configure your agent, and start converting customers 24/7 — on your website, WhatsApp, or any channel.
+              Whether you teach finance, run a coaching practice, sell a course, or ship your own products — your AI persona works your audience around the clock.
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
               <Link
                 href="/register"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
-                style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)' }}
+                style={{ background: 'linear-gradient(135deg, #a855f7, #0ea5e9)' }}
               >
-                Book a Demo
+                Get Started Free
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -390,7 +389,7 @@ function CreatorCard({ creator }: { creator: Creator }) {
 
   return (
     <div
-      className="group relative rounded-2xl border border-white/8 p-5 flex flex-col gap-4 transition-all duration-200 hover:border-white/20 hover:shadow-[0_0_32px_rgba(16,185,129,0.10)]"
+      className="group relative rounded-2xl border border-white/8 p-5 flex flex-col gap-4 transition-all duration-200 hover:border-white/20 hover:shadow-[0_0_32px_rgba(168,85,247,0.10)]"
       style={{ background: 'rgba(255,255,255,0.03)' }}
     >
       {/* Top row */}
@@ -477,7 +476,7 @@ function CreatorCard({ creator }: { creator: Creator }) {
           <Link
             href={`/chat/${creator.slug}`}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
-            style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)' }}
+            style={{ background: 'linear-gradient(135deg, #a855f7, #0ea5e9)' }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />

@@ -25,67 +25,14 @@ interface IndustryData {
 }
 
 const industryData: Record<string, IndustryData> = {
-  'd2c-commerce': {
-    name: 'D2C Brands & E-commerce',
-    tagline: 'Your Store Never Sleeps. Neither Does Your AI Sales Agent.',
-    description:
-      'PersonaMatrix creates an AI Sales Agent that knows your entire product catalog — answering questions, handling objections, and guiding buyers from discovery to checkout automatically, 24/7.',
-    color: '#10b981',
-    bg: 'rgba(16,185,129,0.12)',
-    border: 'rgba(16,185,129,0.3)',
-    useCases: [
-      {
-        title: 'AI That Sells Your Products 24/7',
-        description:
-          'Your AI knows every product detail, handles common objections, and guides customers to the right purchase — even when you\'re asleep. No more lost sales from unanswered questions.',
-        capabilities: ['Product Q&A', 'Objection handling', '24/7 purchase guidance'],
-        channels: ['Web Chat', 'WhatsApp', 'Shopify Embed'],
-        demoPersona: 'D2C Sales AI',
-        demoMessages: [
-          { role: 'user', text: "I'm looking for a protein powder but I'm lactose intolerant. Do any of yours work for me?" },
-          { role: 'ai', text: "Absolutely — our Plant Power Blend is 100% dairy-free and perfect for lactose intolerance. It's made from pea and rice protein, gives you 25g of protein per serving, and has no artificial sweeteners. It's our #1 seller for customers with dietary restrictions. Would you like the chocolate or vanilla flavor? Both are equally popular." },
-          { role: 'user', text: "Chocolate sounds good. How does it taste compared to whey protein?" },
-          { role: 'ai', text: "Most customers say it's actually creamier than whey — we use coconut milk powder for texture. We have a 94% satisfaction rate and a 30-day money-back guarantee, so there's zero risk. I can add the chocolate Plant Power Blend to your cart right now with free shipping on your first order. Ready?" },
-        ],
-      },
-      {
-        title: 'Reduce Returns & Support Tickets',
-        description:
-          'Most returns happen because customers bought the wrong product. Your AI asks the right questions upfront, recommends the perfect fit, and dramatically reduces costly returns and support volume.',
-        capabilities: ['Pre-purchase guidance', 'Size & fit recommendations', 'Return reduction'],
-        channels: ['Web', 'WhatsApp', 'Product Page Widget'],
-        demoPersona: 'Product Advisor AI',
-        demoMessages: [
-          { role: 'user', text: "I want to buy the running shoes but I'm not sure which size to get. I'm usually a 10 but sometimes a 10.5." },
-          { role: 'ai', text: "Great question — our running shoes run slightly narrow, so if you're between sizes, I always recommend going up. For a 10/10.5, I'd suggest the 10.5. Also, are you planning to use them for road running or trail? That affects which model I'd recommend for you." },
-          { role: 'user', text: "Road running, mostly 5k distances." },
-          { role: 'ai', text: "Perfect — for road 5k, our CloudStride model in size 10.5 is your best match. It's our most cushioned road shoe and the top choice for distances under 10k. It comes with free returns if the fit isn't right, but 97% of customers who follow my sizing guide keep their first order. Want me to add the 10.5 CloudStride to your cart?" },
-        ],
-      },
-      {
-        title: 'Turn Followers Into Repeat Buyers',
-        description:
-          'Your content builds trust — your AI converts that trust into sales. Engage your social audience with an AI that knows your brand story, your products, and how to turn a curious follower into a loyal customer.',
-        capabilities: ['Brand story conversations', 'Follower-to-customer conversion', 'Repeat purchase campaigns'],
-        channels: ['Web', 'WhatsApp', 'Instagram Link'],
-        demoPersona: 'Brand Commerce AI',
-        demoMessages: [
-          { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
-          { role: 'ai', text: "Love that you found us! The big difference: we formulate everything without the 12 most common irritants — no parabens, sulfates, synthetic fragrance, or alcohol. Our founder started the brand after struggling with sensitive skin for years and couldn't find anything that worked. Every product is dermatologist-tested and we publish all our ingredient sourcing. What's your main skin concern? I'll point you to exactly the right product." },
-          { role: 'user', text: "I have dry skin and some redness around my nose." },
-          { role: 'ai', text: "That combination is really common — dry skin often triggers redness as your skin tries to compensate. Our Barrier Repair Serum was made for exactly this: it rebuilds your skin's moisture barrier and calms redness within 2 weeks. 89% of customers with your skin type see visible improvement. I can set you up with a starter kit that includes the serum plus our gentle cleanser — it's 20% off for first-time customers." },
-        ],
-      },
-    ],
-  },
   'finance-trading': {
     name: 'Finance & Trading Creators',
     tagline: 'Scale Your Trading Knowledge Without Scaling Your Time',
     description:
       'PersonaMatrix turns your trading strategies, market analysis, and investment frameworks into an AI persona your followers can learn from 24/7 — in your voice, with your insights.',
-    color: '#3b82f6',
-    bg: 'rgba(59,130,246,0.12)',
-    border: 'rgba(59,130,246,0.3)',
+    color: '#10b981',
+    bg: 'rgba(16,185,129,0.12)',
+    border: 'rgba(16,185,129,0.3)',
     useCases: [
       {
         title: 'Your AI Trading Mentor, Always On',
@@ -105,28 +52,28 @@ const industryData: Record<string, IndustryData> = {
         title: 'Monetize Your Market Analysis',
         description:
           'Turn your daily market commentary, watchlists, and trade setups into a paid AI experience. Followers pay to access your AI for deeper analysis and personalized guidance.',
-        capabilities: ['Premium content access', 'Paid AI conversations', 'Subscription monetization'],
+        capabilities: ['Course preview conversations', 'Enrollment Q&A', 'Upsell to premium tiers'],
         channels: ['Web', 'WhatsApp', 'Landing Page Embed'],
-        demoPersona: 'Market Analysis AI',
+        demoPersona: 'Course Sales AI',
         demoMessages: [
-          { role: 'user', text: "What's your current view on the S&P 500 for Q3?" },
-          { role: 'ai', text: "Based on my latest analysis, I'm cautiously bullish on the S&P 500 for Q3. Key factors: Fed rate pause signals, strong earnings from mega-caps, and improving PMI data. My target range is 5,200–5,400. That said, watch for CPI data next week — a hot print could change the picture. Want me to walk through my full technical setup?" },
-          { role: 'user', text: 'Yes, and what sectors are you overweight?' },
-          { role: 'ai', text: "I'm overweight tech and healthcare right now. Tech for the AI infrastructure buildout — specifically semiconductors. Healthcare for defensive positioning if we get a macro surprise. I'm underweight consumer discretionary and real estate. This is covered in detail in my weekly watchlist — I can share this week's edition with you now." },
+          { role: 'user', text: "I want to learn web development but I'm a complete beginner. Is your course right for me?" },
+          { role: 'ai', text: "Absolutely — my course was designed specifically for complete beginners. We start from zero: no prior coding experience needed. By the end, you'll have built 5 real projects you can show employers. 94% of my students with no background complete the course and land their first freelance project within 3 months. Want me to share the full curriculum?" },
+          { role: 'user', text: 'How much does it cost and is there a free trial?' },
+          { role: 'ai', text: "The full course is $199, but I offer a 7-day free trial — you get access to the first 3 modules with no credit card required. If you love it, you continue. If not, no charge. I can start your trial right now. Ready?" },
         ],
       },
       {
-        title: 'Reduce DMs & Scale Your Community',
+        title: 'Reduce Support & Boost Completion',
         description:
-          'Stop answering the same questions in DMs. Your AI handles the repetitive questions so you can focus on creating content and engaging with your most valuable community members.',
-        capabilities: ['DM automation', 'Community Q&A', 'Follower engagement at scale'],
-        channels: ['Web Chat', 'WhatsApp', 'Community Embed'],
-        demoPersona: 'Community AI',
+          'Most students drop out because they get stuck and don\'t get help fast enough. Your AI tutor answers instantly — keeping students moving forward and dramatically improving completion rates.',
+        capabilities: ['Instant homework help', 'Progress check-ins', 'Completion rate improvement'],
+        channels: ['Web Chat', 'Email Follow-up', 'LMS Integration'],
+        demoPersona: 'Student Success AI',
         demoMessages: [
-          { role: 'user', text: "What broker do you recommend for options trading?" },
-          { role: 'ai', text: "For options trading, I personally use and recommend Tastytrade for active traders — lowest commissions on options, great platform. For beginners who want a simpler interface, Robinhood or Webull work fine to start. If you're trading larger size, Interactive Brokers has the best margin rates. What's your experience level and typical trade size? I can give you a more specific recommendation." },
-          { role: 'user', text: "I'm a beginner, just starting with $5,000." },
-          { role: 'ai', text: "With $5,000 starting out, I'd go with Tastytrade — they have a great education section specifically for options beginners, and their 'tastyworks' platform is designed for learning. Start with paper trading for 30 days before going live. I have a beginner's guide in my course that walks through the exact setup. Want me to share it?" },
+          { role: 'user', text: "I haven't logged in for 2 weeks. I feel like I'm falling behind and might quit." },
+          { role: 'ai', text: "I'm glad you reached out — this is exactly the moment most students give up, but you don't have to. You've already completed 60% of the course, which is the hardest part. The remaining modules are shorter and more hands-on. Let's get you back on track: I'll create a 15-minute daily plan that fits your schedule. Can you commit to 15 minutes today?" },
+          { role: 'user', text: "Yes, I can do 15 minutes. Where should I start?" },
+          { role: 'ai', text: "Perfect. Start with Module 4, Lesson 2 — it's a quick 12-minute video and you'll build something you can actually use. I'll check in with you tomorrow to see how it went. You're closer to the finish line than you think. Go get it! 🚀" },
         ],
       },
     ],
@@ -136,9 +83,9 @@ const industryData: Record<string, IndustryData> = {
     tagline: 'Turn Your Course Content Into an Interactive AI Tutor',
     description:
       'PersonaMatrix transforms your lessons, videos, and expertise into an AI that students can learn from interactively — reducing your support load while increasing course completion and sales.',
-    color: '#a855f7',
-    bg: 'rgba(168,85,247,0.12)',
-    border: 'rgba(168,85,247,0.3)',
+    color: '#3b82f6',
+    bg: 'rgba(59,130,246,0.12)',
+    border: 'rgba(59,130,246,0.3)',
     useCases: [
       {
         title: 'AI Tutor From Your Course Content',
@@ -185,7 +132,7 @@ const industryData: Record<string, IndustryData> = {
     ],
   },
   'coaches': {
-    name: 'Coaches & Service Businesses',
+    name: 'Coaches — Fitness, Career & Business',
     tagline: 'Scale Your Coaching Without Burning Out',
     description:
       'PersonaMatrix lets you handle client intake, share your frameworks, and keep clients engaged between sessions — so you can focus on high-value coaching work instead of repetitive questions.',
@@ -229,10 +176,63 @@ const industryData: Record<string, IndustryData> = {
         channels: ['Web', 'WhatsApp', 'Community Embed'],
         demoPersona: 'Career Coach AI',
         demoMessages: [
-          { role: 'user', text: "I've been trying to get a promotion for 2 years. What am I doing wrong?" },
-          { role: 'ai', text: "That's frustrating — and it's usually not about working harder. In my experience, the #1 reason people get passed over is visibility, not performance. Your manager's manager probably doesn't know your name. Let me ask: in the last 6 months, have you presented to anyone above your direct manager?" },
-          { role: 'user', text: "No, I just do my work and hope it gets noticed." },
-          { role: 'ai', text: "That's the pattern I see most often. Great work gets noticed by your manager — but promotions are decided by people who've never seen your work. My 'Visibility Framework' is a 6-week system for getting in front of the right people without being political or pushy. It's the first module in my career coaching program. Want me to walk you through the first step?" },
+          { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
+          { role: 'ai', text: "Love that you found us! The big difference: we formulate everything without the 12 most common irritants — no parabens, sulfates, synthetic fragrance, or alcohol. Our founder started the brand after struggling with sensitive skin for years and couldn't find anything that worked. Every product is dermatologist-tested and we publish all our ingredient sourcing. What's your main skin concern? I'll point you to exactly the right product." },
+          { role: 'user', text: "I have dry skin and some redness around my nose." },
+          { role: 'ai', text: "That combination is really common — dry skin often triggers redness as your skin tries to compensate. Our Barrier Repair Serum was made for exactly this: it rebuilds your skin's moisture barrier and calms redness within 2 weeks. 89% of customers with your skin type see visible improvement. I can set you up with a starter kit that includes the serum plus our gentle cleanser — it's 20% off for first-time customers." },
+        ],
+      },
+    ],
+  },
+  'd2c-commerce': {
+    name: 'D2C Founders & Commerce Creators',
+    tagline: 'Give Every Customer a Personal Shopping Assistant',
+    description:
+      'PersonaMatrix creates an AI that knows your products inside out — answering questions, handling objections, and guiding buyers from discovery to checkout automatically.',
+    color: '#ec4899',
+    bg: 'rgba(236,72,153,0.12)',
+    border: 'rgba(236,72,153,0.3)',
+    useCases: [
+      {
+        title: 'AI That Sells Your Products 24/7',
+        description:
+          'Your AI knows every product detail, handles common objections, and guides customers to the right purchase — even when you\'re asleep. No more lost sales from unanswered questions.',
+        capabilities: ['Product Q&A', 'Objection handling', '24/7 purchase guidance'],
+        channels: ['Web Chat', 'WhatsApp', 'Shopify Embed'],
+        demoPersona: 'D2C Sales AI',
+        demoMessages: [
+          { role: 'user', text: "I'm looking for a protein powder but I'm lactose intolerant. Do any of yours work for me?" },
+          { role: 'ai', text: "Absolutely — our Plant Power Blend is 100% dairy-free and perfect for lactose intolerance. It's made from pea and rice protein, gives you 25g of protein per serving, and has no artificial sweeteners. It's our #1 seller for customers with dietary restrictions. Would you like the chocolate or vanilla flavor? Both are equally popular." },
+          { role: 'user', text: "Chocolate sounds good. How does it taste compared to whey protein?" },
+          { role: 'ai', text: "Most customers say it's actually creamier than whey — we use coconut milk powder for texture. We have a 94% satisfaction rate and a 30-day money-back guarantee, so there's zero risk. I can add the chocolate Plant Power Blend to your cart right now with free shipping on your first order. Ready?" },
+        ],
+      },
+      {
+        title: 'Reduce Returns & Support Tickets',
+        description:
+          'Most returns happen because customers bought the wrong product. Your AI asks the right questions upfront, recommends the perfect fit, and dramatically reduces costly returns and support volume.',
+        capabilities: ['Pre-purchase guidance', 'Size & fit recommendations', 'Return reduction'],
+        channels: ['Web', 'WhatsApp', 'Product Page Widget'],
+        demoPersona: 'Product Advisor AI',
+        demoMessages: [
+          { role: 'user', text: "I want to buy the running shoes but I'm not sure which size to get. I'm usually a 10 but sometimes a 10.5." },
+          { role: 'ai', text: "Great question — our running shoes run slightly narrow, so if you're between sizes, I always recommend going up. For a 10/10.5, I'd suggest the 10.5. Also, are you planning to use them for road running or trail? That affects which model I'd recommend for you." },
+          { role: 'user', text: "Road running, mostly 5k distances." },
+          { role: 'ai', text: "Perfect — for road 5k, our CloudStride model in size 10.5 is your best match. It's our most cushioned road shoe and the top choice for distances under 10k. It comes with free returns if the fit isn't right, but 97% of customers who follow my sizing guide keep their first order. Want me to add the 10.5 CloudStride to your cart?" },
+        ],
+      },
+      {
+        title: 'Turn Followers Into Repeat Buyers',
+        description:
+          'Your content builds trust — your AI converts that trust into sales. Engage your social audience with an AI that knows your brand story, your products, and how to turn a curious follower into a loyal customer.',
+        capabilities: ['Brand story conversations', 'Follower-to-customer conversion', 'Repeat purchase campaigns'],
+        channels: ['Web', 'WhatsApp', 'Instagram Link'],
+        demoPersona: 'Brand Commerce AI',
+        demoMessages: [
+          { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
+          { role: 'ai', text: "Love that you found us! The big difference: we formulate everything without the 12 most common irritants — no parabens, sulfates, synthetic fragrance, or alcohol. Our founder started the brand after struggling with sensitive skin for years and couldn't find anything that worked. Every product is dermatologist-tested and we publish all our ingredient sourcing. What's your main skin concern? I'll point you to exactly the right product." },
+          { role: 'user', text: "I have dry skin and some redness around my nose." },
+          { role: 'ai', text: "That combination is really common — dry skin often triggers redness as your skin tries to compensate. Our Barrier Repair Serum was made for exactly this: it rebuilds your skin's moisture barrier and calms redness within 2 weeks. 89% of customers with your skin type see visible improvement. I can set you up with a starter kit that includes the serum plus our gentle cleanser — it's 20% off for first-time customers." },
         ],
       },
     ],
