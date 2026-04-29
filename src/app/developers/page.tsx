@@ -14,7 +14,7 @@ const codeSnippets = {
   });
 </script>`,
   rest: `curl -X POST https://api.personamatrix.ai/v1/chat \\
-  -H "Authorization: Bearer pm_sk_..." \\ -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer pm_sk_..." \ -H"Content-Type: application/json" \\
   -d '{
     "personaId": "abc123",
     "message": "What are your pricing plans?",
@@ -71,36 +71,6 @@ function CodeBlock({ code, lang = 'html' }: { code: string; lang?: string }) {
   );
 }
 
-const useCases = [
-  {
-    icon: '🛍️',
-    title: 'D2C Commerce',
-    desc: 'Embed a product-aware AI persona on your storefront. Handles FAQs, recommends SKUs, reduces cart abandonment, and drives conversions — all without human intervention.',
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.25)',
-    endpoints: ['POST /v1/chat', 'GET /v1/products/recommend', 'POST /v1/sessions'],
-  },
-  {
-    icon: '📺',
-    title: 'OTT & Streaming',
-    desc: 'Build interactive AI characters for your streaming platform. Personalized content discovery, viewer Q&A, episode recaps, and retention-driving engagement between releases.',
-    color: '#14b8a6',
-    bg: 'rgba(20,184,166,0.12)',
-    border: 'rgba(20,184,166,0.25)',
-    endpoints: ['POST /v1/chat', 'GET /v1/content/discover', 'POST /v1/personas/character'],
-  },
-  {
-    icon: '🎙️',
-    title: 'Creator Monetization',
-    desc: 'Give finance creators, educators, and coaches an API-powered AI persona that answers audience questions, gates premium content, and drives subscriptions 24/7.',
-    color: '#a855f7',
-    bg: 'rgba(168,85,247,0.12)',
-    border: 'rgba(168,85,247,0.25)',
-    endpoints: ['POST /v1/chat', 'POST /v1/paywall/check', 'GET /v1/analytics/sessions'],
-  },
-];
-
 const apiFeatures = [
   {
     icon: (
@@ -129,7 +99,7 @@ const apiFeatures = [
       </svg>
     ),
     title: 'Real-time Streaming',
-    desc: 'Server-sent events for token-by-token streaming. Build fluid, low-latency chat UIs for OTT and D2C experiences.',
+    desc: 'Server-sent events for token-by-token streaming. Build fluid, low-latency chat UIs.',
     color: '#14b8a6',
   },
   {
@@ -164,27 +134,12 @@ export default function DevelopersPage() {
               <span className="text-xs font-medium text-[#60a5fa]">Developer Platform</span>
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
-              Build AI Personas for{' '}
-              <span className="text-gradient">D2C, Creators & OTT</span>
+              Build with the{' '}
+              <span className="text-gradient">Persona API</span>
             </h1>
-            <p className="text-base sm:text-lg text-white/55 leading-relaxed max-w-xl mb-4">
-              REST APIs, embeddable widgets, webhooks, and real-time streaming — purpose-built for D2C commerce, OTT streaming platforms, and creator monetization.
+            <p className="text-base sm:text-lg text-white/55 leading-relaxed max-w-xl mb-8">
+              REST APIs, embeddable widgets, webhooks, and real-time streaming. Everything you need to integrate AI personas into your product.
             </p>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {[
-                { label: 'D2C Commerce', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
-                { label: 'OTT & Streaming', color: '#14b8a6', bg: 'rgba(20,184,166,0.12)' },
-                { label: 'Creator Monetization', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
-              ].map((tag) => (
-                <span
-                  key={tag.label}
-                  className="px-3 py-1 rounded-full text-xs font-medium border"
-                  style={{ background: tag.bg, color: tag.color, borderColor: `${tag.color}30` }}
-                >
-                  {tag.label}
-                </span>
-              ))}
-            </div>
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link href="/register" className="px-5 sm:px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm">
                 Get API Keys
@@ -197,42 +152,8 @@ export default function DevelopersPage() {
         </div>
       </section>
 
-      {/* Use Case Cards */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 border-t border-white/6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10 sm:mb-12">
-            <p className="text-xs font-semibold text-[#3b82f6] uppercase tracking-widest mb-3">Use Cases</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Built for three core verticals</h2>
-            <p className="text-white/45 mt-3 max-w-xl mx-auto text-sm">
-              Whether you're shipping a D2C storefront, running an OTT platform, or building tools for creators — the Persona API has purpose-built endpoints for your use case.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {useCases.map((uc) => (
-              <div
-                key={uc.title}
-                className="rounded-2xl p-6 border flex flex-col gap-4"
-                style={{ background: uc.bg, borderColor: uc.border }}
-              >
-                <div className="text-3xl">{uc.icon}</div>
-                <div>
-                  <h3 className="font-semibold text-white text-base mb-2">{uc.title}</h3>
-                  <p className="text-sm text-white/55 leading-relaxed">{uc.desc}</p>
-                </div>
-                <div className="flex flex-col gap-1 mt-auto pt-3 border-t border-white/8">
-                  <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">Key Endpoints</p>
-                  {uc.endpoints.map((ep) => (
-                    <code key={ep} className="text-[11px] font-mono" style={{ color: uc.color }}>{ep}</code>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* API & SDK Overview */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 border-t border-white/6">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
             <div>
@@ -241,7 +162,7 @@ export default function DevelopersPage() {
                 Drop in a widget.<br />Or go full API.
               </h2>
               <p className="text-white/50 leading-relaxed mb-8">
-                Two lines of code to embed a fully branded AI chat widget on your D2C storefront or OTT platform. Or use our REST API for complete control over the conversation experience.
+                Two lines of code to embed a fully branded AI chat widget. Or use our REST API for complete control over the conversation experience.
               </p>
 
               {/* Tab switcher */}
@@ -298,7 +219,7 @@ export default function DevelopersPage() {
       </section>
 
       {/* API Features */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 border-t border-white/6">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 sm:mb-12">
             <p className="text-xs font-semibold text-[#7c3aed] uppercase tracking-widest mb-3">Platform Features</p>
@@ -324,13 +245,13 @@ export default function DevelopersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 border-t border-white/6">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <div className="glass-elevated rounded-3xl border border-white/10 p-8 sm:p-14 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#3b82f6]/8 to-[#7c3aed]/8 pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-4">Ready to integrate?</h2>
-              <p className="text-white/50 mb-8">Get your API keys and start building AI personas for D2C, OTT, or creator platforms in minutes. No approval process.</p>
+              <p className="text-white/50 mb-8">Get your API keys and start building in minutes. No approval process.</p>
               <Link href="/register" className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-semibold text-white btn-primary text-sm inline-block shadow-[0_0_24px_rgba(124,58,237,0.35)]">
                 Get API Keys →
               </Link>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import PublicHeader from '@/components/public/PublicHeader';
 import PublicFooter from '@/components/public/PublicFooter';
 
-type CreatorVertical = 'Finance Creator' | 'Course Builder' | 'Coach' | 'D2C Brand' | 'OTT & Streaming';
+type CreatorVertical = 'Finance Creator' | 'Course Builder' | 'Coach' | 'D2C Brand';
 
 interface Creator {
   id: string;
@@ -155,38 +155,6 @@ const creators: Creator[] = [
   },
   {
     id: 'c-009',
-    name: 'StreamSage',
-    slug: 'stream-sage',
-    handle: '@streamsage',
-    vertical: 'OTT & Streaming',
-    tagline: 'Your AI guide to the best shows across every platform',
-    description: 'Helps viewers discover hidden gems, navigate streaming catalogs, and get personalized watch recommendations based on mood and taste.',
-    avatar: 'SS',
-    avatarColor: 'linear-gradient(135deg, #14b8a6 0%, #6366f1 100%)',
-    status: 'active',
-    audience: '320K subscribers',
-    topics: ['Content Discovery', 'Recommendations', 'Streaming'],
-    messagesTotal: 84200,
-    conversionFocus: 'Subscription upgrade',
-  },
-  {
-    id: 'c-010',
-    name: 'Reelcast AI',
-    slug: 'reelcast-ai',
-    handle: '@reelcastai',
-    vertical: 'OTT & Streaming',
-    tagline: 'Interactive storytelling for independent OTT creators',
-    description: 'Engages viewers between episodes, answers lore questions, and drives retention with character-driven AI conversations.',
-    avatar: 'RC',
-    avatarColor: 'linear-gradient(135deg, #7c3aed 0%, #14b8a6 100%)',
-    status: 'active',
-    audience: '156K subscribers',
-    topics: ['Viewer Retention', 'Lore', 'Engagement'],
-    messagesTotal: 49300,
-    conversionFocus: 'Season pass purchase',
-  },
-  {
-    id: 'c-011',
     name: 'Nina Crypto',
     slug: 'nina-crypto',
     handle: '@ninacrypto',
@@ -202,7 +170,7 @@ const creators: Creator[] = [
     conversionFocus: 'Newsletter subscription',
   },
   {
-    id: 'c-012',
+    id: 'c-010',
     name: 'Felix Fit',
     slug: 'felix-fit',
     handle: '@felixfit',
@@ -219,14 +187,13 @@ const creators: Creator[] = [
   },
 ];
 
-const verticalFilters = ['All', 'D2C Brand', 'OTT & Streaming', 'Finance Creator', 'Course Builder', 'Coach'] as const;
+const verticalFilters = ['All', 'Finance Creator', 'Course Builder', 'Coach', 'D2C Brand'] as const;
 
 const verticalMeta: Record<string, { icon: string; color: string; bg: string }> = {
-  'D2C Brand': { icon: '🛍️', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
-  'OTT & Streaming': { icon: '📺', color: '#14b8a6', bg: 'rgba(20,184,166,0.12)' },
   'Finance Creator': { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
   'Course Builder': { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
   'Coach': { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
+  'D2C Brand': { icon: '🛍️', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
 };
 
 const statusColors: Record<string, string> = {
@@ -276,54 +243,21 @@ export default function CreatorsDirectoryPage() {
             </span>
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-            D2C brands, OTT & streaming creators, finance experts, course builders, and coaches — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
+            Finance creators, course builders, coaches, and D2C brands — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
           </p>
 
-          {/* Use case highlights */}
+          {/* Vertical pills — decorative overview */}
           <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-            {[
-              { label: 'D2C Commerce', icon: '🛍️', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
-              { label: 'OTT & Streaming', icon: '📺', color: '#14b8a6', bg: 'rgba(20,184,166,0.12)' },
-              { label: 'Finance Creators', icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
-              { label: 'Course Builders', icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
-              { label: 'Coaches', icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
-            ].map((item) => (
+            {Object.entries(verticalMeta).map(([label, meta]) => (
               <div
-                key={item.label}
+                key={label}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border"
-                style={{ background: item.bg, color: item.color, borderColor: `${item.color}30` }}
+                style={{ background: meta.bg, color: meta.color, borderColor: `${meta.color}30` }}
               >
-                <span>{item.icon}</span>
-                {item.label}
+                <span>{meta.icon}</span>
+                {label}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Use Case Spotlight */}
-      <section className="px-6 pb-10">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="rounded-2xl border border-[#f59e0b]/20 bg-[#f59e0b]/5 p-5 flex flex-col gap-2">
-            <div className="text-2xl">🛍️</div>
-            <h3 className="text-sm font-semibold text-white">D2C Brands</h3>
-            <p className="text-xs text-white/45 leading-relaxed">
-              Give every shopper a personal AI assistant that knows your product catalog, handles objections, and guides buyers from discovery to checkout — automatically.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-[#14b8a6]/20 bg-[#14b8a6]/5 p-5 flex flex-col gap-2">
-            <div className="text-2xl">📺</div>
-            <h3 className="text-sm font-semibold text-white">OTT & Streaming</h3>
-            <p className="text-xs text-white/45 leading-relaxed">
-              Deploy interactive AI personas for your streaming platform — personalized content discovery, character-driven engagement, and viewer retention between episodes.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-[#a855f7]/20 bg-[#a855f7]/5 p-5 flex flex-col gap-2">
-            <div className="text-2xl">🎙️</div>
-            <h3 className="text-sm font-semibold text-white">Content Creators</h3>
-            <p className="text-xs text-white/45 leading-relaxed">
-              Finance creators, educators, and coaches turn their expertise into AI personas that engage audiences 24/7, monetize content, and scale personal brands without burnout.
-            </p>
           </div>
         </div>
       </section>
@@ -419,7 +353,7 @@ export default function CreatorsDirectoryPage() {
           >
             <h2 className="text-2xl font-bold text-white mb-2">Build your AI persona</h2>
             <p className="text-white/50 text-sm mb-6 max-w-lg mx-auto">
-              Whether you run a D2C brand, operate an OTT platform, teach finance, coach clients, or sell courses — your AI persona works your audience around the clock.
+              Whether you teach finance, run a coaching practice, sell a course, or ship your own products — your AI persona works your audience around the clock.
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
               <Link

@@ -31,10 +31,10 @@ export default function PublicFooter() {
             </div>
             <div className="flex flex-col gap-3">
               <span className="text-xs font-semibold text-white/55 uppercase tracking-widest">Platform</span>
-              <Link href="/creators" className="text-sm text-white/50 hover:text-white transition-colors">For Creators</Link>
-              <Link href="/developers" className="text-sm text-white/50 hover:text-white transition-colors">Developers</Link>
-              <Link href="/industries" className="text-sm text-white/50 hover:text-white transition-colors">Industries</Link>
-              <Link href="/research" className="text-sm text-white/50 hover:text-white transition-colors">Research</Link>
+              <Link href="/dashboard" className="text-sm text-white/50 hover:text-white transition-colors">Dashboard</Link>
+              <Link href="/create-persona" className="text-sm text-white/50 hover:text-white transition-colors">Create Persona</Link>
+              <Link href="/deploy" className="text-sm text-white/50 hover:text-white transition-colors">Deploy</Link>
+              <Link href="/analytics" className="text-sm text-white/50 hover:text-white transition-colors">Analytics</Link>
             </div>
             <div className="flex flex-col gap-3">
               <span className="text-xs font-semibold text-white/55 uppercase tracking-widest">Legal</span>
