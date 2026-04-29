@@ -185,7 +185,7 @@ const industryData: Record<string, IndustryData> = {
     ],
   },
   'd2c-commerce': {
-    name: 'D2C Founders & Commerce Creators',
+    name: 'D2C Brands & Commerce Creators',
     tagline: 'Give Every Customer a Personal Shopping Assistant',
     description:
       'PersonaMatrix creates an AI that knows your products inside out — answering questions, handling objections, and guiding buyers from discovery to checkout automatically.',
@@ -515,7 +515,7 @@ export default function IndustrySlugPage() {
                 </div>
                 <h2 className="text-3xl font-bold text-white">Connect Your Shopify Store</h2>
                 <p className="text-white/50 mt-3 max-w-xl leading-relaxed">
-                  D2C founders can plug PersonaMatrix directly into their Shopify store. Your AI learns your product catalog, handles customer questions, and guides shoppers to checkout — all without leaving your store.
+                  D2C brands can plug PersonaMatrix directly into their Shopify store. Your AI learns your product catalog, handles customer questions, and guides shoppers to checkout — all without leaving your store.
                 </p>
               </div>
               <div className="shrink-0">

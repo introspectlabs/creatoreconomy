@@ -50,7 +50,7 @@ const industries = [
   },
   {
     slug: 'd2c-commerce',
-    name: 'D2C Founders & Commerce Creators',
+    name: 'D2C Brands & Commerce Creators',
     value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -384,7 +384,7 @@ export default function IndustriesPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
           <p className="text-white/50 mb-8 max-w-xl mx-auto">
-            Join finance creators, educators, coaches, and D2C founders already using PersonaMatrix to scale their audience and income.
+            Join finance creators, educators, coaches, and D2C brands already using PersonaMatrix to scale their audience and income.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">

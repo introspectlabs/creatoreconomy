@@ -249,7 +249,7 @@ export default function HomePage() {
 
             <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
               <p className="text-sm text-[#c4b5fd] leading-relaxed font-medium">
-                Built for <span className="text-white font-semibold">finance creators, course builders, coaches, and D2C founders</span> who want to turn their expertise into{' '}
+                Built for <span className="text-white font-semibold">finance creators, course builders, coaches, and D2C brands</span> who want to turn their expertise into{' '}
                 <span className="text-white font-semibold">always-on, revenue-generating AI</span> — without working more hours.
               </p>
             </div>
@@ -553,7 +553,7 @@ export default function HomePage() {
               },
               {
                 emoji: '🛍️',
-                label: 'D2C Founders & Commerce Creators',
+                label: 'D2C Brands & Commerce Creators',
                 color: '#ec4899',
                 border: 'rgba(236,72,153,0.25)',
                 bg: 'rgba(236,72,153,0.08)',
@@ -609,7 +609,7 @@ export default function HomePage() {
                 <span className="text-gradient">into a revenue engine?</span>
               </h2>
               <p className="text-white/50 max-w-md text-base">
-                Join finance creators, educators, coaches, and D2C founders building with PersonaMatrix to scale their audience and income.
+                Join finance creators, educators, coaches, and D2C brands building with PersonaMatrix to scale their audience and income.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link

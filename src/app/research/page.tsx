@@ -843,9 +843,9 @@ export default function ResearchPage() {
                 ),
               },
               {
-                industry: 'Coaches & D2C Founders',
+                industry: 'Coaches & D2C Brands',
                 tagline: 'Scale expertise and commerce without scaling time',
-                desc: 'Coaches and D2C founders deploy AI personas that handle client intake, answer product questions, and guide buyers from discovery to purchase — delivering personalized experiences at scale without additional headcount.',
+                desc: 'Coaches and D2C brands deploy AI personas that handle client intake, answer product questions, and guide buyers from discovery to purchase — delivering personalized experiences at scale without additional headcount.',
                 color: '#f59e0b',
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

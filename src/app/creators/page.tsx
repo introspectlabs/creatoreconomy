@@ -243,7 +243,7 @@ export default function CreatorsDirectoryPage() {
             </span>
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-            Finance creators, course builders, coaches, and D2C founders — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
+            Finance creators, course builders, coaches, and D2C brands — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
           </p>
 
           {/* Vertical pills — decorative overview */}
