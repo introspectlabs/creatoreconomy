@@ -5,6 +5,7 @@ export interface Persona {
   name: string;
   slug: string;
   description: string;
+  subCategory: string;
   status: PersonaStatus;
   avatar: string;
   channels: string[];
@@ -16,6 +17,7 @@ export interface Persona {
   voice: string;
   language: string;
   whatsappNumber?: string;
+  isPublic?: boolean;
 }
 
 export const personas: Persona[] = [
@@ -23,6 +25,7 @@ export const personas: Persona[] = [
     id: 'persona-001',
     name: 'ZaraSkin Sales Agent',
     slug: 'zara-skin-sales',
+    subCategory: 'D2C Skincare',
     description: 'D2C skincare AI agent — recommends products, answers ingredient questions, and guides customers to their perfect routine to drive conversions',
     status: 'active',
     avatar: 'ZS',
@@ -40,6 +43,7 @@ export const personas: Persona[] = [
     id: 'persona-002',
     name: 'NutriBlend Store Bot',
     slug: 'nutriblend-store-bot',
+    subCategory: 'D2C Nutrition',
     description: 'D2C nutrition brand agent — handles product discovery, subscription upsells, and pre-purchase Q&A for protein and supplement SKUs',
     status: 'active',
     avatar: 'NB',
@@ -56,6 +60,7 @@ export const personas: Persona[] = [
     id: 'persona-003',
     name: 'StyleHouse Fashion Bot',
     slug: 'stylehouse-fashion-bot',
+    subCategory: 'D2C Fashion',
     description: 'D2C fashion brand agent — assists with size recommendations, outfit pairing, and order tracking across seasonal collections',
     status: 'active',
     avatar: 'SH',
@@ -73,6 +78,7 @@ export const personas: Persona[] = [
     id: 'persona-004',
     name: 'FitFuel Voice Agent',
     slug: 'fitfuel-voice-agent',
+    subCategory: 'D2C Fitness Supplements',
     description: 'D2C fitness supplement brand — voice-enabled agent for product recommendations, workout pairing, and subscription management',
     status: 'active',
     avatar: 'FF',
@@ -89,6 +95,7 @@ export const personas: Persona[] = [
     id: 'persona-005',
     name: 'GlowUp Beauty Agent',
     slug: 'glowup-beauty-agent',
+    subCategory: 'D2C Beauty',
     description: 'D2C beauty brand agent — engages shoppers 24/7, recommends bundles, answers shade-match questions, and promotes new launches',
     status: 'active',
     avatar: 'GB',
@@ -106,6 +113,7 @@ export const personas: Persona[] = [
     id: 'persona-006',
     name: 'TheoGear Product Concierge',
     slug: 'theogear-product-concierge',
+    subCategory: 'D2C Everyday Carry',
     description: 'D2C everyday carry brand — helps customers choose the right bag, accessories, and workspace gear from the minimalist product catalog',
     status: 'active',
     avatar: 'TG',
@@ -122,6 +130,7 @@ export const personas: Persona[] = [
     id: 'persona-007',
     name: 'StreamGuide — Crime Drama',
     slug: 'streamguide-crime-drama',
+    subCategory: 'OTT Content Discovery',
     description: 'OTT viewer engagement persona for crime drama series — character Q&A, episode recaps, and personalized content discovery',
     status: 'active',
     avatar: 'SG',
@@ -138,6 +147,7 @@ export const personas: Persona[] = [
     id: 'persona-008',
     name: 'PureHome Decor Bot',
     slug: 'purehome-decor-bot',
+    subCategory: 'D2C Home Decor',
     description: 'D2C home decor brand — helps customers discover products by room, style, and budget; handles cross-sell and cart recovery flows',
     status: 'active',
     avatar: 'PH',
@@ -155,6 +165,7 @@ export const personas: Persona[] = [
     id: 'persona-009',
     name: 'BrewCraft Support Agent',
     slug: 'brewcraft-support-agent',
+    subCategory: 'D2C Specialty Coffee',
     description: 'D2C specialty coffee brand — handles brewing guides, subscription management, and product FAQ for direct-to-consumer coffee orders',
     status: 'paused',
     avatar: 'BC',
@@ -171,6 +182,7 @@ export const personas: Persona[] = [
     id: 'persona-010',
     name: 'ActiveWear Sales Bot',
     slug: 'activewear-sales-bot',
+    subCategory: 'D2C Activewear',
     description: 'D2C activewear brand — delivers size guides, fabric comparisons, and sport-specific recommendations to drive purchase decisions',
     status: 'training',
     avatar: 'AW',
@@ -187,6 +199,7 @@ export const personas: Persona[] = [
     id: 'persona-011',
     name: 'LuxeScent Fragrance Bot',
     slug: 'luxescent-fragrance-bot',
+    subCategory: 'D2C Fragrance',
     description: 'D2C fragrance brand — guides customers through scent profiles, occasion-based recommendations, and gifting bundles',
     status: 'active',
     avatar: 'LS',
@@ -204,6 +217,7 @@ export const personas: Persona[] = [
     id: 'persona-012',
     name: 'GlobalShop Multilingual',
     slug: 'globalshop-multilingual',
+    subCategory: 'D2C Global Commerce',
     description: 'D2C global storefront agent — multilingual product discovery and support for international D2C brands expanding across markets',
     status: 'active',
     avatar: 'GS',
@@ -221,6 +235,7 @@ export const personas: Persona[] = [
     id: 'creator-c-001',
     name: 'Marcus Wealth',
     slug: 'marcus-wealth',
+    subCategory: 'Personal Finance Advisor',
     description: 'Personal finance creator — answers questions on index investing, tax-loss harvesting, and building a $1M portfolio on a regular salary.',
     status: 'active',
     avatar: 'MW',
@@ -237,6 +252,7 @@ export const personas: Persona[] = [
     id: 'creator-c-002',
     name: 'Priya Trades',
     slug: 'priya-trades',
+    subCategory: 'Options Trading Coach',
     description: 'Finance creator — walks through covered calls, puts, and risk management in plain English for beginner options traders.',
     status: 'active',
     avatar: 'PT',
@@ -253,6 +269,7 @@ export const personas: Persona[] = [
     id: 'creator-c-003',
     name: 'Jordan Builds',
     slug: 'jordan-builds',
+    subCategory: 'No-Code SaaS Builder',
     description: 'Course builder — guides students through validating, building, and launching no-code SaaS products with real revenue milestones.',
     status: 'active',
     avatar: 'JB',
@@ -269,6 +286,7 @@ export const personas: Persona[] = [
     id: 'creator-c-004',
     name: 'Leila Learns',
     slug: 'leila-learns',
+    subCategory: 'UX Design Mentor',
     description: 'Course builder — answers portfolio questions, critiques design work, and helps students land their first UX role.',
     status: 'active',
     avatar: 'LL',
@@ -285,6 +303,7 @@ export const personas: Persona[] = [
     id: 'creator-c-005',
     name: 'Coach Dani',
     slug: 'coach-dani',
+    subCategory: 'Executive Leadership Coach',
     description: 'Executive coach — helps new managers navigate difficult conversations, set boundaries, and build leadership confidence.',
     status: 'active',
     avatar: 'CD',
@@ -301,6 +320,7 @@ export const personas: Persona[] = [
     id: 'creator-c-006',
     name: 'Ravi Mindset',
     slug: 'ravi-mindset',
+    subCategory: 'Performance Coach',
     description: 'Performance coach — covers morning routines, deep work systems, and mental resilience for founders building under pressure.',
     status: 'active',
     avatar: 'RM',
@@ -317,6 +337,7 @@ export const personas: Persona[] = [
     id: 'creator-c-007',
     name: 'Sasha Skin',
     slug: 'sasha-skin',
+    subCategory: 'D2C Skincare Founder',
     description: 'D2C founder — recommends products from her clean skincare line, answers ingredient questions, and guides customers to their perfect routine.',
     status: 'active',
     avatar: 'SS',
@@ -333,6 +354,7 @@ export const personas: Persona[] = [
     id: 'creator-c-008',
     name: 'Theo Gear',
     slug: 'theo-gear',
+    subCategory: 'D2C Product Advisor',
     description: 'D2C founder — helps customers choose the right bag, accessories, and workspace setup from his minimalist everyday carry product line.',
     status: 'active',
     avatar: 'TG',
@@ -349,6 +371,7 @@ export const personas: Persona[] = [
     id: 'creator-c-009',
     name: 'Nina Crypto',
     slug: 'nina-crypto',
+    subCategory: 'Web3 & DeFi Educator',
     description: 'Finance creator — demystifies DeFi and Web3 for skeptical beginners with clear, jargon-free explanations.',
     status: 'active',
     avatar: 'NC',
@@ -365,6 +388,7 @@ export const personas: Persona[] = [
     id: 'creator-c-010',
     name: 'Felix Fit',
     slug: 'felix-fit',
+    subCategory: 'Fitness & Nutrition Coach',
     description: 'Course builder — delivers strength training programs and nutrition guidance for busy professionals with limited gym time.',
     status: 'active',
     avatar: 'FF',

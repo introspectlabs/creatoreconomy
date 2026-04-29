@@ -153,6 +153,7 @@ export default function PersonaDetailDrawer({ persona, onClose }: DrawerProps) {
               </div>
               <div>
                 <h2 className="text-base font-700 text-white">{persona.name}</h2>
+                <p className="text-[11px] font-500 text-purple-400/80 mt-0.5">{persona.subCategory}</p>
                 <div className="flex items-center gap-2 mt-0.5">
                   <StatusBadge status={persona.status} />
                   <span className="text-[11px] text-white/30">{persona.lastActive}</span>

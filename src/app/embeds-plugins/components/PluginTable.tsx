@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 interface Plugin {
   id: string;
   personaName: string;
+  personaSubCategory: string;
   types: string[];
   domain: string;
   status: string;
@@ -15,16 +16,16 @@ interface Plugin {
 }
 
 const initialPlugins: Plugin[] = [
-  { id: 'plugin-001', personaName: 'ZaraSkin Sales Agent', types: ['Chat', 'Voice'], domain: 'zaraskin.com', status: 'live', sessions: 4820, created: 'Mar 15, 2026' },
-  { id: 'plugin-002', personaName: 'NutriBlend Store Bot', types: ['Chat'], domain: 'nutriblend.in', status: 'live', sessions: 9100, created: 'Feb 10, 2026' },
-  { id: 'plugin-003', personaName: 'FitFuel Voice Agent', types: ['Voice', 'Avatar'], domain: 'fitfuel.com', status: 'live', sessions: 3200, created: 'Mar 1, 2026' },
-  { id: 'plugin-004', personaName: 'TheoGear Product Concierge', types: ['Avatar', 'Chat'], domain: 'theogear.com', status: 'live', sessions: 1890, created: 'Feb 20, 2026' },
-  { id: 'plugin-005', personaName: 'GlowUp Beauty Agent', types: ['Chat', 'Voice', 'Avatar'], domain: 'glowup.in', status: 'live', sessions: 6100, created: 'Dec 14, 2025' },
-  { id: 'plugin-006', personaName: 'StyleHouse Fashion Bot', types: ['Chat'], domain: 'stylehouse.co', status: 'paused', sessions: 2440, created: 'Feb 5, 2026' },
-  { id: 'plugin-007', personaName: 'LuxeScent Fragrance Bot', types: ['Voice'], domain: 'luxescent.com', status: 'live', sessions: 1210, created: 'Mar 20, 2026' },
-  { id: 'plugin-008', personaName: 'GlobalShop Multilingual', types: ['Avatar', 'Voice'], domain: 'globalshop.io', status: 'live', sessions: 3400, created: 'Mar 15, 2026' },
-  { id: 'plugin-009', personaName: 'StreamGuide — Crime Drama', types: ['Chat'], domain: 'streamguide.tv', status: 'live', sessions: 1840, created: 'Apr 2, 2026' },
-  { id: 'plugin-010', personaName: 'ZaraSkin Sales Agent', types: ['Chat', 'Avatar'], domain: 'zaraskin.com/landing', status: 'live', sessions: 2800, created: 'Mar 28, 2026' },
+  { id: 'plugin-001', personaName: 'ZaraSkin Sales Agent', personaSubCategory: 'D2C Skincare', types: ['Chat', 'Voice'], domain: 'zaraskin.com', status: 'live', sessions: 4820, created: 'Mar 15, 2026' },
+  { id: 'plugin-002', personaName: 'NutriBlend Store Bot', personaSubCategory: 'D2C Nutrition', types: ['Chat'], domain: 'nutriblend.in', status: 'live', sessions: 9100, created: 'Feb 10, 2026' },
+  { id: 'plugin-003', personaName: 'FitFuel Voice Agent', personaSubCategory: 'D2C Fitness Supplements', types: ['Voice', 'Avatar'], domain: 'fitfuel.com', status: 'live', sessions: 3200, created: 'Mar 1, 2026' },
+  { id: 'plugin-004', personaName: 'TheoGear Product Concierge', personaSubCategory: 'D2C Everyday Carry', types: ['Avatar', 'Chat'], domain: 'theogear.com', status: 'live', sessions: 1890, created: 'Feb 20, 2026' },
+  { id: 'plugin-005', personaName: 'GlowUp Beauty Agent', personaSubCategory: 'D2C Beauty', types: ['Chat', 'Voice', 'Avatar'], domain: 'glowup.in', status: 'live', sessions: 6100, created: 'Dec 14, 2025' },
+  { id: 'plugin-006', personaName: 'StyleHouse Fashion Bot', personaSubCategory: 'D2C Fashion', types: ['Chat'], domain: 'stylehouse.co', status: 'paused', sessions: 2440, created: 'Feb 5, 2026' },
+  { id: 'plugin-007', personaName: 'LuxeScent Fragrance Bot', personaSubCategory: 'D2C Fragrance', types: ['Voice'], domain: 'luxescent.com', status: 'live', sessions: 1210, created: 'Mar 20, 2026' },
+  { id: 'plugin-008', personaName: 'GlobalShop Multilingual', personaSubCategory: 'D2C Global Commerce', types: ['Avatar', 'Voice'], domain: 'globalshop.io', status: 'live', sessions: 3400, created: 'Mar 15, 2026' },
+  { id: 'plugin-009', personaName: 'StreamGuide — Crime Drama', personaSubCategory: 'OTT Content Discovery', types: ['Chat'], domain: 'streamguide.tv', status: 'live', sessions: 1840, created: 'Apr 2, 2026' },
+  { id: 'plugin-010', personaName: 'ZaraSkin Sales Agent', personaSubCategory: 'D2C Skincare', types: ['Chat', 'Avatar'], domain: 'zaraskin.com/landing', status: 'live', sessions: 2800, created: 'Mar 28, 2026' },
 ];
 
 const typeConfig: Record<string, { icon: React.ReactNode; label: string; color: string; bg: string }> = {
@@ -81,6 +82,7 @@ function ManageModal({ plugin, onClose, onStatusToggle }: ManageModalProps) {
         <div className="flex items-start justify-between mb-5">
           <div>
             <h2 className="text-base font-600 text-white">{plugin.personaName}</h2>
+            <p className="text-[11px] font-500 text-purple-400/80 mt-0.5">{plugin.personaSubCategory}</p>
             <div className="flex items-center gap-1.5 mt-1">
               <Globe size={11} className="text-white/30" />
               <span className="text-xs text-white/40 font-mono">{plugin.domain}</span>
@@ -258,6 +260,7 @@ export default function PluginTable() {
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <p className="text-sm font-500 text-white truncate">{p.personaName}</p>
+                  <p className="text-[10px] font-500 text-purple-400/70 mt-0.5">{p.personaSubCategory}</p>
                   <div className="flex items-center gap-1 mt-0.5">
                     <Globe size={10} className="text-white/25 flex-shrink-0" />
                     <span className="text-xs text-white/50 font-mono truncate">{p.domain}</span>
@@ -323,6 +326,7 @@ export default function PluginTable() {
                 >
                   <td className="px-5 py-3.5">
                     <p className="text-sm font-500 text-white">{p.personaName}</p>
+                    <p className="text-[10px] font-500 text-purple-400/70 mt-0.5">{p.personaSubCategory}</p>
                   </td>
                   <td className="px-5 py-3.5">
                     <TypeBadges types={p.types} />

@@ -39,6 +39,7 @@ interface Conversation {
   userEmail: string;
   personaId: string;
   personaName: string;
+  personaSubCategory: string;
   conversationId: string;
   status: 'resolved' | 'ongoing' | 'escalated';
   channel: string;
@@ -55,6 +56,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'priya@gmail.com',
     personaId: 'PER-1001',
     personaName: 'ZaraSkin Sales Agent',
+    personaSubCategory: 'D2C Skincare',
     conversationId: 'CONV-8821',
     status: 'resolved',
     channel: 'Web Widget',
@@ -76,6 +78,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'rahul@gmail.com',
     personaId: 'PER-1002',
     personaName: 'NutriBlend Store Bot',
+    personaSubCategory: 'D2C Nutrition',
     conversationId: 'CONV-8820',
     status: 'escalated',
     channel: 'WhatsApp',
@@ -95,6 +98,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'aisha@gmail.com',
     personaId: 'PER-1003',
     personaName: 'StyleHouse Fashion Bot',
+    personaSubCategory: 'D2C Fashion',
     conversationId: 'CONV-8819',
     status: 'resolved',
     channel: 'Web Widget',
@@ -114,6 +118,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'marcus@enterprise.com',
     personaId: 'PER-1001',
     personaName: 'SalesBot Pro',
+    personaSubCategory: 'Sales Executive',
     conversationId: 'CONV-8818',
     status: 'ongoing',
     channel: 'Web Widget',
@@ -133,6 +138,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'yuki@globalco.jp',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
+    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8817',
     status: 'resolved',
     channel: 'API',
@@ -150,6 +156,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'carlos@latam.mx',
     personaId: 'PER-1003',
     personaName: 'Onboarding Guide',
+    personaSubCategory: 'Product Advisor',
     conversationId: 'CONV-8816',
     status: 'resolved',
     channel: 'Web Widget',
@@ -169,6 +176,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'sophie@paris.fr',
     personaId: 'PER-1004',
     personaName: 'HR Assistant',
+    personaSubCategory: 'HR Support Agent',
     conversationId: 'CONV-8815',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -186,6 +194,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'david@seoul.kr',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
+    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8814',
     status: 'escalated',
     channel: 'PersonaMatrix',
@@ -205,6 +214,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'emma@london.uk',
     personaId: 'PER-1001',
     personaName: 'SalesBot Pro',
+    personaSubCategory: 'Sales Executive',
     conversationId: 'CONV-8813',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -222,6 +232,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'liam@dublin.ie',
     personaId: 'PER-1003',
     personaName: 'Onboarding Guide',
+    personaSubCategory: 'Product Advisor',
     conversationId: 'CONV-8812',
     status: 'ongoing',
     channel: 'API',
@@ -239,6 +250,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'fatima@dubai.ae',
     personaId: 'PER-1004',
     personaName: 'HR Assistant',
+    personaSubCategory: 'HR Support Agent',
     conversationId: 'CONV-8811',
     status: 'resolved',
     channel: 'Web Widget',
@@ -256,6 +268,7 @@ const mockConversations: Conversation[] = [
     userEmail: 'noah@berlin.de',
     personaId: 'PER-1002',
     personaName: 'Support Agent',
+    personaSubCategory: 'Customer Support',
     conversationId: 'CONV-8810',
     status: 'resolved',
     channel: 'PersonaMatrix',
@@ -327,6 +340,7 @@ function ConversationModal({ conv, onClose }: { conv: Conversation; onClose: () 
               <span className="text-[10px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-full">{conv.personaId}</span>
               <span className="text-xs font-600 text-white/80">{conv.personaName}</span>
             </div>
+            <p className="text-[10px] font-500 text-purple-400/70 mb-0.5">{conv.personaSubCategory}</p>
             <p className="text-[10px] text-white/35">
               Conversation with <span className="text-white/55">{conv.name}</span> · {conv.conversationId} · {conv.created}
             </p>
@@ -639,7 +653,10 @@ export default function ConversationHistoryPage() {
                   </button>
                   <div className="flex items-center gap-1.5">
                     <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
-                    <span className="text-xs text-white/60">{conv.personaName}</span>
+                    <div>
+                      <span className="text-xs text-white/60">{conv.personaName}</span>
+                      <p className="text-[10px] text-purple-400/70">{conv.personaSubCategory}</p>
+                    </div>
                   </div>
                   <span className={`text-[10px] font-500 px-2.5 py-1 rounded-full border ${channelColors[conv.channel] || 'bg-white/5 text-white/40 border-white/10'}`}>
                     {conv.channel}
@@ -779,7 +796,10 @@ export default function ConversationHistoryPage() {
                       <td className="px-4 py-3.5">
                         <div className="flex items-center gap-1.5">
                           <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
-                          <span className="text-xs text-white/60 truncate">{conv.personaName}</span>
+                          <div className="min-w-0">
+                            <p className="text-xs text-white/60 truncate">{conv.personaName}</p>
+                            <p className="text-[10px] text-purple-400/70 truncate">{conv.personaSubCategory}</p>
+                          </div>
                         </div>
                       </td>
 
