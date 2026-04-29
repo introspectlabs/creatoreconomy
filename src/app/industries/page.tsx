@@ -6,6 +6,38 @@ import PublicFooter from '@/components/public/PublicFooter';
 
 const industries = [
   {
+    slug: 'd2c-commerce',
+    name: 'D2C Brands & Commerce Creators',
+    value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically, 24/7.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+    color: '#f59e0b',
+    bg: 'rgba(245,158,11,0.12)',
+    border: 'rgba(245,158,11,0.25)',
+    highlights: ['Product recommendation AI', 'Cart abandonment recovery', 'Post-purchase support', 'Upsell & cross-sell automation'],
+  },
+  {
+    slug: 'ott-streaming',
+    name: 'OTT & Streaming Platforms',
+    value: 'Deploy interactive AI personas for your streaming platform. Drive viewer retention with personalized content discovery, character-driven conversations, and episode-by-episode engagement.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
+    color: '#14b8a6',
+    bg: 'rgba(20,184,166,0.12)',
+    border: 'rgba(20,184,166,0.25)',
+    highlights: ['Personalized content discovery', 'Interactive character AI', 'Viewer retention between episodes', 'Subscription upgrade nudges'],
+  },
+  {
     slug: 'finance-trading',
     name: 'Finance & Trading Creators',
     value: 'Let your followers ask about your trading strategies, market analysis, and investment frameworks — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
@@ -19,6 +51,7 @@ const industries = [
     color: '#10b981',
     bg: 'rgba(16,185,129,0.12)',
     border: 'rgba(16,185,129,0.25)',
+    highlights: ['24/7 audience Q&A', 'Course & newsletter upsell', 'DM automation', 'Paywall-gated premium content'],
   },
   {
     slug: 'education-courses',
@@ -33,6 +66,7 @@ const industries = [
     color: '#3b82f6',
     bg: 'rgba(59,130,246,0.12)',
     border: 'rgba(59,130,246,0.25)',
+    highlights: ['AI tutor from your content', 'Student support automation', 'Enrollment conversion', 'Progress-aware responses'],
   },
   {
     slug: 'coaches',
@@ -44,42 +78,10 @@ const industries = [
         <circle cx="12" cy="7" r="4" />
       </svg>
     ),
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.25)',
-  },
-  {
-    slug: 'd2c-commerce',
-    name: 'D2C Brands & Commerce Creators',
-    value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
-      </svg>
-    ),
     color: '#ec4899',
     bg: 'rgba(236,72,153,0.12)',
     border: 'rgba(236,72,153,0.25)',
-  },
-];
-
-const comingSoonIndustries = [
-  {
-    slug: 'ott-streaming',
-    name: 'OTT & Streaming',
-    value: 'AI personas for streaming platforms — interactive characters, personalized content discovery, and viewer retention tools.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    ),
-    color: '#14b8a6',
-    bg: 'rgba(20,184,166,0.12)',
-    border: 'rgba(20,184,166,0.25)',
+    highlights: ['Client intake automation', 'Between-session engagement', 'Framework delivery at scale', '1:1 booking conversion'],
   },
 ];
 
@@ -93,28 +95,28 @@ const channels = [
 
 const differentiators = [
   {
-    title: 'Content-first AI',
-    desc: 'Deep understanding of your videos, courses, and content — not just text. Personas trained on everything you\'ve created.',
-    icon: '🎬',
+    title: 'D2C-native commerce AI',
+    desc: 'Product catalog awareness, inventory context, and checkout-optimized conversations built for direct-to-consumer brands.',
+    icon: '🛍️',
+  },
+  {
+    title: 'OTT viewer engagement',
+    desc: 'Interactive character personas, content discovery, and retention tools purpose-built for streaming platforms.',
+    icon: '📺',
+  },
+  {
+    title: 'Creator monetization',
+    desc: 'Subscription tiers, pay-per-message, and audience credits built in from day one for creator economy use cases.',
+    icon: '💰',
   },
   {
     title: 'Multi-channel deployment',
     desc: 'One persona, every channel. Web, WhatsApp, Voice, API — all from a single definition.',
     icon: '🔀',
   },
-  {
-    title: 'Persona memory',
-    desc: 'Persistent context across sessions. Personas remember users, preferences, and history.',
-    icon: '🧠',
-  },
-  {
-    title: 'Creator-ready monetization',
-    desc: 'Subscription tiers, pay-per-message, and audience credits built in from day one.',
-    icon: '💰',
-  },
 ];
 
-function IndustryCard({ industry, index }: { industry: typeof industries[0]; index: number }) {
+function IndustryCard({ industry }: { industry: typeof industries[0] }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -137,7 +139,15 @@ function IndustryCard({ industry, index }: { industry: typeof industries[0]; ind
       </div>
       <div className="flex-1">
         <h3 className="font-semibold text-white text-base mb-1">{industry.name}</h3>
-        <p className="text-sm text-white/50 leading-relaxed">{industry.value}</p>
+        <p className="text-sm text-white/50 leading-relaxed mb-3">{industry.value}</p>
+        <ul className="flex flex-col gap-1">
+          {industry.highlights.map((h) => (
+            <li key={h} className="flex items-center gap-2 text-xs" style={{ color: industry.color }}>
+              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: industry.color }} />
+              <span className="text-white/50">{h}</span>
+            </li>
+          ))}
+        </ul>
       </div>
       <Link
         href={`/industries/${industry.slug}`}
@@ -149,42 +159,6 @@ function IndustryCard({ industry, index }: { industry: typeof industries[0]; ind
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </Link>
-    </div>
-  );
-}
-
-function ComingSoonCard({ industry }: { industry: typeof comingSoonIndustries[0] }) {
-  return (
-    <div
-      className="relative rounded-2xl p-6 flex flex-col gap-4 border overflow-hidden"
-      style={{
-        background: 'rgba(255,255,255,0.02)',
-        borderColor: 'rgba(255,255,255,0.06)',
-      }}
-    >
-      <div className="absolute top-4 right-4">
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-white/5 border border-white/10 text-white/40">
-          <span className="w-1 h-1 rounded-full bg-white/30" />
-          Coming Soon
-        </span>
-      </div>
-
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center opacity-40"
-        style={{ background: `${industry.color}18`, color: industry.color }}
-      >
-        {industry.icon}
-      </div>
-      <div className="flex-1">
-        <h3 className="font-semibold text-white/40 text-base mb-1">{industry.name}</h3>
-        <p className="text-sm text-white/25 leading-relaxed">{industry.value}</p>
-      </div>
-      <div className="inline-flex items-center gap-1.5 text-sm font-medium text-white/20 cursor-default select-none">
-        View Use Cases
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </div>
     </div>
   );
 }
@@ -222,24 +196,24 @@ export default function IndustriesPage() {
         />
         <div
           className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px] opacity-10 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #10b981 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, #14b8a6 0%, transparent 70%)' }}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-              Creator Economy — 4 Verticals
+              <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
+              D2C · OTT Streaming · Creator Economy
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              AI Personas Built for{' '}
-              <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#10b981] bg-clip-text text-transparent">
-                Creator Economy
+              AI Personas for{' '}
+              <span className="bg-gradient-to-r from-[#f59e0b] via-[#14b8a6] to-[#a855f7] bg-clip-text text-transparent">
+                D2C, OTT & Creators
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              Whether you teach, trade, coach, or sell — turn your expertise into an AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.
+              Whether you sell direct-to-consumer, run a streaming platform, or monetize your audience as a creator — turn your expertise and content into AI personas that engage 24/7 and drive revenue.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -260,32 +234,66 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      {/* Three Core Use Cases Banner */}
+      <section className="py-10 border-t border-white/6 border-b border-white/6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              {
+                icon: '🛍️',
+                title: 'D2C Commerce',
+                desc: 'AI shopping assistants that know your catalog, reduce abandonment, and close sales.',
+                color: '#f59e0b',
+                bg: 'rgba(245,158,11,0.08)',
+                border: 'rgba(245,158,11,0.2)',
+              },
+              {
+                icon: '📺',
+                title: 'OTT & Streaming',
+                desc: 'Interactive viewer personas for content discovery, retention, and subscription growth.',
+                color: '#14b8a6',
+                bg: 'rgba(20,184,166,0.08)',
+                border: 'rgba(20,184,166,0.2)',
+              },
+              {
+                icon: '🎙️',
+                title: 'Creator Economy',
+                desc: 'Finance creators, educators, and coaches monetizing their audience with AI personas.',
+                color: '#a855f7',
+                bg: 'rgba(168,85,247,0.08)',
+                border: 'rgba(168,85,247,0.2)',
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl p-5 border flex items-start gap-4"
+                style={{ background: item.bg, borderColor: item.border }}
+              >
+                <div className="text-2xl flex-shrink-0">{item.icon}</div>
+                <div>
+                  <h3 className="font-semibold text-white text-sm mb-1">{item.title}</h3>
+                  <p className="text-xs text-white/45 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Industries Grid */}
       <section id="industries" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-12">
-          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Creator Verticals</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Four verticals, one platform</h2>
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Platform Verticals</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Five verticals, one platform</h2>
           <p className="text-white/50 mt-3 max-w-xl">
-            Focused on the creator economy verticals where AI personas deliver the most immediate impact on audience engagement and revenue.
+            Focused on D2C commerce, OTT streaming, and creator economy verticals where AI personas deliver the most immediate impact on audience engagement and revenue.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-          {industries.map((industry, i) => (
-            <IndustryCard key={industry.slug} industry={industry} index={i} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {industries.map((industry) => (
+            <IndustryCard key={industry.slug} industry={industry} />
           ))}
         </div>
-
-        {/* Coming Soon */}
-        {comingSoonIndustries.length > 0 && (
-          <div className="mt-8">
-            <p className="text-xs font-semibold text-white/20 uppercase tracking-widest mb-4">Future Launch</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {comingSoonIndustries.map((industry) => (
-                <ComingSoonCard key={industry.slug} industry={industry} />
-              ))}
-            </div>
-          </div>
-        )}
       </section>
 
       {/* How It Works */}
@@ -294,31 +302,31 @@ export default function IndustriesPage() {
           <div className="mb-12 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Process</p>
             <h2 className="text-3xl md:text-4xl font-bold text-white">From content to live AI persona</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona for your audience</p>
+            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona for your D2C store, OTT platform, or creator audience</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] opacity-30" />
-            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#3b82f6] to-[#10b981] opacity-30" />
+            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#f59e0b] to-[#14b8a6] opacity-30" />
+            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#14b8a6] to-[#a855f7] opacity-30" />
 
             {[
               {
                 num: '01',
                 title: 'Build Your Persona',
-                desc: 'Set up your AI persona with your name, voice, and the topics you want it to cover. No technical skills needed.',
-                color: '#7c3aed',
+                desc: 'Set up your AI persona with your brand voice, product knowledge, or creator content. No technical skills needed.',
+                color: '#f59e0b',
               },
               {
                 num: '02',
                 title: 'Upload Your Content',
-                desc: 'Feed it your videos, courses, PDFs, or blog posts. Your AI learns from everything you\'ve already created.',
-                color: '#3b82f6',
+                desc: 'Feed it your product catalog, streaming library, courses, or creator content. Your AI learns from everything you\'ve already built.',
+                color: '#14b8a6',
               },
               {
                 num: '03',
                 title: 'Deploy & Earn',
-                desc: 'Share a link, embed it on your site, or connect to WhatsApp. Your audience can start chatting — and you start earning.',
-                color: '#10b981',
+                desc: 'Embed on your storefront, OTT platform, or creator page. Your audience starts engaging — and you start converting.',
+                color: '#a855f7',
               },
             ].map((step) => (
               <div
@@ -344,7 +352,7 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 text-center">
             <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Why PersonaMatrix</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Built differently for creators</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Built differently for D2C, OTT & Creators</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {differentiators.map((d) => (
@@ -384,7 +392,7 @@ export default function IndustriesPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
           <p className="text-white/50 mb-8 max-w-xl mx-auto">
-            Join finance creators, educators, coaches, and D2C brands already using PersonaMatrix to scale their audience and income.
+            Join D2C brands, OTT platforms, finance creators, educators, and coaches already using PersonaMatrix to scale their audience and revenue.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">
