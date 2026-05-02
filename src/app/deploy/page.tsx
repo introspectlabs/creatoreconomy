@@ -99,6 +99,9 @@ export default function DeployPage() {
   const persona = personas.find((p) => p.id === selectedPersona);
   const channel = channels.find((c) => c.id === selectedChannel);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://personamat4842.builtwithrocket.new';
+  const publicChatUrl = selectedPersona ? `${siteUrl}/chat/${selectedPersona}` : '';
+
   const webSnippet = `<!-- PersonaMatrix Creator Widget -->
 <script>
   window.PersonaMatrix = {
@@ -124,6 +127,13 @@ export default function DeployPage() {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(snippet).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const handleCopyUrl = () => {
+    navigator.clipboard.writeText(publicChatUrl).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -314,6 +324,37 @@ export default function DeployPage() {
                 </button>
               ))}
             </div>
+
+            {/* Public URL preview when Text Chat is selected */}
+            {selectedChannel === 'text-chat' && selectedPersona && (
+              <div className="mb-6 rounded-2xl border border-teal-500/25 bg-teal-500/8 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-teal-400">🔗</span>
+                  <p className="text-xs font-semibold text-teal-400 uppercase tracking-wider">Public Chat URL</p>
+                </div>
+                <p className="text-xs text-white/50 mb-3">Your audience can access <span className="text-white font-medium">{persona?.name}</span> directly at:</p>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-white/10 bg-black/30">
+                    <p className="text-xs font-mono text-teal-300 truncate">{publicChatUrl}</p>
+                  </div>
+                  <button
+                    onClick={handleCopyUrl}
+                    className="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold border border-teal-500/30 text-teal-400 hover:bg-teal-500/15 transition-all"
+                  >
+                    {copied ? '✓ Copied' : 'Copy'}
+                  </button>
+                  <a
+                    href={publicChatUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-white/50 hover:text-white hover:border-white/25 transition-all"
+                  >
+                    Open ↗
+                  </a>
+                </div>
+              </div>
+            )}
+
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setStep(0)}
@@ -421,6 +462,36 @@ export default function DeployPage() {
                     </button>
                   </div>
                 </div>
+
+                {/* Public URL section for Text Chat in configure step */}
+                {selectedChannel === 'text-chat' && (
+                  <div className="rounded-xl border border-teal-500/25 bg-teal-500/8 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-teal-400">🔗</span>
+                      <p className="text-xs font-semibold text-teal-400 uppercase tracking-wider">Persona Public URL</p>
+                    </div>
+                    <p className="text-xs text-white/50 mb-3">Share this link with your audience to start chatting with <span className="text-white font-medium">{persona?.name}</span>:</p>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-white/10 bg-black/30">
+                        <p className="text-xs font-mono text-teal-300 truncate">{publicChatUrl}</p>
+                      </div>
+                      <button
+                        onClick={handleCopyUrl}
+                        className="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold border border-teal-500/30 text-teal-400 hover:bg-teal-500/15 transition-all"
+                      >
+                        {copied ? '✓ Copied' : 'Copy'}
+                      </button>
+                      <a
+                        href={publicChatUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-white/50 hover:text-white hover:border-white/25 transition-all"
+                      >
+                        Open ↗
+                      </a>
+                    </div>
+                  </div>
+                )}
               </>
             </div>
 
