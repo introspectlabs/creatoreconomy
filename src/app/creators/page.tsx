@@ -5,23 +5,22 @@ import Link from 'next/link';
 import PublicHeader from '@/components/public/PublicHeader';
 import PublicFooter from '@/components/public/PublicFooter';
 
-type CreatorVertical = 'Finance Creator' | 'Course Builder' | 'Coach';
+type CreatorCategory = 'Finance' | 'Education' | 'Coaching';
 
 interface Creator {
   id: string;
   name: string;
   slug: string;
   handle: string;
-  vertical: CreatorVertical;
+  category: CreatorCategory;
   tagline: string;
   description: string;
   avatar: string;
   avatarColor: string;
-  status: 'active' | 'training' | 'coming-soon';
   audience: string;
   topics: string[];
-  messagesTotal: number;
-  conversionFocus: string;
+  rating: number;
+  responseCount: string;
 }
 
 const creators: Creator[] = [
@@ -30,143 +29,114 @@ const creators: Creator[] = [
     name: 'Marcus Wealth',
     slug: 'marcus-wealth',
     handle: '@marcuswealth',
-    vertical: 'Finance Creator',
+    category: 'Finance',
     tagline: 'Personal finance for the 9-to-5 investor',
-    description: 'Answers questions on index investing, tax-loss harvesting, and building a $1M portfolio on a regular salary.',
+    description: 'Covers index investing, tax-loss harvesting, and building long-term wealth on a regular salary.',
     avatar: 'MW',
     avatarColor: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
-    status: 'active',
     audience: '284K followers',
     topics: ['Investing', 'Tax Strategy', 'FIRE'],
-    messagesTotal: 61400,
-    conversionFocus: 'Course enrollment',
+    rating: 4.9,
+    responseCount: '61K',
   },
   {
     id: 'c-002',
     name: 'Priya Trades',
     slug: 'priya-trades',
     handle: '@priyatrades',
-    vertical: 'Finance Creator',
+    category: 'Finance',
     tagline: 'Options trading made simple for beginners',
-    description: 'Walks through covered calls, puts, and risk management — in plain English, no jargon.',
+    description: 'Explains covered calls, puts, and risk management in plain English — no jargon, no hype.',
     avatar: 'PT',
     avatarColor: 'linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%)',
-    status: 'active',
     audience: '118K followers',
     topics: ['Options', 'Risk Management', 'Stocks'],
-    messagesTotal: 38900,
-    conversionFocus: 'Community membership',
+    rating: 4.8,
+    responseCount: '39K',
   },
   {
     id: 'c-003',
     name: 'Jordan Builds',
     slug: 'jordan-builds',
     handle: '@jordanbuilds',
-    vertical: 'Course Builder',
+    category: 'Education',
     tagline: 'No-code SaaS from idea to $10K MRR',
-    description: 'Guides students through validating, building, and launching no-code products — with real revenue milestones.',
+    description: 'Guides you through validating, building, and launching no-code products with real revenue milestones.',
     avatar: 'JB',
     avatarColor: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
-    status: 'active',
     audience: '92K followers',
     topics: ['No-Code', 'SaaS', 'Validation'],
-    messagesTotal: 47200,
-    conversionFocus: 'Course upsell',
+    rating: 4.7,
+    responseCount: '47K',
   },
   {
     id: 'c-004',
     name: 'Leila Learns',
     slug: 'leila-learns',
     handle: '@leilalearns',
-    vertical: 'Course Builder',
+    category: 'Education',
     tagline: 'UX design courses that get you hired',
-    description: 'Answers portfolio questions, critiques design work, and helps students land their first UX role.',
+    description: 'Helps with portfolio reviews, design critiques, and landing your first UX role.',
     avatar: 'LL',
     avatarColor: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-    status: 'active',
     audience: '67K followers',
     topics: ['UX Design', 'Portfolio', 'Job Search'],
-    messagesTotal: 29100,
-    conversionFocus: 'Bootcamp enrollment',
+    rating: 4.8,
+    responseCount: '29K',
   },
   {
     id: 'c-005',
     name: 'Coach Dani',
     slug: 'coach-dani',
     handle: '@coachdani',
-    vertical: 'Coach',
+    category: 'Coaching',
     tagline: 'Executive presence for first-time managers',
     description: 'Helps new managers navigate difficult conversations, set boundaries, and build leadership confidence.',
     avatar: 'CD',
     avatarColor: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)',
-    status: 'active',
     audience: '53K followers',
     topics: ['Leadership', 'Communication', 'Mindset'],
-    messagesTotal: 22700,
-    conversionFocus: '1:1 coaching booking',
+    rating: 4.9,
+    responseCount: '23K',
   },
   {
     id: 'c-006',
     name: 'Ravi Mindset',
     slug: 'ravi-mindset',
     handle: '@ravimindset',
-    vertical: 'Coach',
+    category: 'Coaching',
     tagline: 'High-performance habits for entrepreneurs',
     description: 'Covers morning routines, deep work systems, and mental resilience for founders building under pressure.',
     avatar: 'RM',
     avatarColor: 'linear-gradient(135deg, #8b5cf6 0%, #14b8a6 100%)',
-    status: 'active',
     audience: '141K followers',
     topics: ['Habits', 'Deep Work', 'Resilience'],
-    messagesTotal: 55800,
-    conversionFocus: 'Group program',
-  },
-  {
-    id: 'c-009',
-    name: 'Nina Crypto',
-    slug: 'nina-crypto',
-    handle: '@ninacrypto',
-    vertical: 'Finance Creator',
-    tagline: 'DeFi and Web3 for skeptical beginners',
-    description: 'Breaks down wallets, staking, and on-chain risk — without the hype or the shilling.',
-    avatar: 'NC',
-    avatarColor: 'linear-gradient(135deg, #f59e0b 0%, #a855f7 100%)',
-    status: 'training',
-    audience: '196K followers',
-    topics: ['DeFi', 'Web3', 'Risk'],
-    messagesTotal: 0,
-    conversionFocus: 'Newsletter subscription',
-  },
-  {
-    id: 'c-010',
-    name: 'Felix Fit',
-    slug: 'felix-fit',
-    handle: '@felixfit',
-    vertical: 'Course Builder',
-    tagline: 'Strength training programs for busy professionals',
-    description: 'Answers workout questions, adjusts programs for injuries, and keeps students accountable between sessions.',
-    avatar: 'FF',
-    avatarColor: 'linear-gradient(135deg, #ef4444 0%, #f59e0b 100%)',
-    status: 'training',
-    audience: '312K followers',
-    topics: ['Strength', 'Nutrition', 'Recovery'],
-    messagesTotal: 0,
-    conversionFocus: 'Program purchase',
+    rating: 4.7,
+    responseCount: '56K',
   },
 ];
 
-const verticalFilters = ['All', 'Finance Creator', 'Course Builder', 'Coach'] as const;
+const categoryFilters = ['All', 'Finance', 'Education', 'Coaching'] as const;
 
-const verticalMeta: Record<string, { icon: string; color: string; bg: string }> = {
-  'Finance Creator': { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
-  'Course Builder': { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
-  'Coach': { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
-};
-
-const statusColors: Record<string, string> = {
-  active: '#14b8a6',
-  training: '#f59e0b',
-  'coming-soon': '#6b7280',
+const categoryMeta: Record<string, { icon: string; color: string; bg: string; description: string }> = {
+  Finance: {
+    icon: '📈',
+    color: '#0ea5e9',
+    bg: 'rgba(14,165,233,0.12)',
+    description: 'Investing, trading & money',
+  },
+  Education: {
+    icon: '🎓',
+    color: '#a855f7',
+    bg: 'rgba(168,85,247,0.12)',
+    description: 'Courses, skills & careers',
+  },
+  Coaching: {
+    icon: '🧭',
+    color: '#10b981',
+    bg: 'rgba(16,185,129,0.12)',
+    description: 'Mindset, leadership & growth',
+  },
 };
 
 export default function CreatorsDirectoryPage() {
@@ -179,11 +149,9 @@ export default function CreatorsDirectoryPage() {
       c.tagline.toLowerCase().includes(search.toLowerCase()) ||
       c.description.toLowerCase().includes(search.toLowerCase()) ||
       c.topics.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-    const matchesFilter = activeFilter === 'All' || c.vertical === activeFilter;
+    const matchesFilter = activeFilter === 'All' || c.category === activeFilter;
     return matchesSearch && matchesFilter;
   });
-
-  const activeCount = creators.filter((c) => c.status === 'active').length;
 
   return (
     <div
@@ -193,59 +161,78 @@ export default function CreatorsDirectoryPage() {
       <PublicHeader />
 
       {/* Hero */}
-      <section className="pt-32 pb-10 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-            <span className="text-xs font-medium text-white/60">{activeCount} Creator Personas Live</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
-            Meet the{' '}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: 'linear-gradient(135deg, #a855f7, #0ea5e9)' }}
-            >
-              Creator Directory
-            </span>
-          </h1>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
-            Finance creators, course builders, and coaches — each with an AI persona that engages their audience, answers questions, and drives conversions 24/7.
-          </p>
-
-          {/* Vertical pills */}
-          <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-            {Object.entries(verticalMeta).map(([key, meta]) => (
-              <div
-                key={key}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-white/10"
-                style={{ background: meta.bg, color: meta.color }}
-              >
-                <span>{meta.icon}</span>
-                <span>{key}</span>
+      <section className="pt-32 pb-12 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
+                <span className="text-xs font-medium text-white/60">{creators.length} creators available to chat</span>
               </div>
-            ))}
+              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+                Discover creators{' '}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #a855f7, #0ea5e9)' }}
+                >
+                  you can talk to
+                </span>
+              </h1>
+              <p className="text-base text-white/50 max-w-xl leading-relaxed">
+                Browse finance experts, educators, and coaches. Ask questions, get personalised answers, and learn directly from the creators you follow.
+              </p>
+            </div>
+
+            {/* Category cards */}
+            <div className="flex gap-3 flex-wrap lg:flex-nowrap lg:flex-shrink-0">
+              {Object.entries(categoryMeta).map(([key, meta]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveFilter(activeFilter === key ? 'All' : key)}
+                  className="flex flex-col items-start gap-1 px-4 py-3 rounded-2xl border transition-all duration-200 text-left"
+                  style={{
+                    background: activeFilter === key ? meta.bg : 'rgba(255,255,255,0.03)',
+                    borderColor: activeFilter === key ? `${meta.color}40` : 'rgba(255,255,255,0.08)',
+                  }}
+                >
+                  <span className="text-lg">{meta.icon}</span>
+                  <span className="text-xs font-semibold" style={{ color: activeFilter === key ? meta.color : 'rgba(255,255,255,0.6)' }}>
+                    {key}
+                  </span>
+                  <span className="text-[10px] text-white/30 whitespace-nowrap">{meta.description}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Search + Filter */}
+      {/* Search + Filter bar */}
       <section className="px-6 pb-8">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-3 items-center">
+          <div className="relative flex-1 w-full">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
             </svg>
             <input
               type="text"
-              placeholder="Search creators, topics..."
+              placeholder="Search by name, topic, or keyword..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/20 transition-colors"
             />
           </div>
           <div className="flex gap-2 flex-wrap">
-            {verticalFilters.map((f) => (
+            {categoryFilters.map((f) => (
               <button
                 key={f}
                 onClick={() => setActiveFilter(f)}
@@ -262,147 +249,125 @@ export default function CreatorsDirectoryPage() {
       </section>
 
       {/* Creator Grid */}
-      <section className="px-6 pb-16 flex-1">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 pb-20 flex-1">
+        <div className="max-w-5xl mx-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-16 text-white/30">
-              <p className="text-lg font-medium mb-2">No creators found</p>
-              <p className="text-sm">Try a different search or filter</p>
+            <div className="text-center py-20 text-white/30">
+              <p className="text-2xl mb-2">🔍</p>
+              <p className="text-base font-medium mb-1">No creators found</p>
+              <p className="text-sm">Try a different search term or category</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((creator) => {
-                const meta = verticalMeta[creator.vertical];
+                const meta = categoryMeta[creator.category];
                 return (
                   <div
                     key={creator.id}
-                    className="group relative p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05] transition-all duration-300"
+                    className="group flex flex-col p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05] transition-all duration-300"
                   >
-                    {/* Status badge */}
-                    {creator.status !== 'active' && (
+                    {/* Header */}
+                    <div className="flex items-start gap-3 mb-4">
                       <div
-                        className="absolute top-4 right-4 px-2 py-0.5 rounded-full text-[10px] font-semibold capitalize"
-                        style={{
-                          color: statusColors[creator.status],
-                          background: `${statusColors[creator.status]}18`,
-                          border: `1px solid ${statusColors[creator.status]}30`,
-                        }}
-                      >
-                        {creator.status === 'training' ? 'Training...' : creator.status}
-                      </div>
-                    )}
-
-                    <div className="flex items-start gap-4 mb-4">
-                      {/* Avatar */}
-                      <div
-                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                        className="w-11 h-11 rounded-xl flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
                         style={{ background: creator.avatarColor }}
                       >
                         {creator.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-0.5">
-                          <h3 className="font-bold text-white text-sm">{creator.name}</h3>
-                          {creator.status === 'active' && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] flex-shrink-0" />
-                          )}
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <h3 className="font-bold text-white text-sm truncate">{creator.name}</h3>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] flex-shrink-0" title="Active" />
                         </div>
-                        <p className="text-xs text-white/40">{creator.handle}</p>
+                        <p className="text-[11px] text-white/35">{creator.handle}</p>
                       </div>
                     </div>
 
-                    {/* Vertical tag */}
-                    <div className="flex items-center gap-2 mb-3">
+                    {/* Category tag */}
+                    <div className="mb-3">
                       <span
-                        className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                         style={{ color: meta?.color, background: meta?.bg }}
                       >
-                        {meta?.icon} {creator.vertical}
+                        {meta?.icon} {creator.category}
                       </span>
                     </div>
 
-                    <p className="text-xs text-white/60 font-medium mb-1">{creator.tagline}</p>
-                    <p className="text-xs text-white/40 leading-relaxed mb-4">{creator.description}</p>
+                    {/* Tagline + description */}
+                    <p className="text-xs font-semibold text-white/80 mb-1 leading-snug">{creator.tagline}</p>
+                    <p className="text-xs text-white/40 leading-relaxed mb-4 flex-1">{creator.description}</p>
 
                     {/* Topics */}
                     <div className="flex flex-wrap gap-1.5 mb-4">
                       {creator.topics.map((t) => (
-                        <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/50">
+                        <span
+                          key={t}
+                          className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/45"
+                        >
                           {t}
                         </span>
                       ))}
                     </div>
 
-                    {/* Stats */}
+                    {/* Footer stats + CTA */}
                     <div className="flex items-center justify-between pt-3 border-t border-white/6">
-                      <div className="flex gap-4">
+                      <div className="flex gap-3">
                         <div>
                           <p className="text-xs font-semibold text-white">{creator.audience}</p>
-                          <p className="text-[10px] text-white/35">Audience</p>
+                          <p className="text-[10px] text-white/30">Followers</p>
                         </div>
-                        {creator.messagesTotal > 0 && (
-                          <div>
-                            <p className="text-xs font-semibold text-white">
-                              {creator.messagesTotal >= 1000
-                                ? `${(creator.messagesTotal / 1000).toFixed(1)}K`
-                                : creator.messagesTotal}
-                            </p>
-                            <p className="text-[10px] text-white/35">Messages</p>
-                          </div>
-                        )}
+                        <div>
+                          <p className="text-xs font-semibold text-white">⭐ {creator.rating}</p>
+                          <p className="text-[10px] text-white/30">Rating</p>
+                        </div>
                       </div>
-                      {creator.status === 'active' && (
-                        <Link
-                          href={`/creator/${creator.slug}`}
-                          className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/15 text-white/70 hover:text-white hover:border-white/30 transition-all"
-                        >
-                          View Profile →
-                        </Link>
-                      )}
+                      <Link
+                        href={`/creator/${creator.slug}`}
+                        className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/15 text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all"
+                      >
+                        View Profile →
+                      </Link>
                     </div>
                   </div>
                 );
               })}
             </div>
           )}
-        </div>
-      </section>
 
-      {/* Coming Soon — D2C */}
-      <section className="px-6 pb-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="rounded-2xl border border-white/6 bg-white/[0.02] p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-white/5 border border-white/10 text-white/40">
-                <span className="w-1 h-1 rounded-full bg-white/30" />
-                Coming Soon
-              </span>
-              <h3 className="text-sm font-semibold text-white/40">D2C Brands & OTT Platforms</h3>
-            </div>
-            <p className="text-sm text-white/25 leading-relaxed max-w-2xl">
-              We&apos;re launching creator-first. D2C brands and OTT streaming platforms are next on our roadmap — AI shopping assistants and character chat experiences coming soon.
+          {/* Results count */}
+          {filtered.length > 0 && (
+            <p className="text-center text-xs text-white/25 mt-8">
+              Showing {filtered.length} of {creators.length} creators
             </p>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Audience CTA */}
       <section className="px-6 pb-24">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto">
           <div
-            className="rounded-2xl border border-white/10 p-10"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(14,165,233,0.08) 100%)' }}
+            className="rounded-2xl border border-white/10 p-8 flex flex-col sm:flex-row items-center gap-6"
+            style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(14,165,233,0.06) 100%)' }}
           >
-            <h2 className="text-2xl font-bold text-white mb-3">Build your own AI creator persona</h2>
-            <p className="text-white/50 text-sm mb-6">
-              Join Finance creators, course builders, and coaches already using PersonaMatrix to engage their audience 24/7.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <Link href="/guest-chat" className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
-                Try Demo
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="text-lg font-bold text-white mb-2">Not sure where to start?</h2>
+              <p className="text-sm text-white/45 leading-relaxed">
+                Try a free chat with any creator. No account needed — just pick a topic and start asking.
+              </p>
+            </div>
+            <div className="flex gap-3 flex-shrink-0">
+              <Link
+                href="/guest-chat"
+                className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all whitespace-nowrap"
+              >
+                Try Free Chat
               </Link>
-              <Link href="/register" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
-                Get Started Free →
+              <Link
+                href="/register"
+                className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary whitespace-nowrap"
+              >
+                Sign Up Free →
               </Link>
             </div>
           </div>
