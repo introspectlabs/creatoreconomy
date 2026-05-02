@@ -6,22 +6,48 @@ import PublicFooter from '@/components/public/PublicFooter';
 
 const plans = [
   {
-    name: 'Creator',
+    name: 'Free',
     badge: null,
-    price: '₹3,999',
+    price: '₹0',
     priceNote: '/month',
-    desc: 'Perfect for individual creators getting started with their AI persona.',
+    desc: 'Get started for free. No credit card required. Perfect for creators exploring AI personas.',
+    color: '#94a3b8',
+    accentBg: 'from-white/4 to-transparent',
+    borderColor: 'border-white/8',
+    personas: '1 Persona',
+    channels: 'Web Chat only',
+    conversations: '100 conversations/mo',
+    features: [
+      '1 AI Creator Persona',
+      'Web Chat channel',
+      '100 conversations/month',
+      'Upload up to 3 documents',
+      'Basic analytics dashboard',
+      'PersonaMatrix branding',
+      'Community support',
+    ],
+    cta: 'Start for Free',
+    ctaHref: '/register',
+    popular: false,
+  },
+  {
+    name: 'Starter',
+    badge: null,
+    price: '₹999',
+    priceNote: '/month',
+    desc: 'For creators ready to engage their first audience. Ideal for finance educators and coaches.',
     color: '#38bdf8',
     accentBg: 'from-[#38bdf8]/8 to-transparent',
     borderColor: 'border-white/8',
     personas: '1 Persona',
     channels: 'Web Chat',
-    conversations: '500 conversations/mo',
+    conversations: '1,000 conversations/mo',
     features: [
       '1 AI Creator Persona',
       'Web Chat channel',
-      '500 conversations/month',
+      '1,000 conversations/month',
       'Upload PDFs, videos & posts',
+      'Remove PersonaMatrix branding',
       'Basic analytics',
       'Email support',
     ],
@@ -32,9 +58,9 @@ const plans = [
   {
     name: 'Pro Creator',
     badge: 'Most Popular',
-    price: '₹14,999',
+    price: '₹2,999',
     priceNote: '/month',
-    desc: 'For creators scaling their audience engagement and course monetization.',
+    desc: 'For creators scaling audience engagement, course sales, and coaching revenue.',
     color: '#a78bfa',
     accentBg: 'from-[#7c3aed]/12 to-[#38bdf8]/5',
     borderColor: 'border-[#7c3aed]/40',
@@ -49,6 +75,7 @@ const plans = [
       'Course & product promotion in chat',
       'Audience engagement analytics',
       'Embeddable JS widget',
+      'UPI & Razorpay payment integration',
       'Priority support',
     ],
     cta: 'Start Pro Trial',
@@ -75,6 +102,7 @@ const plans = [
       'White-label deployment',
       'Advanced analytics & reporting',
       'Dedicated account manager',
+      'GST invoice & annual billing',
       'SLA + 24/7 support',
     ],
     cta: 'Contact Sales',
@@ -85,6 +113,10 @@ const plans = [
 
 const faqs = [
   {
+    q: 'Is the Free plan really free forever?',
+    a: 'Yes — the Free plan is free forever with no credit card required. You get 1 persona, 100 conversations/month, and web chat. Upgrade anytime when you\'re ready to scale.',
+  },
+  {
     q: 'What counts as a conversation?',
     a: 'A conversation is a single chat session with an audience member — from their first message to when they leave or the session ends. Multiple messages in one session count as one conversation.',
   },
@@ -93,20 +125,20 @@ const faqs = [
     a: 'You can upload PDFs, course materials, blog posts, video transcripts, FAQs, and more. Your AI learns your expertise and speaks in your voice — always on-brand.',
   },
   {
+    q: 'Do you support UPI and Indian payment methods?',
+    a: 'Yes. We support UPI, Razorpay, and all major Indian payment methods. GST invoices are provided for all paid plans.',
+  },
+  {
     q: 'What happens if I exceed my conversation limit?',
     a: 'We\'ll notify you before you hit the limit. You can upgrade your plan or purchase additional conversation packs. We never cut off your AI mid-month without warning.',
   },
   {
-    q: 'Can I try before I buy?',
-    a: 'Absolutely. Try our live demo at /guest-chat with no login required. All paid plans also include a 14-day free trial.',
+    q: 'Is there an annual billing discount?',
+    a: 'Yes — annual billing saves you 20% compared to monthly. All prices are in INR and include GST invoicing for Indian businesses.',
   },
   {
     q: 'Do you support D2C brands and OTT platforms?',
     a: 'D2C brands and OTT platforms are on our roadmap and coming soon. We\'re launching creator-first — Finance creators, course builders, and coaches — and will expand to commerce and media verticals next.',
-  },
-  {
-    q: 'Do you offer annual billing?',
-    a: 'Yes — annual billing saves you 20% compared to monthly. Contact us to set up annual billing for any plan.',
   },
 ];
 
@@ -122,31 +154,31 @@ export default function PricingPage() {
         <div className="absolute top-10 right-1/4 w-[400px] h-[250px] bg-[#0ea5e9]/8 rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 text-[#a78bfa] text-xs font-semibold tracking-widest uppercase mb-6">
-            Pricing
+            Pricing — Made for India
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 leading-tight">
-            Grow your audience with{' '}
+            Start free. Scale as your{' '}
             <span className="bg-gradient-to-r from-[#a78bfa] via-[#0ea5e9] to-[#34d399] bg-clip-text text-transparent">
-              AI-powered engagement
+              audience grows
             </span>
           </h1>
           <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-4 leading-relaxed">
-            Simple, transparent pricing for creators. Start free, scale as your audience grows.
+            Transparent INR pricing for Indian creators. No hidden fees. No dollar conversions. Start free and upgrade when you&apos;re ready.
           </p>
-          <p className="text-sm text-white/35">All plans include a 14-day free trial. No credit card required.</p>
+          <p className="text-sm text-white/35">Free plan available forever. Paid plans include a 14-day free trial. GST invoices provided.</p>
         </div>
       </section>
       {/* Plans */}
       <section className="px-6 pb-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {plans?.map((plan) => (
               <div
                 key={plan?.name}
                 className={`relative flex flex-col rounded-2xl border bg-gradient-to-b ${plan?.accentBg} bg-[#0d0f1a] p-6 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] ${plan?.borderColor} ${plan?.popular ? 'shadow-[0_0_40px_rgba(124,58,237,0.2)]' : ''}`}
               >
                 {plan?.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-[#7c3aed] to-[#6d28d9] text-white shadow-lg">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-[#7c3aed] to-[#6d28d9] text-white shadow-lg whitespace-nowrap">
                     {plan?.badge}
                   </div>
                 )}
@@ -189,11 +221,31 @@ export default function PricingPage() {
                   href={plan?.ctaHref}
                   className={`w-full text-center py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
                     plan?.popular
-                      ? 'btn-primary text-white' :'border border-white/15 text-white hover:bg-white/8'
+                      ? 'btn-primary text-white'
+                      : plan?.name === 'Free' ?'bg-white/10 text-white hover:bg-white/15 border border-white/15' :'border border-white/15 text-white hover:bg-white/8'
                   }`}
                 >
                   {plan?.cta}
                 </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* India trust strip */}
+      <section className="px-6 pb-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-2xl border border-white/8 p-6 flex flex-wrap justify-center gap-8 bg-white/2">
+            {[
+              { icon: '🇮🇳', label: 'INR Pricing', sub: 'No dollar conversion' },
+              { icon: '💳', label: 'UPI & Razorpay', sub: 'All Indian payment methods' },
+              { icon: '🧾', label: 'GST Invoices', sub: 'For all paid plans' },
+              { icon: '🔒', label: 'Data in India', sub: 'Compliant with IT Act' },
+            ]?.map((item) => (
+              <div key={item?.label} className="flex flex-col items-center text-center gap-1">
+                <span className="text-2xl">{item?.icon}</span>
+                <span className="text-sm font-semibold text-white">{item?.label}</span>
+                <span className="text-xs text-white/40">{item?.sub}</span>
               </div>
             ))}
           </div>
@@ -272,7 +324,7 @@ export default function PricingPage() {
               Ready to build your AI persona?
             </h2>
             <p className="text-white/50 text-sm mb-6">
-              Turn your expertise into a 24/7 AI. Engage your audience. Monetize your content.
+              Start free today. No credit card. No dollar billing. Built for Indian creators.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/guest-chat" className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
