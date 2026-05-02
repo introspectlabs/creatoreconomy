@@ -41,6 +41,25 @@ interface Persona {
   rating: number;
 }
 
+type Domain = 'Finance' | 'Education' | 'Coaching';
+
+interface Creator {
+  id: string;
+  name: string;
+  slug: string;
+  handle: string;
+  domains: Domain[];
+  emoji: string;
+  tagline: string;
+  description: string;
+  followers: string;
+  isFollowing: boolean;
+  isNew?: boolean;
+  rating: number;
+  personaCount: number;
+  personaLabels: string[];
+}
+
 interface Activity {
   id: string;
   type: 'chat' | 'follow' | 'content';
@@ -58,6 +77,12 @@ interface CreditPack {
   popular?: boolean;
   perChat: string;
 }
+
+const domainMeta: Record<Domain, { icon: string; color: string; bg: string }> = {
+  Finance: { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
+  Education: { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
+  Coaching: { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
+};
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const FEATURED_PERSONAS: Persona[] = [
@@ -130,6 +155,101 @@ const FEATURED_PERSONAS: Persona[] = [
   },
 ];
 
+const FEATURED_CREATORS: Creator[] = [
+  {
+    id: 'c1',
+    name: 'Marcus Wealth',
+    slug: 'marcus-wealth',
+    handle: '@marcuswealth',
+    domains: ['Finance', 'Coaching'],
+    emoji: '💰',
+    tagline: 'Personal finance meets high-performance habits',
+    description: 'Covers index investing, tax-loss harvesting, and wealth building — plus the mindset and habits that make it stick.',
+    followers: '284K',
+    isFollowing: true,
+    rating: 4.9,
+    personaCount: 4,
+    personaLabels: ['Wealth Advisor', 'FIRE Coach', 'Tax Strategist', 'Mindset Mentor'],
+  },
+  {
+    id: 'c2',
+    name: 'Priya Trades',
+    slug: 'priya-trades',
+    handle: '@priyatrades',
+    domains: ['Finance', 'Education'],
+    emoji: '📊',
+    tagline: 'Options trading + financial literacy for beginners',
+    description: 'Explains covered calls, puts, and risk management in plain English — and teaches the financial fundamentals behind every trade.',
+    followers: '118K',
+    isFollowing: false,
+    isNew: true,
+    rating: 4.8,
+    personaCount: 3,
+    personaLabels: ['Options Trader', 'Finance Educator', 'Risk Coach'],
+  },
+  {
+    id: 'c3',
+    name: 'Jordan Builds',
+    slug: 'jordan-builds',
+    handle: '@jordanbuilds',
+    domains: ['Education', 'Coaching'],
+    emoji: '🚀',
+    tagline: 'No-code SaaS from idea to $10K MRR — with coaching',
+    description: 'Guides you through validating, building, and launching no-code products — and coaches you through the founder mindset challenges.',
+    followers: '92K',
+    isFollowing: false,
+    rating: 4.7,
+    personaCount: 5,
+    personaLabels: ['SaaS Educator', 'Validation Coach', 'Product Strategist', 'Launch Advisor', 'Mindset Coach'],
+  },
+  {
+    id: 'c4',
+    name: 'Coach Dani',
+    slug: 'coach-dani',
+    handle: '@coachdani',
+    domains: ['Coaching', 'Education', 'Finance'],
+    emoji: '🧭',
+    tagline: 'Executive presence, leadership skills & financial confidence',
+    description: 'Helps new managers navigate difficult conversations and build leadership confidence — plus a finance persona for comp and equity.',
+    followers: '53K',
+    isFollowing: false,
+    isNew: true,
+    rating: 4.9,
+    personaCount: 3,
+    personaLabels: ['Leadership Coach', 'Communication Trainer', 'Comp & Equity Advisor'],
+  },
+  {
+    id: 'c5',
+    name: 'Leila Learns',
+    slug: 'leila-learns',
+    handle: '@leilalearns',
+    domains: ['Education', 'Coaching'],
+    emoji: '🎨',
+    tagline: 'UX design courses + career coaching that get you hired',
+    description: 'Helps with portfolio reviews, design critiques, and landing your first UX role — with dedicated coaching personas for job seekers.',
+    followers: '67K',
+    isFollowing: true,
+    rating: 4.8,
+    personaCount: 2,
+    personaLabels: ['UX Educator', 'Career Coach'],
+  },
+  {
+    id: 'c6',
+    name: 'Ravi Mindset',
+    slug: 'ravi-mindset',
+    handle: '@ravimindset',
+    domains: ['Coaching', 'Finance'],
+    emoji: '🧠',
+    tagline: 'High-performance habits for entrepreneurs building wealth',
+    description: 'Covers morning routines, deep work systems, and mental resilience for founders — plus a finance persona for bootstrapped business money management.',
+    followers: '141K',
+    isFollowing: false,
+    rating: 4.7,
+    personaCount: 6,
+    personaLabels: ['Performance Coach', 'Deep Work Advisor', 'Resilience Mentor', 'Business Finance Coach', 'Habit Architect', 'Founder Strategist'],
+  },
+];
+
 const PERSONA_SLUGS: Record<string, string> = {
   'Aria Sales': 'aria-sales',
   'Support Bot v2': 'support-bot-v2',
@@ -156,6 +276,8 @@ const CREDIT_PACKS: CreditPack[] = [
   { id: 'p3', chats: 100, price: 15, label: '100 Chats', perChat: '$0.15' },
   { id: 'p4', chats: 300, price: 39, label: '300 Chats', perChat: '$0.13' },
 ];
+
+const DOMAIN_FILTERS = ['All', 'Finance', 'Education', 'Coaching'] as const;
 
 const FREE_CHAT_LIMIT = 5;
 
@@ -421,7 +543,9 @@ function BuyCreditsModal({ onClose, onPurchase }: { onClose: () => void; onPurch
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 export default function AudienceDashboardPage() {
   const [personas, setPersonas] = useState<Persona[]>(FEATURED_PERSONAS);
+  const [creators, setCreators] = useState<Creator[]>(FEATURED_CREATORS);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [activeDomain, setActiveDomain] = useState<string>('All');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [freeChatsUsed, setFreeChatsUsed] = useState(4);
   const [credits, setCredits] = useState(0);
@@ -430,6 +554,10 @@ export default function AudienceDashboardPage() {
 
   const toggleFollow = (id: string) => {
     setPersonas((prev) => prev.map((p) => (p.id === id ? { ...p, isFollowing: !p.isFollowing } : p)));
+  };
+
+  const toggleFollowCreator = (id: string) => {
+    setCreators((prev) => prev.map((c) => (c.id === id ? { ...c, isFollowing: !c.isFollowing } : c)));
   };
 
   const handleChatClick = (e: React.MouseEvent) => {
@@ -448,6 +576,7 @@ export default function AudienceDashboardPage() {
   };
 
   const filtered = activeCategory === 'All' ? personas : personas.filter((p) => p.category === activeCategory);
+  const filteredCreators = activeDomain === 'All' ? creators : creators.filter((c) => c.domains.includes(activeDomain as Domain));
   const following = personas.filter((p) => p.isFollowing);
   const freeRemaining = Math.max(0, FREE_CHAT_LIMIT - freeChatsUsed);
 
@@ -594,78 +723,123 @@ export default function AudienceDashboardPage() {
                     <span className="w-1.5 h-4 rounded-full bg-[#7c3aed]" />
                     Discover Creators
                   </h2>
+                  <Link href="/audience-discover" className="text-xs text-[#6b7ff0] hover:text-[#a5b4fc] transition-colors">
+                    View all →
+                  </Link>
                 </div>
 
-                {/* Category filter */}
+                {/* Multi-domain callout */}
+                <div className="mb-4 flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+                  <span className="text-base">🎭</span>
+                  <p className="text-xs text-white/45 leading-relaxed">
+                    <span className="text-white/70 font-medium">Creators aren&apos;t limited to one niche.</span>{' '}
+                    Each creator builds expert personas across finance, education, coaching, and more.
+                  </p>
+                </div>
+
+                {/* Domain filter */}
                 <div className="flex gap-2 overflow-x-auto pb-2 mb-4" style={{ scrollbarWidth: 'none' }}>
-                  {CATEGORIES.map((cat) => (
+                  {DOMAIN_FILTERS.map((f) => (
                     <button
-                      key={cat}
+                      key={f}
                       type="button"
-                      onClick={() => setActiveCategory(cat)}
-                      className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 ${
-                        activeCategory === cat
+                      onClick={() => setActiveDomain(f)}
+                      className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 ${
+                        activeDomain === f
                           ? 'bg-[#6b7ff0] text-white'
                           : 'bg-white/5 text-white/50 border border-white/10 hover:bg-white/10 hover:text-white'
                       }`}
                     >
-                      {cat}
+                      {f !== 'All' && <span>{domainMeta[f as Domain]?.icon}</span>}
+                      {f}
                     </button>
                   ))}
                 </div>
 
-                {/* Persona grid */}
+                {/* Creator grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filtered.map((persona) => (
+                  {filteredCreators.map((creator) => (
                     <div
-                      key={persona.id}
-                      className="relative flex flex-col gap-3 p-5 rounded-2xl border border-white/10 bg-white/4 hover:bg-white/6 transition-all duration-150 group"
+                      key={creator.id}
+                      className="relative flex flex-col gap-3 p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-150 group"
                     >
-                      {persona.isNew && (
+                      {creator.isNew && (
                         <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#7c3aed]/20 text-[#a78bfa] border border-[#7c3aed]/30">
                           NEW
                         </span>
                       )}
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl bg-[#6b7ff0]/10 flex items-center justify-center text-2xl flex-shrink-0">
-                          {persona.emoji}
+                          {creator.emoji}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-bold text-white truncate">{persona.name}</p>
-                          <p className="text-xs text-white/40 truncate">by {persona.creator}</p>
+                          <p className="text-sm font-bold text-white truncate">{creator.name}</p>
+                          <p className="text-xs text-white/40 truncate">{creator.handle}</p>
                         </div>
                       </div>
-                      <p className="text-xs text-white/50 leading-relaxed line-clamp-2">{persona.description}</p>
-                      <div className="flex items-center gap-1 text-amber-400">
-                        <Star size={11} fill="currentColor" />
-                        <span className="text-[11px] font-semibold text-white/60">{persona.rating}</span>
-                        <span className="text-[11px] text-white/30 ml-1">{persona.followers} followers</span>
+
+                      {/* Domain tags */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {creator.domains.map((d) => (
+                          <span
+                            key={d}
+                            className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold"
+                            style={{ background: domainMeta[d].bg, color: domainMeta[d].color, border: `1px solid ${domainMeta[d].color}30` }}
+                          >
+                            {domainMeta[d].icon} {d}
+                          </span>
+                        ))}
+                        {creator.domains.length > 1 && (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/5 text-white/40 border border-white/10">
+                            multi-domain
+                          </span>
+                        )}
                       </div>
-                      <div className="flex items-center justify-between mt-auto pt-1">
+
+                      <p className="text-xs text-white/50 leading-relaxed line-clamp-2">{creator.description}</p>
+
+                      {/* Persona preview */}
+                      <div className="flex flex-wrap gap-1">
+                        {creator.personaLabels.slice(0, 2).map((label) => (
+                          <span key={label} className="px-2 py-0.5 rounded-md text-[10px] text-white/45 bg-white/5 border border-white/8">
+                            🎭 {label}
+                          </span>
+                        ))}
+                        {creator.personaLabels.length > 2 && (
+                          <span className="px-2 py-0.5 rounded-md text-[10px] text-white/30 bg-white/5 border border-white/8">
+                            +{creator.personaLabels.length - 2} more
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Stats */}
+                      <div className="flex items-center gap-3 text-[11px]">
+                        <div className="flex items-center gap-1 text-amber-400">
+                          <Star size={11} fill="currentColor" />
+                          <span className="text-white/60">{creator.rating}</span>
+                        </div>
+                        <span className="text-white/30">{creator.followers} followers</span>
+                        <span className="text-white/30">🎭 {creator.personaCount} personas</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 mt-auto pt-1">
                         <Link
-                          href={`/chat/${PERSONA_SLUGS[persona.name]}`}
-                          onClick={handleChatClick}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
-                            freeChatsUsed >= FREE_CHAT_LIMIT && credits === 0
-                              ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25' :'bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10'
-                          }`}
+                          href={`/creator/${creator.slug}`}
+                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all"
                         >
-                          {freeChatsUsed >= FREE_CHAT_LIMIT && credits === 0 ? (
-                            <><CreditCard size={11} /> Buy to Chat</>
-                          ) : (
-                            <><MessageSquare size={11} /> Chat</>
-                          )}
+                          <MessageSquare size={12} /> View
                         </Link>
                         <button
                           type="button"
-                          onClick={() => toggleFollow(persona.id)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
-                            persona.isFollowing
+                          onClick={() => toggleFollowCreator(creator.id)}
+                          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                            creator.isFollowing
                               ? 'bg-[#6b7ff0]/15 text-[#6b7ff0] border border-[#6b7ff0]/30 hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/20'
                               : 'bg-[#6b7ff0] text-white hover:bg-[#5a6ee0]'
                           }`}
                         >
-                          {persona.isFollowing ? 'Following' : 'Follow'}
+                          <Heart size={12} fill={creator.isFollowing ? 'currentColor' : 'none'} />
+                          {creator.isFollowing ? 'Following' : 'Follow'}
                         </button>
                       </div>
                     </div>

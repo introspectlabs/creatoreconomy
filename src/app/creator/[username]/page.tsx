@@ -21,6 +21,8 @@ Our personas are used by 200+ companies worldwide to handle millions of conversa
   verified: true,
   avatar: 'PM',
   coverGradient: 'linear-gradient(135deg, #1a0533 0%, #0f1a3a 50%, #0a1628 100%)',
+  domains: ['Finance', 'Education', 'Coaching'] as const,
+  personaLabels: ['Wealth Advisor', 'FIRE Coach', 'Tax Strategist', 'SaaS Educator', 'Leadership Coach', 'Mindset Mentor', 'UX Educator', 'Career Coach', 'Options Trader', 'Finance Educator', 'Performance Coach', 'Deep Work Advisor'],
   stats: {
     totalPersonas: 12,
     totalConversations: '240K+',
@@ -80,6 +82,14 @@ Our personas are used by 200+ companies worldwide to handle millions of conversa
     { name: 'AWS Advanced Partner', year: '2025' },
     { name: 'ISO 27001', year: '2025' },
   ],
+};
+
+type Domain = 'Finance' | 'Education' | 'Coaching';
+
+const domainMeta: Record<Domain, { icon: string; color: string; bg: string }> = {
+  Finance: { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
+  Education: { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
+  Coaching: { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
 };
 
 const statusColors: Record<string, string> = {
@@ -215,7 +225,7 @@ export default function CreatorProfilePage() {
 
           {/* Quick stats strip */}
           <div
-            className="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden mb-8"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden mb-6"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             {[
@@ -233,6 +243,33 @@ export default function CreatorProfilePage() {
                 <span className="text-[10px] text-white/35 uppercase tracking-wider mt-0.5">{stat.label}</span>
               </div>
             ))}
+          </div>
+
+          {/* Domain tags + multi-domain callout */}
+          <div className="mb-6 flex flex-col gap-3">
+            <div className="flex flex-wrap gap-2">
+              {creator.domains.map((d) => (
+                <span
+                  key={d}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
+                  style={{ background: domainMeta[d].bg, color: domainMeta[d].color, border: `1px solid ${domainMeta[d].color}30` }}
+                >
+                  {domainMeta[d].icon} {d}
+                </span>
+              ))}
+              {creator.domains.length > 1 && (
+                <span className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 text-white/50 border border-white/10">
+                  🎭 multi-domain creator
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+              <span className="text-base">🎭</span>
+              <p className="text-xs text-white/45 leading-relaxed">
+                <span className="text-white/70 font-medium">This creator spans multiple domains.</span>{' '}
+                Each persona covers a different area of expertise — finance, education, coaching, and more — so you get the full picture.
+              </p>
+            </div>
           </div>
 
           {/* Tabs */}
