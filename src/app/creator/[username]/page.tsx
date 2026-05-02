@@ -198,7 +198,7 @@ export default function CreatorProfilePage() {
                 Follow
               </button>
               <Link
-                href={`/chat/${personas[0]?.slug || 'aria-sales'}`}
+                href={`/creator/${params?.username || 'personamatrix'}/persona/${personas[0]?.slug || 'aria-sales'}`}
                 className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
               >
@@ -462,7 +462,7 @@ export default function CreatorProfilePage() {
                   {activePersonas.slice(0, 4).map((p) => (
                     <Link
                       key={p.id}
-                      href={`/chat/${p.slug}`}
+                      href={`/creator/${params?.username || 'personamatrix'}/persona/${p.slug}`}
                       className="flex items-center gap-3 p-2.5 rounded-xl transition-all hover:bg-white/5 group"
                     >
                       <div
@@ -584,7 +584,7 @@ export default function CreatorProfilePage() {
 
                     {isActive ? (
                       <Link
-                        href={`/chat/${persona.slug}`}
+                        href={`/creator/${params?.username || 'personamatrix'}/persona/${persona.slug}`}
                         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                         style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
                       >
