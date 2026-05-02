@@ -90,7 +90,7 @@ const statusColors: Record<string, string> = {
   archived: '#6b7280',
 };
 
-type TabType = 'overview' | 'personas' | 'knowledge' | 'reviews';
+type TabType = 'overview' | 'personas' | 'reviews';
 
 export default function CreatorProfilePage() {
   const params = useParams();
@@ -103,7 +103,6 @@ export default function CreatorProfilePage() {
   const tabs: { id: TabType; label: string; count?: number }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'personas', label: 'Personas', count: activePersonas.length },
-    { id: 'knowledge', label: 'Knowledge' },
     { id: 'reviews', label: 'Reviews', count: creator.socialProof.length },
   ];
 
@@ -205,7 +204,7 @@ export default function CreatorProfilePage() {
 
           {/* Quick stats strip */}
           <div
-            className="grid grid-cols-3 sm:grid-cols-6 gap-px rounded-2xl overflow-hidden mb-8"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden mb-8"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             {[
@@ -213,8 +212,6 @@ export default function CreatorProfilePage() {
               { label: 'Conversations', value: creator.stats.totalConversations },
               { label: 'Avg Rating', value: `${creator.stats.avgRating}★` },
               { label: 'Followers', value: creator.stats.totalFollowers },
-              { label: 'Response Rate', value: creator.stats.responseRate },
-              { label: 'Avg Speed', value: creator.stats.avgResponseTime },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -384,7 +381,7 @@ export default function CreatorProfilePage() {
               </div>
             </div>
 
-            {/* Right: Trust + Certs + Quick Personas */}
+            {/* Right: Trust + Quick Personas */}
             <div className="flex flex-col gap-6">
 
               {/* Trust Signals */}
@@ -397,7 +394,7 @@ export default function CreatorProfilePage() {
                   Trust & Safety
                 </h3>
                 <div className="space-y-3">
-                  {creator.trustSignals.map((signal, i) => (
+                  {creator.trustSignals.slice(0, 1).map((signal, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <div
                         className="w-7 h-7 rounded-lg flex items-center justify-center text-xs flex-shrink-0 mt-0.5"
@@ -409,29 +406,6 @@ export default function CreatorProfilePage() {
                         <p className="text-xs font-semibold text-white/80">{signal.label}</p>
                         <p className="text-[11px] text-white/35 mt-0.5 leading-relaxed">{signal.detail}</p>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Certifications */}
-              <div
-                className="rounded-2xl p-5"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                  <span className="w-1 h-3.5 rounded-full" style={{ background: 'linear-gradient(#f59e0b, #ef4444)' }} />
-                  Certifications
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {creator.certifications.map((cert, i) => (
-                    <div
-                      key={i}
-                      className="rounded-xl p-3 text-center"
-                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    >
-                      <p className="text-[11px] font-semibold text-white/70 leading-tight">{cert.name}</p>
-                      <p className="text-[10px] text-white/30 mt-1">{cert.year}</p>
                     </div>
                   ))}
                 </div>
@@ -485,7 +459,6 @@ export default function CreatorProfilePage() {
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredPersonas.map((persona) => {
-                const statusColor = statusColors[persona.status] || '#6b7280';
                 const isActive = persona.status === 'active';
                 return (
                   <div
@@ -507,50 +480,9 @@ export default function CreatorProfilePage() {
                         {persona.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-semibold text-white truncate">{persona.name}</h3>
-                          <span
-                            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-semibold uppercase tracking-wider flex-shrink-0"
-                            style={{
-                              background: `${statusColor}18`,
-                              color: statusColor,
-                              border: `1px solid ${statusColor}30`,
-                            }}
-                          >
-                            <span className="w-1 h-1 rounded-full" style={{ background: statusColor }} />
-                            {persona.status}
-                          </span>
-                        </div>
-                        <p className="text-xs text-white/40 mt-0.5 line-clamp-2 leading-relaxed">{persona.description}</p>
+                        <h3 className="text-sm font-semibold text-white truncate mb-1">{persona.name}</h3>
+                        <p className="text-xs text-white/40 line-clamp-3 leading-relaxed">{persona.description}</p>
                       </div>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70">{persona.knowledgeChunks > 0 ? `${(persona.knowledgeChunks / 1000).toFixed(1)}K` : '—'}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Knowledge</p>
-                      </div>
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70">{persona.messagesTotal > 0 ? `${(persona.messagesTotal / 1000).toFixed(0)}K` : '—'}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Chats</p>
-                      </div>
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70 truncate">{persona.language.split(',')[0]}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Lang</p>
-                      </div>
-                    </div>
-
-                    {/* Channels */}
-                    <div className="flex flex-wrap gap-1">
-                      {persona.channels.map((ch) => (
-                        <span
-                          key={ch}
-                          className="text-[10px] text-white/30 bg-white/5 border border-white/8 px-1.5 py-0.5 rounded-md"
-                        >
-                          {ch}
-                        </span>
-                      ))}
                     </div>
 
                     {isActive ? (
@@ -566,136 +498,12 @@ export default function CreatorProfilePage() {
                       </Link>
                     ) : (
                       <div className="w-full flex items-center justify-center py-2.5 rounded-xl text-sm text-white/25 bg-white/4 border border-white/8 cursor-not-allowed">
-                        {persona.status === 'training' ? 'Training in progress…' : 'Unavailable'}
+                        Unavailable
                       </div>
                     )}
                   </div>
                 );
               })}
-            </div>
-          </div>
-        )}
-
-        {/* ── KNOWLEDGE TAB ── */}
-        {activeTab === 'knowledge' && (
-          <div className="flex flex-col gap-6">
-            {/* Knowledge stats bento */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {creator.knowledgeSources.map((ks, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl p-5 flex flex-col gap-3"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <span className="text-2xl">{ks.icon}</span>
-                  <div>
-                    <p className="text-2xl font-bold text-white">{ks.count}</p>
-                    <p className="text-xs font-semibold text-white/60 mt-0.5">{ks.label}</p>
-                    <p className="text-[11px] text-white/30 mt-1 leading-relaxed">{ks.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Knowledge methodology */}
-            <div
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <h2 className="text-base font-semibold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full" style={{ background: 'linear-gradient(#7c3aed, #3b82f6)' }} />
-                How We Build Knowledge
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  {
-                    step: '01',
-                    title: 'Domain Research',
-                    desc: 'We start with deep industry research — collecting authoritative sources, expert documentation, and real-world use cases specific to each persona\'s domain.',
-                    color: '#7c3aed',
-                  },
-                  {
-                    step: '02',
-                    title: 'Knowledge Curation',
-                    desc: 'Raw data is cleaned, structured, and chunked into semantic units. We remove noise, resolve contradictions, and ensure factual accuracy before ingestion.',
-                    color: '#3b82f6',
-                  },
-                  {
-                    step: '03',
-                    title: 'Persona Training',
-                    desc: 'Each persona is fine-tuned on curated data with specific tone, personality, and response style guidelines. We run hundreds of test conversations before launch.',
-                    color: '#14b8a6',
-                  },
-                  {
-                    step: '04',
-                    title: 'Continuous Improvement',
-                    desc: 'Live conversations feed back into the knowledge base. We monitor accuracy, flag gaps, and update knowledge weekly to keep personas current and reliable.',
-                    color: '#f59e0b',
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.step}
-                    className="flex gap-4 p-4 rounded-xl"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
-                  >
-                    <div
-                      className="text-xs font-black flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
-                      style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
-                    >
-                      {item.step}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white/80 mb-1">{item.title}</p>
-                      <p className="text-xs text-white/45 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Per-persona knowledge breakdown */}
-            <div
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <h2 className="text-base font-semibold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full" style={{ background: 'linear-gradient(#7c3aed, #3b82f6)' }} />
-                Persona Knowledge Breakdown
-              </h2>
-              <div className="space-y-3">
-                {personas.filter((p) => p.knowledgeChunks > 0).sort((a, b) => b.knowledgeChunks - a.knowledgeChunks).map((p) => {
-                  const maxChunks = 12400;
-                  const pct = Math.round((p.knowledgeChunks / maxChunks) * 100);
-                  return (
-                    <div key={p.id} className="flex items-center gap-3">
-                      <div
-                        className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
-                      >
-                        {p.avatar}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium text-white/70 truncate">{p.name}</span>
-                          <span className="text-xs text-white/35 flex-shrink-0 ml-2">{p.knowledgeChunks.toLocaleString()} chunks</span>
-                        </div>
-                        <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                          <div
-                            className="h-full rounded-full transition-all"
-                            style={{
-                              width: `${pct}%`,
-                              background: 'linear-gradient(90deg, #7c3aed, #3b82f6)',
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           </div>
         )}
