@@ -5,35 +5,30 @@ import Link from 'next/link';
 interface Message {
   role: 'user' | 'ai';
   text: string;
-  product?: { name: string; price: string; emoji: string };
 }
 
 const suggestedPrompts = [
-  'Recommend a moisturizer for oily skin',
-  'Compare your top 2 serums',
-  'What\'s best for sensitive skin?',
-  'Do you have SPF products?',
+  'How do I start investing in mutual funds?',
+  'What is the difference between SIP and lump sum?',
+  'How much should I save each month?',
+  'Best way to build an emergency fund?',
 ];
 
-const aiResponses: Record<string, { text: string; product?: { name: string; price: string; emoji: string } }> = {
+const aiResponses: Record<string, { text: string }> = {
   default: {
-    text: 'Great question! Based on your needs, I\'d recommend checking out our bestsellers. Would you like me to narrow it down by skin type or concern?',
+    text: 'Great question! I\'d love to help you with that. Could you share a bit more about your current financial situation or what specific goal you\'re working towards?',
   },
-  'recommend a moisturizer for oily skin': {
-    text: 'For oily skin, our Matte Control Gel SPF 30 is the #1 pick — lightweight, non-comedogenic, and controls shine all day. It\'s our bestseller for oily skin types! 🎯',
-    product: { name: 'Matte Control Gel SPF 30', price: '₹899', emoji: '🧴' },
+  'how do i start investing in mutual funds?': {
+    text: 'Starting with mutual funds is simpler than most people think! Here\'s my recommended path:\n\n1. **Open a KYC-verified account** — use any SEBI-registered platform (Zerodha Coin, Groww, or Kuvera).\n2. **Start with an index fund** — Nifty 50 or Nifty Next 50 index funds are low-cost and diversified.\n3. **Set up a monthly SIP** — even ₹500/month builds the habit.\n\nWant me to walk you through picking your first fund?',
   },
-  'compare your top 2 serums': {
-    text: 'Our top 2 serums are:\n\n1. **Vitamin C Brightening Serum** — for dull/uneven skin, fades dark spots, morning use.\n2. **Hyaluronic Acid Plump Serum** — for dehydrated skin, deep moisture, day & night.\n\nWhich skin concern fits you better?',
-    product: { name: 'Vitamin C Brightening Serum', price: '₹1,299', emoji: '✨' },
+  'what is the difference between sip and lump sum?': {
+    text: 'Great question! Here\'s the key difference:\n\n**SIP (Systematic Investment Plan)**\n• Invest a fixed amount every month\n• Averages out market ups and downs (rupee cost averaging)\n• Best for salaried individuals with regular income\n\n**Lump Sum**\n• Invest a large amount at once\n• Works best when markets are at a low\n• Higher risk if you invest at a market peak\n\nFor most beginners, SIP is the safer and smarter choice. 📈',
   },
-  "what's best for sensitive skin?": {
-    text: 'For sensitive skin, I always recommend our Calm & Soothe range — fragrance-free, dermatologist tested, and gentle enough for daily use. The Barrier Repair Cream is our #1 for sensitive skin.',
-    product: { name: 'Barrier Repair Cream', price: '₹749', emoji: '🌿' },
+  'how much should i save each month?': {
+    text: 'A solid rule of thumb is the **50-30-20 rule**:\n\n• **50%** of income → Needs (rent, food, bills)\n• **30%** → Wants (dining out, entertainment)\n• **20%** → Savings & investments\n\nIf you\'re just starting out, even 10% is a great first step. The key is consistency — automate your SIP so you invest before you spend. What\'s your monthly take-home income? I can give you a more personalised breakdown.',
   },
-  'do you have spf products?': {
-    text: 'Yes! We have 3 SPF options:\n• Matte Control Gel SPF 30 (oily skin)\n• Hydra Shield SPF 50 (dry/normal skin)\n• Invisible Sunscreen SPF 50+ (all skin types)\n\nWhich skin type are you shopping for?',
-    product: { name: 'Invisible Sunscreen SPF 50+', price: '₹999', emoji: '☀️' },
+  'best way to build an emergency fund?': {
+    text: 'An emergency fund is your financial safety net — here\'s how to build one:\n\n**Target:** 3–6 months of monthly expenses\n\n**Where to keep it:**\n• High-yield savings account (4–5% interest)\n• Liquid mutual funds (better returns, easy withdrawal)\n\n**How to build it fast:**\n• Set aside 10–15% of income every month\n• Park any bonuses or windfalls here first\n• Don\'t touch it unless it\'s a real emergency\n\nOnce your emergency fund is set, you can invest the rest more aggressively. 💪',
   },
 };
 
@@ -41,7 +36,7 @@ export default function GuestChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'ai',
-      text: 'Hi! I\'m Glow AI, your personal skincare assistant. I can help you find the perfect products for your skin type, compare options, and answer any questions. What are you looking for today? 😊',
+      text: 'Hi! I\'m Arjun AI — your personal finance guide. I can help you understand investing, build a savings plan, and answer any money questions you have. What would you like to explore today? 😊',
     },
   ]);
   const [input, setInput] = useState('');
@@ -67,7 +62,7 @@ export default function GuestChatPage() {
     setTimeout(() => {
       const key = text.toLowerCase().trim();
       const response = aiResponses[key] || aiResponses['default'];
-      const aiMsg: Message = { role: 'ai', text: response.text, product: response.product };
+      const aiMsg: Message = { role: 'ai', text: response.text };
       setMessages((prev) => [...prev, aiMsg]);
       setIsTyping(false);
       if (newCount >= 3) setShowCta(true);
@@ -92,14 +87,14 @@ export default function GuestChatPage() {
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </Link>
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#7c3aed] flex items-center justify-center text-sm font-bold">
-            G
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#14b8a6] flex items-center justify-center text-sm font-bold">
+            A
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">Glow AI — Skincare Assistant</p>
+            <p className="text-sm font-semibold text-white">Arjun AI — Finance Educator</p>
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              <span className="text-[11px] text-white/40">Demo persona · D2C Skincare Brand</span>
+              <span className="text-[11px] text-white/40">Demo persona · Creator AI</span>
             </div>
           </div>
         </div>
@@ -119,8 +114,8 @@ export default function GuestChatPage() {
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-3`}>
               {msg.role === 'ai' && (
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#7c3aed] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1">
-                  G
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#14b8a6] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1">
+                  A
                 </div>
               )}
               <div className="flex flex-col gap-2 max-w-[80%]">
@@ -131,33 +126,14 @@ export default function GuestChatPage() {
                 >
                   {msg.text}
                 </div>
-                {msg.product && (
-                  <div className="flex items-center gap-3 p-3 rounded-xl border border-[#14b8a6]/25 bg-[#14b8a6]/8">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#14b8a6]/20 to-[#7c3aed]/15 flex items-center justify-center text-xl flex-shrink-0">
-                      {msg.product.emoji}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-white truncate">{msg.product.name}</p>
-                      <p className="text-[11px] text-white/50">{msg.product.price} · In stock</p>
-                    </div>
-                    <div className="flex gap-2 flex-shrink-0">
-                      <button className="text-[10px] font-semibold text-white/60 border border-white/15 px-2 py-1 rounded-lg hover:bg-white/8 transition-colors">
-                        View
-                      </button>
-                      <button className="text-[10px] font-semibold text-[#14b8a6] border border-[#14b8a6]/40 px-2 py-1 rounded-lg hover:bg-[#14b8a6]/15 transition-colors">
-                        Buy Now
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           ))}
 
           {isTyping && (
             <div className="flex justify-start gap-3">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#7c3aed] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1">
-                G
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#14b8a6] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-1">
+                A
               </div>
               <div className="px-4 py-3 rounded-2xl bg-white/6 border border-white/8 flex gap-1 items-center">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -174,7 +150,7 @@ export default function GuestChatPage() {
               style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(20,184,166,0.08) 100%)' }}
             >
               <p className="text-sm font-semibold text-white mb-1">Enjoying the demo?</p>
-              <p className="text-xs text-white/50 mb-4">Create your own AI persona for your D2C brand in under 3 minutes.</p>
+              <p className="text-xs text-white/50 mb-4">Create your own AI persona and let it answer your audience 24/7 — in your voice.</p>
               <Link href="/register" className="inline-block px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
                 Create Your AI Persona →
               </Link>
@@ -210,7 +186,7 @@ export default function GuestChatPage() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about products, ingredients, or recommendations..."
+            placeholder="Ask about investing, savings, or financial planning..."
             className="flex-1 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all"
           />
           <button
@@ -225,7 +201,7 @@ export default function GuestChatPage() {
           </button>
         </form>
         <p className="text-[10px] text-white/20 text-center mt-2">
-          This is a demo persona for a fictional skincare brand. <Link href="/register" className="text-[#7c3aed]/70 hover:text-[#a78bfa]">Create your own →</Link>
+          This is a demo persona for a finance educator creator. <Link href="/register" className="text-[#7c3aed]/70 hover:text-[#a78bfa]">Create your own →</Link>
         </p>
       </div>
     </div>
