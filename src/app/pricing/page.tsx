@@ -6,11 +6,11 @@ import PublicFooter from '@/components/public/PublicFooter';
 
 const plans = [
   {
-    name: 'Starter',
+    name: 'Creator',
     badge: null,
     price: '₹3,999',
     priceNote: '/month',
-    desc: 'Perfect for small D2C brands getting started with AI-powered engagement.',
+    desc: 'Perfect for individual creators getting started with their AI persona.',
     color: '#38bdf8',
     accentBg: 'from-[#38bdf8]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -18,10 +18,10 @@ const plans = [
     channels: 'Web Chat',
     conversations: '500 conversations/mo',
     features: [
-      '1 AI Sales Persona',
+      '1 AI Creator Persona',
       'Web Chat channel',
       '500 conversations/month',
-      'Shopify product sync',
+      'Upload PDFs, videos & posts',
       'Basic analytics',
       'Email support',
     ],
@@ -30,11 +30,11 @@ const plans = [
     popular: false,
   },
   {
-    name: 'Growth',
+    name: 'Pro Creator',
     badge: 'Most Popular',
     price: '₹14,999',
     priceNote: '/month',
-    desc: 'For growing D2C brands that want to scale engagement and conversions.',
+    desc: 'For creators scaling their audience engagement and course monetization.',
     color: '#a78bfa',
     accentBg: 'from-[#7c3aed]/12 to-[#38bdf8]/5',
     borderColor: 'border-[#7c3aed]/40',
@@ -42,25 +42,25 @@ const plans = [
     channels: 'Web + WhatsApp',
     conversations: '5,000 conversations/mo',
     features: [
-      '5 AI Sales Personas',
+      '5 AI Creator Personas',
       'Web Chat + WhatsApp channels',
       '5,000 conversations/month',
-      'Shopify auto-sync + PDFs',
-      'Product cards in chat',
-      'Conversion analytics',
+      'Upload PDFs, videos, courses & posts',
+      'Course & product promotion in chat',
+      'Audience engagement analytics',
       'Embeddable JS widget',
       'Priority support',
     ],
-    cta: 'Start Growth Trial',
+    cta: 'Start Pro Trial',
     ctaHref: '/register',
     popular: true,
   },
   {
-    name: 'Enterprise',
+    name: 'Studio',
     badge: null,
     price: 'Custom',
     priceNote: '',
-    desc: 'For large brands and agencies needing custom personas, SLAs, and integrations.',
+    desc: 'For creator studios, agencies, and media companies needing custom personas and SLAs.',
     color: '#34d399',
     accentBg: 'from-[#34d399]/8 to-transparent',
     borderColor: 'border-white/8',
@@ -71,7 +71,7 @@ const plans = [
       'Unlimited AI Personas',
       'All channels (Web, WhatsApp, API)',
       'Unlimited conversations',
-      'Custom Shopify + ERP integrations',
+      'Custom content integrations',
       'White-label deployment',
       'Advanced analytics & reporting',
       'Dedicated account manager',
@@ -86,11 +86,11 @@ const plans = [
 const faqs = [
   {
     q: 'What counts as a conversation?',
-    a: 'A conversation is a single chat session with a visitor — from their first message to when they leave or the session ends. Multiple messages in one session count as one conversation.',
+    a: 'A conversation is a single chat session with an audience member — from their first message to when they leave or the session ends. Multiple messages in one session count as one conversation.',
   },
   {
-    q: 'Can I sync my Shopify store automatically?',
-    a: 'Yes. All plans include Shopify product sync. Your AI persona automatically knows your full catalog, pricing, and inventory — always up to date.',
+    q: 'What content can I upload to train my AI persona?',
+    a: 'You can upload PDFs, course materials, blog posts, video transcripts, FAQs, and more. Your AI learns your expertise and speaks in your voice — always on-brand.',
   },
   {
     q: 'What happens if I exceed my conversation limit?',
@@ -99,6 +99,10 @@ const faqs = [
   {
     q: 'Can I try before I buy?',
     a: 'Absolutely. Try our live demo at /guest-chat with no login required. All paid plans also include a 14-day free trial.',
+  },
+  {
+    q: 'Do you support D2C brands and OTT platforms?',
+    a: 'D2C brands and OTT platforms are on our roadmap and coming soon. We\'re launching creator-first — Finance creators, course builders, and coaches — and will expand to commerce and media verticals next.',
   },
   {
     q: 'Do you offer annual billing?',
@@ -115,19 +119,19 @@ export default function PricingPage() {
       {/* Hero */}
       <section className="relative pt-32 pb-12 px-6 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-[#7c3aed]/10 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute top-10 right-1/4 w-[400px] h-[250px] bg-[#14b8a6]/8 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-10 right-1/4 w-[400px] h-[250px] bg-[#0ea5e9]/8 rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 text-[#a78bfa] text-xs font-semibold tracking-widest uppercase mb-6">
             Pricing
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 leading-tight">
-            Increase conversions with{' '}
-            <span className="bg-gradient-to-r from-[#a78bfa] via-[#14b8a6] to-[#34d399] bg-clip-text text-transparent">
+            Grow your audience with{' '}
+            <span className="bg-gradient-to-r from-[#a78bfa] via-[#0ea5e9] to-[#34d399] bg-clip-text text-transparent">
               AI-powered engagement
             </span>
           </h1>
           <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-4 leading-relaxed">
-            Simple, transparent pricing for D2C brands. Start free, scale as you grow.
+            Simple, transparent pricing for creators. Start free, scale as your audience grows.
           </p>
           <p className="text-sm text-white/35">All plans include a 14-day free trial. No credit card required.</p>
         </div>
@@ -199,24 +203,24 @@ export default function PricingPage() {
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto">
           <div
-            className="rounded-2xl border border-[#14b8a6]/20 p-8 text-center"
-            style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(124,58,237,0.06) 100%)' }}
+            className="rounded-2xl border border-[#7c3aed]/20 p-8 text-center"
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(14,165,233,0.06) 100%)' }}
           >
             <h3 className="text-xl font-bold text-white mb-2">
-              &quot;Your AI salesperson, available 24/7&quot;
+              &quot;Your AI persona, on your platform, driving your revenue&quot;
             </h3>
             <p className="text-white/50 text-sm max-w-lg mx-auto">
-              Every plan includes Shopify sync, product cards in chat, and conversion tracking. Deploy in minutes, not weeks.
+              Every plan includes content upload, multi-channel deployment, and audience analytics. Deploy in minutes, not weeks.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-6">
               {[
                 { val: '3 min', label: 'Average setup time' },
-                { val: '23%', label: 'Avg conversion lift' },
+                { val: '3.4×', label: 'Avg engagement lift' },
                 { val: '24/7', label: 'Always available' },
                 { val: '0', label: 'Developers needed' },
               ]?.map((s) => (
                 <div key={s?.label} className="text-center">
-                  <p className="text-2xl font-extrabold text-[#14b8a6]">{s?.val}</p>
+                  <p className="text-2xl font-extrabold text-[#a78bfa]">{s?.val}</p>
                   <p className="text-xs text-white/40 mt-0.5">{s?.label}</p>
                 </div>
               ))}
@@ -254,6 +258,30 @@ export default function PricingPage() {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* CTA */}
+      <section className="px-6 pb-24">
+        <div className="max-w-2xl mx-auto text-center">
+          <div
+            className="rounded-2xl border border-white/10 p-10"
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(14,165,233,0.08) 100%)' }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-3">
+              Ready to build your AI persona?
+            </h2>
+            <p className="text-white/50 text-sm mb-6">
+              Turn your expertise into a 24/7 AI. Engage your audience. Monetize your content.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link href="/guest-chat" className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
+                Try Demo
+              </Link>
+              <Link href="/register" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
+                Get Started Free →
+              </Link>
+            </div>
           </div>
         </div>
       </section>

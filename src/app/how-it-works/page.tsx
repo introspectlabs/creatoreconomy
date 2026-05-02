@@ -7,13 +7,13 @@ import PublicFooter from '@/components/public/PublicFooter';
 const steps = [
   {
     number: '01',
-    title: 'Create Your Persona',
+    title: 'Create Your AI Persona',
     description:
-      'Name your AI sales persona, choose a type (Shopping Assistant or Founder Persona), and set the tone — friendly, expert, or premium. Takes under 2 minutes.',
+      'Name your AI persona, choose a type (Finance Advisor, Course Guide, or Coaching Assistant), and set the tone — knowledgeable, friendly, or authoritative. Takes under 2 minutes.',
     details: [
       'Choose a persona name and type',
-      'Set tone: friendly, expert, or premium',
-      'Define your brand voice and guardrails',
+      'Set tone: knowledgeable, friendly, or authoritative',
+      'Define your creator voice and guardrails',
       'Preview how your persona will respond',
     ],
     accentColor: '#7c3aed',
@@ -26,14 +26,14 @@ const steps = [
   },
   {
     number: '02',
-    title: 'Connect Store / Upload Content',
+    title: 'Upload Your Content',
     description:
-      'Auto-sync your Shopify catalog with one click, or upload PDFs, product guides, and FAQs. Your AI learns your entire inventory and brand knowledge instantly.',
+      'Upload your PDFs, course materials, video transcripts, blog posts, and FAQs. Your AI learns your expertise and speaks in your voice — always on-brand and up to date.',
     details: [
-      'One-click Shopify product catalog sync',
-      'Upload PDFs, product guides, FAQs',
-      'Add videos and brand content (optional)',
-      'AI learns and stays up to date automatically',
+      'Upload PDFs, course materials & guides',
+      'Add video transcripts and blog posts',
+      'Import FAQs and community Q&As',
+      'AI learns and stays current automatically',
     ],
     accentColor: '#0ea5e9',
     icon: (
@@ -46,14 +46,14 @@ const steps = [
   },
   {
     number: '03',
-    title: 'Deploy & Convert',
+    title: 'Deploy & Engage 24/7',
     description:
-      'Embed your AI persona on your website or Shopify store with a single JS snippet. Your AI salesperson starts engaging visitors, recommending products, and driving conversions 24/7.',
+      'Embed your AI persona on your website or share via WhatsApp with a single snippet. Your AI starts engaging your audience, answering questions, and promoting your programs around the clock.',
     details: [
       'Copy-paste JS snippet onto your site',
-      'Install Shopify plugin in one click',
       'Enable WhatsApp channel (optional)',
-      'Watch conversations and conversions roll in',
+      'AI promotes your courses and coaching slots',
+      'Watch audience engagement and conversions grow',
     ],
     accentColor: '#14b8a6',
     icon: (
@@ -67,41 +67,39 @@ const steps = [
 
 const features = [
   {
-    title: 'Shopify-Native Sync',
-    description: 'Your AI automatically knows every product, variant, price, and stock level — always current.',
+    title: 'Content-Powered AI',
+    description: 'Your AI learns from your videos, courses, PDFs, and posts — speaking in your voice with your expertise.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </svg>
-    ),
-    color: '#14b8a6',
-  },
-  {
-    title: 'Product Cards in Chat',
-    description: 'Your AI surfaces product cards with images, prices, and Buy Now buttons directly inside the conversation.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
       </svg>
     ),
     color: '#7c3aed',
   },
   {
-    title: 'Multi-Channel Deploy',
-    description: 'Deploy on your website and WhatsApp Business simultaneously — meet customers wherever they are.',
+    title: 'Course & Program Promotion',
+    description: 'Your AI surfaces your courses, coaching slots, and memberships directly inside conversations — driving enrollments automatically.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
       </svg>
     ),
     color: '#0ea5e9',
   },
   {
-    title: 'Conversion Tracking',
-    description: 'See which conversations led to purchases. Track top questions, engagement rates, and conversion proxies.',
+    title: 'Multi-Channel Deploy',
+    description: 'Deploy on your website and WhatsApp Business simultaneously — meet your audience wherever they are.',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
+      </svg>
+    ),
+    color: '#14b8a6',
+  },
+  {
+    title: 'Audience Engagement Analytics',
+    description: 'See top questions, engagement rates, and which conversations led to course enrollments or coaching bookings.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6">
         <line x1="18" y1="20" x2="18" y2="10" />
@@ -125,16 +123,16 @@ export default function HowItWorksPage() {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" />
             </svg>
-            3 Steps to Your AI Salesperson
+            3 Steps to Your AI Creator Persona
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
-            From zero to deployed{' '}
-            <span className="bg-gradient-to-r from-[#a78bfa] via-[#14b8a6] to-[#34d399] bg-clip-text text-transparent">
+            From content to deployed AI{' '}
+            <span className="bg-gradient-to-r from-[#a78bfa] via-[#0ea5e9] to-[#34d399] bg-clip-text text-transparent">
               in under 3 minutes
             </span>
           </h1>
           <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-8">
-            PersonaMatrix is built for D2C brands that want to engage visitors instantly and increase conversion with AI personas — without any technical setup.
+            PersonaMatrix is built for Finance creators, course builders, and coaches who want to engage their audience 24/7 and monetize their expertise — without any technical setup.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link href="/guest-chat" className="px-6 py-3 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
@@ -236,20 +234,20 @@ export default function HowItWorksPage() {
         <div className="max-w-2xl mx-auto text-center">
           <div
             className="rounded-2xl border border-white/10 p-10"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(20,184,166,0.08) 100%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(14,165,233,0.08) 100%)' }}
           >
             <h2 className="text-2xl font-bold text-white mb-3">
-              Ready to deploy your AI salesperson?
+              Ready to build your AI creator persona?
             </h2>
             <p className="text-white/50 text-sm mb-6">
-              Turn content into revenue. Engage visitors instantly. Increase conversion with AI personas.
+              Turn your expertise into a 24/7 AI. Engage your audience. Monetize your content.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/guest-chat" className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
                 Try Demo
               </Link>
               <Link href="/register" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
-                Get Started Free
+                Get Started Free →
               </Link>
             </div>
           </div>

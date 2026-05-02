@@ -15,8 +15,8 @@ function AnimatedGradientOrb({ className }: { className: string }) {
 const steps = [
   {
     num: '01',
-    title: 'Create Your Persona',
-    desc: 'Name your AI sales persona, set the tone — friendly, expert, or premium — and define its personality in minutes.',
+    title: 'Create Your AI Persona',
+    desc: 'Name your AI persona, set the tone — knowledgeable, friendly, or authoritative — and define its personality in minutes.',
     color: '#7c3aed',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
@@ -27,8 +27,8 @@ const steps = [
   },
   {
     num: '02',
-    title: 'Connect Store / Upload Content',
-    desc: 'Auto-sync your Shopify catalog or upload PDFs and product docs. Your AI learns your entire inventory instantly.',
+    title: 'Upload Your Content',
+    desc: 'Upload your videos, PDFs, courses, and posts. Your AI learns your expertise and speaks in your voice — instantly.',
     color: '#0ea5e9',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
@@ -40,8 +40,8 @@ const steps = [
   },
   {
     num: '03',
-    title: 'Deploy & Convert',
-    desc: 'Embed on your website or Shopify store in one click. Your AI salesperson starts engaging visitors and driving conversions 24/7.',
+    title: 'Deploy & Engage 24/7',
+    desc: 'Embed on your site or share via WhatsApp. Your AI persona engages your audience, answers questions, and drives conversions around the clock.',
     color: '#14b8a6',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
@@ -54,39 +54,61 @@ const steps = [
 
 const useCases = [
   {
-    tag: 'D2C Brands',
-    tagColor: '#14b8a6',
-    tagBg: 'rgba(20,184,166,0.12)',
+    tag: 'Finance Creators',
+    tagColor: '#0ea5e9',
+    tagBg: 'rgba(14,165,233,0.12)',
     status: null,
-    title: 'AI Shopping Assistant',
-    desc: 'Engage every visitor with a smart AI that recommends products, answers questions, and nudges them toward checkout — increasing conversion without extra ad spend.',
+    title: 'AI Finance Advisor Persona',
+    desc: 'Let your followers ask about your trading strategies, investment frameworks, and market analysis — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
     metrics: [
-      { label: 'Avg. Conversion Lift', value: '23%' },
-      { label: 'Queries Handled', value: '24/7' },
+      { label: 'Avg. Engagement Lift', value: '3.4×' },
+      { label: 'Available', value: '24/7' },
     ],
-    accentColor: '#14b8a6',
+    accentColor: '#0ea5e9',
     span: 'lg:col-span-2',
   },
   {
-    tag: 'Creators',
+    tag: 'Course Builders',
     tagColor: '#a78bfa',
     tagBg: 'rgba(167,139,250,0.12)',
-    status: 'Coming Soon',
-    title: 'Interactive AI Persona',
-    desc: 'Turn your content into an interactive AI persona that engages your audience around the clock.',
+    status: null,
+    title: 'Interactive Course Guide',
+    desc: 'Turn your course content into an AI tutor that answers student questions, reduces support load, and sells your programs through conversations.',
     metrics: [],
     accentColor: '#7c3aed',
     span: 'lg:col-span-1',
   },
   {
-    tag: 'OTT & Media',
+    tag: 'Coaches',
+    tagColor: '#10b981',
+    tagBg: 'rgba(16,185,129,0.12)',
+    status: null,
+    title: 'Coaching Assistant',
+    desc: 'Scale your coaching without burnout. Your AI handles intake questions, shares your frameworks, and keeps clients engaged between sessions.',
+    metrics: [],
+    accentColor: '#10b981',
+    span: 'lg:col-span-1',
+  },
+  {
+    tag: 'D2C Brands',
     tagColor: '#f59e0b',
     tagBg: 'rgba(245,158,11,0.12)',
+    status: 'Coming Soon',
+    title: 'AI Shopping Assistant',
+    desc: 'Engage every visitor with a smart AI that recommends products, answers questions, and nudges them toward checkout.',
+    metrics: [],
+    accentColor: '#f59e0b',
+    span: 'lg:col-span-1',
+  },
+  {
+    tag: 'OTT & Media',
+    tagColor: '#ec4899',
+    tagBg: 'rgba(236,72,153,0.12)',
     status: 'Coming Soon',
     title: 'Character Chat',
     desc: 'Let users chat with characters and explore content interactively across your streaming platform.',
     metrics: [],
-    accentColor: '#f59e0b',
+    accentColor: '#ec4899',
     span: 'lg:col-span-1',
   },
 ];
@@ -98,10 +120,10 @@ const benefits = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
       </svg>
     ),
-    title: 'Engage Visitors Instantly',
-    desc: 'Your AI salesperson greets every visitor, answers product questions, and guides them to the right item — no wait time.',
-    accent: 'rgba(20,184,166,0.2)',
-    accentColor: '#14b8a6',
+    title: 'Engage Your Audience 24/7',
+    desc: 'Your AI persona answers fan questions, shares your frameworks, and keeps your audience engaged — even while you sleep.',
+    accent: 'rgba(14,165,233,0.2)',
+    accentColor: '#0ea5e9',
   },
   {
     icon: (
@@ -111,22 +133,22 @@ const benefits = [
         <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
-    title: 'Increase Conversion with AI',
-    desc: 'Turn content into revenue by surfacing the right products at the right moment in every conversation.',
+    title: 'Monetize Your Knowledge',
+    desc: 'Turn content into revenue — your AI promotes your courses, coaching slots, and memberships in every conversation.',
     accent: 'rgba(124,58,237,0.2)',
     accentColor: '#7c3aed',
   },
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
       </svg>
     ),
-    title: 'Shopify-Native Integration',
-    desc: 'Auto-sync your product catalog. Your AI knows every SKU, variant, and price — always up to date.',
-    accent: 'rgba(14,165,233,0.2)',
-    accentColor: '#0ea5e9',
+    title: 'Content-Powered AI',
+    desc: 'Upload your videos, PDFs, and posts. Your AI learns your expertise and speaks in your voice — always on-brand.',
+    accent: 'rgba(20,184,166,0.2)',
+    accentColor: '#14b8a6',
   },
   {
     icon: (
@@ -134,8 +156,8 @@ const benefits = [
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    title: 'Brand-Safe Responses',
-    desc: 'Set guardrails so your AI always speaks in your brand voice — consistent, on-message, and on-brand.',
+    title: 'Your Platform, Your Audience',
+    desc: 'Deploy on your own site or WhatsApp — you own the audience relationship, not a third-party platform.',
     accent: 'rgba(245,158,11,0.2)',
     accentColor: '#f59e0b',
   },
@@ -147,7 +169,7 @@ const benefits = [
       </svg>
     ),
     title: 'One-Click Embed',
-    desc: 'Drop your AI persona onto any website or Shopify store with a single JS snippet — no developers needed.',
+    desc: 'Drop your AI persona onto any website with a single JS snippet — no developers needed.',
     accent: 'rgba(52,211,153,0.2)',
     accentColor: '#34d399',
   },
@@ -158,17 +180,17 @@ const benefits = [
       </svg>
     ),
     title: 'WhatsApp & Web Channels',
-    desc: 'Meet customers where they are — deploy your AI persona on your website and WhatsApp Business simultaneously.',
+    desc: 'Meet your audience where they are — deploy your AI persona on your website and WhatsApp simultaneously.',
     accent: 'rgba(124,58,237,0.2)',
     accentColor: '#7c3aed',
   },
 ];
 
 const chatMessages = [
-  { role: 'user', text: 'Do you have a moisturizer for oily skin?' },
-  { role: 'ai', text: 'Yes! Our Matte Control Gel is perfect for oily skin — lightweight, non-comedogenic, and SPF 30. It\'s our #1 seller for oily skin types. Want me to show you more details?' },
-  { role: 'user', text: 'What\'s the difference between that and the Hydra Boost?' },
-  { role: 'ai', text: 'Great question! Matte Control Gel controls shine and is ideal for oily/combination skin. Hydra Boost is richer — better for dry or dehydrated skin. Since you mentioned oily skin, Matte Control Gel is your best bet. 🎯' },
+  { role: 'user', text: 'What\'s the best way to start investing with ₹10,000?' },
+  { role: 'ai', text: 'Great starting point! I\'d recommend splitting it: 60% into a Nifty 50 index fund, 30% into a flexi-cap fund, and keep 10% liquid. This gives you market exposure with built-in diversification. Want me to walk you through my full beginner framework?' },
+  { role: 'user', text: 'Yes! Also, should I do SIP or lump sum?' },
+  { role: 'ai', text: 'For ₹10K, SIP wins — it removes the timing pressure and averages your cost over time. I cover this in detail in Module 3 of my Investing Foundations course. Want the link? 🎯' },
 ];
 
 export default function HomePage() {
@@ -205,7 +227,7 @@ export default function HomePage() {
         className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
       >
         <AnimatedGradientOrb className="w-[600px] h-[600px] bg-[#7c3aed] -top-32 -left-32" />
-        <AnimatedGradientOrb className="w-[400px] h-[400px] bg-[#14b8a6] bottom-0 right-0" />
+        <AnimatedGradientOrb className="w-[400px] h-[400px] bg-[#0ea5e9] bottom-0 right-0" />
         <div
           className="absolute inset-0 pointer-events-none transition-all duration-700"
           style={{
@@ -224,18 +246,18 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-16">
           {/* Left */}
           <div className="flex-1 flex flex-col gap-8 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#14b8a6]/30 bg-[#14b8a6]/10 w-fit">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              <span className="text-xs font-medium text-[#5eead4]">AI Sales Persona for D2C Brands</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 w-fit">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] animate-pulse" />
+              <span className="text-xs font-medium text-[#c4b5fd]">AI Persona Platform for Creators</span>
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
-              Turn Your Content into a{' '}
-              <span className="text-gradient">24/7 AI</span> for Engagement, Discovery, and Conversion
+              Clone Your Expertise into a{' '}
+              <span className="text-gradient">24/7 AI</span> That Engages, Teaches & Converts
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Build AI sales personas that help D2C brands engage visitors, answer questions, and drive more conversions — even when you&apos;re offline.
+              Finance creators, course builders, and coaches — turn your content into an AI persona that answers audience questions, promotes your programs, and drives revenue while you focus on creating.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -249,7 +271,7 @@ export default function HomePage() {
                 href="/register"
                 className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary"
               >
-                Get Started →
+                Get Started Free →
               </Link>
             </div>
 
@@ -257,7 +279,7 @@ export default function HomePage() {
               {[
                 { val: '24/7', label: 'Always available' },
                 { val: '3 min', label: 'Setup time' },
-                { val: '23%', label: 'Avg conversion lift' },
+                { val: '3.4×', label: 'Avg engagement lift' },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-0.5">
                   <span className="text-xl font-bold text-white">{stat.val}</span>
@@ -275,14 +297,14 @@ export default function HomePage() {
             >
               {/* Chat header */}
               <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#7c3aed] flex items-center justify-center text-xs font-bold">
-                  G
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0ea5e9] to-[#7c3aed] flex items-center justify-center text-xs font-bold">
+                  M
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-white">Glow AI — Skincare Assistant</p>
+                  <p className="text-xs font-semibold text-white">Marcus Wealth — Finance AI</p>
                   <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-                    <span className="text-[10px] text-white/40">Your AI salesperson, available 24/7</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                    <span className="text-[10px] text-white/40">Your AI persona, available 24/7</span>
                   </div>
                 </div>
               </div>
@@ -314,25 +336,25 @@ export default function HomePage() {
                 )}
               </div>
 
-              {/* Product card */}
+              {/* Course card */}
               {visibleMessages >= 2 && (
-                <div className="mx-4 mb-4 p-3 rounded-xl border border-[#14b8a6]/25 bg-[#14b8a6]/8 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#14b8a6]/30 to-[#7c3aed]/20 flex items-center justify-center text-lg">
-                    🧴
+                <div className="mx-4 mb-4 p-3 rounded-xl border border-[#7c3aed]/25 bg-[#7c3aed]/8 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7c3aed]/30 to-[#0ea5e9]/20 flex items-center justify-center text-lg">
+                    📈
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-white truncate">Matte Control Gel SPF 30</p>
-                    <p className="text-[10px] text-white/50">₹899 · In stock</p>
+                    <p className="text-xs font-semibold text-white truncate">Investing Foundations — Module 3</p>
+                    <p className="text-[10px] text-white/50">₹1,999 · 4.9★ · 12K students</p>
                   </div>
-                  <button className="text-[10px] font-semibold text-[#14b8a6] border border-[#14b8a6]/40 px-2 py-1 rounded-lg hover:bg-[#14b8a6]/15 transition-colors flex-shrink-0">
-                    Buy Now
+                  <button className="text-[10px] font-semibold text-[#a78bfa] border border-[#7c3aed]/40 px-2 py-1 rounded-lg hover:bg-[#7c3aed]/15 transition-colors flex-shrink-0">
+                    Enroll
                   </button>
                 </div>
               )}
 
               <div className="px-4 pb-4">
                 <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-white/8 bg-white/4">
-                  <span className="text-xs text-white/25 flex-1">Ask about products...</span>
+                  <span className="text-xs text-white/25 flex-1">Ask Marcus anything...</span>
                   <Link href="/guest-chat" className="text-[10px] font-semibold text-[#7c3aed] hover:text-[#a78bfa] transition-colors">
                     Try live →
                   </Link>
@@ -352,13 +374,13 @@ export default function HomePage() {
               Simple 3-Step Setup
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              From zero to deployed in{' '}
+              From content to deployed AI in{' '}
               <span className="bg-gradient-to-r from-[#a78bfa] to-[#14b8a6] bg-clip-text text-transparent">
                 under 3 minutes
               </span>
             </h2>
             <p className="text-white/45 max-w-xl mx-auto">
-              Minimal clicks to create, test, and deploy your AI persona.
+              Minimal clicks to create, train, and deploy your creator AI persona.
             </p>
           </div>
 
@@ -412,16 +434,16 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/4 text-white/50 text-xs font-medium mb-4">
-              Powering More Than Commerce
+              Built for Creators First
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Built for D2C today.{' '}
+              Creator-first today.{' '}
               <span className="bg-gradient-to-r from-[#a78bfa] to-[#f59e0b] bg-clip-text text-transparent">
-                Expanding to creators and media.
+                Expanding to D2C and OTT.
               </span>
             </h2>
             <p className="text-white/45 max-w-xl mx-auto">
-              PersonaMatrix starts with D2C brands and Shopify stores — with creators and OTT platforms coming next.
+              PersonaMatrix starts with Finance creators, course builders, and coaches — with D2C brands and OTT platforms coming next.
             </p>
           </div>
 
@@ -429,7 +451,7 @@ export default function HomePage() {
             {useCases.map((uc) => (
               <div
                 key={uc.title}
-                className={`relative group p-6 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 transition-all duration-300 ${uc.span} ${uc.status ? 'opacity-70' : ''}`}
+                className={`relative group p-6 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 transition-all duration-300 ${uc.span} ${uc.status ? 'opacity-60' : ''}`}
               >
                 {uc.status && (
                   <div className="absolute top-4 right-4 px-2 py-0.5 rounded-full text-[10px] font-semibold border"
@@ -465,17 +487,17 @@ export default function HomePage() {
 
       {/* ── BENEFITS BENTO ── */}
       <section className="relative py-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#14b8a6]/3 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/3 to-transparent pointer-events-none" />
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Your AI salesperson,{' '}
-              <span className="bg-gradient-to-r from-[#14b8a6] to-[#7c3aed] bg-clip-text text-transparent">
-                available 24/7
+              Your AI persona,{' '}
+              <span className="bg-gradient-to-r from-[#a78bfa] to-[#0ea5e9] bg-clip-text text-transparent">
+                on your platform
               </span>
             </h2>
             <p className="text-white/45 max-w-xl mx-auto">
-              Everything you need to engage visitors instantly and increase conversion with AI personas.
+              Everything you need to engage your audience, monetize your expertise, and scale your personal brand.
             </p>
           </div>
 
@@ -508,15 +530,15 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto text-center">
           <div
             className="relative rounded-3xl border border-white/10 p-12 overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(20,184,166,0.08) 100%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(14,165,233,0.08) 100%)' }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed]/10 via-transparent to-[#14b8a6]/10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed]/10 via-transparent to-[#0ea5e9]/10 pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
-                Start converting visitors into customers today
+                Build your AI persona today
               </h2>
               <p className="text-white/50 mb-8 max-w-lg mx-auto">
-                Deploy your AI sales persona in minutes. No developers needed. No long setup. Just results.
+                Turn your expertise into a 24/7 AI that engages your audience, answers questions, and drives revenue — on your platform.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link href="/guest-chat" className="px-6 py-3 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">

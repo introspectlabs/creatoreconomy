@@ -48,9 +48,12 @@ const industries = [
     bg: 'rgba(245,158,11,0.12)',
     border: 'rgba(245,158,11,0.25)',
   },
+];
+
+const comingSoonIndustries = [
   {
     slug: 'd2c-commerce',
-    name: 'D2C Brands & Commerce Creators',
+    name: 'D2C Brands & Commerce',
     value: 'Give every customer a personal shopping assistant that knows your products inside out. Answer questions, handle objections, and guide buyers from discovery to checkout — automatically.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -63,9 +66,6 @@ const industries = [
     bg: 'rgba(236,72,153,0.12)',
     border: 'rgba(236,72,153,0.25)',
   },
-];
-
-const comingSoonIndustries = [
   {
     slug: 'ott-streaming',
     name: 'OTT & Streaming',
@@ -229,17 +229,17 @@ export default function IndustriesPage() {
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/60 mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-              Creator Economy — 4 Verticals
+              Creator Economy — 3 Active Verticals
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              AI Personas Built for{' '}
+              AI Personas Built for the{' '}
               <span className="bg-gradient-to-r from-[#7c3aed] via-[#3b82f6] to-[#10b981] bg-clip-text text-transparent">
                 Creator Economy
               </span>
             </h1>
             <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto">
-              Whether you teach, trade, coach, or sell — turn your expertise into an AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.
+              Whether you teach, trade, or coach — turn your expertise into an AI persona that engages your audience 24/7, monetizes your content, and scales your personal brand.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -250,107 +250,65 @@ export default function IndustriesPage() {
                 Explore Use Cases
               </a>
               <Link
-                href="/register"
-                className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200 w-full sm:w-auto text-center"
+                href="/creators"
+                className="px-6 py-3 rounded-xl font-semibold text-white/70 text-sm border border-white/15 hover:bg-white/5 transition-all w-full sm:w-auto text-center"
               >
-                Get Started Free
+                See Creator Directory →
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Industries Grid */}
-      <section id="industries" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="mb-12">
-          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Creator Verticals</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Four verticals, one platform</h2>
-          <p className="text-white/50 mt-3 max-w-xl">
-            Focused on the creator economy verticals where AI personas deliver the most immediate impact on audience engagement and revenue.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-          {industries.map((industry, i) => (
-            <IndustryCard key={industry.slug} industry={industry} index={i} />
-          ))}
-        </div>
-
-        {/* Coming Soon */}
-        {comingSoonIndustries.length > 0 && (
-          <div className="mt-8">
-            <p className="text-xs font-semibold text-white/20 uppercase tracking-widest mb-4">Future Launch</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {comingSoonIndustries.map((industry) => (
-                <ComingSoonCard key={industry.slug} industry={industry} />
-              ))}
-            </div>
+      {/* Active Industries */}
+      <section id="industries" className="px-4 sm:px-6 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-white mb-1">Live Now</h2>
+            <p className="text-sm text-white/40">Active verticals with full platform support</p>
           </div>
-        )}
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20 border-t border-white/6">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12 text-center">
-            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Process</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">From content to live AI persona</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto">Three steps to a production-ready AI persona for your audience</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] opacity-30" />
-            <div className="hidden md:block absolute top-12 left-2/3 right-0 h-px bg-gradient-to-r from-[#3b82f6] to-[#10b981] opacity-30" />
-
-            {[
-              {
-                num: '01',
-                title: 'Build Your Persona',
-                desc: 'Set up your AI persona with your name, voice, and the topics you want it to cover. No technical skills needed.',
-                color: '#7c3aed',
-              },
-              {
-                num: '02',
-                title: 'Upload Your Content',
-                desc: 'Feed it your videos, courses, PDFs, or blog posts. Your AI learns from everything you\'ve already created.',
-                color: '#3b82f6',
-              },
-              {
-                num: '03',
-                title: 'Deploy & Earn',
-                desc: 'Share a link, embed it on your site, or connect to WhatsApp. Your audience can start chatting — and you start earning.',
-                color: '#10b981',
-              },
-            ].map((step) => (
-              <div
-                key={step.num}
-                className="relative rounded-2xl p-8 border border-white/8 bg-white/[0.02] flex flex-col gap-4"
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center font-mono font-bold text-lg"
-                  style={{ background: `${step.color}20`, color: step.color, border: `1px solid ${step.color}30` }}
-                >
-                  {step.num}
-                </div>
-                <h3 className="font-semibold text-white text-base">{step.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{step.desc}</p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {industries.map((industry, index) => (
+              <IndustryCard key={industry.slug} industry={industry} index={index} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why PersonaMatrix */}
-      <section className="py-20 border-t border-white/6">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12 text-center">
-            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Why PersonaMatrix</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Built differently for creators</h2>
+      {/* Coming Soon Industries */}
+      <section className="px-4 sm:px-6 pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-white/50 mb-1">Expansion Roadmap</h2>
+            <p className="text-sm text-white/30">Coming soon — next verticals on our roadmap</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+            {comingSoonIndustries.map((industry) => (
+              <ComingSoonCard key={industry.slug} industry={industry} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Differentiators */}
+      <section className="px-4 sm:px-6 pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              Why PersonaMatrix for Creators?
+            </h2>
+            <p className="text-white/45 max-w-xl mx-auto text-sm sm:text-base">
+              Built differently from generic chatbots — designed for creators who own their audience.
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {differentiators.map((d) => (
-              <div key={d.title} className="rounded-2xl p-6 border border-white/8 bg-white/[0.02] flex flex-col gap-3">
-                <div className="text-2xl">{d.icon}</div>
-                <h3 className="font-semibold text-white text-sm">{d.title}</h3>
+              <div
+                key={d.title}
+                className="p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 transition-all duration-200"
+              >
+                <div className="text-2xl mb-3">{d.icon}</div>
+                <h3 className="font-semibold text-white text-sm mb-2">{d.title}</h3>
                 <p className="text-xs text-white/45 leading-relaxed">{d.desc}</p>
               </div>
             ))}
@@ -359,18 +317,21 @@ export default function IndustriesPage() {
       </section>
 
       {/* Channels */}
-      <section className="py-20 border-t border-white/6">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Channels</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Meet your audience where they are</h2>
+      <section className="px-4 sm:px-6 pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-white mb-3">Deploy Everywhere Your Audience Is</h2>
+            <p className="text-white/45 text-sm max-w-lg mx-auto">One persona definition, multiple channels — meet your audience wherever they are.</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {channels.map((ch) => (
-              <div key={ch.label} className="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+              <div
+                key={ch.label}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.03] hover:border-white/15 transition-all duration-200"
+              >
                 <span className="text-xl">{ch.icon}</span>
                 <div>
-                  <p className="text-sm font-medium text-white">{ch.label}</p>
+                  <p className="text-sm font-semibold text-white">{ch.label}</p>
                   <p className="text-xs text-white/40">{ch.desc}</p>
                 </div>
               </div>
@@ -380,19 +341,24 @@ export default function IndustriesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 border-t border-white/6">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
-          <p className="text-white/50 mb-8 max-w-xl mx-auto">
-            Join finance creators, educators, coaches, and D2C brands already using PersonaMatrix to scale their audience and income.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">
-              Get Started Free
-            </Link>
-            <Link href="/pricing" className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200">
-              View Pricing
-            </Link>
+      <section className="px-4 sm:px-6 pb-24">
+        <div className="max-w-2xl mx-auto text-center">
+          <div
+            className="rounded-2xl border border-white/10 p-10"
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(16,185,129,0.08) 100%)' }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-3">Ready to build your AI creator persona?</h2>
+            <p className="text-white/50 text-sm mb-6">
+              Turn your expertise into a 24/7 AI. Engage your audience. Monetize your content.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link href="/guest-chat" className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
+                Try Demo
+              </Link>
+              <Link href="/register" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
+                Get Started Free →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
