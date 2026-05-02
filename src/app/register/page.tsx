@@ -8,11 +8,11 @@ import PublicFooter from '@/components/public/PublicFooter';
 type Step = 'account' | 'workspace';
 
 const USE_CASES = [
-  { id: 'd2c-commerce', label: 'D2C / E-commerce', emoji: '🛍️', description: 'Personal shopping assistant for your customers' },
+  { id: 'finance', label: 'Finance & Advisory', emoji: '📈', description: 'Deliver market insights and strategy at scale' },
   { id: 'education', label: 'Education & Courses', emoji: '🎓', description: 'AI tutor for your students and learners' },
   { id: 'coaching', label: 'Coaching & Consulting', emoji: '💡', description: 'Scale client engagement with AI personas' },
-  { id: 'finance', label: 'Finance & Advisory', emoji: '📈', description: 'Deliver market insights and strategy at scale' },
-  { id: 'saas', label: 'SaaS / Tech Product', emoji: '⚙️', description: 'Onboarding and support automation' },
+  { id: 'content', label: 'Content Creator', emoji: '🎙️', description: 'Monetise your expertise with an AI twin' },
+  { id: 'community', label: 'Community & Membership', emoji: '🤝', description: 'Engage your community 24/7 with AI' },
   { id: 'other', label: 'Other', emoji: '✦', description: 'Something else entirely' },
 ];
 
@@ -52,7 +52,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setError('');
     if (!workspace.organizationName || !workspace.subdomain) {
-      setError('Please fill in your organization name and subdomain.');
+      setError('Please fill in your creator name and subdomain.');
       return;
     }
     setLoading(true);
@@ -65,7 +65,7 @@ export default function RegisterPage() {
     <div className="flex items-center justify-center gap-2 mb-7">
       {[
         { n: 1, label: 'Your Account' },
-        { n: 2, label: 'Workspace' },
+        { n: 2, label: 'Creator Profile' },
       ].map((s, i) => {
         const done = s.n < current;
         const active = s.n === current;
@@ -123,7 +123,7 @@ export default function RegisterPage() {
                 <img
                   src="/assets/images/image-1775312226237.png"
                   alt="PersonaMatrix Logo"
-                  className="h-13 w-auto object-contain"
+                  className="h-auto w-auto object-contain"
                   style={{ height: '52px' }}
                 />
               </div>
@@ -145,7 +145,7 @@ export default function RegisterPage() {
                   <StepPills current={1} />
 
                   <h1 className="text-2xl font-bold text-center text-white mb-1">Create your account</h1>
-                  <p className="text-center text-white/40 text-sm mb-7">Start your free trial — no credit card required</p>
+                  <p className="text-center text-white/40 text-sm mb-7">Build your AI persona — free to start</p>
 
                   <form onSubmit={handleAccountNext} className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-3">
@@ -176,10 +176,10 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Work Email</label>
+                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Email</label>
                       <input
                         type="email"
-                        placeholder="you@company.com"
+                        placeholder="you@example.com"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className="w-full px-3.5 py-3 rounded-xl text-white placeholder-white/25 text-sm focus:outline-none transition-all duration-150"
@@ -244,20 +244,20 @@ export default function RegisterPage() {
                 </>
               )}
 
-              {/* ── STEP 2: Workspace ── */}
+              {/* ── STEP 2: Creator Profile ── */}
               {step === 'workspace' && (
                 <>
                   <StepPills current={2} />
 
-                  <h1 className="text-2xl font-bold text-center text-white mb-1">Set up your workspace</h1>
-                  <p className="text-center text-white/40 text-sm mb-7">This is where your team and personas will live</p>
+                  <h1 className="text-2xl font-bold text-center text-white mb-1">Set up your creator profile</h1>
+                  <p className="text-center text-white/40 text-sm mb-7">Your AI persona will live here</p>
 
                   <form onSubmit={handleWorkspaceSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Organization Name</label>
+                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Creator / Brand Name</label>
                       <input
                         type="text"
-                        placeholder="Acme Inc."
+                        placeholder="e.g. Arjun Sharma Finance"
                         value={workspace.organizationName}
                         onChange={(e) => setWorkspace({ ...workspace, organizationName: e.target.value })}
                         className="w-full px-3.5 py-3 rounded-xl text-white placeholder-white/25 text-sm focus:outline-none transition-all duration-150"
@@ -267,14 +267,14 @@ export default function RegisterPage() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Workspace URL</label>
+                      <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Profile URL</label>
                       <div
                         className="flex items-center rounded-xl overflow-hidden"
                         style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
                       >
                         <input
                           type="text"
-                          placeholder="acme"
+                          placeholder="arjun-finance"
                           value={workspace.subdomain}
                           onChange={(e) => setWorkspace({ ...workspace, subdomain: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') })}
                           className="flex-1 px-3.5 py-3 bg-transparent text-white placeholder-white/25 text-sm focus:outline-none"
@@ -287,7 +287,7 @@ export default function RegisterPage() {
                     {/* Use case */}
                     <div className="flex flex-col gap-2">
                       <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">
-                        Primary Use Case <span className="text-white/25 font-normal normal-case">(optional)</span>
+                        What best describes you? <span className="text-white/25 font-normal normal-case">(optional)</span>
                       </label>
                       <div className="grid grid-cols-2 gap-2">
                         {USE_CASES.map((uc) => (
@@ -331,10 +331,10 @@ export default function RegisterPage() {
                               <circle cx="8" cy="8" r="6" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
                               <path d="M8 2a6 6 0 0 1 6 6" stroke="white" strokeWidth="2" strokeLinecap="round" />
                             </svg>
-                            Creating workspace…
+                            Creating profile…
                           </>
                         ) : (
-                          'Create Workspace'
+                          'Launch My Persona'
                         )}
                       </button>
                     </div>

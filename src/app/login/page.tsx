@@ -56,7 +56,7 @@ export default function LoginPage() {
 
               {/* Heading */}
               <h1 className="text-2xl font-bold text-center text-white mb-1.5">Welcome back</h1>
-              <p className="text-center text-white/45 text-sm mb-8">Sign in to your workspace</p>
+              <p className="text-center text-white/45 text-sm mb-8">Sign in to your creator dashboard</p>
 
               {/* Error */}
               {error && (
@@ -72,10 +72,10 @@ export default function LoginPage() {
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 {/* Email */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-semibold text-white/80">Work Email</label>
+                  <label className="text-sm font-semibold text-white/80">Email</label>
                   <input
                     type="email"
-                    placeholder="you@company.com"
+                    placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/25 text-sm focus:outline-none transition-all duration-150"
@@ -174,7 +174,19 @@ export default function LoginPage() {
                 Continue with SSO
               </button>
 
-              <p className="mt-7 text-center text-sm text-white/45">
+              {/* Creator persona tags */}
+              <div className="mt-6 flex items-center justify-center gap-2 flex-wrap">
+                {['Finance Educators', 'Coaches', 'Course Creators'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 rounded-full text-[10px] font-medium text-white/30 border border-white/8"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-5 text-center text-sm text-white/45">
                 Don&apos;t have an account?{' '}
                 <Link href="/register" className="text-[#6b7ff0] font-semibold hover:text-[#a78bfa] transition-colors">
                   Start free trial
