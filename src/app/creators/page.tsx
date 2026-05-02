@@ -21,6 +21,7 @@ interface Creator {
   topics: string[];
   rating: number;
   responseCount: string;
+  personaCount: number;
 }
 
 const creators: Creator[] = [
@@ -38,6 +39,7 @@ const creators: Creator[] = [
     topics: ['Investing', 'Tax Strategy', 'FIRE'],
     rating: 4.9,
     responseCount: '61K',
+    personaCount: 4,
   },
   {
     id: 'c-002',
@@ -53,6 +55,7 @@ const creators: Creator[] = [
     topics: ['Options', 'Risk Management', 'Stocks'],
     rating: 4.8,
     responseCount: '39K',
+    personaCount: 3,
   },
   {
     id: 'c-003',
@@ -68,6 +71,7 @@ const creators: Creator[] = [
     topics: ['No-Code', 'SaaS', 'Validation'],
     rating: 4.7,
     responseCount: '47K',
+    personaCount: 5,
   },
   {
     id: 'c-004',
@@ -83,6 +87,7 @@ const creators: Creator[] = [
     topics: ['UX Design', 'Portfolio', 'Job Search'],
     rating: 4.8,
     responseCount: '29K',
+    personaCount: 2,
   },
   {
     id: 'c-005',
@@ -98,6 +103,7 @@ const creators: Creator[] = [
     topics: ['Leadership', 'Communication', 'Mindset'],
     rating: 4.9,
     responseCount: '23K',
+    personaCount: 3,
   },
   {
     id: 'c-006',
@@ -113,6 +119,7 @@ const creators: Creator[] = [
     topics: ['Habits', 'Deep Work', 'Resilience'],
     rating: 4.7,
     responseCount: '56K',
+    personaCount: 6,
   },
 ];
 
@@ -319,6 +326,12 @@ export default function CreatorsDirectoryPage() {
                         <div>
                           <p className="text-xs font-semibold text-white">⭐ {creator.rating}</p>
                           <p className="text-[10px] text-white/30">Rating</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-white">
+                            🎭 {creator.personaCount}
+                          </p>
+                          <p className="text-[10px] text-white/30">Personas</p>
                         </div>
                       </div>
                       <Link
