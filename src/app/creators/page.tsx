@@ -5,14 +5,14 @@ import Link from 'next/link';
 import PublicHeader from '@/components/public/PublicHeader';
 import PublicFooter from '@/components/public/PublicFooter';
 
-type CreatorCategory = 'Finance' | 'Education' | 'Coaching';
+type Domain = 'Finance' | 'Education' | 'Coaching';
 
 interface Creator {
   id: string;
   name: string;
   slug: string;
   handle: string;
-  category: CreatorCategory;
+  domains: Domain[];
   tagline: string;
   description: string;
   avatar: string;
@@ -22,6 +22,7 @@ interface Creator {
   rating: number;
   responseCount: string;
   personaCount: number;
+  personaLabels: string[];
 }
 
 const creators: Creator[] = [
@@ -30,102 +31,108 @@ const creators: Creator[] = [
     name: 'Marcus Wealth',
     slug: 'marcus-wealth',
     handle: '@marcuswealth',
-    category: 'Finance',
-    tagline: 'Personal finance for the 9-to-5 investor',
-    description: 'Covers index investing, tax-loss harvesting, and building long-term wealth on a regular salary.',
+    domains: ['Finance', 'Coaching'],
+    tagline: 'Personal finance meets high-performance habits',
+    description: 'Covers index investing, tax-loss harvesting, and building long-term wealth — plus the mindset and habits that make it stick.',
     avatar: 'MW',
     avatarColor: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
     audience: '284K followers',
-    topics: ['Investing', 'Tax Strategy', 'FIRE'],
+    topics: ['Investing', 'Tax Strategy', 'FIRE', 'Habits'],
     rating: 4.9,
     responseCount: '61K',
     personaCount: 4,
+    personaLabels: ['Wealth Advisor', 'FIRE Coach', 'Tax Strategist', 'Mindset Mentor'],
   },
   {
     id: 'c-002',
     name: 'Priya Trades',
     slug: 'priya-trades',
     handle: '@priyatrades',
-    category: 'Finance',
-    tagline: 'Options trading made simple for beginners',
-    description: 'Explains covered calls, puts, and risk management in plain English — no jargon, no hype.',
+    domains: ['Finance', 'Education'],
+    tagline: 'Options trading + financial literacy for beginners',
+    description: 'Explains covered calls, puts, and risk management in plain English — and teaches the financial fundamentals behind every trade.',
     avatar: 'PT',
     avatarColor: 'linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%)',
     audience: '118K followers',
-    topics: ['Options', 'Risk Management', 'Stocks'],
+    topics: ['Options', 'Risk Management', 'Financial Literacy'],
     rating: 4.8,
     responseCount: '39K',
     personaCount: 3,
+    personaLabels: ['Options Trader', 'Finance Educator', 'Risk Coach'],
   },
   {
     id: 'c-003',
     name: 'Jordan Builds',
     slug: 'jordan-builds',
     handle: '@jordanbuilds',
-    category: 'Education',
-    tagline: 'No-code SaaS from idea to $10K MRR',
-    description: 'Guides you through validating, building, and launching no-code products with real revenue milestones.',
+    domains: ['Education', 'Coaching'],
+    tagline: 'No-code SaaS from idea to $10K MRR — with coaching',
+    description: 'Guides you through validating, building, and launching no-code products — and coaches you through the founder mindset challenges along the way.',
     avatar: 'JB',
     avatarColor: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
     audience: '92K followers',
-    topics: ['No-Code', 'SaaS', 'Validation'],
+    topics: ['No-Code', 'SaaS', 'Validation', 'Founder Mindset'],
     rating: 4.7,
     responseCount: '47K',
     personaCount: 5,
+    personaLabels: ['SaaS Educator', 'Validation Coach', 'Product Strategist', 'Launch Advisor', 'Mindset Coach'],
   },
   {
     id: 'c-004',
     name: 'Leila Learns',
     slug: 'leila-learns',
     handle: '@leilalearns',
-    category: 'Education',
-    tagline: 'UX design courses that get you hired',
-    description: 'Helps with portfolio reviews, design critiques, and landing your first UX role.',
+    domains: ['Education', 'Coaching'],
+    tagline: 'UX design courses + career coaching that get you hired',
+    description: 'Helps with portfolio reviews, design critiques, and landing your first UX role — with dedicated coaching personas for job seekers.',
     avatar: 'LL',
     avatarColor: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
     audience: '67K followers',
-    topics: ['UX Design', 'Portfolio', 'Job Search'],
+    topics: ['UX Design', 'Portfolio', 'Job Search', 'Career'],
     rating: 4.8,
     responseCount: '29K',
     personaCount: 2,
+    personaLabels: ['UX Educator', 'Career Coach'],
   },
   {
     id: 'c-005',
     name: 'Coach Dani',
     slug: 'coach-dani',
     handle: '@coachdani',
-    category: 'Coaching',
-    tagline: 'Executive presence for first-time managers',
-    description: 'Helps new managers navigate difficult conversations, set boundaries, and build leadership confidence.',
+    domains: ['Coaching', 'Education', 'Finance'],
+    tagline: 'Executive presence, leadership skills & financial confidence',
+    description: 'Helps new managers navigate difficult conversations and build leadership confidence — plus a finance persona for understanding compensation and equity.',
     avatar: 'CD',
     avatarColor: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)',
     audience: '53K followers',
-    topics: ['Leadership', 'Communication', 'Mindset'],
+    topics: ['Leadership', 'Communication', 'Equity', 'Mindset'],
     rating: 4.9,
     responseCount: '23K',
     personaCount: 3,
+    personaLabels: ['Leadership Coach', 'Communication Trainer', 'Comp & Equity Advisor'],
   },
   {
     id: 'c-006',
     name: 'Ravi Mindset',
     slug: 'ravi-mindset',
     handle: '@ravimindset',
-    category: 'Coaching',
-    tagline: 'High-performance habits for entrepreneurs',
-    description: 'Covers morning routines, deep work systems, and mental resilience for founders building under pressure.',
+    domains: ['Coaching', 'Finance'],
+    tagline: 'High-performance habits for entrepreneurs building wealth',
+    description: 'Covers morning routines, deep work systems, and mental resilience for founders — plus a finance persona for bootstrapped business money management.',
     avatar: 'RM',
     avatarColor: 'linear-gradient(135deg, #8b5cf6 0%, #14b8a6 100%)',
     audience: '141K followers',
-    topics: ['Habits', 'Deep Work', 'Resilience'],
+    topics: ['Habits', 'Deep Work', 'Resilience', 'Bootstrapping'],
     rating: 4.7,
     responseCount: '56K',
     personaCount: 6,
+    personaLabels: ['Performance Coach', 'Deep Work Advisor', 'Resilience Mentor', 'Business Finance Coach', 'Habit Architect', 'Founder Strategist'],
   },
 ];
 
-const categoryFilters = ['All', 'Finance', 'Education', 'Coaching'] as const;
+const domainFilters = ['All', 'Finance', 'Education', 'Coaching'] as const;
 
-const categoryMeta: Record<string, { icon: string; color: string; bg: string; description: string }> = {
+const domainMeta: Record<Domain, { icon: string; color: string; bg: string; description: string }> = {
   Finance: {
     icon: '📈',
     color: '#0ea5e9',
@@ -155,10 +162,13 @@ export default function CreatorsDirectoryPage() {
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.tagline.toLowerCase().includes(search.toLowerCase()) ||
       c.description.toLowerCase().includes(search.toLowerCase()) ||
-      c.topics.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-    const matchesFilter = activeFilter === 'All' || c.category === activeFilter;
+      c.topics.some((t) => t.toLowerCase().includes(search.toLowerCase())) ||
+      c.personaLabels.some((p) => p.toLowerCase().includes(search.toLowerCase()));
+    const matchesFilter = activeFilter === 'All' || c.domains.includes(activeFilter as Domain);
     return matchesSearch && matchesFilter;
   });
+
+  const multiDomainCount = creators.filter((c) => c.domains.length > 1).length;
 
   return (
     <div
@@ -174,7 +184,7 @@ export default function CreatorsDirectoryPage() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-                <span className="text-xs font-medium text-white/60">{creators.length} creators available to chat</span>
+                <span className="text-xs font-medium text-white/60">{creators.length} creators · {multiDomainCount} span multiple domains</span>
               </div>
               <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
                 Discover creators{' '}
@@ -186,13 +196,13 @@ export default function CreatorsDirectoryPage() {
                 </span>
               </h1>
               <p className="text-base text-white/50 max-w-xl leading-relaxed">
-                Browse finance experts, educators, and coaches. Ask questions, get personalised answers, and learn directly from the creators you follow.
+                Each creator builds expert personas across multiple domains — finance, education, coaching, and more. One creator, many angles.
               </p>
             </div>
 
-            {/* Category cards */}
+            {/* Domain cards */}
             <div className="flex gap-3 flex-wrap lg:flex-nowrap lg:flex-shrink-0">
-              {Object.entries(categoryMeta).map(([key, meta]) => (
+              {(Object.entries(domainMeta) as [Domain, typeof domainMeta[Domain]][]).map(([key, meta]) => (
                 <button
                   key={key}
                   onClick={() => setActiveFilter(activeFilter === key ? 'All' : key)}
@@ -210,6 +220,15 @@ export default function CreatorsDirectoryPage() {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Multi-domain callout */}
+          <div className="mt-8 flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+            <span className="text-base">🎭</span>
+            <p className="text-xs text-white/45 leading-relaxed">
+              <span className="text-white/70 font-medium">Creators aren&apos;t limited to one niche.</span>{' '}
+              Each creator can build expert personas across finance, education, coaching, and more — so you get the full picture from people you already trust.
+            </p>
           </div>
         </div>
       </section>
@@ -232,14 +251,14 @@ export default function CreatorsDirectoryPage() {
             </svg>
             <input
               type="text"
-              placeholder="Search by name, topic, or keyword..."
+              placeholder="Search by name, topic, persona, or keyword..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-white/30 focus:outline-none focus:border-white/20 transition-colors"
             />
           </div>
           <div className="flex gap-2 flex-wrap">
-            {categoryFilters.map((f) => (
+            {domainFilters.map((f) => (
               <button
                 key={f}
                 onClick={() => setActiveFilter(f)}
@@ -262,12 +281,13 @@ export default function CreatorsDirectoryPage() {
             <div className="text-center py-20 text-white/30">
               <p className="text-2xl mb-2">🔍</p>
               <p className="text-base font-medium mb-1">No creators found</p>
-              <p className="text-sm">Try a different search term or category</p>
+              <p className="text-sm">Try a different search term or domain</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((creator) => {
-                const meta = categoryMeta[creator.category];
+                const primaryDomain = creator.domains[0];
+                const primaryMeta = domainMeta[primaryDomain];
                 return (
                   <div
                     key={creator.id}
@@ -290,19 +310,51 @@ export default function CreatorsDirectoryPage() {
                       </div>
                     </div>
 
-                    {/* Category tag */}
-                    <div className="mb-3">
-                      <span
-                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                        style={{ color: meta?.color, background: meta?.bg }}
-                      >
-                        {meta?.icon} {creator.category}
-                      </span>
+                    {/* Multi-domain tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {creator.domains.map((domain) => {
+                        const meta = domainMeta[domain];
+                        return (
+                          <span
+                            key={domain}
+                            className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                            style={{ color: meta.color, background: meta.bg }}
+                          >
+                            {meta.icon} {domain}
+                          </span>
+                        );
+                      })}
+                      {creator.domains.length > 1 && (
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40">
+                          multi-domain
+                        </span>
+                      )}
                     </div>
 
                     {/* Tagline + description */}
                     <p className="text-xs font-semibold text-white/80 mb-1 leading-snug">{creator.tagline}</p>
-                    <p className="text-xs text-white/40 leading-relaxed mb-4 flex-1">{creator.description}</p>
+                    <p className="text-xs text-white/40 leading-relaxed mb-3 flex-1">{creator.description}</p>
+
+                    {/* Persona labels preview */}
+                    <div className="mb-3">
+                      <p className="text-[10px] text-white/30 mb-1.5 font-medium uppercase tracking-wide">Personas</p>
+                      <div className="flex flex-wrap gap-1">
+                        {creator.personaLabels.slice(0, 3).map((label) => (
+                          <span
+                            key={label}
+                            className="text-[10px] px-2 py-0.5 rounded-full border text-white/55"
+                            style={{ borderColor: `${primaryMeta.color}30`, background: `${primaryMeta.color}08` }}
+                          >
+                            {label}
+                          </span>
+                        ))}
+                        {creator.personaLabels.length > 3 && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/35">
+                            +{creator.personaLabels.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
 
                     {/* Topics */}
                     <div className="flex flex-wrap gap-1.5 mb-4">
@@ -366,7 +418,7 @@ export default function CreatorsDirectoryPage() {
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-lg font-bold text-white mb-2">Not sure where to start?</h2>
               <p className="text-sm text-white/45 leading-relaxed">
-                Try a free chat with any creator. No account needed — just pick a topic and start asking.
+                Try a free chat with any creator persona. No account needed — just pick a topic and start asking.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0">
