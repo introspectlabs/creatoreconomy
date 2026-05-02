@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, MessageSquare, Database, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Clock, Coins } from 'lucide-react';
+import { Brain, MessageSquare, Database, TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Coins } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
@@ -25,22 +25,22 @@ const metrics = [
     alert: false,
   },
   {
-    id: 'metric-response-time',
-    label: 'Avg Response Time',
-    value: '1.4s',
-    change: '-0.2s vs last week',
-    trend: 'up',
-    icon: Clock,
+    id: 'metric-domains',
+    label: 'Domains Active',
+    value: '3',
+    change: 'Finance · Education · Coaching',
+    trend: 'neutral',
+    icon: CheckCircle,
     color: 'teal',
     alert: false,
   },
   {
     id: 'metric-success-rate',
     label: 'Audience Engagement Rate',
-    value: '18.3%',
-    change: '+2.1% this week',
+    value: '9.1%',
+    change: '+2.4% this week',
     trend: 'up',
-    icon: CheckCircle,
+    icon: TrendingUp,
     color: 'emerald',
     alert: false,
   },

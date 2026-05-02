@@ -250,8 +250,8 @@ const mockConversations: Conversation[] = [
   },
 ];
 
-const allPersonas = ['All Personas', 'SalesBot Pro', 'Support Agent', 'Onboarding Guide', 'HR Assistant'];
-const allChannels = ['All Channels', 'Web Widget', 'PersonaMatrix', 'API'];
+const allPersonas = ['All Personas', 'FinanceCoach — Priya', 'CourseGuide — Jordan', 'Coach Dani', 'MindsetPro — Ravi'];
+const allChannels = ['All Channels', 'Web Widget', 'WhatsApp', 'API'];
 const statusOptions = ['All Status', 'resolved', 'ongoing', 'escalated'];
 
 const statusConfig = {
@@ -270,7 +270,7 @@ const channelColors: Record<string, string> = {
 
 const PAGE_SIZE = 8;
 
-function FilterSelect({ icon: IconComponent, options, value, onChange }: {
+function FilterSelect({ icon: Icon, options, value, onChange }: {
   icon: React.ElementType;
   options: string[];
   value: string;
@@ -278,7 +278,7 @@ function FilterSelect({ icon: IconComponent, options, value, onChange }: {
 }) {
   return (
     <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/8 transition-all cursor-pointer min-w-[140px]">
-      {IconComponent && <IconComponent size={13} className="text-white/40 flex-shrink-0" />}
+      {Icon && <Icon size={13} className="text-white/40 flex-shrink-0" />}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}

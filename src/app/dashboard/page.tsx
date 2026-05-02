@@ -4,10 +4,18 @@ import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
 
+type Domain = 'Finance' | 'Education' | 'Coaching';
+
+const domainColors: Record<Domain, { text: string; bg: string; border: string }> = {
+  Finance:   { text: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/25' },
+  Education: { text: 'text-blue-400',    bg: 'bg-blue-500/10',    border: 'border-blue-500/25'    },
+  Coaching:  { text: 'text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/25'  },
+};
+
 const metrics = [
   {
     label: 'Active Personas',
-    value: '2',
+    value: '4',
     change: '+1 this week',
     trend: 'up',
     color: '#7c3aed',
@@ -19,9 +27,9 @@ const metrics = [
     ),
   },
   {
-    label: 'Conversations (30d)',
-    value: '1,284',
-    change: '+18% vs last month',
+    label: 'Audience Chats (30d)',
+    value: '3,284',
+    change: '+22% vs last month',
     trend: 'up',
     color: '#14b8a6',
     icon: (
@@ -31,9 +39,9 @@ const metrics = [
     ),
   },
   {
-    label: 'Conversion Rate',
-    value: '8.4%',
-    change: '+2.1% this month',
+    label: 'Engagement Rate',
+    value: '9.1%',
+    change: '+2.4% this month',
     trend: 'up',
     color: '#34d399',
     icon: (
@@ -45,29 +53,59 @@ const metrics = [
     ),
   },
   {
-    label: 'Channels Active',
-    value: '2',
-    change: 'Web + WhatsApp',
+    label: 'Domains Active',
+    value: '3',
+    change: 'Finance · Education · Coaching',
     trend: 'neutral',
     color: '#0ea5e9',
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
   },
 ];
 
 const personasSummary = [
-  { id: 'glow-ai', name: 'Glow AI', status: 'active', conversations: 842, conversion: '9.2%', emoji: '🧴' },
-  { id: 'support-ai', name: 'Support AI', status: 'draft', conversations: 0, conversion: '—', emoji: '💬' },
+  {
+    id: 'finance-priya',
+    name: 'FinanceCoach — Priya',
+    domains: ['Finance', 'Education'] as Domain[],
+    status: 'active',
+    conversations: 1284,
+    conversion: '9.2%',
+    emoji: '📈',
+    personaCount: 3,
+  },
+  {
+    id: 'coach-dani',
+    name: 'Coach Dani',
+    domains: ['Coaching'] as Domain[],
+    status: 'active',
+    conversations: 842,
+    conversion: '11.4%',
+    emoji: '🧭',
+    personaCount: 2,
+  },
+  {
+    id: 'course-jordan',
+    name: 'CourseGuide — Jordan',
+    domains: ['Education', 'Finance'] as Domain[],
+    status: 'draft',
+    conversations: 0,
+    conversion: '—',
+    emoji: '🎓',
+    personaCount: 1,
+  },
 ];
 
 const recentActivity = [
-  { text: 'Glow AI answered 48 questions today', time: '2h ago', color: '#14b8a6' },
-  { text: '3 visitors converted via Glow AI', time: '4h ago', color: '#34d399' },
-  { text: 'WhatsApp channel connected', time: 'Yesterday', color: '#7c3aed' },
-  { text: 'Shopify catalog synced — 124 products', time: '2 days ago', color: '#0ea5e9' },
+  { text: 'FinanceCoach — Priya answered 62 investor questions today', time: '1h ago', color: '#34d399' },
+  { text: 'Coach Dani completed 8 audience coaching sessions', time: '2h ago', color: '#7c3aed' },
+  { text: 'CourseGuide — Jordan persona created (draft)', time: '4h ago', color: '#14b8a6' },
+  { text: 'Finance newsletter archive synced — 2,800 new chunks', time: '1 day ago', color: '#0ea5e9' },
 ];
 
 export default function DashboardPage() {
@@ -81,7 +119,7 @@ export default function DashboardPage() {
     <AppLayout>
       <Topbar
         title="Dashboard"
-        subtitle="Your AI salesperson, available 24/7"
+        subtitle="Your multi-domain creator personas, engaging your audience 24/7"
         action={
           <Link href="/create-persona" className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
@@ -92,6 +130,21 @@ export default function DashboardPage() {
           </Link>
         }
       />
+
+      {/* Multi-domain callout */}
+      <div className="flex items-center gap-3 p-3.5 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/5 mb-6">
+        <span className="text-base">🌐</span>
+        <p className="text-xs text-white/55 flex-1">
+          <span className="text-white font-semibold">Multi-domain creator platform</span> — your personas span Finance, Education, and Coaching. Each persona can cover multiple niches simultaneously.
+        </p>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          {(['Finance', 'Education', 'Coaching'] as Domain[]).map((d) => (
+            <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${domainColors[d].text} ${domainColors[d].bg} ${domainColors[d].border}`}>
+              {d}
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -116,7 +169,7 @@ export default function DashboardPage() {
         <div className="xl:col-span-2">
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-              <h2 className="text-sm font-semibold text-white">Your Personas</h2>
+              <h2 className="text-sm font-semibold text-white">Your Creator Personas</h2>
               <Link href="/personas" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors">
                 View all →
               </Link>
@@ -128,13 +181,25 @@ export default function DashboardPage() {
                     {p.emoji}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
                       <p className="text-sm font-medium text-white truncate">{p.name}</p>
                       <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${statusStyle(p.status)}`}>
                         {p.status}
                       </span>
+                      {p.domains.length > 1 && (
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25">
+                          🌐 multi-domain
+                        </span>
+                      )}
                     </div>
-                    <p className="text-xs text-white/40">Shopping Assistant</p>
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {p.domains.map((d) => (
+                        <span key={d} className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border ${domainColors[d].text} ${domainColors[d].bg} ${domainColors[d].border}`}>
+                          {d}
+                        </span>
+                      ))}
+                      <span className="text-[10px] text-white/30">· 🎭 {p.personaCount} persona{p.personaCount !== 1 ? 's' : ''}</span>
+                    </div>
                   </div>
                   <div className="hidden sm:flex flex-col items-end gap-0.5">
                     <p className="text-sm font-semibold text-white">{p.conversations.toLocaleString()}</p>
@@ -142,7 +207,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="hidden md:flex flex-col items-end gap-0.5">
                     <p className="text-sm font-semibold text-[#34d399]">{p.conversion}</p>
-                    <p className="text-[10px] text-white/35">conversion</p>
+                    <p className="text-[10px] text-white/35">engagement</p>
                   </div>
                   <Link
                     href="/personas"
@@ -162,12 +227,12 @@ export default function DashboardPage() {
             <h2 className="text-sm font-semibold text-white mb-4">Quick Actions</h2>
             <div className="flex flex-col gap-2">
               {[
-                { href: '/personas', label: 'Manage Personas', icon: '🤖', color: '#7c3aed' },
-                { href: '/deploy', label: 'Deploy to Channel', icon: '🚀', color: '#14b8a6' },
-                { href: '/embeds', label: 'Manage Embeds', icon: '💻', color: '#0ea5e9' },
-                { href: '/analytics', label: 'View Analytics', icon: '📊', color: '#34d399' },
-                { href: '/knowledge-base', label: 'Knowledge Base', icon: '📚', color: '#f59e0b' },
-                { href: '/conversations', label: 'View Conversations', icon: '💬', color: '#a78bfa' },
+                { href: '/personas',       label: 'Manage Personas',    icon: '🎭', color: '#7c3aed' },
+                { href: '/deploy',         label: 'Deploy to Channel',  icon: '🚀', color: '#14b8a6' },
+                { href: '/embeds',         label: 'Manage Embeds',      icon: '💻', color: '#0ea5e9' },
+                { href: '/analytics',      label: 'View Analytics',     icon: '📊', color: '#34d399' },
+                { href: '/knowledge-base', label: 'Knowledge Base',     icon: '📚', color: '#f59e0b' },
+                { href: '/conversations',  label: 'View Conversations', icon: '💬', color: '#a78bfa' },
               ]?.map((action) => (
                 <Link
                   key={action?.href}

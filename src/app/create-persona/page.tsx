@@ -1,23 +1,31 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
-import { ChevronDown, ChevronUp, Zap, FileText, ShoppingBag } from 'lucide-react';
+import { ChevronDown, ChevronUp, Zap, FileText } from 'lucide-react';
 
 type Step = 'details' | 'knowledge' | 'review';
+type Domain = 'Finance' | 'Education' | 'Coaching';
 
 interface PersonaForm {
   name: string;
+  domains: Domain[];
   tone: 'friendly' | 'expert' | 'premium';
   prompt: string;
   attachedKbIds: string[];
 }
 
+const domainConfig: Record<Domain, { color: string; bg: string; border: string; emoji: string; desc: string }> = {
+  Finance:   { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', emoji: '📈', desc: 'Investing, wealth-building, financial planning' },
+  Education: { color: 'text-blue-400',    bg: 'bg-blue-500/10',    border: 'border-blue-500/30',    emoji: '🎓', desc: 'Courses, curriculum, student Q&A' },
+  Coaching:  { color: 'text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/30',  emoji: '🧭', desc: 'Life coaching, mindset, 1:1 sessions' },
+};
+
 const toneOptions = [
   { value: 'friendly', label: 'Friendly', desc: 'Warm, approachable, conversational', emoji: '😊' },
-  { value: 'expert', label: 'Expert', desc: 'Knowledgeable, precise, authoritative', emoji: '🎓' },
-  { value: 'premium', label: 'Premium', desc: 'Sophisticated, exclusive, refined', emoji: '✨' },
+  { value: 'expert',   label: 'Expert',   desc: 'Knowledgeable, precise, authoritative', emoji: '🎓' },
+  { value: 'premium',  label: 'Premium',  desc: 'Sophisticated, exclusive, refined', emoji: '✨' },
 ] as const;
 
 interface QuickTemplate {
@@ -32,84 +40,50 @@ const quickTemplates: QuickTemplate[] = [
     id: 'tone-behaviour',
     label: 'Tone & Behaviour',
     icon: '🎭',
-    prompt: `You are a friendly and helpful shopping assistant for our D2C brand. Always greet customers warmly, use a conversational tone, and be empathetic to their needs. Avoid being pushy — focus on helping customers find the right product for them. Use simple, clear language and keep responses concise.`,
+    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise — whether in finance, coaching, or course content. Use clear, jargon-free language and keep responses concise and actionable.`,
   },
   {
     id: 'capabilities',
     label: 'Capabilities',
     icon: '⚡',
-    prompt: `You can help customers with: (1) Finding the right product based on their needs and preferences, (2) Comparing products and explaining differences, (3) Answering questions about ingredients, materials, or specifications, (4) Checking product availability and pricing, (5) Explaining shipping, returns, and policies, (6) Recommending bundles or complementary products.`,
+    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing finance tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
   },
   {
     id: 'call-flow',
-    label: 'Call Flow',
+    label: 'Conversation Flow',
     icon: '🔄',
-    prompt: `Follow this conversation flow: 1) Greet the customer and ask how you can help. 2) Understand their need or problem. 3) Ask 1-2 clarifying questions if needed. 4) Recommend 1-3 relevant products with brief explanations. 5) Handle objections or questions. 6) Guide them toward adding to cart or completing purchase. 7) Offer post-purchase support if needed.`,
+    prompt: `Follow this conversation flow: 1) Greet the audience member and ask how you can help. 2) Understand their goal or challenge. 3) Ask 1-2 clarifying questions if needed. 4) Share relevant insights from your content or frameworks. 5) Recommend a specific course, module, or resource. 6) Invite them to take the next step — enroll, book a call, or join your community.`,
   },
   {
     id: 'objectives',
     label: 'Objectives',
     icon: '🎯',
-    prompt: `Primary objective: Help customers find and purchase the right product. Secondary objectives: (1) Increase average order value through relevant upsells, (2) Reduce cart abandonment by addressing concerns proactively, (3) Build brand trust through accurate, helpful information, (4) Collect customer preferences to personalize recommendations. Always prioritize customer satisfaction over immediate sales.`,
+    prompt: `Primary objective: Help your audience get real value from your expertise and content. Secondary objectives: (1) Guide them toward enrolling in your course or coaching program, (2) Build trust by delivering accurate, helpful information grounded in your content, (3) Increase engagement with your community and content library, (4) Collect audience questions to inform future content creation. Always prioritize genuine helpfulness over hard selling.`,
   },
 ];
 
-// Mock KB documents for attachment
 const kbDocuments = [
-  { id: 'kb-1', name: 'Product_FAQ_v3.pdf', type: 'pdf', size: '2.4 MB' },
-  { id: 'kb-2', name: 'Sales_Playbook_2024.docx', type: 'docx', size: '1.1 MB' },
-  { id: 'kb-4', name: 'Competitor_Analysis_Q4.csv', type: 'csv', size: '890 KB' },
-  { id: 'kb-6', name: 'Brand_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
+  { id: 'kb-1', name: 'Course_Curriculum_v3.pdf', type: 'pdf', size: '2.4 MB' },
+  { id: 'kb-2', name: 'Coaching_Framework_2024.docx', type: 'docx', size: '1.1 MB' },
+  { id: 'kb-4', name: 'Finance_Newsletter_Archive.csv', type: 'csv', size: '890 KB' },
+  { id: 'kb-6', name: 'Creator_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
 ];
-
-interface ShopifyStoreOption {
-  id: string;
-  name: string;
-  domain: string;
-  products: number;
-}
-
-const STORES_STORAGE_KEY = 'kb_shopify_stores';
-
-function loadShopifyStores(): ShopifyStoreOption[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(STORES_STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw) as Array<{ id: string; name: string; domain: string; products: number; status: string }>;
-      return parsed.filter((s) => s.status === 'connected').map((s) => ({
-        id: s.id,
-        name: s.name,
-        domain: s.domain,
-        products: s.products,
-      }));
-    }
-  } catch {}
-  return [];
-}
 
 export default function CreatePersonaPage() {
   const [step, setStep] = useState<Step>('details');
   const [form, setForm] = useState<PersonaForm>({
     name: '',
+    domains: [],
     tone: 'friendly',
     prompt: '',
     attachedKbIds: [],
   });
   const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null);
-  const [shopifyStores, setShopifyStores] = useState<ShopifyStoreOption[]>([]);
-
-  // Load Shopify stores from localStorage when reaching knowledge step
-  React.useEffect(() => {
-    if (step === 'knowledge') {
-      setShopifyStores(loadShopifyStores());
-    }
-  }, [step]);
 
   const steps: { key: Step; label: string; num: string }[] = [
-    { key: 'details', label: 'Persona Details', num: '1' },
+    { key: 'details',  label: 'Persona Details',  num: '1' },
     { key: 'knowledge', label: 'Knowledge Source', num: '2' },
-    { key: 'review', label: 'Review & Create', num: '3' },
+    { key: 'review',   label: 'Review & Create',  num: '3' },
   ];
 
   const currentStepIdx = steps.findIndex((s) => s.key === step);
@@ -122,6 +96,13 @@ export default function CreatePersonaPage() {
   const handleBack = () => {
     if (step === 'knowledge') setStep('details');
     else if (step === 'review') setStep('knowledge');
+  };
+
+  const toggleDomain = (d: Domain) => {
+    setForm((prev) => ({
+      ...prev,
+      domains: prev.domains.includes(d) ? prev.domains.filter((x) => x !== d) : [...prev.domains, d],
+    }));
   };
 
   const injectTemplate = (template: QuickTemplate) => {
@@ -144,8 +125,16 @@ export default function CreatePersonaPage() {
     <AppLayout>
       <Topbar
         title="Create Persona"
-        subtitle="Build your AI sales persona in 3 simple steps"
+        subtitle="Build a multi-domain AI persona that engages your audience with your expertise"
       />
+
+      {/* Multi-domain callout */}
+      <div className="flex items-start gap-3 p-4 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/6 mb-6 max-w-2xl">
+        <span className="text-lg flex-shrink-0">🌐</span>
+        <p className="text-xs text-white/60 leading-relaxed">
+          <span className="text-white font-semibold">Multi-domain personas</span> — your AI persona can span Finance, Education, and Coaching simultaneously. Audience members get expert answers across all your niches, 24/7.
+        </p>
+      </div>
 
       {/* Step indicator */}
       <div className="flex items-center gap-0 mb-8 max-w-lg">
@@ -184,7 +173,7 @@ export default function CreatePersonaPage() {
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-6">
             <div>
               <h2 className="text-base font-semibold text-white mb-1">Persona Details</h2>
-              <p className="text-sm text-white/45">Give your AI persona a name, personality, and behaviour.</p>
+              <p className="text-sm text-white/45">Give your AI persona a name, domain expertise, and personality.</p>
             </div>
 
             {/* Name */}
@@ -194,24 +183,57 @@ export default function CreatePersonaPage() {
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="e.g. Glow AI, Shop Assistant, Aria..."
+                placeholder="e.g. FinanceCoach — Priya, CourseGuide — Jordan, Coach Dani..."
                 className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all"
               />
             </div>
 
-            {/* Type — Shopping Assistant only */}
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Persona Type</label>
-              <div className="flex items-center gap-3 p-4 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/8">
-                <span className="text-2xl">🛍️</span>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-white">Shopping Assistant</p>
-                  <p className="text-xs text-white/45 mt-0.5">Helps visitors find products, compare options, and complete purchases</p>
-                </div>
-                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30">
-                  Default
-                </span>
+            {/* Domain Selection */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Domain Expertise</label>
+                <span className="text-[10px] text-white/30">Select one or more</span>
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {(Object.keys(domainConfig) as Domain[]).map((d) => {
+                  const cfg = domainConfig[d];
+                  const selected = form.domains.includes(d);
+                  return (
+                    <button
+                      key={d}
+                      onClick={() => toggleDomain(d)}
+                      className={`flex flex-col gap-2 p-4 rounded-xl border text-left transition-all ${
+                        selected
+                          ? `${cfg.border} ${cfg.bg}`
+                          : 'border-white/8 bg-white/[0.02] hover:border-white/15'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xl">{cfg.emoji}</span>
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                          selected ? `${cfg.border.replace('border-', 'border-')} bg-current` : 'border-white/20'
+                        }`}
+                          style={selected ? { borderColor: cfg.color.replace('text-', ''), backgroundColor: cfg.color.replace('text-', '') } : {}}
+                        >
+                          {selected && (
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          )}
+                        </div>
+                      </div>
+                      <p className={`text-xs font-semibold ${selected ? cfg.color : 'text-white/70'}`}>{d}</p>
+                      <p className="text-[10px] text-white/35 leading-relaxed">{cfg.desc}</p>
+                    </button>
+                  );
+                })}
+              </div>
+              {form.domains.length > 1 && (
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#7c3aed]/8 border border-[#7c3aed]/20">
+                  <span className="text-xs">🌐</span>
+                  <span className="text-[11px] text-[#a78bfa]">Multi-domain persona — your audience gets expertise across {form.domains.join(', ')}</span>
+                </div>
+              )}
             </div>
 
             {/* Tone */}
@@ -283,7 +305,7 @@ export default function CreatePersonaPage() {
               <textarea
                 value={form.prompt}
                 onChange={(e) => setForm({ ...form, prompt: e.target.value })}
-                placeholder="Define how your AI persona should behave, what it knows, and how it should respond to customers..."
+                placeholder="Define how your AI persona should behave, what expertise it draws from, and how it should engage your audience..."
                 rows={6}
                 className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all resize-none leading-relaxed"
               />
@@ -294,11 +316,14 @@ export default function CreatePersonaPage() {
 
             <button
               onClick={handleNext}
-              disabled={!form.name.trim()}
+              disabled={!form.name.trim() || form.domains.length === 0}
               className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40 disabled:cursor-not-allowed self-start"
             >
               Continue →
             </button>
+            {form.domains.length === 0 && form.name.trim() && (
+              <p className="text-[11px] text-amber-400/70 -mt-4">Select at least one domain to continue</p>
+            )}
           </div>
         )}
 
@@ -307,8 +332,23 @@ export default function CreatePersonaPage() {
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-6">
             <div>
               <h2 className="text-base font-semibold text-white mb-1">Knowledge Source</h2>
-              <p className="text-sm text-white/45">Attach documents from your Knowledge Base to power this persona.</p>
+              <p className="text-sm text-white/45">Attach your content from the Knowledge Base to power this persona.</p>
             </div>
+
+            {/* Domain context */}
+            {form.domains.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {form.domains.map((d) => {
+                  const cfg = domainConfig[d];
+                  return (
+                    <span key={d} className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cfg.border} ${cfg.bg} ${cfg.color}`}>
+                      {cfg.emoji} {d}
+                    </span>
+                  );
+                })}
+                <span className="text-[11px] text-white/35 self-center">— attach relevant content for each domain</span>
+              </div>
+            )}
 
             {/* Attach from Knowledge Base */}
             <div className="flex flex-col gap-3">
@@ -357,57 +397,6 @@ export default function CreatePersonaPage() {
               </Link>
             </div>
 
-            {/* Shopify Stores */}
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <ShoppingBag size={14} className="text-white/40" />
-                <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Shopify Stores</label>
-              </div>
-              {shopifyStores.length === 0 ? (
-                <div className="flex items-center gap-3 p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                  <ShoppingBag size={16} className="text-white/20 flex-shrink-0" />
-                  <p className="text-xs text-white/35">No Shopify stores connected yet.</p>
-                  <Link href="/knowledge-base" className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors ml-auto flex-shrink-0">
-                    Connect a store →
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  {shopifyStores.map((store) => {
-                    const isAttached = form.attachedKbIds.includes(store.id);
-                    return (
-                      <button
-                        key={store.id}
-                        onClick={() => toggleKbDoc(store.id)}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
-                          isAttached
-                            ? 'border-[#14b8a6]/40 bg-[#14b8a6]/8'
-                            : 'border-white/8 bg-white/[0.02] hover:border-white/15'
-                        }`}
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-[#14b8a6]/10 flex items-center justify-center flex-shrink-0 text-[#14b8a6]">
-                          <ShoppingBag size={13} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-white truncate">{store.name}</p>
-                          <p className="text-[10px] text-white/35">{store.domain} · {store.products} products</p>
-                        </div>
-                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                          isAttached ? 'border-[#14b8a6] bg-[#14b8a6]' : 'border-white/20'
-                        }`}>
-                          {isAttached && (
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
             <div className="flex gap-3">
               <button
                 onClick={handleBack}
@@ -433,7 +422,12 @@ export default function CreatePersonaPage() {
             <div className="flex flex-col gap-3">
               {[
                 { label: 'Name', value: form.name || '(unnamed)' },
-                { label: 'Type', value: 'Shopping Assistant 🛍️' },
+                {
+                  label: 'Domains',
+                  value: form.domains.length > 0
+                    ? form.domains.map((d) => `${domainConfig[d].emoji} ${d}`).join('  ·  ')
+                    : 'None selected',
+                },
                 { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
                 {
                   label: 'KB Docs Attached',
@@ -454,9 +448,18 @@ export default function CreatePersonaPage() {
               ))}
             </div>
 
+            {form.domains.length > 1 && (
+              <div className="flex items-start gap-3 p-3 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/6">
+                <span className="text-base flex-shrink-0">🌐</span>
+                <p className="text-xs text-[#a78bfa] leading-relaxed">
+                  This is a <span className="font-semibold">multi-domain persona</span> — it will engage your audience across {form.domains.join(', ')} simultaneously.
+                </p>
+              </div>
+            )}
+
             <div className="p-4 rounded-xl border border-[#14b8a6]/20 bg-[#14b8a6]/6">
               <p className="text-xs text-[#5eead4] leading-relaxed">
-                🚀 After creating, you can test your persona in chat, then deploy it to your website or Shopify store.
+                🚀 After creating, you can test your persona in chat, then deploy it to your website, course platform, or WhatsApp.
               </p>
             </div>
 
@@ -467,7 +470,7 @@ export default function CreatePersonaPage() {
               >
                 ← Back
               </button>
-              <Link href="/dashboard" className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
+              <Link href="/personas" className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
                 Create Persona ✨
               </Link>
             </div>
