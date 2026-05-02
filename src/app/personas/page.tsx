@@ -526,9 +526,10 @@ export default function PersonasPage() {
   };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://creatoreco2029.builtwithrocket.new';
+  const creatorId = 'my-creator-profile';
 
-  const getCreatorProfileUrl = (persona: Persona) => `${siteUrl}/creator/${persona.id}`;
-  const getPersonaPublicUrl = (persona: Persona) => `${siteUrl}/creator/${persona.id}/persona/${persona.id}`;
+  const getCreatorProfileUrl = () => `${siteUrl}/creator/${creatorId}`;
+  const getPersonaPublicUrl = (persona: Persona) => `${siteUrl}/creator/${creatorId}/persona/${persona.id}`;
 
   const handleToggleStatus = (id: string) => {
     setPersonas((prev) =>
@@ -577,6 +578,32 @@ export default function PersonasPage() {
           </Link>
         }
       />
+
+      {/* Creator Profile URL — shown once for the creator */}
+      <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#7c3aed]/25 bg-[#7c3aed]/5 mb-4">
+        <span className="text-sm flex-shrink-0">🔗</span>
+        <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+          <span className="text-[10px] font-semibold text-[#a78bfa]/70 uppercase tracking-wide">Creator Profile URL</span>
+          <span className="text-[11px] text-[#a78bfa] font-mono truncate">{getCreatorProfileUrl()}</span>
+        </div>
+        <button
+          onClick={() => handleCopy(getCreatorProfileUrl(), 'creator-profile')}
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/40 hover:text-white transition-all flex-shrink-0"
+          title="Copy Creator Profile URL"
+        >
+          {copiedKey === 'creator-profile' ? <Check size={11} className="text-emerald-400" /> : <Copy size={11} />}
+          <span className="text-[10px]">{copiedKey === 'creator-profile' ? 'Copied' : 'Copy'}</span>
+        </button>
+        <a
+          href={getCreatorProfileUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-7 h-7 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/40 hover:text-white transition-all flex-shrink-0"
+          title="Open Creator Profile"
+        >
+          <ExternalLink size={11} />
+        </a>
+      </div>
 
       {/* Single-domain info callout */}
       <div className="flex items-start gap-3 p-4 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/5 mb-6">
@@ -690,29 +717,6 @@ export default function PersonasPage() {
 
                     {/* Shareable URLs */}
                     <div className="mt-3 flex flex-col gap-2">
-                      {/* Creator Profile URL */}
-                      <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.03] border border-white/8">
-                        <span className="text-[10px] font-semibold text-white/40 flex-shrink-0 w-24">Profile URL</span>
-                        <span className="text-[11px] text-[#a78bfa] truncate flex-1 font-mono">{getCreatorProfileUrl(persona)}</span>
-                        <button
-                          onClick={() => handleCopy(getCreatorProfileUrl(persona), `profile-${persona.id}`)}
-                          className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/8 text-white/40 hover:text-white transition-all flex-shrink-0"
-                          title="Copy Creator Profile URL"
-                        >
-                          {copiedKey === `profile-${persona.id}` ? <Check size={11} className="text-emerald-400" /> : <Copy size={11} />}
-                          <span className="text-[10px]">{copiedKey === `profile-${persona.id}` ? 'Copied' : 'Copy'}</span>
-                        </button>
-                        <a
-                          href={getCreatorProfileUrl(persona)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-6 h-6 rounded-lg bg-white/5 hover:bg-white/10 border border-white/8 text-white/40 hover:text-white transition-all flex-shrink-0"
-                          title="Open Creator Profile"
-                        >
-                          <ExternalLink size={11} />
-                        </a>
-                      </div>
-
                       {/* Persona Public URL */}
                       <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0d9488]/5 border border-[#0d9488]/20">
                         <span className="text-[10px] font-semibold text-teal-400/60 flex-shrink-0 w-24">Persona URL</span>
