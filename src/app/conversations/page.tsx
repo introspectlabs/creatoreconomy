@@ -99,7 +99,7 @@ const mockConversations: Conversation[] = [
     personaName: 'Coach Dani',
     conversationId: 'CONV-8819',
     status: 'resolved',
-    channel: 'WhatsApp',
+    channel: 'URL',
     created: 'Apr 4, 2026 10:05 AM',
     duration: '17 min',
     messageCount: 11,
@@ -154,7 +154,7 @@ const mockConversations: Conversation[] = [
     personaName: 'MindsetPro — Ravi',
     conversationId: 'CONV-8816',
     status: 'resolved',
-    channel: 'WhatsApp',
+    channel: 'URL',
     created: 'Apr 3, 2026 11:30 AM',
     duration: '18 min',
     messageCount: 16,
@@ -224,7 +224,7 @@ const mockConversations: Conversation[] = [
     personaName: 'MindsetPro — Ravi',
     conversationId: 'CONV-8812',
     status: 'ongoing',
-    channel: 'WhatsApp',
+    channel: 'URL',
     created: 'Apr 1, 2026 11:00 AM',
     duration: 'Active',
     messageCount: 4,
@@ -253,7 +253,7 @@ const mockConversations: Conversation[] = [
 ];
 
 const allPersonas = ['All Personas', 'FinanceCoach — Priya', 'CourseGuide — Jordan', 'Coach Dani', 'MindsetPro — Ravi'];
-const allChannels = ['All Channels', 'Web Widget', 'WhatsApp', 'API'];
+const allChannels = ['All Channels', 'Web Widget', 'URL'];
 const statusOptions = ['All Status', 'resolved', 'ongoing', 'escalated'];
 
 const statusConfig = {
@@ -307,7 +307,6 @@ function ConversationModal({ conv, onClose }: { conv: Conversation; onClose: () 
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
           <div>
             <div className="flex items-center gap-2 mb-0.5">
-              <span className="text-[10px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-full">{conv.personaId}</span>
               <span className="text-xs font-600 text-white/80">{conv.personaName}</span>
             </div>
             <p className="text-[10px] text-white/35">
@@ -405,7 +404,6 @@ export default function ConversationsPage() {
     const matchSearch =
       searchQuery === '' ||
       conv.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      conv.personaId.toLowerCase().includes(searchQuery.toLowerCase()) ||
       conv.personaName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       conv.conversationId.toLowerCase().includes(searchQuery.toLowerCase());
     return matchPersona && matchChannel && matchStatus && matchSearch;
@@ -609,9 +607,6 @@ export default function ConversationsPage() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="text-[11px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-lg">
-                    {conv.personaId}
-                  </span>
                   <div className="flex items-center gap-1.5">
                     <Brain size={11} className="text-purple-400/60 flex-shrink-0" />
                     <span className="text-xs text-white/60">{conv.personaName}</span>
@@ -679,7 +674,6 @@ export default function ConversationsPage() {
               <tr className="border-b border-white/8">
                 {[
                   { label: 'User', width: 'w-[180px]' },
-                  { label: 'Persona ID', width: 'w-[110px]' },
                   { label: 'Persona Name', width: 'w-[140px]' },
                   { label: 'Conversation ID', width: 'w-[130px]' },
                   { label: 'Status', width: 'w-[110px]' },
@@ -704,7 +698,7 @@ export default function ConversationsPage() {
             <tbody>
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-16 text-center">
+                  <td colSpan={7} className="px-4 py-16 text-center">
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-12 h-12 rounded-2xl bg-white/4 border border-white/8 flex items-center justify-center">
                         <MessageSquare size={20} className="text-white/20" />
@@ -738,12 +732,6 @@ export default function ConversationsPage() {
                             <p className="text-[10px] text-white/35 truncate">{conv.userEmail}</p>
                           </div>
                         </div>
-                      </td>
-
-                      <td className="px-4 py-3.5">
-                        <span className="text-[11px] font-600 text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-lg">
-                          {conv.personaId}
-                        </span>
                       </td>
 
                       <td className="px-4 py-3.5">
