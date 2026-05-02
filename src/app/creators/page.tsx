@@ -342,7 +342,11 @@ export default function CreatorsDirectoryPage() {
                         </div>
                         {creator.messagesTotal > 0 && (
                           <div>
-                            <p className="text-xs font-semibold text-white">{creator.messagesTotal.toLocaleString()}</p>
+                            <p className="text-xs font-semibold text-white">
+                              {creator.messagesTotal >= 1000
+                                ? `${(creator.messagesTotal / 1000).toFixed(1)}K`
+                                : creator.messagesTotal}
+                            </p>
                             <p className="text-[10px] text-white/35">Messages</p>
                           </div>
                         )}
@@ -352,7 +356,7 @@ export default function CreatorsDirectoryPage() {
                           href={`/creator/${creator.slug}`}
                           className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/15 text-white/70 hover:text-white hover:border-white/30 transition-all"
                         >
-                          Chat →
+                          View Profile →
                         </Link>
                       )}
                     </div>

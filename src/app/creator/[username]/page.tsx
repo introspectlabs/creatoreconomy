@@ -99,6 +99,7 @@ export default function CreatorProfilePage() {
   const creator = CREATOR_DATA;
   const activePersonas = personas.filter((p) => p.status === 'active');
   const filteredPersonas = activePersonas;
+  const firstActivePersona = activePersonas[0];
 
   const tabs: { id: TabType; label: string; count?: number }[] = [
     { id: 'overview', label: 'Overview' },
@@ -192,13 +193,23 @@ export default function CreatorProfilePage() {
               >
                 Follow
               </button>
-              <Link
-                href={`/creator/${params?.username || 'personamatrix'}/persona/${personas[0]?.slug || 'aria-sales'}`}
-                className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
-              >
-                Chat Now
-              </Link>
+              {firstActivePersona ? (
+                <Link
+                  href={`/creator/${params?.username || 'personamatrix'}/persona/${firstActivePersona.slug}`}
+                  className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
+                >
+                  Chat Now
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="px-5 py-2 rounded-xl text-sm font-semibold text-white/30 cursor-not-allowed"
+                  style={{ background: 'rgba(124,58,237,0.2)' }}
+                >
+                  No Active Personas
+                </button>
+              )}
             </div>
           </div>
 
@@ -588,8 +599,8 @@ export default function CreatorProfilePage() {
             >
               <p className="text-lg font-bold text-white mb-2">Ready to experience it yourself?</p>
               <p className="text-sm text-white/50 mb-5">Start a free conversation with any persona — no sign-up required.</p>
-              <Link
-                href="/creators"
+              <button
+                onClick={() => setActiveTab('personas')}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
               >
@@ -597,7 +608,7 @@ export default function CreatorProfilePage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-              </Link>
+              </button>
             </div>
           </div>
         )}

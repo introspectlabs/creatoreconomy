@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import PublicHeader from '@/components/public/PublicHeader';
-import PublicFooter from '@/components/public/PublicFooter';
 import { personas } from '@/app/persona-library/components/personaData';
 
 interface Message {
@@ -30,7 +29,6 @@ export default function PersonaChatPage() {
   const username = (params?.username as string) || '';
   const personaname = (params?.personaname as string) || '';
 
-  // Find matching persona by slug or name match
   const persona = personas.find(
     (p) =>
       p.slug === personaname ||
@@ -76,13 +74,14 @@ export default function PersonaChatPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: '#080a10' }}>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: '#080a10' }}>
       <PublicHeader />
 
-      <div className="flex-1 flex flex-col pt-16">
+      {/* Full-height chat container below header */}
+      <div className="flex-1 flex flex-col overflow-hidden pt-16">
         {/* Persona header banner */}
         <div
-          className="border-b border-white/8 px-6 py-4"
+          className="border-b border-white/8 px-6 py-4 flex-shrink-0"
           style={{ background: 'rgba(10,12,18,0.9)', backdropFilter: 'blur(12px)' }}
         >
           <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
@@ -137,100 +136,95 @@ export default function PersonaChatPage() {
           </div>
         </div>
 
-        {/* Chat area */}
-        <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full px-4">
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto py-6 min-h-0" style={{ maxHeight: 'calc(100vh - 280px)' }}>
-            <div className="flex flex-col gap-4">
-              {messages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-3`}>
-                  {msg.role === 'ai' && (
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-1"
-                      style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.3)' }}
-                    >
-                      {personaEmoji}
-                    </div>
-                  )}
-                  <div
-                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-[80%] ${
-                      msg.role === 'user' ?'bg-[#7c3aed]/30 text-white border border-[#7c3aed]/30 rounded-br-sm' :'bg-white/6 text-white/85 border border-white/8 rounded-bl-sm'
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
-
-              {isTyping && (
-                <div className="flex justify-start gap-3">
+        {/* Scrollable messages area */}
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="max-w-3xl mx-auto flex flex-col gap-4">
+            {messages.map((msg, i) => (
+              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-3`}>
+                {msg.role === 'ai' && (
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-1"
-                    style={{ background: 'rgba(124,58,237,0.2)' }}
+                    style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.3)' }}
                   >
                     {personaEmoji}
                   </div>
-                  <div className="px-4 py-3 rounded-2xl bg-white/6 border border-white/8 flex gap-1 items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
+                )}
+                <div
+                  className={`px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-[80%] ${
+                    msg.role === 'user' ?'bg-[#7c3aed]/30 text-white border border-[#7c3aed]/30 rounded-br-sm' :'bg-white/6 text-white/85 border border-white/8 rounded-bl-sm'
+                  }`}
+                >
+                  {msg.text}
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-          </div>
-
-          {/* Suggested prompts */}
-          {messages.length <= 1 && (
-            <div className="pb-3">
-              <div className="flex flex-wrap gap-2">
-                {suggestedPrompts.map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => sendMessage(p)}
-                    className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 hover:bg-white/5 transition-all"
-                  >
-                    {p}
-                  </button>
-                ))}
               </div>
-            </div>
-          )}
+            ))}
 
-          {/* Input */}
-          <div className="pb-6 pt-2 border-t border-white/6">
-            <form onSubmit={handleSubmit} className="flex items-center gap-3">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder={`Message ${displayName}...`}
-                className="flex-1 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || isTyping}
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <line x1="22" y1="2" x2="11" y2="13" />
-                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
-              </button>
-            </form>
-            <p className="text-center text-[10px] text-white/20 mt-3">
-              AI persona powered by{' '}
-              <Link href="/" className="text-purple-400/60 hover:text-purple-400 transition-colors">
-                PersonaMatrix
-              </Link>
-            </p>
+            {isTyping && (
+              <div className="flex justify-start gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0 mt-1"
+                  style={{ background: 'rgba(124,58,237,0.2)' }}
+                >
+                  {personaEmoji}
+                </div>
+                <div className="px-4 py-3 rounded-2xl bg-white/6 border border-white/8 flex gap-1 items-center">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '300ms' }} />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
           </div>
         </div>
-      </div>
 
-      <PublicFooter />
+        {/* Suggested prompts */}
+        {messages.length <= 1 && (
+          <div className="px-4 pb-2 max-w-3xl mx-auto w-full flex-shrink-0">
+            <div className="flex flex-wrap gap-2">
+              {suggestedPrompts.map((p) => (
+                <button
+                  key={p}
+                  onClick={() => sendMessage(p)}
+                  className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 hover:bg-white/5 transition-all"
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Input bar */}
+        <div className="px-4 pb-5 pt-3 flex-shrink-0 border-t border-white/6" style={{ background: 'rgba(8,10,16,0.95)' }}>
+          <form onSubmit={handleSubmit} className="flex items-center gap-3 max-w-3xl mx-auto">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={`Message ${displayName}...`}
+              className="flex-1 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all"
+            />
+            <button
+              type="submit"
+              disabled={!input.trim() || isTyping}
+              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </form>
+          <p className="text-center text-[10px] text-white/20 mt-3">
+            AI persona powered by{' '}
+            <Link href="/" className="text-purple-400/60 hover:text-purple-400 transition-colors">
+              PersonaMatrix
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
