@@ -10,7 +10,7 @@ type Domain = 'Finance' | 'Education' | 'Coaching';
 
 interface PersonaForm {
   name: string;
-  domains: Domain[];
+  domain: Domain | null;
   tone: 'friendly' | 'expert' | 'premium';
   prompt: string;
   attachedKbIds: string[];
@@ -40,13 +40,13 @@ const quickTemplates: QuickTemplate[] = [
     id: 'tone-behaviour',
     label: 'Tone & Behaviour',
     icon: '🎭',
-    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise — whether in finance, coaching, or course content. Use clear, jargon-free language and keep responses concise and actionable.`,
+    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise. Use clear, jargon-free language and keep responses concise and actionable.`,
   },
   {
     id: 'capabilities',
     label: 'Capabilities',
     icon: '⚡',
-    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing finance tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
+    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
   },
   {
     id: 'call-flow',
@@ -73,7 +73,7 @@ export default function CreatePersonaPage() {
   const [step, setStep] = useState<Step>('details');
   const [form, setForm] = useState<PersonaForm>({
     name: '',
-    domains: [],
+    domain: null,
     tone: 'friendly',
     prompt: '',
     attachedKbIds: [],
@@ -98,11 +98,8 @@ export default function CreatePersonaPage() {
     else if (step === 'review') setStep('knowledge');
   };
 
-  const toggleDomain = (d: Domain) => {
-    setForm((prev) => ({
-      ...prev,
-      domains: prev.domains.includes(d) ? prev.domains.filter((x) => x !== d) : [...prev.domains, d],
-    }));
+  const selectDomain = (d: Domain) => {
+    setForm((prev) => ({ ...prev, domain: d }));
   };
 
   const injectTemplate = (template: QuickTemplate) => {
@@ -125,14 +122,14 @@ export default function CreatePersonaPage() {
     <AppLayout>
       <Topbar
         title="Create Persona"
-        subtitle="Build a multi-domain AI persona that engages your audience with your expertise"
+        subtitle="Build a focused AI persona for a single domain that engages your audience with your expertise"
       />
 
-      {/* Multi-domain callout */}
+      {/* Single-domain info callout */}
       <div className="flex items-start gap-3 p-4 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/6 mb-6 max-w-2xl">
-        <span className="text-lg flex-shrink-0">🌐</span>
+        <span className="text-lg flex-shrink-0">🎯</span>
         <p className="text-xs text-white/60 leading-relaxed">
-          <span className="text-white font-semibold">Multi-domain personas</span> — your AI persona can span Finance, Education, and Coaching simultaneously. Audience members get expert answers across all your niches, 24/7.
+          <span className="text-white font-semibold">Each persona is focused on one domain</span> — Finance, Education, or Coaching. You can create multiple personas across different domains to cover all your niches.
         </p>
       </div>
 
@@ -188,20 +185,20 @@ export default function CreatePersonaPage() {
               />
             </div>
 
-            {/* Domain Selection */}
+            {/* Domain Selection — single select */}
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Domain Expertise</label>
-                <span className="text-[10px] text-white/30">Select one or more</span>
+                <span className="text-[10px] text-white/30">Select one</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {(Object.keys(domainConfig) as Domain[]).map((d) => {
                   const cfg = domainConfig[d];
-                  const selected = form.domains.includes(d);
+                  const selected = form.domain === d;
                   return (
                     <button
                       key={d}
-                      onClick={() => toggleDomain(d)}
+                      onClick={() => selectDomain(d)}
                       className={`flex flex-col gap-2 p-4 rounded-xl border text-left transition-all ${
                         selected
                           ? `${cfg.border} ${cfg.bg}`
@@ -210,15 +207,14 @@ export default function CreatePersonaPage() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-xl">{cfg.emoji}</span>
-                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                          selected ? `${cfg.border.replace('border-', 'border-')} bg-current` : 'border-white/20'
-                        }`}
-                          style={selected ? { borderColor: cfg.color.replace('text-', ''), backgroundColor: cfg.color.replace('text-', '') } : {}}
+                        <div
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                            selected ? cfg.border : 'border-white/20'
+                          }`}
+                          style={selected ? { borderColor: '', backgroundColor: '' } : {}}
                         >
                           {selected && (
-                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cfg.color.replace('text-', '').includes('emerald') ? '#34d399' : cfg.color.includes('blue') ? '#60a5fa' : '#fb923c' }} />
                           )}
                         </div>
                       </div>
@@ -228,12 +224,6 @@ export default function CreatePersonaPage() {
                   );
                 })}
               </div>
-              {form.domains.length > 1 && (
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#7c3aed]/8 border border-[#7c3aed]/20">
-                  <span className="text-xs">🌐</span>
-                  <span className="text-[11px] text-[#a78bfa]">Multi-domain persona — your audience gets expertise across {form.domains.join(', ')}</span>
-                </div>
-              )}
             </div>
 
             {/* Tone */}
@@ -316,13 +306,13 @@ export default function CreatePersonaPage() {
 
             <button
               onClick={handleNext}
-              disabled={!form.name.trim() || form.domains.length === 0}
+              disabled={!form.name.trim() || !form.domain}
               className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40 disabled:cursor-not-allowed self-start"
             >
               Continue →
             </button>
-            {form.domains.length === 0 && form.name.trim() && (
-              <p className="text-[11px] text-amber-400/70 -mt-4">Select at least one domain to continue</p>
+            {!form.domain && form.name.trim() && (
+              <p className="text-[11px] text-amber-400/70 -mt-4">Select a domain to continue</p>
             )}
           </div>
         )}
@@ -336,17 +326,17 @@ export default function CreatePersonaPage() {
             </div>
 
             {/* Domain context */}
-            {form.domains.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {form.domains.map((d) => {
-                  const cfg = domainConfig[d];
+            {form.domain && (
+              <div className="flex items-center gap-2">
+                {(() => {
+                  const cfg = domainConfig[form.domain];
                   return (
-                    <span key={d} className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cfg.border} ${cfg.bg} ${cfg.color}`}>
-                      {cfg.emoji} {d}
+                    <span className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cfg.border} ${cfg.bg} ${cfg.color}`}>
+                      {cfg.emoji} {form.domain}
                     </span>
                   );
-                })}
-                <span className="text-[11px] text-white/35 self-center">— attach relevant content for each domain</span>
+                })()}
+                <span className="text-[11px] text-white/35">— attach relevant content for this domain</span>
               </div>
             )}
 
@@ -423,9 +413,9 @@ export default function CreatePersonaPage() {
               {[
                 { label: 'Name', value: form.name || '(unnamed)' },
                 {
-                  label: 'Domains',
-                  value: form.domains.length > 0
-                    ? form.domains.map((d) => `${domainConfig[d].emoji} ${d}`).join('  ·  ')
+                  label: 'Domain',
+                  value: form.domain
+                    ? `${domainConfig[form.domain].emoji} ${form.domain}`
                     : 'None selected',
                 },
                 { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
@@ -447,15 +437,6 @@ export default function CreatePersonaPage() {
                 </div>
               ))}
             </div>
-
-            {form.domains.length > 1 && (
-              <div className="flex items-start gap-3 p-3 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/6">
-                <span className="text-base flex-shrink-0">🌐</span>
-                <p className="text-xs text-[#a78bfa] leading-relaxed">
-                  This is a <span className="font-semibold">multi-domain persona</span> — it will engage your audience across {form.domains.join(', ')} simultaneously.
-                </p>
-              </div>
-            )}
 
             <div className="p-4 rounded-xl border border-[#14b8a6]/20 bg-[#14b8a6]/6">
               <p className="text-xs text-[#5eead4] leading-relaxed">

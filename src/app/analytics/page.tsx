@@ -46,7 +46,7 @@ const engagementData = [
 
 const domainBreakdown = [
   { domain: 'Finance' as const, personas: 2, chats: 1284, engagement: '9.2%', topPersona: 'FinanceCoach — Priya', emoji: '📈' },
-  { domain: 'Education' as const, personas: 2, chats: 642, engagement: '7.8%', topPersona: 'CourseGuide — Jordan', emoji: '🎓' },
+  { domain: 'Education' as const, personas: 1, chats: 642, engagement: '7.8%', topPersona: 'CourseGuide — Jordan', emoji: '🎓' },
   { domain: 'Coaching' as const, personas: 2, chats: 358, engagement: '11.4%', topPersona: 'Coach Dani', emoji: '🧭' },
 ];
 
@@ -74,13 +74,13 @@ export default function AnalyticsPage() {
 
   const summaryMetrics = [
     { label: 'Total Audience Chats', value: '3,284', change: '+22% vs last month', color: '#7c3aed', trend: 'up' },
-    { label: 'Domains Active', value: '3', change: 'Finance · Education · Coaching', color: '#14b8a6', trend: 'neutral' },
+    { label: 'Personas Active', value: '5', change: 'Across Finance, Education & Coaching', color: '#14b8a6', trend: 'neutral' },
     { label: 'Avg Engagement Rate', value: '9.1%', change: '+2.4% this month', color: '#34d399', trend: 'up' },
   ];
 
   return (
     <AppLayout>
-      <Topbar title="Analytics" subtitle="Audience conversations, top questions, and engagement metrics across all creator personas and domains" />
+      <Topbar title="Analytics" subtitle="Audience conversations, top questions, and engagement metrics — each persona focused on a single domain" />
 
       {/* Domain breakdown strip */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">

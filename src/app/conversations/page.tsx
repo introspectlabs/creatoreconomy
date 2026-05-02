@@ -25,6 +25,8 @@ import {
   ChevronRight,
   ArrowUpDown,
 } from 'lucide-react';
+import Icon from '@/components/ui/AppIcon';
+
 
 interface Message {
   id: string;

@@ -54,7 +54,7 @@ const activities = [
     id: 'act-006',
     type: 'success',
     icon: TrendingUp,
-    title: 'MindsetPro — Ravi multi-domain persona training complete',
+    title: 'MindsetPro — Ravi persona training complete',
     time: '5 hr ago',
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',

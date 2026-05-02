@@ -13,12 +13,12 @@ const domainColors: Record<Domain, { text: string; bg: string; border: string; e
 };
 
 const personas = [
-  { id: 'finance-priya',  name: 'FinanceCoach — Priya',  domains: ['Finance', 'Education'] as Domain[], initials: 'FP', color: 'from-purple-500 to-blue-500',   personaCount: 3 },
-  { id: 'course-jordan',  name: 'CourseGuide — Jordan',  domains: ['Education', 'Finance'] as Domain[], initials: 'CJ', color: 'from-teal-500 to-emerald-500',  personaCount: 2 },
-  { id: 'coach-dani',     name: 'Coach Dani',            domains: ['Coaching'] as Domain[],             initials: 'CD', color: 'from-orange-500 to-pink-500',   personaCount: 3 },
-  { id: 'mindset-ravi',   name: 'MindsetPro — Ravi',     domains: ['Coaching', 'Education'] as Domain[], initials: 'MR', color: 'from-blue-500 to-cyan-500',    personaCount: 2 },
-  { id: 'priya-trades',   name: 'Priya Trades',          domains: ['Finance'] as Domain[],              initials: 'PT', color: 'from-pink-500 to-rose-500',    personaCount: 2 },
-  { id: 'marcus-wealth',  name: 'Marcus Wealth',         domains: ['Finance', 'Coaching'] as Domain[],  initials: 'MW', color: 'from-violet-500 to-purple-500', personaCount: 4 },
+  { id: 'finance-priya',  name: 'FinanceCoach — Priya',  domain: 'Finance' as Domain,   initials: 'FP', color: 'from-purple-500 to-blue-500'   },
+  { id: 'course-jordan',  name: 'CourseGuide — Jordan',  domain: 'Education' as Domain, initials: 'CJ', color: 'from-teal-500 to-emerald-500'  },
+  { id: 'coach-dani',     name: 'Coach Dani',            domain: 'Coaching' as Domain,  initials: 'CD', color: 'from-orange-500 to-pink-500'   },
+  { id: 'mindset-ravi',   name: 'MindsetPro — Ravi',     domain: 'Coaching' as Domain,  initials: 'MR', color: 'from-blue-500 to-cyan-500'     },
+  { id: 'priya-trades',   name: 'Priya Trades',          domain: 'Finance' as Domain,   initials: 'PT', color: 'from-pink-500 to-rose-500'     },
+  { id: 'marcus-wealth',  name: 'Marcus Wealth',         domain: 'Finance' as Domain,   initials: 'MW', color: 'from-violet-500 to-purple-500' },
 ];
 
 const channels = [
@@ -166,16 +166,16 @@ export default function DeployPage() {
             <span className="text-white font-medium">{persona?.name}</span> is now live on{' '}
             <span className="text-white font-medium">{channel?.title}</span>
           </p>
-          {persona && persona.domains.length > 0 && (
+          {persona && (
             <div className="flex items-center justify-center gap-1.5 mb-2">
-              {persona.domains.map((d) => {
-                const cfg = domainColors[d];
+              {(() => {
+                const cfg = domainColors[persona.domain];
                 return (
-                  <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
-                    {cfg.emoji} {d}
+                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
+                    {cfg.emoji} {persona.domain}
                   </span>
                 );
-              })}
+              })()}
             </div>
           )}
           {config.domain && (
@@ -204,7 +204,7 @@ export default function DeployPage() {
     <AppLayout>
       <Topbar
         title="Deploy"
-        subtitle="Get your multi-domain creator persona live — on your site, course platform, or WhatsApp"
+        subtitle="Get your creator persona live — on your site, course platform, or WhatsApp"
         action={
           <Link href="/embeds" className="text-xs text-white/40 hover:text-white transition-colors flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -224,56 +224,44 @@ export default function DeployPage() {
           <div>
             <div className="mb-5">
               <h2 className="text-base font-semibold text-white mb-1">Which creator persona do you want to deploy?</h2>
-              <p className="text-xs text-white/40">Select the AI persona that will engage your audience. Multi-domain personas cover Finance, Education, and Coaching.</p>
+              <p className="text-xs text-white/40">Select the AI persona that will engage your audience.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-              {personas.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => setSelectedPersona(p.id)}
-                  className={`flex items-start gap-3 p-4 rounded-2xl border text-left transition-all ${
-                    selectedPersona === p.id
-                      ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10'
-                      : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/5'
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center text-white text-xs font-bold flex-shrink-0`}>
-                    {p.initials}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                      <p className="text-sm font-semibold text-white truncate">{p.name}</p>
-                      {p.domains.length > 1 && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25 flex-shrink-0">
-                          🌐 multi
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1 flex-wrap mb-1">
-                      {p.domains.map((d) => {
-                        const cfg = domainColors[d];
-                        return (
-                          <span key={d} className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
-                            {cfg.emoji} {d}
-                          </span>
-                        );
-                      })}
-                    </div>
-                    <p className="text-[10px] text-white/35">🎭 {p.personaCount} persona{p.personaCount !== 1 ? 's' : ''}</p>
-                  </div>
-                  <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
-                      selectedPersona === p.id ? 'border-[#7c3aed] bg-[#7c3aed]' : 'border-white/20'
+              {personas.map((p) => {
+                const cfg = domainColors[p.domain];
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => setSelectedPersona(p.id)}
+                    className={`flex items-start gap-3 p-4 rounded-2xl border text-left transition-all ${
+                      selectedPersona === p.id
+                        ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10'
+                        : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/5'
                     }`}
                   >
-                    {selectedPersona === p.id && (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    )}
-                  </div>
-                </button>
-              ))}
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center text-white text-xs font-bold flex-shrink-0`}>
+                      {p.initials}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-white truncate mb-1">{p.name}</p>
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
+                        {cfg.emoji} {p.domain}
+                      </span>
+                    </div>
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
+                        selectedPersona === p.id ? 'border-[#7c3aed] bg-[#7c3aed]' : 'border-white/20'
+                      }`}
+                    >
+                      {selectedPersona === p.id && (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
             <div className="flex justify-end">
               <button
@@ -297,15 +285,15 @@ export default function DeployPage() {
               <h2 className="text-base font-semibold text-white mb-1">Where do you want to deploy?</h2>
               <p className="text-xs text-white/40">Choose the channel where your audience will chat with <span className="text-white">{persona?.name}</span>.</p>
               {persona && (
-                <div className="flex items-center gap-1.5 mt-2 flex-wrap">
-                  {persona.domains.map((d) => {
-                    const cfg = domainColors[d];
+                <div className="flex items-center gap-1.5 mt-2">
+                  {(() => {
+                    const cfg = domainColors[persona.domain];
                     return (
-                      <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
-                        {cfg.emoji} {d}
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
+                        {cfg.emoji} {persona.domain}
                       </span>
                     );
-                  })}
+                  })()}
                 </div>
               )}
             </div>
@@ -374,20 +362,15 @@ export default function DeployPage() {
                 Deploying <span className="text-white">{persona?.name}</span> to <span className="text-white">{channel?.title}</span>
               </p>
               {persona && (
-                <div className="flex items-center gap-1.5 mt-2 flex-wrap">
-                  {persona.domains.map((d) => {
-                    const cfg = domainColors[d];
+                <div className="flex items-center gap-1.5 mt-2">
+                  {(() => {
+                    const cfg = domainColors[persona.domain];
                     return (
-                      <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
-                        {cfg.emoji} {d}
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
+                        {cfg.emoji} {persona.domain}
                       </span>
                     );
-                  })}
-                  {persona.domains.length > 1 && (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25">
-                      🌐 multi-domain
-                    </span>
-                  )}
+                  })()}
                 </div>
               )}
             </div>

@@ -10,7 +10,7 @@ type Domain = 'Finance' | 'Education' | 'Coaching';
 
 interface PersonaForm {
   name: string;
-  domains: Domain[];
+  domain: Domain | null;
   tone: 'friendly' | 'expert' | 'premium';
   prompt: string;
   attachedKbIds: string[];
@@ -19,7 +19,7 @@ interface PersonaForm {
 interface Persona {
   id: string;
   name: string;
-  domains: Domain[];
+  domain: Domain;
   status: 'active' | 'paused' | 'draft';
   conversations: number;
   conversion: string;
@@ -55,13 +55,13 @@ const quickTemplates: QuickTemplate[] = [
     id: 'tone-behaviour',
     label: 'Tone & Behaviour',
     icon: '🎭',
-    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise — whether in finance, coaching, or course content. Use clear, jargon-free language and keep responses concise and actionable.`,
+    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise. Use clear, jargon-free language and keep responses concise and actionable.`,
   },
   {
     id: 'capabilities',
     label: 'Capabilities',
     icon: '⚡',
-    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing finance tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
+    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
   },
   {
     id: 'call-flow',
@@ -88,7 +88,7 @@ const initialPersonas: Persona[] = [
   {
     id: 'finance-coach',
     name: 'FinanceCoach — Priya',
-    domains: ['Finance', 'Education'],
+    domain: 'Finance',
     status: 'active',
     conversations: 1284,
     conversion: '9.2%',
@@ -97,12 +97,12 @@ const initialPersonas: Persona[] = [
     tone: 'expert',
     prompt: '',
     attachedKbIds: ['kb-1', 'kb-4'],
-    personaLabels: ['Investor Q&A', 'SIP Guide', 'Module Advisor'],
+    personaLabels: ['Investor Q&A', 'SIP Guide', 'Portfolio Builder'],
   },
   {
     id: 'coach-dani',
     name: 'Coach Dani',
-    domains: ['Coaching'],
+    domain: 'Coaching',
     status: 'active',
     conversations: 842,
     conversion: '11.4%',
@@ -116,7 +116,7 @@ const initialPersonas: Persona[] = [
   {
     id: 'course-jordan',
     name: 'CourseGuide — Jordan',
-    domains: ['Education', 'Finance'],
+    domain: 'Education',
     status: 'draft',
     conversations: 0,
     conversion: '—',
@@ -139,7 +139,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
   const [step, setStep] = useState<Step>('details');
   const [form, setForm] = useState<PersonaForm>({
     name: persona.name,
-    domains: persona.domains,
+    domain: persona.domain,
     tone: persona.tone,
     prompt: persona.prompt,
     attachedKbIds: persona.attachedKbIds,
@@ -164,11 +164,8 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
     else if (step === 'review') setStep('knowledge');
   };
 
-  const toggleDomain = (d: Domain) => {
-    setForm((prev) => ({
-      ...prev,
-      domains: prev.domains.includes(d) ? prev.domains.filter((x) => x !== d) : [...prev.domains, d],
-    }));
+  const selectDomain = (d: Domain) => {
+    setForm((prev) => ({ ...prev, domain: d }));
   };
 
   const injectTemplate = (template: QuickTemplate) => {
@@ -188,10 +185,11 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
   };
 
   const handleSave = () => {
+    if (!form.domain) return;
     onSave({
       ...persona,
       name: form.name.trim(),
-      domains: form.domains,
+      domain: form.domain,
       tone: form.tone,
       prompt: form.prompt,
       attachedKbIds: form.attachedKbIds,
@@ -262,20 +260,20 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                 />
               </div>
 
-              {/* Domain Selection */}
+              {/* Domain Selection — single select */}
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Domain Expertise</label>
-                  <span className="text-[10px] text-white/30">Select one or more</span>
+                  <span className="text-[10px] text-white/30">Select one</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   {(Object.keys(domainConfig) as Domain[]).map((d) => {
                     const cfg = domainConfig[d];
-                    const selected = form.domains.includes(d);
+                    const selected = form.domain === d;
                     return (
                       <button
                         key={d}
-                        onClick={() => toggleDomain(d)}
+                        onClick={() => selectDomain(d)}
                         className={`flex items-center gap-2 p-3 rounded-xl border text-left transition-all ${
                           selected ? `${cfg.border} ${cfg.bg}` : 'border-white/8 bg-white/[0.02] hover:border-white/15'
                         }`}
@@ -283,23 +281,14 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                         <span className="text-lg">{cfg.emoji}</span>
                         <span className={`text-xs font-semibold ${selected ? cfg.text : 'text-white/60'}`}>{d}</span>
                         {selected && (
-                          <div className="ml-auto w-4 h-4 rounded-full bg-current flex items-center justify-center flex-shrink-0"
-                            style={{ backgroundColor: selected ? 'currentColor' : 'transparent' }}>
-                            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
+                          <div className="ml-auto w-4 h-4 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0">
+                            <div className="w-2 h-2 rounded-full bg-current" />
                           </div>
                         )}
                       </button>
                     );
                   })}
                 </div>
-                {form.domains.length > 1 && (
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#7c3aed]/8 border border-[#7c3aed]/20">
-                    <span className="text-xs">🌐</span>
-                    <span className="text-[11px] text-[#a78bfa]">Multi-domain persona — {form.domains.join(' + ')}</span>
-                  </div>
-                )}
               </div>
 
               {/* Tone */}
@@ -379,7 +368,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
 
               <button
                 onClick={handleNext}
-                disabled={!form.name.trim()}
+                disabled={!form.name.trim() || !form.domain}
                 className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40 disabled:cursor-not-allowed self-start"
               >
                 Continue →
@@ -393,16 +382,16 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                 <h3 className="text-base font-semibold text-white mb-1">Knowledge Source</h3>
                 <p className="text-sm text-white/45">Attach your content from the Knowledge Base to power this persona.</p>
               </div>
-              {form.domains.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {form.domains.map((d) => {
-                    const cfg = domainConfig[d];
+              {form.domain && (
+                <div className="flex items-center gap-2">
+                  {(() => {
+                    const cfg = domainConfig[form.domain];
                     return (
-                      <span key={d} className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cfg.border} ${cfg.bg} ${cfg.text}`}>
-                        {cfg.emoji} {d}
+                      <span className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cfg.border} ${cfg.bg} ${cfg.text}`}>
+                        {cfg.emoji} {form.domain}
                       </span>
                     );
-                  })}
+                  })()}
                 </div>
               )}
               <div className="flex flex-col gap-3">
@@ -474,9 +463,9 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                 {[
                   { label: 'Name', value: form.name || '(unnamed)' },
                   {
-                    label: 'Domains',
-                    value: form.domains.length > 0
-                      ? form.domains.map((d) => `${domainConfig[d].emoji} ${d}`).join('  ·  ')
+                    label: 'Domain',
+                    value: form.domain
+                      ? `${domainConfig[form.domain].emoji} ${form.domain}`
                       : 'None selected',
                   },
                   { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
@@ -507,7 +496,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                 </button>
                 <button
                   onClick={handleSave}
-                  disabled={!form.name.trim()}
+                  disabled={!form.name.trim() || !form.domain}
                   className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-40"
                 >
                   Save Changes ✨
@@ -558,13 +547,13 @@ export default function PersonasPage() {
 
   const filteredPersonas = domainFilter === 'All'
     ? personas
-    : personas.filter((p) => p.domains.includes(domainFilter as Domain));
+    : personas.filter((p) => p.domain === domainFilter);
 
   return (
     <AppLayout>
       <Topbar
         title="Creator Personas"
-        subtitle="Build and manage multi-domain AI personas that engage your audience across Finance, Education, and Coaching"
+        subtitle="Build and manage focused AI personas — each dedicated to a single domain: Finance, Education, or Coaching"
         action={
           <Link
             href="/create-persona"
@@ -576,12 +565,12 @@ export default function PersonasPage() {
         }
       />
 
-      {/* Multi-domain callout */}
+      {/* Single-domain info callout */}
       <div className="flex items-start gap-3 p-4 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/5 mb-6">
-        <span className="text-lg flex-shrink-0">🌐</span>
+        <span className="text-lg flex-shrink-0">🎯</span>
         <div className="flex-1">
           <p className="text-xs text-white/60 leading-relaxed">
-            <span className="text-white font-semibold">Multi-domain personas</span> — each persona can span Finance, Education, and Coaching simultaneously. Your audience gets expert answers across all your niches from a single AI persona.
+            <span className="text-white font-semibold">Each persona is focused on one domain</span> — create separate personas for Finance, Education, and Coaching to give your audience the most relevant, expert experience.
           </p>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -630,113 +619,106 @@ export default function PersonasPage() {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {filteredPersonas.map((persona) => (
-            <div
-              key={persona.id}
-              className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-5 hover:border-white/12 transition-all"
-            >
-              <div className="flex items-start gap-4">
-                {/* Emoji avatar */}
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center text-2xl flex-shrink-0">
-                  {persona.emoji}
-                </div>
+          {filteredPersonas.map((persona) => {
+            const cfg = domainConfig[persona.domain];
+            return (
+              <div
+                key={persona.id}
+                className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-5 hover:border-white/12 transition-all"
+              >
+                <div className="flex items-start gap-4">
+                  {/* Emoji avatar */}
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center text-2xl flex-shrink-0">
+                    {persona.emoji}
+                  </div>
 
-                {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                    <h3 className="text-sm font-semibold text-white">{persona.name}</h3>
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${statusColors[persona.status]}`}>
-                      {persona.status}
-                    </span>
-                    {persona.domains.length > 1 && (
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25">
-                        🌐 multi-domain
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                      <h3 className="text-sm font-semibold text-white">{persona.name}</h3>
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${statusColors[persona.status]}`}>
+                        {persona.status}
                       </span>
-                    )}
-                  </div>
-
-                  {/* Domain tags */}
-                  <div className="flex items-center gap-1.5 flex-wrap mb-2">
-                    {persona.domains.map((d) => {
-                      const cfg = domainConfig[d];
-                      return (
-                        <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
-                          {cfg.emoji} {d}
-                        </span>
-                      );
-                    })}
-                    <span className="text-[10px] text-white/30">· {persona.channel}</span>
-                  </div>
-
-                  {/* Persona labels */}
-                  {persona.personaLabels.length > 0 && (
-                    <div className="flex items-center gap-1.5 flex-wrap mb-3">
-                      <span className="text-[10px] text-white/30">🎭</span>
-                      {persona.personaLabels.slice(0, 3).map((label) => (
-                        <span key={label} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/50">
-                          {label}
-                        </span>
-                      ))}
-                      {persona.personaLabels.length > 3 && (
-                        <span className="text-[10px] text-white/30">+{persona.personaLabels.length - 3} more</span>
-                      )}
                     </div>
-                  )}
 
-                  <div className="flex items-center gap-5 flex-wrap">
-                    <div>
-                      <p className="text-xs font-semibold text-white tabular-nums">{persona.conversations.toLocaleString()}</p>
-                      <p className="text-[10px] text-white/30">conversations</p>
+                    {/* Domain tag */}
+                    <div className="flex items-center gap-1.5 flex-wrap mb-2">
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${cfg.text} ${cfg.bg} ${cfg.border}`}>
+                        {cfg.emoji} {persona.domain}
+                      </span>
+                      <span className="text-[10px] text-white/30">· {persona.channel}</span>
                     </div>
-                    <div>
-                      <p className="text-xs font-semibold text-white">{persona.conversion}</p>
-                      <p className="text-[10px] text-white/30">engagement rate</p>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Actions */}
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <button
-                    onClick={() => setEditingPersona(persona)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/25 text-xs transition-all"
-                  >
-                    <Pencil size={12} />
-                    Edit
-                  </button>
-                  <div className="relative">
-                    <button
-                      onClick={() => setOpenMenuId(openMenuId === persona.id ? null : persona.id)}
-                      className="w-8 h-8 rounded-lg border border-white/8 text-white/35 hover:text-white hover:border-white/20 flex items-center justify-center transition-all"
-                    >
-                      <MoreVertical size={14} />
-                    </button>
-                    {openMenuId === persona.id && (
-                      <div
-                        className="absolute right-0 top-10 z-20 w-44 rounded-xl border border-white/10 overflow-hidden shadow-2xl"
-                        style={{ background: 'rgba(18,20,28,0.98)' }}
-                      >
-                        <button
-                          onClick={() => handleToggleStatus(persona.id)}
-                          className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all"
-                        >
-                          {persona.status === 'active' ? <Pause size={13} /> : <Play size={13} />}
-                          {persona.status === 'active' ? 'Pause Persona' : 'Activate Persona'}
-                        </button>
-                        <button
-                          onClick={() => { setDeleteConfirmId(persona.id); setOpenMenuId(null); }}
-                          className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-red-400/70 hover:text-red-400 hover:bg-red-500/5 transition-all"
-                        >
-                          <Trash2 size={13} />
-                          Delete Persona
-                        </button>
+                    {/* Persona labels */}
+                    {persona.personaLabels.length > 0 && (
+                      <div className="flex items-center gap-1.5 flex-wrap mb-3">
+                        <span className="text-[10px] text-white/30">🎭</span>
+                        {persona.personaLabels.slice(0, 3).map((label) => (
+                          <span key={label} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/50">
+                            {label}
+                          </span>
+                        ))}
+                        {persona.personaLabels.length > 3 && (
+                          <span className="text-[10px] text-white/30">+{persona.personaLabels.length - 3} more</span>
+                        )}
                       </div>
                     )}
+
+                    <div className="flex items-center gap-5 flex-wrap">
+                      <div>
+                        <p className="text-xs font-semibold text-white tabular-nums">{persona.conversations.toLocaleString()}</p>
+                        <p className="text-[10px] text-white/30">conversations</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-white">{persona.conversion}</p>
+                        <p className="text-[10px] text-white/30">engagement rate</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={() => setEditingPersona(persona)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/25 text-xs transition-all"
+                    >
+                      <Pencil size={12} />
+                      Edit
+                    </button>
+                    <div className="relative">
+                      <button
+                        onClick={() => setOpenMenuId(openMenuId === persona.id ? null : persona.id)}
+                        className="w-8 h-8 rounded-lg border border-white/8 text-white/35 hover:text-white hover:border-white/20 flex items-center justify-center transition-all"
+                      >
+                        <MoreVertical size={14} />
+                      </button>
+                      {openMenuId === persona.id && (
+                        <div
+                          className="absolute right-0 top-10 z-20 w-44 rounded-xl border border-white/10 overflow-hidden shadow-2xl"
+                          style={{ background: 'rgba(18,20,28,0.98)' }}
+                        >
+                          <button
+                            onClick={() => handleToggleStatus(persona.id)}
+                            className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all"
+                          >
+                            {persona.status === 'active' ? <Pause size={13} /> : <Play size={13} />}
+                            {persona.status === 'active' ? 'Pause Persona' : 'Activate Persona'}
+                          </button>
+                          <button
+                            onClick={() => { setDeleteConfirmId(persona.id); setOpenMenuId(null); }}
+                            className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-red-400/70 hover:text-red-400 hover:bg-red-500/5 transition-all"
+                          >
+                            <Trash2 size={13} />
+                            Delete Persona
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

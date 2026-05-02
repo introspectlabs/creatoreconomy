@@ -15,7 +15,7 @@ const domainColors: Record<Domain, { text: string; bg: string; border: string }>
 const metrics = [
   {
     label: 'Active Personas',
-    value: '4',
+    value: '3',
     change: '+1 this week',
     trend: 'up',
     color: '#7c3aed',
@@ -53,7 +53,7 @@ const metrics = [
     ),
   },
   {
-    label: 'Domains Active',
+    label: 'Domains Covered',
     value: '3',
     change: 'Finance · Education · Coaching',
     trend: 'neutral',
@@ -72,32 +72,29 @@ const personasSummary = [
   {
     id: 'finance-priya',
     name: 'FinanceCoach — Priya',
-    domains: ['Finance', 'Education'] as Domain[],
+    domain: 'Finance' as Domain,
     status: 'active',
     conversations: 1284,
     conversion: '9.2%',
     emoji: '📈',
-    personaCount: 3,
   },
   {
     id: 'coach-dani',
     name: 'Coach Dani',
-    domains: ['Coaching'] as Domain[],
+    domain: 'Coaching' as Domain,
     status: 'active',
     conversations: 842,
     conversion: '11.4%',
     emoji: '🧭',
-    personaCount: 2,
   },
   {
     id: 'course-jordan',
     name: 'CourseGuide — Jordan',
-    domains: ['Education', 'Finance'] as Domain[],
+    domain: 'Education' as Domain,
     status: 'draft',
     conversations: 0,
     conversion: '—',
     emoji: '🎓',
-    personaCount: 1,
   },
 ];
 
@@ -119,7 +116,7 @@ export default function DashboardPage() {
     <AppLayout>
       <Topbar
         title="Dashboard"
-        subtitle="Your multi-domain creator personas, engaging your audience 24/7"
+        subtitle="Your creator personas, each focused on a single domain, engaging your audience 24/7"
         action={
           <Link href="/create-persona" className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
@@ -130,21 +127,6 @@ export default function DashboardPage() {
           </Link>
         }
       />
-
-      {/* Multi-domain callout */}
-      <div className="flex items-center gap-3 p-3.5 rounded-xl border border-[#7c3aed]/20 bg-[#7c3aed]/5 mb-6">
-        <span className="text-base">🌐</span>
-        <p className="text-xs text-white/55 flex-1">
-          <span className="text-white font-semibold">Multi-domain creator platform</span> — your personas span Finance, Education, and Coaching. Each persona can cover multiple niches simultaneously.
-        </p>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          {(['Finance', 'Education', 'Coaching'] as Domain[]).map((d) => (
-            <span key={d} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${domainColors[d].text} ${domainColors[d].bg} ${domainColors[d].border}`}>
-              {d}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -175,48 +157,43 @@ export default function DashboardPage() {
               </Link>
             </div>
             <div className="divide-y divide-white/5">
-              {personasSummary.map((p) => (
-                <div key={p.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/3 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-white/6 border border-white/8 flex items-center justify-center text-xl flex-shrink-0">
-                    {p.emoji}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <p className="text-sm font-medium text-white truncate">{p.name}</p>
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${statusStyle(p.status)}`}>
-                        {p.status}
-                      </span>
-                      {p.domains.length > 1 && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25">
-                          🌐 multi-domain
-                        </span>
-                      )}
+              {personasSummary.map((p) => {
+                const dc = domainColors[p.domain];
+                return (
+                  <div key={p.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/3 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-white/6 border border-white/8 flex items-center justify-center text-xl flex-shrink-0">
+                      {p.emoji}
                     </div>
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      {p.domains.map((d) => (
-                        <span key={d} className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border ${domainColors[d].text} ${domainColors[d].bg} ${domainColors[d].border}`}>
-                          {d}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <p className="text-sm font-medium text-white truncate">{p.name}</p>
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${statusStyle(p.status)}`}>
+                          {p.status}
                         </span>
-                      ))}
-                      <span className="text-[10px] text-white/30">· 🎭 {p.personaCount} persona{p.personaCount !== 1 ? 's' : ''}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border ${dc.text} ${dc.bg} ${dc.border}`}>
+                          {p.domain}
+                        </span>
+                      </div>
                     </div>
+                    <div className="hidden sm:flex flex-col items-end gap-0.5">
+                      <p className="text-sm font-semibold text-white">{p.conversations.toLocaleString()}</p>
+                      <p className="text-[10px] text-white/35">conversations</p>
+                    </div>
+                    <div className="hidden md:flex flex-col items-end gap-0.5">
+                      <p className="text-sm font-semibold text-[#34d399]">{p.conversion}</p>
+                      <p className="text-[10px] text-white/35">engagement</p>
+                    </div>
+                    <Link
+                      href="/personas"
+                      className="text-[11px] px-2.5 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all flex-shrink-0"
+                    >
+                      Manage
+                    </Link>
                   </div>
-                  <div className="hidden sm:flex flex-col items-end gap-0.5">
-                    <p className="text-sm font-semibold text-white">{p.conversations.toLocaleString()}</p>
-                    <p className="text-[10px] text-white/35">conversations</p>
-                  </div>
-                  <div className="hidden md:flex flex-col items-end gap-0.5">
-                    <p className="text-sm font-semibold text-[#34d399]">{p.conversion}</p>
-                    <p className="text-[10px] text-white/35">engagement</p>
-                  </div>
-                  <Link
-                    href="/personas"
-                    className="text-[11px] px-2.5 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all flex-shrink-0"
-                  >
-                    Manage
-                  </Link>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -249,15 +226,16 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          {/* Recent Activity */}
           <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
             <h2 className="text-sm font-semibold text-white mb-4">Recent Activity</h2>
             <div className="flex flex-col gap-3">
-              {recentActivity?.map((a, i) => (
+              {recentActivity.map((a, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: a?.color }} />
+                  <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: a.color }} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-white/65 leading-relaxed">{a?.text}</p>
-                    <p className="text-[10px] text-white/25 mt-0.5">{a?.time}</p>
+                    <p className="text-xs text-white/65 leading-relaxed">{a.text}</p>
+                    <p className="text-[10px] text-white/30 mt-0.5">{a.time}</p>
                   </div>
                 </div>
               ))}
