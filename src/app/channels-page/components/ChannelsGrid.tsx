@@ -1,17 +1,17 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { MessageCircle, Phone, Settings, RefreshCw, X, CheckCircle, Clock, PauseCircle, FileEdit, Plus, AlertCircle, Trash2, Hash, Copy, Check, Search, ChevronDown, ChevronUp, Edit2,  } from 'lucide-react';
+import { MessageCircle, Globe, Settings, RefreshCw, X, CheckCircle, Clock, PauseCircle, FileEdit, Plus, AlertCircle, Trash2, Copy, Check, Search, ChevronDown, ChevronUp, Edit2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { personas } from '@/app/persona-library/components/personaData';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type ChannelType = 'whatsapp';
+type ChannelType = 'text-chat' | 'web-embed';
 
-interface PersonaNumberAssignment {
+interface PersonaAssignment {
   personaId: string;
-  phoneNumber: string; // unique per persona within this channel type
+  embedKey: string; // unique per persona within this channel type
 }
 
 interface ChannelGroup {
@@ -21,7 +21,7 @@ interface ChannelGroup {
   status: 'connected' | 'disconnected' | 'error';
   webhookUrl: string;
   apiVersion: string | null;
-  assignments: PersonaNumberAssignment[];
+  assignments: PersonaAssignment[];
   messagesDay: string;
   uptime: string;
   lastEvent: string;
@@ -36,12 +36,19 @@ const CHANNEL_META: Record<ChannelType, {
   borderColor: string;
   accentBorder: string;
 }> = {
-  whatsapp: {
+  'text-chat': {
     icon: MessageCircle,
-    color: 'text-emerald-400',
-    iconBg: 'bg-emerald-500/15',
-    borderColor: 'border-emerald-500/20',
-    accentBorder: 'border-emerald-500/30',
+    color: 'text-teal-400',
+    iconBg: 'bg-teal-500/15',
+    borderColor: 'border-teal-500/20',
+    accentBorder: 'border-teal-500/30',
+  },
+  'web-embed': {
+    icon: Globe,
+    color: 'text-purple-400',
+    iconBg: 'bg-purple-500/15',
+    borderColor: 'border-purple-500/20',
+    accentBorder: 'border-purple-500/30',
   },
 };
 
@@ -49,20 +56,33 @@ const CHANNEL_META: Record<ChannelType, {
 
 const initialChannelGroups: ChannelGroup[] = [
   {
-    type: 'whatsapp',
-    name: 'WhatsApp Business',
-    provider: 'Meta Business API',
+    type: 'text-chat',
+    name: 'Text Chat',
+    provider: 'Hosted Chat Page',
     status: 'connected',
-    webhookUrl: 'https://api.personamatrix.ai/webhooks/whatsapp',
-    apiVersion: 'v18.0',
-    messagesDay: '2,841',
-    uptime: '99.8%',
-    lastEvent: '2 min ago',
+    webhookUrl: 'https://api.personamatrix.ai/webhooks/text-chat',
+    apiVersion: null,
+    messagesDay: '1,524',
+    uptime: '99.9%',
+    lastEvent: '1 min ago',
     assignments: [
-      { personaId: 'persona-003', phoneNumber: '+91 98765 43210' },
-      { personaId: 'persona-008', phoneNumber: '+91 98765 43211' },
-      { personaId: 'persona-011', phoneNumber: '+1 415 555 0101' },
-      { personaId: 'persona-012', phoneNumber: '+1 415 555 0102' },
+      { personaId: 'persona-003', embedKey: 'tc-key-003' },
+      { personaId: 'persona-008', embedKey: 'tc-key-008' },
+    ],
+  },
+  {
+    type: 'web-embed',
+    name: 'Web Embed',
+    provider: 'Widget CDN',
+    status: 'connected',
+    webhookUrl: 'https://api.personamatrix.ai/webhooks/web-embed',
+    apiVersion: null,
+    messagesDay: '3,210',
+    uptime: '99.7%',
+    lastEvent: '3 min ago',
+    assignments: [
+      { personaId: 'persona-011', embedKey: 'we-key-011' },
+      { personaId: 'persona-012', embedKey: 'we-key-012' },
     ],
   },
 ];
@@ -79,8 +99,7 @@ const statusIcon = (status: string) => {
   }
 };
 
-// Collect all phone numbers already in use across all groups (excluding a specific assignment being edited)
-function getAllUsedNumbers(
+function getAllUsedKeys(
   groups: ChannelGroup[],
   excludeGroupType?: ChannelType,
   excludePersonaId?: string
@@ -89,7 +108,7 @@ function getAllUsedNumbers(
   for (const g of groups) {
     for (const a of g.assignments) {
       if (g.type === excludeGroupType && a.personaId === excludePersonaId) continue;
-      used.push(a.phoneNumber);
+      used.push(a.embedKey);
     }
   }
   return used;
@@ -100,16 +119,16 @@ function getAllUsedNumbers(
 interface AssignmentModalProps {
   channelGroup: ChannelGroup;
   allGroups: ChannelGroup[];
-  editingAssignment?: PersonaNumberAssignment | null;
+  editingAssignment?: PersonaAssignment | null;
   onClose: () => void;
-  onSave: (assignment: PersonaNumberAssignment) => void;
+  onSave: (assignment: PersonaAssignment) => void;
 }
 
 function AssignmentModal({ channelGroup, allGroups, editingAssignment, onClose, onSave }: AssignmentModalProps) {
   const isEdit = !!editingAssignment;
   const [selectedPersonaId, setSelectedPersonaId] = useState(editingAssignment?.personaId ?? '');
-  const [phoneNumber, setPhoneNumber] = useState(editingAssignment?.phoneNumber ?? '');
-  const [phoneError, setPhoneError] = useState('');
+  const [embedKey, setEmbedKey] = useState(editingAssignment?.embedKey ?? '');
+  const [keyError, setKeyError] = useState('');
   const [personaSearch, setPersonaSearch] = useState('');
 
   useEffect(() => {
@@ -120,7 +139,7 @@ function AssignmentModal({ channelGroup, allGroups, editingAssignment, onClose, 
     return () => document.removeEventListener('keydown', handler);
   }, [onClose]);
 
-  const usedNumbers = getAllUsedNumbers(allGroups, channelGroup.type, editingAssignment?.personaId);
+  const usedKeys = getAllUsedKeys(allGroups, channelGroup.type, editingAssignment?.personaId);
   const assignedPersonaIds = new Set(channelGroup.assignments.map((a) => a.personaId));
 
   const availablePersonas = useMemo(() =>
@@ -135,20 +154,20 @@ function AssignmentModal({ channelGroup, allGroups, editingAssignment, onClose, 
     [personaSearch, isEdit]
   );
 
-  const validatePhone = (val: string) => {
-    if (!val.trim()) { setPhoneError('Phone number is required'); return false; }
-    if (usedNumbers.includes(val.trim())) {
-      setPhoneError('This number is already assigned to another persona');
+  const validateKey = (val: string) => {
+    if (!val.trim()) { setKeyError('Embed key is required'); return false; }
+    if (usedKeys.includes(val.trim())) {
+      setKeyError('This key is already assigned to another persona');
       return false;
     }
-    setPhoneError('');
+    setKeyError('');
     return true;
   };
 
   const handleSave = () => {
     if (!selectedPersonaId) { toast.error('Please select a persona'); return; }
-    if (!validatePhone(phoneNumber)) return;
-    onSave({ personaId: selectedPersonaId, phoneNumber: phoneNumber.trim() });
+    if (!validateKey(embedKey)) return;
+    onSave({ personaId: selectedPersonaId, embedKey: embedKey.trim() });
   };
 
   const meta = CHANNEL_META[channelGroup.type];
@@ -209,7 +228,7 @@ function AssignmentModal({ channelGroup, allGroups, editingAssignment, onClose, 
                       selectedPersonaId === p.id
                         ? 'bg-purple-600/15 border-purple-500/30'
                         : isEdit
-                        ? 'bg-white/3 border-white/6 cursor-default' :'bg-white/3 border-white/6 hover:border-white/15'
+                        ? 'bg-white/3 border-white/6 cursor-default' : 'bg-white/3 border-white/6 hover:border-white/15'
                     }`}
                   >
                     <div className="w-7 h-7 rounded-lg bg-purple-500/20 flex items-center justify-center text-[9px] font-700 text-purple-300 shrink-0">
@@ -229,40 +248,42 @@ function AssignmentModal({ channelGroup, allGroups, editingAssignment, onClose, 
             </div>
           </div>
 
-          {/* Phone number */}
+          {/* Embed Key */}
           <div>
             <label className="text-xs text-white/50 mb-1.5 block">
-              Phone Number
+              Embed Key
               <span className="ml-1.5 text-[10px] text-amber-400/70">· Unique per persona</span>
             </label>
             <input
-              value={phoneNumber}
-              onChange={(e) => { setPhoneNumber(e.target.value); if (phoneError) validatePhone(e.target.value); }}
-              onBlur={() => validatePhone(phoneNumber)}
-              placeholder="+1 415 555 0100"
+              value={embedKey}
+              onChange={(e) => { setEmbedKey(e.target.value); if (keyError) validateKey(e.target.value); }}
+              onBlur={() => validateKey(embedKey)}
+              placeholder="e.g. tc-key-001"
               className={`w-full bg-white/5 border rounded-xl px-3 py-2.5 text-xs text-white font-mono focus:outline-none placeholder:text-white/20 ${
-                phoneError ? 'border-red-500/50' : 'border-white/10 focus:border-purple-500/50'
+                keyError ? 'border-red-500/50' : 'border-white/10 focus:border-purple-500/50'
               }`}
             />
-            {phoneError && (
+            {keyError && (
               <p className="flex items-center gap-1 text-[11px] text-red-400 mt-1.5">
-                <AlertCircle size={11} /> {phoneError}
+                <AlertCircle size={11} /> {keyError}
               </p>
             )}
           </div>
+        </div>
 
-          <div className="flex gap-2 pt-1">
-            <button
-              onClick={handleSave}
-              disabled={!selectedPersonaId}
-              className="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-xs font-600 text-white transition-all"
-            >
-              {isEdit ? 'Save Changes' : 'Assign Persona'}
-            </button>
-            <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-white/10 text-xs font-500 text-white/60 hover:text-white hover:bg-white/5 transition-all">
-              Cancel
-            </button>
-          </div>
+        <div className="flex items-center justify-end gap-2 p-5 border-t border-white/8">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-xl text-xs font-600 border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 rounded-xl text-xs font-600 bg-purple-600 hover:bg-purple-500 text-white transition-all"
+          >
+            {isEdit ? 'Save Changes' : 'Assign Persona'}
+          </button>
         </div>
       </div>
     </div>
@@ -279,22 +300,28 @@ interface ConfigModalProps {
 
 function ConfigModal({ channelGroup, onClose, onUpdate }: ConfigModalProps) {
   const [webhookUrl, setWebhookUrl] = useState(channelGroup.webhookUrl);
-  const [apiVersion, setApiVersion] = useState(channelGroup.apiVersion ?? '');
   const [copied, setCopied] = useState(false);
   const meta = CHANNEL_META[channelGroup.type];
   const ChannelIcon = meta.icon;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(webhookUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText(webhookUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   const handleSave = () => {
-    onUpdate({ ...channelGroup, webhookUrl, apiVersion: apiVersion || null });
+    onUpdate({ ...channelGroup, webhookUrl });
     toast.success('Channel configuration saved');
     onClose();
   };
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [onClose]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -317,6 +344,7 @@ function ConfigModal({ channelGroup, onClose, onUpdate }: ConfigModalProps) {
             <X size={14} />
           </button>
         </div>
+
         <div className="p-5 space-y-4">
           <div>
             <label className="text-xs text-white/50 mb-1.5 block">Webhook URL</label>
@@ -324,7 +352,7 @@ function ConfigModal({ channelGroup, onClose, onUpdate }: ConfigModalProps) {
               <input
                 value={webhookUrl}
                 onChange={(e) => setWebhookUrl(e.target.value)}
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-purple-500/50"
+                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white font-mono focus:outline-none focus:border-purple-500/50"
               />
               <button
                 onClick={handleCopy}
@@ -334,57 +362,14 @@ function ConfigModal({ channelGroup, onClose, onUpdate }: ConfigModalProps) {
               </button>
             </div>
           </div>
-          {channelGroup.apiVersion !== undefined && (
-            <div>
-              <label className="text-xs text-white/50 mb-1.5 block">API Version</label>
-              <input
-                value={apiVersion}
-                onChange={(e) => setApiVersion(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-purple-500/50"
-              />
-            </div>
-          )}
-          <div className="flex gap-2 pt-1">
-            <button onClick={handleSave} className="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-xs font-600 text-white transition-all">
-              Save Changes
-            </button>
-            <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-white/10 text-xs font-500 text-white/60 hover:text-white hover:bg-white/5 transition-all">
-              Cancel
-            </button>
-          </div>
         </div>
-      </div>
-    </div>
-  );
-}
 
-// ─── Remove Assignment Confirm ────────────────────────────────────────────────
-
-interface RemoveConfirmProps {
-  personaId: string;
-  phoneNumber: string;
-  onClose: () => void;
-  onConfirm: () => void;
-}
-
-function RemoveConfirm({ personaId, phoneNumber, onClose, onConfirm }: RemoveConfirmProps) {
-  const p = personas.find((x) => x.id === personaId);
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      <div className="relative glass rounded-2xl border border-white/10 w-full max-w-sm p-6" onClick={(e) => e.stopPropagation()}>
-        <h3 className="text-sm font-700 text-white mb-1">Remove Assignment</h3>
-        <p className="text-[11px] text-white/40">{p?.name}</p>
-        <p className="text-[11px] text-white/40 mb-4">
-          Remove <span className="text-white font-600">{p?.name}</span> from number{' '}
-          <span className="font-mono text-white/70">{phoneNumber}</span>? This frees the number for reassignment.
-        </p>
-        <div className="flex gap-2">
-          <button onClick={onConfirm} className="flex-1 py-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-xs font-600 text-red-400 transition-all">
-            Remove
-          </button>
-          <button onClick={onClose} className="flex-1 py-2 rounded-xl border border-white/10 text-xs font-500 text-white/60 hover:text-white hover:bg-white/5 transition-all">
+        <div className="flex items-center justify-end gap-2 p-5 border-t border-white/8">
+          <button onClick={onClose} className="px-4 py-2 rounded-xl text-xs font-600 border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all">
             Cancel
+          </button>
+          <button onClick={handleSave} className="px-4 py-2 rounded-xl text-xs font-600 bg-purple-600 hover:bg-purple-500 text-white transition-all">
+            Save
           </button>
         </div>
       </div>
@@ -400,9 +385,9 @@ interface ChannelGroupCardProps {
   refreshing: boolean;
   onRefresh: () => void;
   onConfigure: () => void;
-  onAddAssignment: () => void;
-  onEditAssignment: (assignment: PersonaNumberAssignment) => void;
-  onRemoveAssignment: (assignment: PersonaNumberAssignment) => void;
+  onAssign: () => void;
+  onEditAssignment: (assignment: PersonaAssignment) => void;
+  onRemoveAssignment: (assignment: PersonaAssignment) => void;
 }
 
 function ChannelGroupCard({
@@ -411,7 +396,7 @@ function ChannelGroupCard({
   refreshing,
   onRefresh,
   onConfigure,
-  onAddAssignment,
+  onAssign,
   onEditAssignment,
   onRemoveAssignment,
 }: ChannelGroupCardProps) {
@@ -423,49 +408,37 @@ function ChannelGroupCard({
   const filteredAssignments = useMemo(() =>
     group.assignments.filter((a) => {
       const p = personas.find((x) => x.id === a.personaId);
-      if (!p) return false;
-      return (
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        a.phoneNumber.includes(search)
-      );
+      return !search || p?.name.toLowerCase().includes(search.toLowerCase());
     }),
     [group.assignments, search]
   );
 
   return (
-    <div className={`glass rounded-2xl border ${meta.borderColor} overflow-hidden`}>
-      {/* Group Header */}
+    <div className={`rounded-2xl border ${meta.borderColor} bg-white/[0.02] overflow-hidden`}>
+      {/* Card Header */}
       <div className="flex items-center gap-4 p-4 border-b border-white/6">
         <div className={`w-10 h-10 rounded-xl ${meta.iconBg} flex items-center justify-center shrink-0`}>
           <ChannelIcon size={18} className={meta.color} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-sm font-700 text-white">{group.name}</p>
-            <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/12 text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Connected
+          <div className="flex items-center gap-2 mb-0.5">
+            <h3 className="text-sm font-700 text-white truncate">{group.name}</h3>
+            <span className={`text-[9px] font-700 px-1.5 py-0.5 rounded-full ${
+              group.status === 'connected' ?'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                : group.status === 'error' ?'bg-red-500/15 text-red-400 border border-red-500/20' :'bg-white/8 text-white/30 border border-white/10'
+            }`}>
+              {group.status}
             </span>
           </div>
-          <div className="flex items-center gap-3 mt-0.5 flex-wrap">
-            <span className="text-[11px] text-white/35">{group.provider}</span>
-            <span className="text-[11px] text-white/25">·</span>
-            <span className="text-[11px] text-white/35 tabular-nums">{group.messagesDay} msgs/day</span>
-            <span className="text-[11px] text-white/25">·</span>
-            <span className="text-[11px] text-white/35">{group.uptime} uptime</span>
-          </div>
+          <p className="text-[11px] text-white/35 truncate">{group.provider}</p>
         </div>
-
-        {/* Header actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 flex-wrap justify-end">
-          <span className={`text-[11px] font-500 px-2.5 py-1 rounded-lg ${meta.iconBg} ${meta.color} hidden sm:inline`}>
-            {group.assignments.length} persona{group.assignments.length !== 1 ? 's' : ''}
-          </span>
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
-            onClick={onAddAssignment}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-purple-600/20 border border-purple-500/25 text-[11px] font-500 text-purple-300 hover:bg-purple-600/30 transition-all"
+            onClick={onRefresh}
+            className="w-7 h-7 rounded-xl border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/5 transition-all"
+            title="Refresh status"
           >
-            <Plus size={11} /> <span className="hidden sm:inline">Assign</span><span className="sm:hidden">+</span>
+            <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
           </button>
           <button
             onClick={onConfigure}
@@ -473,12 +446,6 @@ function ChannelGroupCard({
             title="Configure channel"
           >
             <Settings size={11} />
-          </button>
-          <button
-            onClick={onRefresh}
-            className="w-7 h-7 rounded-xl border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/5 transition-all"
-          >
-            <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
           </button>
           <button
             onClick={() => setExpanded((v) => !v)}
@@ -489,110 +456,145 @@ function ChannelGroupCard({
         </div>
       </div>
 
-      {/* Persona list */}
+      {/* Stats row */}
+      <div className="grid grid-cols-3 divide-x divide-white/6 border-b border-white/6">
+        {[
+          { label: 'Msgs / Day', value: group.messagesDay },
+          { label: 'Uptime', value: group.uptime },
+          { label: 'Last Event', value: group.lastEvent },
+        ].map(({ label, value }) => (
+          <div key={label} className="px-4 py-2.5 text-center">
+            <p className="text-[10px] text-white/30 mb-0.5">{label}</p>
+            <p className="text-xs font-700 text-white/70">{value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Assignments */}
       {expanded && (
         <div className="p-4">
-          {/* Search */}
-          {group.assignments.length > 4 && (
-            <div className="flex items-center gap-1.5 bg-white/4 border border-white/8 rounded-xl px-2.5 py-1.5 mb-3">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[11px] font-600 text-white/40 uppercase tracking-wider">
+              Personas ({group.assignments.length})
+            </p>
+            <button
+              onClick={onAssign}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-600 border border-white/10 text-white/50 hover:text-white hover:border-white/25 transition-all"
+            >
+              <Plus size={10} /> Assign
+            </button>
+          </div>
+
+          {group.assignments.length > 3 && (
+            <div className="flex items-center gap-1.5 bg-white/4 border border-white/8 rounded-xl px-2.5 py-1.5 mb-2">
               <Search size={11} className="text-white/25 shrink-0" />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by name or number…"
+                placeholder="Search assigned personas…"
                 className="flex-1 bg-transparent text-[11px] text-white placeholder:text-white/20 focus:outline-none"
               />
-              {search && (
-                <button onClick={() => setSearch('')} className="text-white/20 hover:text-white/50">
-                  <X size={10} />
-                </button>
-              )}
             </div>
           )}
 
-          {group.assignments.length === 0 ? (
+          {filteredAssignments.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <div className="w-10 h-10 rounded-xl bg-white/4 flex items-center justify-center mb-3">
                 <ChannelIcon size={16} className="text-white/15" />
               </div>
               <p className="text-sm font-600 text-white/40">No personas assigned</p>
-              <p className="text-xs text-white/25 mt-1 mb-4">Add your first persona to start routing conversations</p>
-              <button
-                onClick={() => setAssigningGroup(groups[0])}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-xs font-600 text-white transition-all"
-              >
-                <Plus size={13} /> Add Persona
-              </button>
+              <p className="text-[11px] text-white/20 mt-1">Assign a persona to activate this channel</p>
             </div>
           ) : (
-            <>
-              {/* Column headers */}
-              <div className="grid grid-cols-[1fr_auto_auto] gap-3 px-3 mb-2">
-                <span className="text-[10px] text-white/25 uppercase tracking-wider font-500">Persona</span>
-                <span className="text-[10px] text-white/25 uppercase tracking-wider font-500 text-right min-w-[130px]">Number</span>
-                <span className="text-[10px] text-white/25 uppercase tracking-wider font-500 text-right min-w-[60px]">Actions</span>
-              </div>
-
-              <div className="space-y-1.5">
-                {filteredAssignments.map((assignment) => {
-                  const p = personas.find((x) => x.id === assignment.personaId);
-                  if (!p) return null;
-                  return (
-                    <div
-                      key={assignment.personaId}
-                      className="grid grid-cols-[1fr_auto_auto] gap-3 items-center px-3 py-2.5 rounded-xl bg-white/3 border border-white/6 hover:border-white/12 transition-all group"
-                    >
-                      {/* Persona info */}
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="w-7 h-7 rounded-lg bg-purple-500/20 flex items-center justify-center text-[9px] font-700 text-purple-300 shrink-0">
-                          {p.avatar}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-[12px] font-600 text-white/85 truncate">{p.name}</p>
-                          <div className="flex items-center gap-1.5 mt-0.5">
-                            {statusIcon(p.status)}
-                            <span className="text-[10px] text-white/30 capitalize">{p.status}</span>
-                            <span className="text-[10px] text-white/15">·</span>
-                            <span className="text-[10px] text-white/25 truncate">{p.description}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Phone number */}
-                      <div className="flex items-center gap-1.5 min-w-[130px] justify-end">
-                        <Hash size={9} className="text-white/20 shrink-0" />
-                        <span className="text-[11px] font-mono text-white/65 tabular-nums">{assignment.phoneNumber}</span>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-1 min-w-[60px] justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={() => onEditAssignment(assignment)}
-                          className="w-6 h-6 rounded-lg border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/8 transition-all"
-                          title="Edit number"
-                        >
-                          <Edit2 size={9} />
-                        </button>
-                        <button
-                          onClick={() => onRemoveAssignment(assignment)}
-                          className="w-6 h-6 rounded-lg border border-white/10 flex items-center justify-center text-white/30 hover:text-red-400 hover:bg-red-500/8 hover:border-red-500/20 transition-all"
-                          title="Remove assignment"
-                        >
-                          <Trash2 size={9} />
-                        </button>
-                      </div>
+            <div className="space-y-1.5">
+              {filteredAssignments.map((assignment) => {
+                const persona = personas.find((p) => p.id === assignment.personaId);
+                if (!persona) return null;
+                return (
+                  <div
+                    key={assignment.personaId}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-white/6 bg-white/[0.02] group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-purple-500/20 flex items-center justify-center text-[9px] font-700 text-purple-300 shrink-0">
+                      {persona.avatar}
                     </div>
-                  );
-                })}
-              </div>
-
-              {search && filteredAssignments.length === 0 && (
-                <p className="text-[11px] text-white/25 text-center py-4">No results for "{search}"</p>
-              )}
-            </>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[11px] font-600 text-white/80 truncate">{persona.name}</p>
+                      <p className="text-[10px] text-white/30 font-mono truncate">{assignment.embedKey}</p>
+                    </div>
+                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                      <button
+                        onClick={() => onEditAssignment(assignment)}
+                        className="w-6 h-6 rounded-lg border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/5 transition-all"
+                        title="Edit assignment"
+                      >
+                        <Edit2 size={9} />
+                      </button>
+                      <button
+                        onClick={() => onRemoveAssignment(assignment)}
+                        className="w-6 h-6 rounded-lg border border-red-500/20 flex items-center justify-center text-red-400/50 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                        title="Remove assignment"
+                      >
+                        <Trash2 size={9} />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+// ─── Remove Confirmation Modal ────────────────────────────────────────────────
+
+interface RemoveModalProps {
+  assignment: PersonaAssignment;
+  channelName: string;
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+function RemoveModal({ assignment, channelName, onClose, onConfirm }: RemoveModalProps) {
+  const persona = personas.find((p) => p.id === assignment.personaId);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative glass rounded-2xl border border-white/10 w-full max-w-sm p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-xl bg-red-500/15 flex items-center justify-center shrink-0">
+            <Trash2 size={15} className="text-red-400" />
+          </div>
+          <div>
+            <h2 className="text-sm font-700 text-white">Remove Assignment</h2>
+            <p className="text-[11px] text-white/40">{channelName}</p>
+          </div>
+        </div>
+        <p className="text-xs text-white/50 mb-5 leading-relaxed">
+          Remove <span className="text-white font-600">{persona?.name}</span> from this channel? This will disable their chat on this channel.
+        </p>
+        <div className="flex gap-2 justify-end">
+          <button onClick={onClose} className="px-4 py-2 rounded-xl text-xs font-600 border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all">
+            Cancel
+          </button>
+          <button onClick={onConfirm} className="px-4 py-2 rounded-xl text-xs font-600 bg-red-600 hover:bg-red-500 text-white transition-all">
+            Remove
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -605,8 +607,8 @@ export default function ChannelsGrid() {
 
   // Modal states
   const [assigningGroup, setAssigningGroup] = useState<ChannelGroup | null>(null);
-  const [editingAssignment, setEditingAssignment] = useState<{ group: ChannelGroup; assignment: PersonaNumberAssignment } | null>(null);
-  const [removingAssignment, setRemovingAssignment] = useState<{ group: ChannelGroup; assignment: PersonaNumberAssignment } | null>(null);
+  const [editingAssignment, setEditingAssignment] = useState<{ group: ChannelGroup; assignment: PersonaAssignment } | null>(null);
+  const [removingAssignment, setRemovingAssignment] = useState<{ group: ChannelGroup; assignment: PersonaAssignment } | null>(null);
   const [configuringGroup, setConfiguringGroup] = useState<ChannelGroup | null>(null);
 
   const handleRefresh = (type: ChannelType) => {
@@ -618,22 +620,19 @@ export default function ChannelsGrid() {
     setGroups((prev) => prev.map((g) => (g.type === updated.type ? updated : g)));
   };
 
-  const handleSaveAssignment = (groupType: ChannelType, assignment: PersonaNumberAssignment, isEdit: boolean) => {
+  const handleSaveAssignment = (groupType: ChannelType, assignment: PersonaAssignment, isEdit: boolean) => {
     setGroups((prev) =>
       prev.map((g) => {
         if (g.type !== groupType) return g;
         if (isEdit) {
-          return {
-            ...g,
-            assignments: g.assignments.map((a) =>
-              a.personaId === assignment.personaId ? assignment : a
-            ),
-          };
+          return { ...g, assignments: g.assignments.map((a) => a.personaId === assignment.personaId ? assignment : a) };
         }
         return { ...g, assignments: [...g.assignments, assignment] };
       })
     );
-    toast.success(isEdit ? 'Assignment updated' : `Persona assigned to ${assignment.phoneNumber}`);
+    toast.success(isEdit ? 'Assignment updated' : 'Persona assigned');
+    setAssigningGroup(null);
+    setEditingAssignment(null);
   };
 
   const handleRemoveAssignment = (groupType: ChannelType, personaId: string) => {
@@ -645,26 +644,20 @@ export default function ChannelsGrid() {
       )
     );
     toast.success('Assignment removed');
+    setRemovingAssignment(null);
   };
 
   const totalAssignments = groups.reduce((sum, g) => sum + g.assignments.length, 0);
 
-  // All persona IDs assigned across all groups
-  const allAssignedIds = new Set(groups.flatMap((g) => g.assignments.map((a) => a.personaId)));
-  const unassignedPersonas = personas.filter((p) => !allAssignedIds.has(p.id) && p.status !== 'draft');
-
   return (
-    <div>
+    <div className="p-6">
       {/* Modals */}
       {assigningGroup && (
         <AssignmentModal
           channelGroup={assigningGroup}
           allGroups={groups}
           onClose={() => setAssigningGroup(null)}
-          onSave={(a) => {
-            handleSaveAssignment(assigningGroup.type, a, false);
-            setAssigningGroup(null);
-          }}
+          onSave={(assignment) => handleSaveAssignment(assigningGroup.type, assignment, false)}
         />
       )}
       {editingAssignment && (
@@ -673,21 +666,15 @@ export default function ChannelsGrid() {
           allGroups={groups}
           editingAssignment={editingAssignment.assignment}
           onClose={() => setEditingAssignment(null)}
-          onSave={(a) => {
-            handleSaveAssignment(editingAssignment.group.type, a, true);
-            setEditingAssignment(null);
-          }}
+          onSave={(assignment) => handleSaveAssignment(editingAssignment.group.type, assignment, true)}
         />
       )}
       {removingAssignment && (
-        <RemoveConfirm
-          personaId={removingAssignment.assignment.personaId}
-          phoneNumber={removingAssignment.assignment.phoneNumber}
+        <RemoveModal
+          assignment={removingAssignment.assignment}
+          channelName={removingAssignment.group.name}
           onClose={() => setRemovingAssignment(null)}
-          onConfirm={() => {
-            handleRemoveAssignment(removingAssignment.group.type, removingAssignment.assignment.personaId);
-            setRemovingAssignment(null);
-          }}
+          onConfirm={() => handleRemoveAssignment(removingAssignment.group.type, removingAssignment.assignment.personaId)}
         />
       )}
       {configuringGroup && (
@@ -701,25 +688,22 @@ export default function ChannelsGrid() {
         />
       )}
 
-      {/* Page Header */}
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-base font-700 text-white">Channels</h2>
           <p className="text-xs text-white/40 mt-0.5">
-            {groups.length} channel type{groups.length !== 1 ? 's' : ''} · {totalAssignments} persona assignment{totalAssignments !== 1 ? 's' : ''} · Each persona has a unique number
+            {groups.length} channel type{groups.length !== 1 ? 's' : ''} · {totalAssignments} persona assignment{totalAssignments !== 1 ? 's' : ''}
           </p>
         </div>
       </div>
 
-      {/* Info Banner */}
-      <div className="flex items-start gap-3 p-3.5 rounded-xl bg-amber-500/6 border border-amber-500/15 mb-6">
-        <Hash size={14} className="text-amber-400 mt-0.5 shrink-0" />
-        <div>
-          <p className="text-xs font-600 text-amber-300">Unique number per persona</p>
-          <p className="text-[11px] text-white/40 mt-0.5">
-            Every persona must have its own dedicated phone number. Numbers cannot be shared across personas — this ensures clean conversation routing and compliance with WhatsApp Business provider policies.
-          </p>
-        </div>
+      {/* Info strip */}
+      <div className="rounded-xl border border-teal-500/20 bg-teal-500/5 px-4 py-3 mb-6">
+        <p className="text-xs font-600 text-teal-300">Text Chat &amp; Web Embed only</p>
+        <p className="text-[11px] text-white/40 mt-0.5">
+          Personas can be deployed via a hosted text chat page or as a web embed widget. Each persona receives a unique embed key for clean routing.
+        </p>
       </div>
 
       {/* Channel Groups */}
@@ -732,9 +716,9 @@ export default function ChannelsGrid() {
             refreshing={refreshing === group.type}
             onRefresh={() => handleRefresh(group.type)}
             onConfigure={() => setConfiguringGroup(group)}
-            onAddAssignment={() => setAssigningGroup(group)}
-            onEditAssignment={(a) => setEditingAssignment({ group, assignment: a })}
-            onRemoveAssignment={(a) => setRemovingAssignment({ group, assignment: a })}
+            onAssign={() => setAssigningGroup(group)}
+            onEditAssignment={(assignment) => setEditingAssignment({ group, assignment })}
+            onRemoveAssignment={(assignment) => setRemovingAssignment({ group, assignment })}
           />
         ))}
       </div>

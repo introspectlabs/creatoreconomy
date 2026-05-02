@@ -32,31 +32,13 @@ const channels = [
     activeColor: 'border-purple-500/60 bg-purple-500/15',
   },
   {
-    id: 'whatsapp',
-    title: 'WhatsApp',
-    desc: 'Let your audience chat with your persona on WhatsApp Business',
-    icon: '📱',
-    tag: 'Popular',
-    color: 'border-emerald-500/40 bg-emerald-500/8',
-    activeColor: 'border-emerald-500/60 bg-emerald-500/15',
-  },
-  {
-    id: 'course-platform',
-    title: 'Course Platform',
-    desc: 'Embed inside your Teachable, Kajabi, or Thinkific course',
-    icon: '🎓',
+    id: 'text-chat',
+    title: 'Text Chat',
+    desc: 'Deploy a hosted text chat page your audience can access directly via link',
+    icon: '💬',
     tag: 'Recommended',
     color: 'border-teal-500/40 bg-teal-500/8',
     activeColor: 'border-teal-500/60 bg-teal-500/15',
-  },
-  {
-    id: 'slack',
-    title: 'Community / Slack',
-    desc: 'Add your persona as a bot in your creator community or Slack group',
-    icon: '💬',
-    tag: 'Beta',
-    color: 'border-amber-500/40 bg-amber-500/8',
-    activeColor: 'border-amber-500/60 bg-amber-500/15',
   },
 ];
 
@@ -204,7 +186,7 @@ export default function DeployPage() {
     <AppLayout>
       <Topbar
         title="Deploy"
-        subtitle="Get your creator persona live — on your site, course platform, or WhatsApp"
+        subtitle="Get your creator persona live — on your site or as a hosted chat"
         action={
           <Link href="/embeds" className="text-xs text-white/40 hover:text-white transition-colors flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -376,98 +358,70 @@ export default function DeployPage() {
             </div>
 
             <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5 mb-4 flex flex-col gap-4">
-              {selectedChannel === 'web' || selectedChannel === 'course-platform' ? (
-                <>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Allowed Domain</label>
-                    <input
-                      type="text"
-                      value={config.domain}
-                      onChange={(e) => setConfig({ ...config, domain: e.target.value })}
-                      placeholder="yourdomain.com"
-                      className="px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 transition-all"
-                    />
+              <>
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Allowed Domain</label>
+                  <input
+                    type="text"
+                    value={config.domain}
+                    onChange={(e) => setConfig({ ...config, domain: e.target.value })}
+                    placeholder="yourdomain.com"
+                    className="px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 transition-all"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Theme</label>
+                  <div className="flex gap-2">
+                    {['dark', 'light'].map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => setConfig({ ...config, theme: t })}
+                        className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all capitalize ${
+                          config.theme === t
+                            ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10 text-white'
+                            : 'border-white/8 text-white/40 hover:text-white/70'
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
                   </div>
+                </div>
+                {selectedChannel === 'web' && (
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Theme</label>
-                    <div className="flex gap-2">
-                      {['dark', 'light'].map((t) => (
+                    <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Widget Position</label>
+                    <div className="flex gap-2 flex-wrap">
+                      {['bottom-right', 'bottom-left', 'top-right'].map((pos) => (
                         <button
-                          key={t}
-                          onClick={() => setConfig({ ...config, theme: t })}
-                          className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all capitalize ${
-                            config.theme === t
+                          key={pos}
+                          onClick={() => setConfig({ ...config, position: pos })}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                            config.position === pos
                               ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10 text-white'
                               : 'border-white/8 text-white/40 hover:text-white/70'
                           }`}
                         >
-                          {t}
+                          {pos}
                         </button>
                       ))}
                     </div>
                   </div>
-                  {selectedChannel === 'web' && (
-                    <div className="flex flex-col gap-2">
-                      <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Widget Position</label>
-                      <div className="flex gap-2 flex-wrap">
-                        {['bottom-right', 'bottom-left', 'top-right'].map((pos) => (
-                          <button
-                            key={pos}
-                            onClick={() => setConfig({ ...config, position: pos })}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
-                              config.position === pos
-                                ? 'border-[#7c3aed]/50 bg-[#7c3aed]/10 text-white'
-                                : 'border-white/8 text-white/40 hover:text-white/70'
-                            }`}
-                          >
-                            {pos}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Embed Snippet</label>
-                    <div className="relative">
-                      <pre className="px-4 py-3 rounded-xl border border-white/8 bg-black/30 text-[11px] text-white/60 overflow-x-auto leading-relaxed whitespace-pre-wrap">
-                        {snippet}
-                      </pre>
-                      <button
-                        onClick={handleCopy}
-                        className="absolute top-2 right-2 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-white/10 text-white/50 hover:text-white hover:border-white/25 transition-all bg-black/40"
-                      >
-                        {copied ? '✓ Copied' : 'Copy'}
-                      </button>
-                    </div>
-                  </div>
-                </>
-              ) : selectedChannel === 'whatsapp' ? (
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-start gap-3 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5">
-                    <span className="text-xl flex-shrink-0">📱</span>
-                    <div>
-                      <p className="text-sm font-semibold text-white mb-1">WhatsApp Business Setup</p>
-                      <p className="text-xs text-white/50 leading-relaxed">Connect your WhatsApp Business number to deploy <span className="text-white">{persona?.name}</span>. Your audience can chat with your persona directly on WhatsApp.</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/60 uppercase tracking-wider">WhatsApp Business Number</label>
-                    <input
-                      type="text"
-                      placeholder="+91 98765 43210"
-                      className="px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 transition-all"
-                    />
+                )}
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Embed Snippet</label>
+                  <div className="relative">
+                    <pre className="px-4 py-3 rounded-xl border border-white/8 bg-black/30 text-[11px] text-white/60 overflow-x-auto leading-relaxed whitespace-pre-wrap">
+                      {snippet}
+                    </pre>
+                    <button
+                      onClick={handleCopy}
+                      className="absolute top-2 right-2 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-white/10 text-white/50 hover:text-white hover:border-white/25 transition-all bg-black/40"
+                    >
+                      {copied ? '✓ Copied' : 'Copy'}
+                    </button>
                   </div>
                 </div>
-              ) : (
-                <div className="flex items-start gap-3 p-4 rounded-xl border border-amber-500/20 bg-amber-500/5">
-                  <span className="text-xl flex-shrink-0">💬</span>
-                  <div>
-                    <p className="text-sm font-semibold text-white mb-1">Community / Slack Setup</p>
-                    <p className="text-xs text-white/50 leading-relaxed">Add <span className="text-white">{persona?.name}</span> as a bot to your Slack workspace or creator community. Beta feature — contact support for setup.</p>
-                  </div>
-                </div>
-              )}
+              </>
             </div>
 
             <div className="flex items-center justify-between">
