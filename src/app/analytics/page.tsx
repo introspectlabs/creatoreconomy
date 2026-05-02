@@ -15,16 +15,16 @@ const conversationData = [
 ];
 
 const topQuestions = [
-  { question: 'Do you have a moisturizer for oily skin?', count: 142, conversion: '12%' },
-  { question: 'What\'s the difference between Hydra Boost and Matte Gel?', count: 98, conversion: '18%' },
-  { question: 'Is this product good for sensitive skin?', count: 87, conversion: '9%' },
-  { question: 'Do you offer free shipping?', count: 76, conversion: '6%' },
-  { question: 'What\'s your return policy?', count: 64, conversion: '4%' },
-  { question: 'Can I use Vitamin C serum with SPF?', count: 58, conversion: '15%' },
-  { question: 'Do you have a bundle deal?', count: 51, conversion: '22%' },
+  { question: 'How do I start investing with ₹10,000?', count: 142, conversion: '12%' },
+  { question: 'What\'s the difference between SIP and lump sum?', count: 98, conversion: '18%' },
+  { question: 'Which module covers options trading strategies?', count: 87, conversion: '9%' },
+  { question: 'How do I book a 1:1 coaching session?', count: 76, conversion: '24%' },
+  { question: 'Is the course suitable for complete beginners?', count: 64, conversion: '16%' },
+  { question: 'Can I get a refund if the course doesn\'t work for me?', count: 58, conversion: '8%' },
+  { question: 'Do you offer a community or group coaching?', count: 51, conversion: '22%' },
 ];
 
-const conversionData = [
+const engagementData = [
   { date: 'Apr 23', rate: 6.2 },
   { date: 'Apr 24', rate: 7.8 },
   { date: 'Apr 25', rate: 7.1 },
@@ -52,14 +52,14 @@ export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState<'7d' | '30d'>('7d');
 
   const summaryMetrics = [
-    { label: 'Total Conversations', value: '1,284', change: '+18% vs last month', color: '#7c3aed', trend: 'up' },
+    { label: 'Total Audience Chats', value: '1,284', change: '+18% vs last month', color: '#7c3aed', trend: 'up' },
     { label: 'Top Questions Asked', value: '642', change: 'Across all personas', color: '#14b8a6', trend: 'neutral' },
-    { label: 'Conversion Rate (proxy)', value: '8.4%', change: '+2.1% this month', color: '#34d399', trend: 'up' },
+    { label: 'Audience Engagement Rate', value: '8.4%', change: '+2.1% this month', color: '#34d399', trend: 'up' },
   ];
 
   return (
     <AppLayout>
-      <Topbar title="Analytics" subtitle="Conversations, top questions, and conversion metrics" />
+      <Topbar title="Analytics" subtitle="Audience conversations, top questions, and engagement metrics across your creator personas" />
 
       {/* Time range */}
       <div className="flex items-center gap-2 mb-6">
@@ -69,7 +69,7 @@ export default function AnalyticsPage() {
             onClick={() => setTimeRange(r)}
             className={`px-3 py-1.5 rounded-lg text-xs font-600 transition-all ${
               timeRange === r
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :'text-white/40 hover:text-white/70 border border-white/8 hover:border-white/15'
+                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'text-white/40 hover:text-white/70 border border-white/8 hover:border-white/15'
             }`}
           >
             {r}
@@ -91,7 +91,7 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
         {/* Conversations chart */}
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-          <h2 className="text-sm font-semibold text-white mb-4">Conversations Over Time</h2>
+          <h2 className="text-sm font-semibold text-white mb-4">Audience Conversations Over Time</h2>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={conversationData}>
               <defs>
@@ -109,21 +109,21 @@ export default function AnalyticsPage() {
           </ResponsiveContainer>
         </div>
 
-        {/* Conversion proxy chart */}
+        {/* Engagement chart */}
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-white">Conversion Rate (Proxy)</h2>
+            <h2 className="text-sm font-semibold text-white">Audience Engagement Rate</h2>
             <span className="text-[10px] text-white/35 border border-white/10 px-2 py-0.5 rounded-full">
-              Chat → Product click
+              Chat → Course/Booking click
             </span>
           </div>
           <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={conversionData}>
+            <BarChart data={engagementData}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
               <XAxis dataKey="date" tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: 10 }} axisLine={false} tickLine={false} unit="%" />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="rate" name="Conversion %" fill="#14b8a6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="rate" name="Engagement %" fill="#14b8a6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -132,8 +132,8 @@ export default function AnalyticsPage() {
       {/* Top questions */}
       <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
         <div className="px-5 py-4 border-b border-white/6">
-          <h2 className="text-sm font-semibold text-white">Top Questions</h2>
-          <p className="text-xs text-white/40 mt-0.5">Most asked questions across all personas</p>
+          <h2 className="text-sm font-semibold text-white">Top Audience Questions</h2>
+          <p className="text-xs text-white/40 mt-0.5">Most asked questions across all creator personas</p>
         </div>
         <div className="divide-y divide-white/5">
           {topQuestions.map((q, i) => (
@@ -147,7 +147,7 @@ export default function AnalyticsPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-semibold text-[#34d399]">{q.conversion}</p>
-                  <p className="text-[10px] text-white/30">conversion</p>
+                  <p className="text-[10px] text-white/30">engagement</p>
                 </div>
               </div>
             </div>

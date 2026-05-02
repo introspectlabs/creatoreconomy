@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Brain, Database, Plug, BookOpen, ShoppingBag, TrendingUp } from 'lucide-react';
+import { Brain, Database, Plug, BookOpen, TrendingUp, Mic } from 'lucide-react';
 import Icon from '@/components/ui/AppIcon';
 
 
@@ -34,9 +34,9 @@ const activities = [
   },
   {
     id: 'act-004',
-    type: 'info',
-    icon: ShoppingBag,
-    title: 'D2C persona "BrandBot — Zara Skin" drove 8 product sales',
+    type: 'success',
+    icon: Mic,
+    title: 'Coaching persona "Coach Dani" completed 12 audience sessions',
     time: '2 hr ago',
     color: 'text-purple-400',
     bg: 'bg-purple-500/10',

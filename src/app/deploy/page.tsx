@@ -5,46 +5,46 @@ import AppLayout from '@/components/AppLayout';
 import Topbar from '@/components/Topbar';
 
 const personas = [
-  { id: 'aria-sales', name: 'Aria Sales', role: 'Sales Assistant', initials: 'AS', color: 'from-purple-500 to-blue-500' },
-  { id: 'support-bot', name: 'Support Bot v2', role: 'Customer Support', initials: 'SB', color: 'from-teal-500 to-emerald-500' },
-  { id: 'kai-voice', name: 'Kai Voice Agent', role: 'Voice Support', initials: 'KV', color: 'from-orange-500 to-pink-500' },
-  { id: 'demo-concierge', name: 'Demo Concierge', role: 'Product Demo', initials: 'DC', color: 'from-blue-500 to-cyan-500' },
-  { id: 'zara-retail', name: 'Zara Retail', role: 'Retail Assistant', initials: 'ZR', color: 'from-pink-500 to-rose-500' },
-  { id: 'nova-cs', name: 'Nova Customer Success', role: 'Customer Success', initials: 'NC', color: 'from-violet-500 to-purple-500' },
+  { id: 'finance-priya', name: 'FinanceCoach — Priya', role: 'Finance Creator', initials: 'FP', color: 'from-purple-500 to-blue-500' },
+  { id: 'course-jordan', name: 'CourseGuide — Jordan', role: 'Course Builder', initials: 'CJ', color: 'from-teal-500 to-emerald-500' },
+  { id: 'coach-dani', name: 'Coach Dani', role: 'Life Coach', initials: 'CD', color: 'from-orange-500 to-pink-500' },
+  { id: 'mindset-ravi', name: 'MindsetPro — Ravi', role: 'Mindset Coach', initials: 'MR', color: 'from-blue-500 to-cyan-500' },
+  { id: 'priya-trades', name: 'Priya Trades', role: 'Trading Educator', initials: 'PT', color: 'from-pink-500 to-rose-500' },
+  { id: 'marcus-wealth', name: 'Marcus Wealth', role: 'Wealth Creator', initials: 'MW', color: 'from-violet-500 to-purple-500' },
 ];
 
 const channels = [
   {
     id: 'web',
     title: 'Web Embed',
-    desc: 'Add a floating chat widget to any website via JS snippet',
+    desc: 'Add a floating chat widget to your website, landing page, or course portal',
     icon: '💻',
     tag: null,
     color: 'border-purple-500/40 bg-purple-500/8',
     activeColor: 'border-purple-500/60 bg-purple-500/15',
   },
   {
-    id: 'shopify',
-    title: 'Shopify Plugin',
-    desc: 'Install directly into your Shopify store theme',
-    icon: '🛍️',
+    id: 'whatsapp',
+    title: 'WhatsApp',
+    desc: 'Let your audience chat with your persona on WhatsApp Business',
+    icon: '📱',
+    tag: 'Popular',
+    color: 'border-emerald-500/40 bg-emerald-500/8',
+    activeColor: 'border-emerald-500/60 bg-emerald-500/15',
+  },
+  {
+    id: 'course-platform',
+    title: 'Course Platform',
+    desc: 'Embed inside your Teachable, Kajabi, or Thinkific course',
+    icon: '🎓',
     tag: 'Recommended',
     color: 'border-teal-500/40 bg-teal-500/8',
     activeColor: 'border-teal-500/60 bg-teal-500/15',
   },
   {
-    id: 'whatsapp',
-    title: 'WhatsApp',
-    desc: 'Deploy on WhatsApp Business via API integration',
-    icon: '📱',
-    tag: null,
-    color: 'border-emerald-500/40 bg-emerald-500/8',
-    activeColor: 'border-emerald-500/60 bg-emerald-500/15',
-  },
-  {
     id: 'slack',
-    title: 'Slack',
-    desc: 'Add your persona as a Slack bot in your workspace',
+    title: 'Community / Slack',
+    desc: 'Add your persona as a bot in your creator community or Slack group',
     icon: '💬',
     tag: 'Beta',
     color: 'border-amber-500/40 bg-amber-500/8',
@@ -109,7 +109,7 @@ export default function DeployPage() {
   const persona = personas.find((p) => p.id === selectedPersona);
   const channel = channels.find((c) => c.id === selectedChannel);
 
-  const webSnippet = `<!-- PersonaMatrix AI Widget -->
+  const webSnippet = `<!-- PersonaMatrix Creator Widget -->
 <script>
   window.PersonaMatrix = {
     personaId: "${selectedPersona || 'your-persona-id'}",
@@ -120,16 +120,17 @@ export default function DeployPage() {
 </script>
 <script src="https://cdn.personamatrix.ai/widget.js" async></script>`;
 
-  const shopifySnippet = `{% comment %} PersonaMatrix Shopify App {% endcomment %}
-{{ 'personamatrix.js' | asset_url | script_tag }}
+  const coursePlatformSnippet = `<!-- PersonaMatrix Course Widget -->
 <script>
-  PersonaMatrix.init({
+  window.PersonaMatrix = {
     personaId: "${selectedPersona || 'your-persona-id'}",
-    theme: "${config.theme}"
-  });
-</script>`;
+    theme: "${config.theme}",
+    context: "course"
+  };
+</script>
+<script src="https://cdn.personamatrix.ai/widget.js" async></script>`;
 
-  const snippet = selectedChannel === 'shopify' ? shopifySnippet : webSnippet;
+  const snippet = selectedChannel === 'course-platform' ? coursePlatformSnippet : webSnippet;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(snippet).then(() => {
@@ -145,7 +146,7 @@ export default function DeployPage() {
   if (deployed) {
     return (
       <AppLayout>
-        <Topbar title="Deploy" subtitle="Get your AI persona live on your channels" />
+        <Topbar title="Deploy" subtitle="Get your creator persona live on your channels" />
         <div className="max-w-lg mx-auto text-center py-16">
           <div className="w-16 h-16 rounded-full bg-[#34d399]/15 border border-[#34d399]/30 flex items-center justify-center mx-auto mb-5">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
@@ -183,7 +184,7 @@ export default function DeployPage() {
     <AppLayout>
       <Topbar
         title="Deploy"
-        subtitle="Deploy a persona to a channel in a few steps"
+        subtitle="Get your creator persona live — on your site, course platform, or WhatsApp"
         action={
           <Link href="/embeds" className="text-xs text-white/40 hover:text-white transition-colors flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -202,8 +203,8 @@ export default function DeployPage() {
         {step === 0 && (
           <div>
             <div className="mb-5">
-              <h2 className="text-base font-semibold text-white mb-1">Which persona do you want to deploy?</h2>
-              <p className="text-xs text-white/40">Select the AI persona that will power this deployment.</p>
+              <h2 className="text-base font-semibold text-white mb-1">Which creator persona do you want to deploy?</h2>
+              <p className="text-xs text-white/40">Select the AI persona that will engage your audience.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {personas.map((p) => (
@@ -243,7 +244,7 @@ export default function DeployPage() {
                 onClick={() => setStep(1)}
                 className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   selectedPersona
-                    ? 'btn-primary text-white' :'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
+                    ? 'btn-primary text-white' : 'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
                 }`}
               >
                 Continue →
@@ -278,7 +279,8 @@ export default function DeployPage() {
                 >
                   {ch.tag && (
                     <span className={`absolute top-3 right-3 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
-                      ch.tag === 'Recommended' ?'bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30' :'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                      ch.tag === 'Recommended' ? 'bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30' :
+                      ch.tag === 'Popular'? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
                     }`}>
                       {ch.tag}
                     </span>
@@ -314,7 +316,7 @@ export default function DeployPage() {
                 onClick={() => setStep(2)}
                 className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   selectedChannel
-                    ? 'btn-primary text-white' :'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
+                    ? 'btn-primary text-white' : 'bg-white/5 text-white/25 cursor-not-allowed border border-white/8'
                 }`}
               >
                 Continue →
@@ -365,12 +367,12 @@ export default function DeployPage() {
                 </div>
               )}
 
-              {/* Slack special case */}
+              {/* Community / Slack special case */}
               {selectedChannel === 'slack' && (
                 <div className="rounded-2xl border border-amber-500/20 bg-amber-500/6 p-5">
-                  <p className="text-sm font-semibold text-white mb-1">Connect Slack Workspace</p>
+                  <p className="text-sm font-semibold text-white mb-1">Connect Community / Slack</p>
                   <p className="text-xs text-white/50 leading-relaxed mb-4">
-                    Authorize PersonaMatrix to add <strong className="text-white/70">{persona?.name}</strong> as a bot in your Slack workspace.
+                    Authorize PersonaMatrix to add <strong className="text-white/70">{persona?.name}</strong> as a bot in your creator community or Slack workspace.
                   </p>
                   <button className="self-start text-xs px-4 py-2 rounded-lg border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all font-medium">
                     Add to Slack →
@@ -378,8 +380,8 @@ export default function DeployPage() {
                 </div>
               )}
 
-              {/* Web / Shopify config */}
-              {(selectedChannel === 'web' || selectedChannel === 'shopify') && (
+              {/* Web / Course Platform config */}
+              {(selectedChannel === 'web' || selectedChannel === 'course-platform') && (
                 <>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
@@ -428,7 +430,7 @@ export default function DeployPage() {
                       type="text"
                       value={config.domain}
                       onChange={(e) => setConfig({ ...config, domain: e.target.value })}
-                      placeholder="yourdomain.com"
+                      placeholder="yourcoursesite.com"
                       className="w-full px-3 py-2.5 rounded-lg border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/40 transition-all"
                     />
                     <p className="text-[10px] text-white/25 mt-1.5">Only allow the widget to load on this domain.</p>
@@ -439,11 +441,11 @@ export default function DeployPage() {
                     <div className="flex items-center justify-between px-4 py-3 border-b border-white/6">
                       <div>
                         <p className="text-xs font-semibold text-white">
-                          {selectedChannel === 'shopify' ? 'Shopify Installation Code' : 'Embed Code'}
+                          {selectedChannel === 'course-platform' ? 'Course Platform Embed Code' : 'Embed Code'}
                         </p>
                         <p className="text-[10px] text-white/35 mt-0.5">
-                          {selectedChannel === 'shopify'
-                            ? 'Add to your theme.liquid file' :'Paste before the closing </body> tag'}
+                          {selectedChannel === 'course-platform'
+                            ? 'Add to your course platform custom code section' :'Paste before the closing </body> tag'}
                         </p>
                       </div>
                       <button

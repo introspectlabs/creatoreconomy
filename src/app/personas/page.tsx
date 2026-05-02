@@ -50,59 +50,59 @@ const quickTemplates: QuickTemplate[] = [
     id: 'tone-behaviour',
     label: 'Tone & Behaviour',
     icon: '🎭',
-    prompt: `You are a friendly and helpful shopping assistant for our D2C brand. Always greet customers warmly, use a conversational tone, and be empathetic to their needs. Avoid being pushy — focus on helping customers find the right product for them. Use simple, clear language and keep responses concise.`,
+    prompt: `You are a knowledgeable and approachable creator persona. Always greet your audience warmly, use a conversational tone, and be empathetic to their questions. Focus on delivering genuine value from your expertise — whether in finance, coaching, or course content. Use clear, jargon-free language and keep responses concise and actionable.`,
   },
   {
     id: 'capabilities',
     label: 'Capabilities',
     icon: '⚡',
-    prompt: `You can help customers with: (1) Finding the right product based on their needs and preferences, (2) Comparing products and explaining differences, (3) Answering questions about ingredients, materials, or specifications, (4) Checking product availability and pricing, (5) Explaining shipping, returns, and policies, (6) Recommending bundles or complementary products.`,
+    prompt: `You can help your audience with: (1) Answering questions about your course content and curriculum, (2) Providing guidance based on your coaching frameworks, (3) Sharing finance tips, strategies, and insights from your content library, (4) Recommending the right course module or resource for their situation, (5) Explaining concepts from your videos, newsletters, or PDFs, (6) Directing them to book a 1:1 session or enroll in a course.`,
   },
   {
     id: 'call-flow',
-    label: 'Call Flow',
+    label: 'Conversation Flow',
     icon: '🔄',
-    prompt: `Follow this conversation flow: 1) Greet the customer and ask how you can help. 2) Understand their need or problem. 3) Ask 1-2 clarifying questions if needed. 4) Recommend 1-3 relevant products with brief explanations. 5) Handle objections or questions. 6) Guide them toward adding to cart or completing purchase. 7) Offer post-purchase support if needed.`,
+    prompt: `Follow this conversation flow: 1) Greet the audience member and ask how you can help. 2) Understand their goal or challenge. 3) Ask 1-2 clarifying questions if needed. 4) Share relevant insights from your content or frameworks. 5) Recommend a specific course, module, or resource. 6) Invite them to take the next step — enroll, book a call, or join your community.`,
   },
   {
     id: 'objectives',
     label: 'Objectives',
     icon: '🎯',
-    prompt: `Primary objective: Help customers find and purchase the right product. Secondary objectives: (1) Increase average order value through relevant upsells, (2) Reduce cart abandonment by addressing concerns proactively, (3) Build brand trust through accurate, helpful information, (4) Collect customer preferences to personalize recommendations. Always prioritize customer satisfaction over immediate sales.`,
+    prompt: `Primary objective: Help your audience get real value from your expertise and content. Secondary objectives: (1) Guide them toward enrolling in your course or coaching program, (2) Build trust by delivering accurate, helpful information grounded in your content, (3) Increase engagement with your community and content library, (4) Collect audience questions to inform future content creation. Always prioritize genuine helpfulness over hard selling.`,
   },
 ];
 
 const kbDocuments = [
-  { id: 'kb-1', name: 'Product_FAQ_v3.pdf', type: 'pdf', size: '2.4 MB' },
-  { id: 'kb-2', name: 'Sales_Playbook_2024.docx', type: 'docx', size: '1.1 MB' },
-  { id: 'kb-4', name: 'Competitor_Analysis_Q4.csv', type: 'csv', size: '890 KB' },
-  { id: 'kb-6', name: 'Brand_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
+  { id: 'kb-1', name: 'Course_Curriculum_v3.pdf', type: 'pdf', size: '2.4 MB' },
+  { id: 'kb-2', name: 'Coaching_Framework_2024.docx', type: 'docx', size: '1.1 MB' },
+  { id: 'kb-4', name: 'Finance_Newsletter_Archive.csv', type: 'csv', size: '890 KB' },
+  { id: 'kb-6', name: 'Creator_Voice_Guidelines.pdf', type: 'pdf', size: '3.2 MB' },
 ];
 
 const initialPersonas: Persona[] = [
   {
-    id: 'glow-ai',
-    name: 'Glow AI',
-    type: 'Shopping Assistant',
+    id: 'finance-coach',
+    name: 'FinanceCoach — Priya',
+    type: 'Finance Creator',
     status: 'active',
     conversations: 842,
     conversion: '9.2%',
     channel: 'Web + WhatsApp',
-    emoji: '🧴',
-    tone: 'friendly',
+    emoji: '📈',
+    tone: 'expert',
     prompt: '',
     attachedKbIds: ['kb-1'],
   },
   {
-    id: 'support-ai',
-    name: 'Support AI',
-    type: 'Shopping Assistant',
+    id: 'course-guide',
+    name: 'CourseGuide — Jordan',
+    type: 'Course Builder',
     status: 'draft',
     conversations: 0,
     conversion: '—',
     channel: 'Not deployed',
-    emoji: '💬',
-    tone: 'expert',
+    emoji: '🎓',
+    tone: 'friendly',
     prompt: '',
     attachedKbIds: [],
   },
@@ -230,7 +230,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="e.g. Glow AI, Shop Assistant, Aria..."
+                  placeholder="e.g. FinanceCoach — Priya, CourseGuide — Jordan..."
                   className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all"
                 />
               </div>
@@ -239,10 +239,10 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Persona Type</label>
                 <div className="flex items-center gap-3 p-4 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/8">
-                  <span className="text-2xl">🛍️</span>
+                  <span className="text-2xl">🎓</span>
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-white">Shopping Assistant</p>
-                    <p className="text-xs text-white/45 mt-0.5">Helps visitors find products, compare options, and complete purchases</p>
+                    <p className="text-sm font-semibold text-white">Creator Persona</p>
+                    <p className="text-xs text-white/45 mt-0.5">Engages your audience with your expertise — finance, coaching, or course content</p>
                   </div>
                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-[#14b8a6]/20 text-[#14b8a6] border border-[#14b8a6]/30">
                     Default
@@ -316,7 +316,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
                 <textarea
                   value={form.prompt}
                   onChange={(e) => setForm({ ...form, prompt: e.target.value })}
-                  placeholder="Define how your AI persona should behave, what it knows, and how it should respond to customers..."
+                  placeholder="Define how your AI persona should behave, what expertise it draws from, and how it should engage your audience..."
                   rows={6}
                   className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#7c3aed]/50 focus:bg-white/8 transition-all resize-none leading-relaxed"
                 />
@@ -340,7 +340,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
             <>
               <div>
                 <h3 className="text-base font-semibold text-white mb-1">Knowledge Source</h3>
-                <p className="text-sm text-white/45">Attach documents from your Knowledge Base to power this persona.</p>
+                <p className="text-sm text-white/45">Attach your content from the Knowledge Base to power this persona.</p>
               </div>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
@@ -411,7 +411,7 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
               <div className="flex flex-col gap-3">
                 {[
                   { label: 'Name', value: form.name || '(unnamed)' },
-                  { label: 'Type', value: 'Shopping Assistant 🛍️' },
+                  { label: 'Type', value: 'Creator Persona 🎓' },
                   { label: 'Tone', value: toneOptions.find((t) => t.value === form.tone)?.label || '' },
                   {
                     label: 'KB Docs Attached',
@@ -458,14 +458,16 @@ function EditPersonaWizard({ persona, onSave, onClose }: EditWizardProps) {
 
 export default function PersonasPage() {
   const [personas, setPersonas] = useState<Persona[]>(initialPersonas);
+  const [editingPersona, setEditingPersona] = useState<Persona | null>(null);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
-  const [editingPersona, setEditingPersona] = useState<Persona | null>(null);
 
-  const handleTogglePause = (id: string) => {
+  const handleToggleStatus = (id: string) => {
     setPersonas((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, status: p.status === 'active' ? 'paused' : 'active' } : p
+        p.id === id
+          ? { ...p, status: p.status === 'active' ? 'paused' : 'active' }
+          : p
       )
     );
     setOpenMenuId(null);
@@ -477,123 +479,112 @@ export default function PersonasPage() {
     setOpenMenuId(null);
   };
 
-  const handleEditOpen = (persona: Persona) => {
-    setEditingPersona(persona);
-    setOpenMenuId(null);
-  };
-
-  const handleEditSave = (updated: Persona) => {
+  const handleSaveEdit = (updated: Persona) => {
     setPersonas((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
     setEditingPersona(null);
   };
 
-  const statusStyle = (status: Persona['status']) => {
-    if (status === 'active') return 'bg-[#34d399]/15 text-[#34d399] border-[#34d399]/25';
-    if (status === 'paused') return 'bg-amber-500/15 text-amber-400 border-amber-500/25';
-    return 'bg-white/8 text-white/40 border-white/10';
+  const statusColors: Record<string, string> = {
+    active: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
+    paused: 'bg-amber-500/15 text-amber-400 border-amber-500/25',
+    draft: 'bg-white/8 text-white/40 border-white/10',
   };
 
   return (
     <AppLayout>
       <Topbar
-        title="Personas"
-        subtitle="Manage your AI sales personas"
+        title="Creator Personas"
+        subtitle="Build and manage AI personas that engage your audience with your expertise"
         action={
           <Link
             href="/create-persona"
-            className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex items-center gap-2"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            Create Persona
+            <span className="text-base leading-none">+</span>
+            New Persona
           </Link>
         }
       />
 
-      <div className="rounded-2xl border border-white/8 bg-white/[0.03] overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-          <h2 className="text-sm font-semibold text-white">Your Personas</h2>
-          <span className="text-xs text-white/35">{personas.length} persona{personas.length !== 1 ? 's' : ''}</span>
-        </div>
-
-        {personas.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center text-3xl">🤖</div>
-            <div className="text-center">
-              <p className="text-sm font-medium text-white/60">No personas yet</p>
-              <p className="text-xs text-white/30 mt-1">Create your first AI sales persona to get started</p>
-            </div>
-            <Link href="/create-persona" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
-              Create Persona
-            </Link>
+      {personas.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4">
+            <span className="text-3xl">🎓</span>
           </div>
-        ) : (
-          <div className="divide-y divide-white/5">
-            {personas.map((p) => (
-              <div key={p.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/3 transition-colors relative">
-                <div className="w-10 h-10 rounded-xl bg-white/6 border border-white/8 flex items-center justify-center text-xl flex-shrink-0">
-                  {p.emoji}
+          <h3 className="text-base font-semibold text-white mb-2">No personas yet</h3>
+          <p className="text-sm text-white/40 mb-6 max-w-xs">
+            Create your first creator persona to start engaging your audience with your expertise.
+          </p>
+          <Link href="/create-persona" className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
+            Create Your First Persona
+          </Link>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {personas.map((persona) => (
+            <div
+              key={persona.id}
+              className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-5 hover:border-white/12 transition-all"
+            >
+              <div className="flex items-start gap-4">
+                {/* Emoji avatar */}
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center text-2xl flex-shrink-0">
+                  {persona.emoji}
                 </div>
+
+                {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <p className="text-sm font-medium text-white truncate">{p.name}</p>
-                    <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${statusStyle(p.status)}`}>
-                      {p.status}
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <h3 className="text-sm font-semibold text-white">{persona.name}</h3>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${statusColors[persona.status]}`}>
+                      {persona.status}
                     </span>
                   </div>
-                  <p className="text-xs text-white/40">{p.type} · {p.channel}</p>
+                  <p className="text-xs text-white/40 mb-3">{persona.type} · {persona.channel}</p>
+
+                  <div className="flex items-center gap-5 flex-wrap">
+                    <div>
+                      <p className="text-xs font-semibold text-white tabular-nums">{persona.conversations.toLocaleString()}</p>
+                      <p className="text-[10px] text-white/30">conversations</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-white">{persona.conversion}</p>
+                      <p className="text-[10px] text-white/30">engagement rate</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="hidden sm:flex flex-col items-end gap-0.5">
-                  <p className="text-sm font-semibold text-white">{p.conversations.toLocaleString()}</p>
-                  <p className="text-[10px] text-white/35">conversations</p>
-                </div>
-                <div className="hidden md:flex flex-col items-end gap-0.5">
-                  <p className="text-sm font-semibold text-[#34d399]">{p.conversion}</p>
-                  <p className="text-[10px] text-white/35">conversion</p>
-                </div>
-                <div className="flex gap-2 flex-shrink-0 items-center">
-                  <Link
-                    href={`/chat/${p.id}`}
-                    className="text-[11px] px-2.5 py-1.5 rounded-lg border border-white/10 text-white/55 hover:text-white hover:border-white/25 transition-all"
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button
+                    onClick={() => setEditingPersona(persona)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/25 text-xs transition-all"
                   >
-                    Test
-                  </Link>
-                  <Link
-                    href="/deploy"
-                    className="text-[11px] px-2.5 py-1.5 rounded-lg border border-[#7c3aed]/30 text-[#a78bfa] hover:bg-[#7c3aed]/10 transition-all"
-                  >
-                    Deploy
-                  </Link>
-                  {/* More menu */}
+                    <Pencil size={12} />
+                    Edit
+                  </button>
                   <div className="relative">
                     <button
-                      onClick={() => setOpenMenuId(openMenuId === p.id ? null : p.id)}
-                      className="w-7 h-7 rounded-lg border border-white/8 text-white/35 hover:text-white hover:border-white/20 flex items-center justify-center transition-all"
+                      onClick={() => setOpenMenuId(openMenuId === persona.id ? null : persona.id)}
+                      className="w-8 h-8 rounded-lg border border-white/8 text-white/35 hover:text-white hover:border-white/20 flex items-center justify-center transition-all"
                     >
-                      <MoreVertical size={13} />
+                      <MoreVertical size={14} />
                     </button>
-                    {openMenuId === p.id && (
-                      <div className="absolute right-0 top-9 z-20 w-44 rounded-xl border border-white/10 bg-[#1a1025] shadow-2xl overflow-hidden">
+                    {openMenuId === persona.id && (
+                      <div
+                        className="absolute right-0 top-10 z-20 w-44 rounded-xl border border-white/10 overflow-hidden shadow-2xl"
+                        style={{ background: 'rgba(18,20,28,0.98)' }}
+                      >
                         <button
-                          onClick={() => handleEditOpen(p)}
-                          className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                          onClick={() => handleToggleStatus(persona.id)}
+                          className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-white/60 hover:text-white hover:bg-white/5 transition-all"
                         >
-                          <Pencil size={13} />
-                          Edit Persona
+                          {persona.status === 'active' ? <Pause size={13} /> : <Play size={13} />}
+                          {persona.status === 'active' ? 'Pause Persona' : 'Activate Persona'}
                         </button>
                         <button
-                          onClick={() => handleTogglePause(p.id)}
-                          className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-white/5 transition-colors"
-                        >
-                          {p.status === 'active' ? <Pause size={13} /> : <Play size={13} />}
-                          {p.status === 'active' ? 'Pause Persona' : 'Resume Persona'}
-                        </button>
-                        <div className="border-t border-white/8" />
-                        <button
-                          onClick={() => { setDeleteConfirmId(p.id); setOpenMenuId(null); }}
-                          className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-red-400 hover:bg-red-500/8 transition-colors"
+                          onClick={() => { setDeleteConfirmId(persona.id); setOpenMenuId(null); }}
+                          className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs text-red-400/70 hover:text-red-400 hover:bg-red-500/5 transition-all"
                         >
                           <Trash2 size={13} />
                           Delete Persona
@@ -603,35 +594,44 @@ export default function PersonasPage() {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* Click outside to close menu */}
-      {openMenuId && (
-        <div className="fixed inset-0 z-10" onClick={() => setOpenMenuId(null)} />
+      {/* Edit Wizard Modal */}
+      {editingPersona && (
+        <EditPersonaWizard
+          persona={editingPersona}
+          onSave={handleSaveEdit}
+          onClose={() => setEditingPersona(null)}
+        />
       )}
 
       {/* Delete Confirm Modal */}
       {deleteConfirmId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-sm mx-4 rounded-2xl border border-white/10 bg-[#1a1025] p-6 flex flex-col gap-5">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0f0d1a] p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
                 <AlertTriangle size={18} className="text-red-400" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-white">Delete Persona</h3>
-                <p className="text-xs text-white/50 mt-1 leading-relaxed">
-                  This will permanently delete the persona and all its conversation history. This action cannot be undone.
-                </p>
+                <p className="text-xs text-white/40">This action cannot be undone</p>
               </div>
             </div>
+            <p className="text-sm text-white/60 mb-5">
+              Are you sure you want to delete{' '}
+              <span className="text-white font-medium">
+                {personas.find((p) => p.id === deleteConfirmId)?.name}
+              </span>
+              ? All conversation history will be lost.
+            </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white transition-all"
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-all"
               >
                 Cancel
               </button>
@@ -644,15 +644,6 @@ export default function PersonasPage() {
             </div>
           </div>
         </div>
-      )}
-
-      {/* Edit Persona Wizard */}
-      {editingPersona && (
-        <EditPersonaWizard
-          persona={editingPersona}
-          onSave={handleEditSave}
-          onClose={() => setEditingPersona(null)}
-        />
       )}
     </AppLayout>
   );

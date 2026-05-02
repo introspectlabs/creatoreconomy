@@ -5,13 +5,13 @@ import Topbar from '@/components/Topbar';
 import Link from 'next/link';
 
 const currentPlan = {
-  name: 'Growth',
+  name: 'Creator Pro',
   price: '₹14,999',
   period: '/month',
   renewsOn: 'May 29, 2026',
   personas: { used: 3, total: 5 },
   conversations: { used: 1284, total: 5000 },
-  channels: 'Web + WhatsApp',
+  channels: 'Web + WhatsApp + Course Platform',
 };
 
 const invoices = [
@@ -23,7 +23,7 @@ const invoices = [
 export default function BillingPage() {
   return (
     <AppLayout>
-      <Topbar title="Billing" subtitle="Manage your plan and usage" />
+      <Topbar title="Billing" subtitle="Manage your creator plan and usage" />
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Current plan */}
         <div className="xl:col-span-2 flex flex-col gap-5">
@@ -48,7 +48,7 @@ export default function BillingPage() {
             <div className="flex flex-col gap-4">
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs text-white/50">Personas</span>
+                  <span className="text-xs text-white/50">Creator Personas</span>
                   <span className="text-xs font-semibold text-white">
                     {currentPlan?.personas?.used} / {currentPlan?.personas?.total}
                   </span>
@@ -62,7 +62,7 @@ export default function BillingPage() {
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs text-white/50">Conversations this month</span>
+                  <span className="text-xs text-white/50">Audience conversations this month</span>
                   <span className="text-xs font-semibold text-white">
                     {currentPlan?.conversations?.used?.toLocaleString()} / {currentPlan?.conversations?.total?.toLocaleString()}
                   </span>
@@ -121,12 +121,12 @@ export default function BillingPage() {
             className="rounded-2xl border border-white/10 p-5"
             style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.10) 0%, rgba(124,58,237,0.08) 100%)' }}
           >
-            <h3 className="text-sm font-bold text-white mb-2">Upgrade to Enterprise</h3>
+            <h3 className="text-sm font-bold text-white mb-2">Upgrade to Creator Studio</h3>
             <p className="text-xs text-white/50 leading-relaxed mb-4">
-              Unlimited personas, all channels, custom Shopify integrations, and a dedicated account manager.
+              Unlimited creator personas, all channels, custom course platform integrations, video avatars, and a dedicated creator success manager.
             </p>
             <Link href="/pricing" className="block text-center px-4 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary">
-              View Enterprise Plans
+              View Studio Plans
             </Link>
           </div>
 

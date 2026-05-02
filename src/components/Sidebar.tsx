@@ -10,9 +10,9 @@ import Icon from '@/components/ui/AppIcon';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', group: 'main' },
-  { href: '/personas', icon: Users, label: 'Personas', group: 'main' },
-  { href: '/knowledge-base', icon: BookOpen, label: 'Knowledge Base', group: 'main' },
-  { href: '/conversations', icon: MessagesSquare, label: 'Conversations', group: 'main' },
+  { href: '/personas', icon: Users, label: 'Creator Personas', group: 'main' },
+  { href: '/knowledge-base', icon: BookOpen, label: 'Content Library', group: 'main' },
+  { href: '/conversations', icon: MessagesSquare, label: 'Audience Chats', group: 'main' },
   { href: '/analytics', icon: BarChart2, label: 'Analytics', group: 'main' },
   { href: '/deploy', icon: Rocket, label: 'Deploy', group: 'deploy' },
   { href: '/embeds', icon: Code2, label: 'Embeds', group: 'deploy' },
@@ -21,7 +21,7 @@ const navItems = [
 
 const groupLabels: Record<string, string> = {
   main: 'WORKSPACE',
-  deploy: 'DEPLOY',
+  deploy: 'PUBLISH',
   manage: 'MANAGE',
 };
 
@@ -81,7 +81,7 @@ export default function Sidebar() {
               ? 'w-10 h-10 justify-center p-0'
               : 'px-3 py-2.5 w-full'
           }`}
-          title={(!isMobile && collapsed) ? 'New Persona' : undefined}
+          title={(!isMobile && collapsed) ? 'New Creator Persona' : undefined}
         >
           <Plus size={15} className="flex-shrink-0" />
           {(!collapsed || isMobile) && <span>New Persona</span>}

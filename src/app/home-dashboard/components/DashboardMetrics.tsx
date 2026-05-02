@@ -6,7 +6,7 @@ import Icon from '@/components/ui/AppIcon';
 const metrics = [
   {
     id: 'metric-personas',
-    label: 'Active AI Personas',
+    label: 'Active Creator Personas',
     value: '4',
     change: '+1 this week',
     trend: 'up',
@@ -36,7 +36,7 @@ const metrics = [
   },
   {
     id: 'metric-success-rate',
-    label: 'Lead Conversion Rate',
+    label: 'Audience Engagement Rate',
     value: '18.3%',
     change: '+2.1% this week',
     trend: 'up',
