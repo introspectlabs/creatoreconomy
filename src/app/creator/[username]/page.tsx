@@ -101,12 +101,12 @@ export default function CreatorProfilePage() {
   const activePersonas = personas.filter((p) => p.status === 'active');
   const filteredPersonas =
     personaFilter === 'All'
-      ? personas
+      ? activePersonas
       : personas.filter((p) => p.status === personaFilter);
 
   const tabs: { id: TabType; label: string; count?: number }[] = [
     { id: 'overview', label: 'Overview' },
-    { id: 'personas', label: 'Personas', count: personas.length },
+    { id: 'personas', label: 'Personas', count: activePersonas.length },
     { id: 'knowledge', label: 'Knowledge' },
     { id: 'reviews', label: 'Reviews', count: creator.socialProof.length },
   ];
