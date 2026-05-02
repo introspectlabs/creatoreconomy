@@ -20,7 +20,6 @@ export default function PublicHeader() {
     { href: '/creators', label: 'Creators' },
     { href: '/industries', label: 'Use Cases' },
     { href: '/pricing', label: 'Pricing' },
-    { href: '/guest-chat', label: 'Demo' },
   ];
 
   return (
