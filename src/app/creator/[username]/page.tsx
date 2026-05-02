@@ -95,14 +95,10 @@ type TabType = 'overview' | 'personas' | 'knowledge' | 'reviews';
 export default function CreatorProfilePage() {
   const params = useParams();
   const [activeTab, setActiveTab] = useState<TabType>('overview');
-  const [personaFilter, setPersonaFilter] = useState('All');
 
   const creator = CREATOR_DATA;
   const activePersonas = personas.filter((p) => p.status === 'active');
-  const filteredPersonas =
-    personaFilter === 'All'
-      ? activePersonas
-      : personas.filter((p) => p.status === personaFilter);
+  const filteredPersonas = activePersonas;
 
   const tabs: { id: TabType; label: string; count?: number }[] = [
     { id: 'overview', label: 'Overview' },
@@ -487,31 +483,6 @@ export default function CreatorProfilePage() {
         {/* ── PERSONAS TAB ── */}
         {activeTab === 'personas' && (
           <div>
-            {/* Filter row */}
-            <div className="flex items-center gap-2 mb-6 flex-wrap">
-              {['All', 'active', 'training', 'draft', 'paused'].map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setPersonaFilter(f)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${
-                    personaFilter === f
-                      ? 'text-white' :'text-white/40 border border-white/8 hover:text-white/70'
-                  }`}
-                  style={
-                    personaFilter === f
-                      ? {
-                          background: 'linear-gradient(135deg, rgba(124,58,237,0.25), rgba(59,130,246,0.15))',
-                          border: '1px solid rgba(124,58,237,0.4)',
-                        }
-                      : {}
-                  }
-                >
-                  {f}
-                </button>
-              ))}
-              <span className="ml-auto text-xs text-white/30">{filteredPersonas.length} personas</span>
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredPersonas.map((persona) => {
                 const statusColor = statusColors[persona.status] || '#6b7280';
