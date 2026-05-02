@@ -29,7 +29,7 @@ export default function RegisterPage() {
   const [workspace, setWorkspace] = useState({
     organizationName: '',
     subdomain: '',
-    useCase: '',
+    useCases: [] as string[],
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -294,9 +294,14 @@ export default function RegisterPage() {
                           <button
                             key={uc.id}
                             type="button"
-                            onClick={() => setWorkspace({ ...workspace, useCase: workspace.useCase === uc.id ? '' : uc.id })}
+                            onClick={() => setWorkspace((prev) => ({
+                              ...prev,
+                              useCases: prev.useCases.includes(uc.id)
+                                ? prev.useCases.filter((id) => id !== uc.id)
+                                : [...prev.useCases, uc.id],
+                            }))}
                             className={`flex items-center gap-2.5 p-3 rounded-xl border text-left transition-all duration-150 ${
-                              workspace.useCase === uc.id
+                              workspace.useCases.includes(uc.id)
                                 ? 'bg-[#6b7ff0]/15 border-[#6b7ff0]/40 text-[#6b7ff0]'
                                 : 'bg-white/3 border-white/8 text-white/50 hover:bg-white/6 hover:border-white/15 hover:text-white/70'
                             }`}
@@ -334,7 +339,7 @@ export default function RegisterPage() {
                             Creating profile…
                           </>
                         ) : (
-                          'Launch My Persona'
+                          'Register'
                         )}
                       </button>
                     </div>
