@@ -37,29 +37,29 @@ interface ProfileData {
 }
 
 const INITIAL_DATA: ProfileData = {
-  displayName: 'PersonaMatrix Labs',
-  username: 'personamatrix',
-  tagline: 'Building AI personas that actually understand your business',
-  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across sales, support, HR, finance, and education — each grounded in real domain knowledge, not generic prompts.\n\nOur personas are used by 200+ companies worldwide to handle millions of conversations monthly. Every persona we build goes through rigorous knowledge curation, voice calibration, and real-world testing before going live.`,
-  location: 'San Francisco, CA',
-  website: 'https://personamatrix.ai',
+  displayName: 'Arjun Mehta',
+  username: 'arjunmehta',
+  tagline: 'Finance educator, course builder & coach helping 50K+ people build wealth with clarity',
+  bio: `I'm a SEBI-registered financial educator and certified coach who has spent 8 years simplifying personal finance, investing, and wealth-building for everyday people.\n\nI create structured courses on equity investing, mutual funds, and financial independence — and run a private coaching program for high-intent learners. My D2C brand "WealthReady" sells digital toolkits and templates used by 12,000+ subscribers.\n\nMy AI persona is trained on 200+ hours of my course content, coaching call transcripts, and finance guides — so your audience gets answers that sound exactly like me, 24/7.`,
+  location: 'Mumbai, India',
+  website: 'https://arjunmehta.in',
   expertise: [
-    'Enterprise Sales Automation',
-    'Customer Support AI',
-    'HR & People Operations',
-    'Financial Services',
-    'E-commerce & Retail',
-    'Voice AI & IVR',
+    'Personal Finance & Investing',
+    'Course Creation & Curriculum Design',
+    '1:1 & Group Coaching',
+    'D2C Digital Products',
+    'Equity & Mutual Funds',
+    'Financial Independence',
   ],
   certifications: [
-    { id: '1', name: 'OpenAI Partner', issuer: 'OpenAI', year: '2024', url: '' },
-    { id: '2', name: 'ElevenLabs Certified', issuer: 'ElevenLabs', year: '2024', url: '' },
-    { id: '3', name: 'AWS Advanced Partner', issuer: 'Amazon Web Services', year: '2025', url: '' },
-    { id: '4', name: 'ISO 27001', issuer: 'ISO', year: '2025', url: '' },
+    { id: '1', name: 'SEBI Registered Investment Advisor', issuer: 'SEBI', year: '2021', url: '' },
+    { id: '2', name: 'Certified Financial Planner (CFP)', issuer: 'FPSB India', year: '2020', url: '' },
+    { id: '3', name: 'ICF Certified Coach (ACC)', issuer: 'International Coaching Federation', year: '2022', url: '' },
+    { id: '4', name: 'Teachable Creator Partner', issuer: 'Teachable', year: '2023', url: '' },
   ],
   socialLinks: [
-    { platform: 'linkedin', url: 'https://linkedin.com/company/personamatrix', verified: true },
-    { platform: 'youtube', url: 'https://youtube.com/@personamatrix', verified: false },
+    { platform: 'linkedin', url: 'https://linkedin.com/in/arjunmehta', verified: true },
+    { platform: 'youtube', url: 'https://youtube.com/@arjunmehta', verified: true },
     { platform: 'twitter', url: '', verified: false },
   ],
   trustSignals: {
@@ -360,7 +360,7 @@ export default function CreatorProfileEditorPage() {
                       onChange={(e) => setNewExpertise(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && addExpertise()}
                       className="form-input flex-1"
-                      placeholder="e.g. Machine Learning, Sales Automation..."
+                      placeholder="e.g. Options Trading, Cohort Courses, Business Coaching..."
                     />
                     <button
                       onClick={addExpertise}
@@ -379,9 +379,10 @@ export default function CreatorProfileEditorPage() {
                   <h3 className="text-sm font-semibold text-white mb-3">Suggested Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'Natural Language Processing', 'Conversational AI', 'Prompt Engineering',
-                      'RAG Systems', 'LLM Fine-tuning', 'Customer Experience',
-                      'B2B SaaS', 'Healthcare AI', 'Legal Tech', 'EdTech',
+                      'Stock Market Education', 'Options & Derivatives', 'SIP & Mutual Funds',
+                      'Cohort-Based Courses', 'LMS & Course Platforms', 'Community Building',
+                      'Life Coaching', 'Business Coaching', 'Executive Coaching',
+                      'D2C Brand Building', 'Digital Products', 'Email Marketing',
                     ].filter((t) => !data.expertise.includes(t)).map((tag) => (
                       <button
                         key={tag}

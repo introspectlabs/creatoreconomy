@@ -79,8 +79,8 @@ const knowledgeByPersona: Record<string, KnowledgeChunk[]> = {
     { id: 'kc-19', name: 'Alert_Definitions.csv', type: 'csv', syncStatus: 'synced', chunks: 180, lastSync: '3 days ago', size: '450 KB' },
   ],
   'persona-010': [
-    { id: 'kc-20', name: 'Curriculum_K12.pdf', type: 'pdf', syncStatus: 'processing', chunks: 0, lastSync: 'Just now', size: '9.2 MB' },
-    { id: 'kc-21', name: 'Quiz_Bank_2026.docx', type: 'docx', syncStatus: 'pending', chunks: 0, lastSync: 'Pending', size: '2.3 MB' },
+    { id: 'kc-20', name: 'Sports_Content_Library.pdf', type: 'pdf', syncStatus: 'processing', chunks: 0, lastSync: 'Just now', size: '9.2 MB' },
+    { id: 'kc-21', name: 'Match_Highlights_2026.docx', type: 'docx', syncStatus: 'pending', chunks: 0, lastSync: 'Pending', size: '2.3 MB' },
   ],
   'persona-011': [
     { id: 'kc-22', name: 'Customer_Success_Playbook.pdf', type: 'pdf', syncStatus: 'synced', chunks: 220, lastSync: '4 hr ago', size: '3.1 MB' },
@@ -365,7 +365,7 @@ export default function PersonaDetailDrawer({ persona, onClose }: DrawerProps) {
                 persona.channels.map((ch) => (
                   <div key={`drawer-ch-${ch}`} className="glass rounded-xl p-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{ch === 'WhatsApp' ? '📱' : ch === 'Web Chat' ? '💬' : ch === 'SIP' ? '📞' : '⚡'}</span>
+                      <span className="text-base">{ch === 'WhatsApp' ? '📱' : ch === 'Web Chat' ? '💬' : ch === 'Voice AI' ? '🎙️' : '⚡'}</span>
                       <p className="text-sm font-500 text-white">{ch}</p>
                     </div>
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400">Connected</span>

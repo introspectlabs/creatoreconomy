@@ -8,8 +8,8 @@ const actions = [
   {
     id: 'qa-persona',
     icon: Brain,
-    title: 'Create Persona',
-    desc: 'Define a new AI agent with personality, voice, and knowledge',
+    title: 'Build Your Creator Persona',
+    desc: 'Create a finance, coaching, or course persona trained on your content and voice',
     href: '/persona-library',
     color: 'from-purple-500/20 to-purple-600/10',
     border: 'border-purple-500/20',
@@ -19,8 +19,8 @@ const actions = [
   {
     id: 'qa-knowledge',
     icon: Database,
-    title: 'Add Knowledge',
-    desc: 'Upload documents, connect Notion, or sync a website',
+    title: 'Upload Your Content',
+    desc: 'Add course modules, coaching frameworks, finance guides, or newsletters to train your persona',
     href: '/knowledge-base',
     color: 'from-teal-500/15 to-teal-600/5',
     border: 'border-teal-500/20',
@@ -30,8 +30,8 @@ const actions = [
   {
     id: 'qa-channel',
     icon: Radio,
-    title: 'Connect Channel',
-    desc: 'Link WhatsApp, SIP, or Web Chat to a persona',
+    title: 'Connect a Channel',
+    desc: 'Deploy your persona on WhatsApp, Web Chat, or your course platform',
     href: '/channels-page',
     color: 'from-blue-500/15 to-blue-600/5',
     border: 'border-blue-500/20',
@@ -41,8 +41,8 @@ const actions = [
   {
     id: 'qa-embed',
     icon: Code2,
-    title: 'Deploy Plugin',
-    desc: 'Generate an embed script to add personas to any website',
+    title: 'Embed on Your Site',
+    desc: 'Add a chat widget to your landing page, course portal, or creator community',
     href: '/embeds-plugins',
     color: 'from-indigo-500/15 to-indigo-600/5',
     border: 'border-indigo-500/20',

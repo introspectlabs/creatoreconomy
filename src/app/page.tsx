@@ -12,181 +12,118 @@ function AnimatedGradientOrb({ className }: { className: string }) {
   );
 }
 
-function FeatureCard({
-  icon,
-  title,
-  desc,
-  accent,
-  className = '',
-  accentColor = '#7c3aed',
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-  accent: string;
-  className?: string;
-  accentColor?: string;
-}) {
-  return (
-    <div
-      className={`group relative glass-elevated rounded-2xl p-6 flex flex-col gap-4 border border-white/8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] cursor-default overflow-hidden ${className}`}
-      style={
-        {
-          '--accent-color': accentColor,
-        } as React.CSSProperties
-      }
-    >
-      {/* Hover glow overlay */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-        style={{
-          background: `radial-gradient(ellipse at 30% 20%, ${accentColor}18 0%, transparent 65%)`,
-        }}
-      />
-      {/* Top edge accent line */}
-      <div
-        className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)`,
-        }}
-      />
-
-      <div
-        className="relative w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:shadow-lg"
-        style={{
-          background: accent,
-          boxShadow: `0 0 0 0 ${accentColor}00`,
-        }}
-      >
-        <div
-          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ boxShadow: `0 0 16px ${accentColor}60` }}
-        />
-        {icon}
-      </div>
-
-      <div className="relative flex flex-col gap-1.5">
-        <h3 className="font-bold text-white text-base tracking-tight leading-snug group-hover:text-white transition-colors duration-200">
-          {title}
-        </h3>
-        <p className="text-[13px] text-white/45 leading-relaxed group-hover:text-white/60 transition-colors duration-200">
-          {desc}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-const features = [
+const steps = [
   {
+    num: '01',
+    title: 'Create Your AI Persona',
+    desc: 'Name your AI persona, set the tone — knowledgeable, friendly, or authoritative — and define its personality in minutes.',
+    color: '#7c3aed',
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-        <path d="M7 10h2M11 10h6" strokeDasharray="2 2" />
-      </svg>
-    ),
-    title: 'Cloud-Agnostic Multi-Model AI',
-    desc: 'Run AI workloads across any cloud or on-premise using multiple LLMs and models—optimized for performance, cost, and flexibility.',
-    accent: 'rgba(124,58,237,0.25)',
-    accentColor: '#7c3aed',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <polygon points="23 7 16 12 23 17 23 7" />
-        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-      </svg>
-    ),
-    title: 'Video-First Deep RAG Engine',
-    desc: 'Transform videos, documents, and media into searchable, conversational intelligence with ultra-deep retrieval across frames and context.',
-    accent: 'rgba(239,68,68,0.25)',
-    accentColor: '#ef4444',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
       </svg>
     ),
-    title: 'AI Personas with Memory & Context',
-    desc: 'Create persistent, intelligent personas that understand users, retain context, and deliver personalized interactions over time.',
-    accent: 'rgba(59,130,246,0.25)',
-    accentColor: '#3b82f6',
   },
+  {
+    num: '02',
+    title: 'Upload Your Content',
+    desc: 'Upload your videos, PDFs, courses, and posts. Your AI learns your expertise and speaks in your voice — instantly.',
+    color: '#0ea5e9',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="17 8 12 3 7 8" />
+        <line x1="12" y1="3" x2="12" y2="15" />
+      </svg>
+    ),
+  },
+  {
+    num: '03',
+    title: 'Deploy & Engage 24/7',
+    desc: 'Embed on your site or share via WhatsApp. Your AI persona engages your audience, answers questions, and drives conversions around the clock.',
+    color: '#14b8a6',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+  },
+];
+
+const useCases = [
+  {
+    tag: 'Finance Creators',
+    tagColor: '#0ea5e9',
+    tagBg: 'rgba(14,165,233,0.12)',
+    status: null,
+    title: 'AI Finance Advisor Persona',
+    desc: 'Let your followers ask about your trading strategies, investment frameworks, and market analysis — your AI answers in your voice, 24/7. Monetize your knowledge without being glued to DMs.',
+    metrics: [
+      { label: 'Avg. Engagement Lift', value: '3.4×' },
+      { label: 'Available', value: '24/7' },
+    ],
+    accentColor: '#0ea5e9',
+    span: 'lg:col-span-2',
+  },
+  {
+    tag: 'Course Builders',
+    tagColor: '#a78bfa',
+    tagBg: 'rgba(167,139,250,0.12)',
+    status: null,
+    title: 'Interactive Course Guide',
+    desc: 'Turn your course content into an AI tutor that answers student questions, reduces support load, and sells your programs through conversations.',
+    metrics: [],
+    accentColor: '#7c3aed',
+    span: 'lg:col-span-1',
+  },
+  {
+    tag: 'Coaches',
+    tagColor: '#10b981',
+    tagBg: 'rgba(16,185,129,0.12)',
+    status: null,
+    title: 'Coaching Assistant',
+    desc: 'Scale your coaching without burnout. Your AI handles intake questions, shares your frameworks, and keeps clients engaged between sessions.',
+    metrics: [],
+    accentColor: '#10b981',
+    span: 'lg:col-span-1',
+  },
+  {
+    tag: 'D2C Brands',
+    tagColor: '#f59e0b',
+    tagBg: 'rgba(245,158,11,0.12)',
+    status: 'Coming Soon',
+    title: 'AI Shopping Assistant',
+    desc: 'Engage every visitor with a smart AI that recommends products, answers questions, and nudges them toward checkout.',
+    metrics: [],
+    accentColor: '#f59e0b',
+    span: 'lg:col-span-1',
+  },
+  {
+    tag: 'OTT & Media',
+    tagColor: '#ec4899',
+    tagBg: 'rgba(236,72,153,0.12)',
+    status: 'Coming Soon',
+    title: 'Character Chat',
+    desc: 'Let users chat with characters and explore content interactively across your streaming platform.',
+    metrics: [],
+    accentColor: '#ec4899',
+    span: 'lg:col-span-1',
+  },
+];
+
+const benefits = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z" />
       </svg>
     ),
-    title: 'Omnichannel AI Deployment',
-    desc: 'Deploy personas across WhatsApp, voice (SIP), web chat, APIs, and video—ensuring consistent experiences across all touchpoints.',
-    accent: 'rgba(20,184,166,0.25)',
-    accentColor: '#14b8a6',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-    title: 'Embeddable AI via JS SDK',
-    desc: 'Integrate AI personas into any website or application using lightweight JavaScript plugins with secure, domain-restricted access.',
-    accent: 'rgba(124,58,237,0.25)',
-    accentColor: '#7c3aed',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <line x1="12" y1="19" x2="12" y2="23" />
-        <line x1="8" y1="23" x2="16" y2="23" />
-      </svg>
-    ),
-    title: 'Real-Time Voice & Avatar AI',
-    desc: 'Enable human-like interactions using speech-to-speech AI, voice synthesis, and avatar-based conversations powered by external services.',
-    accent: 'rgba(245,158,11,0.25)',
-    accentColor: '#f59e0b',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-    title: 'Enterprise-Grade RBAC & Multi-Tenancy',
-    desc: 'Securely manage teams, roles, and permissions with full organization-level control and isolation across tenants.',
-    accent: 'rgba(16,185,129,0.25)',
-    accentColor: '#10b981',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-      </svg>
-    ),
-    title: 'Extensible AI Integrations Layer',
-    desc: 'Seamlessly connect with AI providers like Heygen, Tavus, Omnidimension, and ElevenLabs through a unified integration layer.',
-    accent: 'rgba(59,130,246,0.25)',
-    accentColor: '#3b82f6',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-        <ellipse cx="12" cy="5" rx="9" ry="3" />
-        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-      </svg>
-    ),
-    title: 'Scalable Knowledge Ingestion Pipeline',
-    desc: 'Ingest and process large-scale content (PDFs, videos, audio, web) with automated parsing, chunking, and indexing pipelines.',
-    accent: 'rgba(239,68,68,0.25)',
-    accentColor: '#ef4444',
+    title: 'Engage Your Audience 24/7',
+    desc: 'Your AI persona answers fan questions, shares your frameworks, and keeps your audience engaged — even while you sleep.',
+    accent: 'rgba(14,165,233,0.2)',
+    accentColor: '#0ea5e9',
   },
   {
     icon: (
@@ -196,15 +133,69 @@ const features = [
         <line x1="6" y1="20" x2="6" y2="14" />
       </svg>
     ),
-    title: 'Analytics & Usage Intelligence',
-    desc: 'Track persona performance, user interactions, and channel activity with actionable insights and real-time metrics.',
-    accent: 'rgba(20,184,166,0.25)',
+    title: 'Monetize Your Knowledge',
+    desc: 'Turn content into revenue — your AI promotes your courses, coaching slots, and memberships in every conversation.',
+    accent: 'rgba(124,58,237,0.2)',
+    accentColor: '#7c3aed',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+    ),
+    title: 'Content-Powered AI',
+    desc: 'Upload your videos, PDFs, and posts. Your AI learns your expertise and speaks in your voice — always on-brand.',
+    accent: 'rgba(20,184,166,0.2)',
     accentColor: '#14b8a6',
   },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    title: 'Your Platform, Your Audience',
+    desc: 'Deploy on your own site or WhatsApp — you own the audience relationship, not a third-party platform.',
+    accent: 'rgba(245,158,11,0.2)',
+    accentColor: '#f59e0b',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    title: 'One-Click Embed',
+    desc: 'Drop your AI persona onto any website with a single JS snippet — no developers needed.',
+    accent: 'rgba(52,211,153,0.2)',
+    accentColor: '#34d399',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
+    title: 'WhatsApp & Web Channels',
+    desc: 'Meet your audience where they are — deploy your AI persona on your website and WhatsApp simultaneously.',
+    accent: 'rgba(124,58,237,0.2)',
+    accentColor: '#7c3aed',
+  },
+];
+
+const chatMessages = [
+  { role: 'user', text: 'What\'s the best way to start investing with ₹10,000?' },
+  { role: 'ai', text: 'Great starting point! I\'d recommend splitting it: 60% into a Nifty 50 index fund, 30% into a flexi-cap fund, and keep 10% liquid. This gives you market exposure with built-in diversification. Want me to walk you through my full beginner framework?' },
+  { role: 'user', text: 'Yes! Also, should I do SIP or lump sum?' },
+  { role: 'ai', text: 'For ₹10K, SIP wins — it removes the timing pressure and averages your cost over time. I cover this in detail in Module 3 of my Investing Foundations course. Want the link? 🎯' },
 ];
 
 export default function HomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [visibleMessages, setVisibleMessages] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -220,6 +211,12 @@ export default function HomePage() {
     return () => window.removeEventListener('mousemove', handleMouse);
   }, []);
 
+  useEffect(() => {
+    if (visibleMessages >= chatMessages.length) return;
+    const t = setTimeout(() => setVisibleMessages((v) => v + 1), 900 + visibleMessages * 400);
+    return () => clearTimeout(t);
+  }, [visibleMessages]);
+
   return (
     <div className="min-h-screen bg-[#0a0c12] text-white overflow-x-hidden">
       <PublicHeader />
@@ -229,17 +226,14 @@ export default function HomePage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
       >
-        {/* Background orbs */}
         <AnimatedGradientOrb className="w-[600px] h-[600px] bg-[#7c3aed] -top-32 -left-32" />
-        <AnimatedGradientOrb className="w-[400px] h-[400px] bg-[#3b82f6] bottom-0 right-0" />
+        <AnimatedGradientOrb className="w-[400px] h-[400px] bg-[#0ea5e9] bottom-0 right-0" />
         <div
           className="absolute inset-0 pointer-events-none transition-all duration-700"
           style={{
             background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(124,58,237,0.06), transparent 60%)`,
           }}
         />
-
-        {/* Grid overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -249,115 +243,121 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-16">
           {/* Left */}
           <div className="flex-1 flex flex-col gap-8 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#7c3aed]/30 bg-[#7c3aed]/10 w-fit">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#14b8a6] animate-pulse" />
-              <span className="text-xs font-medium text-[#a78bfa]">Now in public beta</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] animate-pulse" />
+              <span className="text-xs font-medium text-[#c4b5fd]">AI Persona Platform for Creators</span>
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
-              Transform Content into{' '}
-              <span className="text-gradient">Interactive AI Personas</span>
+              Clone Your Expertise into a{' '}
+              <span className="text-gradient">24/7 AI</span> That Engages, Teaches & Converts
             </h1>
 
             <p className="text-lg text-white/55 leading-relaxed max-w-xl">
-              Build, deploy, and scale AI personas across chat, SIP trunking, WhatsApp, voice, avatars, and APIs—grounded in your knowledge and ready to run everywhere.
+              Finance creators, course builders, and coaches — turn your content into an AI persona that answers audience questions, promotes your programs, and drives revenue while you focus on creating.
             </p>
 
-            <div className="px-4 py-3 rounded-xl border border-[#7c3aed]/40 bg-[#7c3aed]/10 backdrop-blur-sm">
-              <p className="text-sm text-[#c4b5fd] leading-relaxed font-medium">
-                PersonaMatrix is a <span className="text-white font-semibold">video-first, multimodal AI platform</span> that transforms content into <span className="text-white font-semibold">interactive, memory-driven personas</span> with <span className="text-white font-semibold">causal reasoning</span>.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               <Link
-                href="/register"
-                className="px-6 py-3 rounded-xl font-semibold text-white btn-primary text-sm shadow-[0_0_24px_rgba(124,58,237,0.35)] hover:shadow-[0_0_32px_rgba(124,58,237,0.5)]"
+                href="/guest-chat"
+                className="px-6 py-3 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all duration-200"
               >
-                Get Started — free
+                Try Demo
               </Link>
               <Link
-                href="/developers"
-                className="px-6 py-3 rounded-xl font-semibold text-white/80 border border-white/12 hover:border-white/25 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm"
+                href="/register"
+                className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary"
               >
-                View Demo →
+                Get Started Free →
               </Link>
             </div>
 
             <div className="flex items-center gap-6 pt-2">
-              {['No credit card', 'Deploy in minutes', 'SOC 2 ready'].map((t) => (
-                <div key={t} className="flex items-center gap-1.5">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <circle cx="7" cy="7" r="6" fill="rgba(20,184,166,0.2)" />
-                    <path d="M4.5 7l2 2 3-3" stroke="#14b8a6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="text-xs text-white/40">{t}</span>
+              {[
+                { val: '24/7', label: 'Always available' },
+                { val: '3 min', label: 'Setup time' },
+                { val: '3.4×', label: 'Avg engagement lift' },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-0.5">
+                  <span className="text-xl font-bold text-white">{stat.val}</span>
+                  <span className="text-xs text-white/40">{stat.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right — product preview */}
-          <div className="flex-1 flex items-center justify-center w-full max-w-lg">
-            <div className="relative w-full">
-              {/* Glow behind card */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#7c3aed]/20 to-[#3b82f6]/10 blur-2xl scale-105" />
-              <div className="relative glass-elevated rounded-3xl border border-white/10 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.6)]">
-                {/* Fake topbar */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-white/8">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <div className="ml-3 flex-1 h-5 rounded-md bg-white/5 text-[10px] text-white/25 flex items-center px-2">
-                    personamatrix.ai/chat/aria
+          {/* Right — Demo Chat Preview */}
+          <div className="flex-shrink-0 w-full max-w-sm lg:max-w-md">
+            <div
+              className="rounded-2xl border border-white/10 overflow-hidden shadow-2xl"
+              style={{ background: 'rgba(14,16,24,0.9)', backdropFilter: 'blur(24px)' }}
+            >
+              {/* Chat header */}
+              <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0ea5e9] to-[#7c3aed] flex items-center justify-center text-xs font-bold">
+                  M
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-white">Marcus Wealth — Finance AI</p>
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                    <span className="text-[10px] text-white/40">Your AI persona, available 24/7</span>
                   </div>
                 </div>
-                {/* Chat preview */}
-                <div className="p-5 flex flex-col gap-3 min-h-[280px]">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
-                    <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Hi! I'm Aria, your AI product specialist. How can I help you today?
+              </div>
+
+              {/* Messages */}
+              <div className="p-4 flex flex-col gap-3 min-h-[260px]">
+                {chatMessages.slice(0, visibleMessages).map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
+                  >
+                    <div
+                      className={`max-w-[85%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
+                        msg.role === 'user' ?'bg-[#7c3aed]/30 text-white border border-[#7c3aed]/30' :'bg-white/6 text-white/85 border border-white/8'
+                      }`}
+                    >
+                      {msg.text}
                     </div>
                   </div>
-                  <div className="flex justify-end">
-                    <div className="bg-[#7c3aed]/20 border border-[#7c3aed]/30 rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      What's included in the Pro plan?
+                ))}
+                {visibleMessages < chatMessages.length && (
+                  <div className="flex justify-start">
+                    <div className="px-3 py-2 rounded-xl bg-white/6 border border-white/8 flex gap-1 items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold shrink-0">A</div>
-                    <div className="glass rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                      Pro includes unlimited personas, all channels (WhatsApp, SIP, API), embeds, and priority support. Want me to walk you through setup?
-                    </div>
+                )}
+              </div>
+
+              {/* Course card */}
+              {visibleMessages >= 2 && (
+                <div className="mx-4 mb-4 p-3 rounded-xl border border-[#7c3aed]/25 bg-[#7c3aed]/8 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7c3aed]/30 to-[#0ea5e9]/20 flex items-center justify-center text-lg">
+                    📈
                   </div>
-                  {/* Typing indicator */}
-                  <div className="flex items-center gap-2 pl-11">
-                    <div className="flex gap-1">
-                      {[0, 1, 2].map((i) => (
-                        <div
-                          key={i}
-                          className="w-1.5 h-1.5 rounded-full bg-[#7c3aed]/60"
-                          style={{ animation: `bounce 1.2s ${i * 0.2}s infinite` }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-[11px] text-white/25">Aria is typing…</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-white truncate">Investing Foundations — Module 3</p>
+                    <p className="text-[10px] text-white/50">₹1,999 · 4.9★ · 12K students</p>
                   </div>
+                  <button className="text-[10px] font-semibold text-[#a78bfa] border border-[#7c3aed]/40 px-2 py-1 rounded-lg hover:bg-[#7c3aed]/15 transition-colors flex-shrink-0">
+                    Enroll
+                  </button>
                 </div>
-                {/* Input bar */}
-                <div className="px-4 pb-4">
-                  <div className="flex items-center gap-2 glass rounded-xl px-4 py-2.5 border border-white/8">
-                    <span className="text-sm text-white/25 flex-1">Ask Aria anything…</span>
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </div>
+              )}
+
+              <div className="px-4 pb-4">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-white/8 bg-white/4">
+                  <span className="text-xs text-white/25 flex-1">Ask Marcus anything...</span>
+                  <Link href="/guest-chat" className="text-[10px] font-semibold text-[#7c3aed] hover:text-[#a78bfa] transition-colors">
+                    Try live →
+                  </Link>
                 </div>
               </div>
             </div>
@@ -365,249 +365,187 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FEATURES BENTO ── */}
-      <section className="py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <p className="text-[11px] font-bold text-[#a78bfa] uppercase tracking-[0.2em] mb-3">Platform Capabilities</p>
-            <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              Everything you need to ship{' '}
-              <span className="text-gradient">AI personas</span>
+      {/* ── HOW IT WORKS ── */}
+      <section className="relative py-24 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/4 to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/4 text-white/50 text-xs font-medium mb-4">
+              Simple 3-Step Setup
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              From content to deployed AI in{' '}
+              <span className="bg-gradient-to-r from-[#a78bfa] to-[#14b8a6] bg-clip-text text-transparent">
+                under 3 minutes
+              </span>
             </h2>
-            <p className="mt-4 text-white/60 max-w-lg mx-auto text-[15px] leading-relaxed">
-              From knowledge ingestion to omnichannel deployment — the full stack, in one platform.
+            <p className="text-white/45 max-w-xl mx-auto">
+              Minimal clicks to create, train, and deploy your creator AI persona.
             </p>
           </div>
 
-          {/* Bento grid — asymmetric with connecting lines */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* SVG connecting lines overlay — visible on lg screens */}
-            <svg
-              className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-10"
-              preserveAspectRatio="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="line-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0" />
-                  <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="line-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
-                  <stop offset="50%" stopColor="#14b8a6" stopOpacity="0.35" />
-                  <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="line-grad-3" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0" />
-                  <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              {/* Horizontal connector: card 0 (col-span-2) → card 1 */}
-              <line
-                x1="66.7%"
-                y1="25%"
-                x2="100%"
-                y2="25%"
-                stroke="url(#line-grad-1)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Vertical connector: card 1 → card 4 */}
-              <line
-                x1="83.3%"
-                y1="50%"
-                x2="83.3%"
-                y2="75%"
-                stroke="url(#line-grad-2)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Horizontal connector: card 2 → card 3 (col-span-2) */}
-              <line
-                x1="0%"
-                y1="75%"
-                x2="33.3%"
-                y2="75%"
-                stroke="url(#line-grad-3)"
-                strokeWidth="1"
-                strokeDasharray="4 6"
-                filter="url(#glow)"
-              />
-              {/* Dot nodes at connection points */}
-              <circle cx="66.7%" cy="25%" r="3" fill="#7c3aed" opacity="0.6" filter="url(#glow)" />
-              <circle cx="100%" cy="25%" r="3" fill="#3b82f6" opacity="0.6" filter="url(#glow)" />
-              <circle cx="83.3%" cy="75%" r="3" fill="#3b82f6" opacity="0.6" filter="url(#glow)" />
-              <circle cx="0%" cy="75%" r="3" fill="#7c3aed" opacity="0.6" filter="url(#glow)" />
-              <circle cx="33.3%" cy="75%" r="3" fill="#7c3aed" opacity="0.6" filter="url(#glow)" />
-            </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {steps.map((step, i) => (
+              <div
+                key={step.num}
+                className="relative group p-6 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05] transition-all duration-300"
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-px rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, transparent, ${step.color}80, transparent)` }}
+                />
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${step.color}22` }}
+                  >
+                    {step.icon}
+                  </div>
+                  <span
+                    className="text-3xl font-black opacity-20"
+                    style={{ color: step.color }}
+                  >
+                    {step.num}
+                  </span>
+                </div>
+                <h3 className="font-bold text-white text-base mb-2">{step.title}</h3>
+                <p className="text-sm text-white/45 leading-relaxed">{step.desc}</p>
+                {i < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 z-10 text-white/20">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
 
-            <FeatureCard
-              className="lg:col-span-2 lg:row-span-1"
-              icon={features[0].icon}
-              title={features[0].title}
-              desc={features[0].desc}
-              accent={features[0].accent}
-              accentColor={features[0].accentColor}
-            />
-            <FeatureCard
-              icon={features[1].icon}
-              title={features[1].title}
-              desc={features[1].desc}
-              accent={features[1].accent}
-              accentColor={features[1].accentColor}
-            />
-            <FeatureCard
-              icon={features[2].icon}
-              title={features[2].title}
-              desc={features[2].desc}
-              accent={features[2].accent}
-              accentColor={features[2].accentColor}
-            />
-            <FeatureCard
-              className="lg:col-span-2"
-              icon={features[3].icon}
-              title={features[3].title}
-              desc={features[3].desc}
-              accent={features[3].accent}
-              accentColor={features[3].accentColor}
-            />
-            <FeatureCard
-              icon={features[4].icon}
-              title={features[4].title}
-              desc={features[4].desc}
-              accent={features[4].accent}
-              accentColor={features[4].accentColor}
-            />
-            <FeatureCard
-              icon={features[5].icon}
-              title={features[5].title}
-              desc={features[5].desc}
-              accent={features[5].accent}
-              accentColor={features[5].accentColor}
-            />
-            <FeatureCard
-              icon={features[6].icon}
-              title={features[6].title}
-              desc={features[6].desc}
-              accent={features[6].accent}
-              accentColor={features[6].accentColor}
-            />
-            <FeatureCard
-              icon={features[7].icon}
-              title={features[7].title}
-              desc={features[7].desc}
-              accent={features[7].accent}
-              accentColor={features[7].accentColor}
-            />
-            <FeatureCard
-              icon={features[8].icon}
-              title={features[8].title}
-              desc={features[8].desc}
-              accent={features[8].accent}
-              accentColor={features[8].accentColor}
-            />
-            <FeatureCard
-              icon={features[9].icon}
-              title={features[9].title}
-              desc={features[9].desc}
-              accent={features[9].accent}
-              accentColor={features[9].accentColor}
-            />
+          <div className="text-center mt-10">
+            <Link href="/how-it-works" className="text-sm text-white/50 hover:text-white transition-colors underline underline-offset-4">
+              See detailed walkthrough →
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section className="py-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/4 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold text-[#14b8a6] uppercase tracking-widest mb-3">How It Works</p>
-            <h2 className="text-4xl font-extrabold tracking-tight">From idea to deployed in three steps</h2>
+      {/* ── USE CASES ── */}
+      <section className="relative py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/4 text-white/50 text-xs font-medium mb-4">
+              Built for Creators First
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              Creator-first today.{' '}
+              <span className="bg-gradient-to-r from-[#a78bfa] to-[#f59e0b] bg-clip-text text-transparent">
+                Expanding to D2C and OTT.
+              </span>
+            </h2>
+            <p className="text-white/45 max-w-xl mx-auto">
+              PersonaMatrix starts with Finance creators, course builders, and coaches — with D2C brands and OTT platforms coming next.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connector line */}
-            <div className="hidden md:block absolute top-10 left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] h-px bg-gradient-to-r from-[#7c3aed]/40 via-[#3b82f6]/40 to-[#14b8a6]/40" />
-
-            {[
-              {
-                step: '01',
-                title: 'Create Persona',
-                desc: 'Define your AI persona — name, personality, system prompt, and behavioral guardrails.',
-                color: '#7c3aed',
-                bg: 'rgba(124,58,237,0.15)',
-              },
-              {
-                step: '02',
-                title: 'Attach Knowledge',
-                desc: 'Upload PDFs, videos, URLs, or connect live data sources. Your persona learns from your content.',
-                color: '#3b82f6',
-                bg: 'rgba(59,130,246,0.15)',
-              },
-              {
-                step: '03',
-                title: 'Deploy Anywhere',
-                desc: 'Publish to WhatsApp, embed on your site, expose via REST API, or launch a video avatar.',
-                color: '#14b8a6',
-                bg: 'rgba(20,184,166,0.15)',
-              },
-            ].map((item) => (
-              <div key={item.step} className="glass-elevated rounded-2xl p-8 border border-white/8 flex flex-col gap-5 card-hover">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center font-mono font-bold text-lg"
-                  style={{ background: item.bg, color: item.color, border: `1px solid ${item.color}30` }}
-                >
-                  {item.step}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {useCases.map((uc) => (
+              <div
+                key={uc.title}
+                className={`relative group p-6 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 transition-all duration-300 ${uc.span} ${uc.status ? 'opacity-60' : ''}`}
+              >
+                {uc.status && (
+                  <div className="absolute top-4 right-4 px-2 py-0.5 rounded-full text-[10px] font-semibold border"
+                    style={{ color: uc.accentColor, borderColor: `${uc.accentColor}40`, background: `${uc.accentColor}12` }}>
+                    {uc.status}
+                  </div>
+                )}
+                <div className="flex items-center gap-2 mb-4">
+                  <span
+                    className="text-[11px] font-semibold px-2.5 py-1 rounded-full"
+                    style={{ color: uc.tagColor, background: uc.tagBg }}
+                  >
+                    {uc.tag}
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-bold text-white text-lg mb-2">{item.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
-                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{uc.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed mb-4">{uc.desc}</p>
+                {uc.metrics.length > 0 && (
+                  <div className="flex gap-6 pt-4 border-t border-white/6">
+                    {uc.metrics.map((m) => (
+                      <div key={m.label}>
+                        <p className="text-xl font-bold" style={{ color: uc.accentColor }}>{m.value}</p>
+                        <p className="text-[11px] text-white/40">{m.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA SECTION ── */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative glass-elevated rounded-3xl border border-white/10 p-10 text-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed]/10 via-transparent to-[#3b82f6]/10 pointer-events-none" />
-            <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-[#7c3aed]/15 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-[#3b82f6]/10 blur-3xl pointer-events-none" />
-            <div className="relative z-10 flex flex-col items-center gap-6">
-              <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-                Start building your<br />
-                <span className="text-gradient">AI Persona today</span>
+      {/* ── BENEFITS BENTO ── */}
+      <section className="relative py-24 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7c3aed]/3 to-transparent pointer-events-none" />
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              Your AI persona,{' '}
+              <span className="bg-gradient-to-r from-[#a78bfa] to-[#0ea5e9] bg-clip-text text-transparent">
+                on your platform
+              </span>
+            </h2>
+            <p className="text-white/45 max-w-xl mx-auto">
+              Everything you need to engage your audience, monetize your expertise, and scale your personal brand.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {benefits.map((b) => (
+              <div
+                key={b.title}
+                className="group relative p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05] transition-all duration-300 cursor-default overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+                  style={{ background: `radial-gradient(ellipse at 30% 20%, ${b.accentColor}12 0%, transparent 65%)` }}
+                />
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+                  style={{ background: b.accent }}
+                >
+                  {b.icon}
+                </div>
+                <h3 className="font-bold text-white text-sm mb-1.5">{b.title}</h3>
+                <p className="text-xs text-white/45 leading-relaxed">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="relative py-24 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <div
+            className="relative rounded-3xl border border-white/10 p-12 overflow-hidden"
+            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(14,165,233,0.08) 100%)' }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed]/10 via-transparent to-[#0ea5e9]/10 pointer-events-none" />
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+                Build your AI persona today
               </h2>
-              <p className="text-white/50 max-w-md text-base">
-                Join thousands of creators and enterprises already using PersonaMatrix to automate conversations at scale.
+              <p className="text-white/50 mb-8 max-w-lg mx-auto">
+                Turn your expertise into a 24/7 AI that engages your audience, answers questions, and drives revenue — on your platform.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link
-                  href="/register"
-                  className="px-8 py-3.5 rounded-xl font-semibold text-white btn-primary text-sm shadow-[0_0_32px_rgba(124,58,237,0.4)]"
-                >
-                  Get Started — free
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Link href="/guest-chat" className="px-6 py-3 rounded-xl text-sm font-semibold border border-white/15 text-white hover:bg-white/8 transition-all">
+                  Try Demo First
                 </Link>
-                <Link
-                  href="/pricing"
-                  className="px-8 py-3.5 rounded-xl font-semibold text-white/70 border border-white/12 hover:border-white/25 hover:text-white hover:bg-white/5 transition-all duration-200 text-sm"
-                >
-                  View Pricing
+                <Link href="/register" className="px-6 py-3 rounded-xl text-sm font-semibold text-white btn-primary">
+                  Get Started Free →
                 </Link>
               </div>
             </div>
@@ -616,13 +554,6 @@ export default function HomePage() {
       </section>
 
       <PublicFooter />
-
-      <style jsx>{`
-        @keyframes bounce {
-          0%, 60%, 100% { transform: translateY(0); }
-          30% { transform: translateY(-4px); }
-        }
-      `}</style>
     </div>
   );
 }

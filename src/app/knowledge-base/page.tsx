@@ -8,7 +8,7 @@ export default function KnowledgeBasePage() {
     <AppLayout>
       <Topbar
         title="Knowledge Base"
-        subtitle="Upload and manage documents that power your personas — ground responses in your own data"
+        subtitle="Upload your courses, coaching frameworks, finance guides, and content — ground your persona in your expertise"
       />
       <KnowledgeBaseClient />
     </AppLayout>

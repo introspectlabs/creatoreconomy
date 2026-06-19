@@ -12,7 +12,7 @@ const CREATOR_DATA = {
   username: 'personamatrix',
   displayName: 'PersonaMatrix Labs',
   tagline: 'Building AI personas that actually understand your business',
-  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across sales, support, HR, finance, and education — each grounded in real domain knowledge, not generic prompts.
+  bio: `We're a team of AI engineers and product designers obsessed with making AI conversations feel genuinely human. Since 2024, we've trained over 50 specialized AI personas across creator economy, OTT engagement, sales, support, and HR — each grounded in real domain knowledge, not generic prompts.
 
 Our personas are used by 200+ companies worldwide to handle millions of conversations monthly. Every persona we build goes through rigorous knowledge curation, voice calibration, and real-world testing before going live.`,
   location: 'San Francisco, CA',
@@ -21,6 +21,8 @@ Our personas are used by 200+ companies worldwide to handle millions of conversa
   verified: true,
   avatar: 'PM',
   coverGradient: 'linear-gradient(135deg, #1a0533 0%, #0f1a3a 50%, #0a1628 100%)',
+  domains: ['Finance', 'Education', 'Coaching'] as const,
+  personaLabels: ['Wealth Advisor', 'FIRE Coach', 'Tax Strategist', 'SaaS Educator', 'Leadership Coach', 'Mindset Mentor', 'UX Educator', 'Career Coach', 'Options Trader', 'Finance Educator', 'Performance Coach', 'Deep Work Advisor'],
   stats: {
     totalPersonas: 12,
     totalConversations: '240K+',
@@ -82,6 +84,14 @@ Our personas are used by 200+ companies worldwide to handle millions of conversa
   ],
 };
 
+type Domain = 'Finance' | 'Education' | 'Coaching';
+
+const domainMeta: Record<Domain, { icon: string; color: string; bg: string }> = {
+  Finance: { icon: '📈', color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)' },
+  Education: { icon: '🎓', color: '#a855f7', bg: 'rgba(168,85,247,0.12)' },
+  Coaching: { icon: '🧭', color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
+};
+
 const statusColors: Record<string, string> = {
   active: '#14b8a6',
   training: '#f59e0b',
@@ -90,24 +100,20 @@ const statusColors: Record<string, string> = {
   archived: '#6b7280',
 };
 
-type TabType = 'overview' | 'personas' | 'knowledge' | 'reviews';
+type TabType = 'overview' | 'personas' | 'reviews';
 
 export default function CreatorProfilePage() {
   const params = useParams();
   const [activeTab, setActiveTab] = useState<TabType>('overview');
-  const [personaFilter, setPersonaFilter] = useState('All');
 
   const creator = CREATOR_DATA;
   const activePersonas = personas.filter((p) => p.status === 'active');
-  const filteredPersonas =
-    personaFilter === 'All'
-      ? personas
-      : personas.filter((p) => p.status === personaFilter);
+  const filteredPersonas = activePersonas;
+  const firstActivePersona = activePersonas[0];
 
   const tabs: { id: TabType; label: string; count?: number }[] = [
     { id: 'overview', label: 'Overview' },
-    { id: 'personas', label: 'Personas', count: personas.length },
-    { id: 'knowledge', label: 'Knowledge' },
+    { id: 'personas', label: 'Personas', count: activePersonas.length },
     { id: 'reviews', label: 'Reviews', count: creator.socialProof.length },
   ];
 
@@ -197,19 +203,29 @@ export default function CreatorProfilePage() {
               >
                 Follow
               </button>
-              <Link
-                href={`/chat/${personas[0]?.slug || 'aria-sales'}`}
-                className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
-              >
-                Chat Now
-              </Link>
+              {firstActivePersona ? (
+                <Link
+                  href={`/creator/${params?.username || 'personamatrix'}/persona/${firstActivePersona.slug}`}
+                  className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
+                >
+                  Chat Now
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="px-5 py-2 rounded-xl text-sm font-semibold text-white/30 cursor-not-allowed"
+                  style={{ background: 'rgba(124,58,237,0.2)' }}
+                >
+                  No Active Personas
+                </button>
+              )}
             </div>
           </div>
 
           {/* Quick stats strip */}
           <div
-            className="grid grid-cols-3 sm:grid-cols-6 gap-px rounded-2xl overflow-hidden mb-8"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden mb-6"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             {[
@@ -217,8 +233,6 @@ export default function CreatorProfilePage() {
               { label: 'Conversations', value: creator.stats.totalConversations },
               { label: 'Avg Rating', value: `${creator.stats.avgRating}★` },
               { label: 'Followers', value: creator.stats.totalFollowers },
-              { label: 'Response Rate', value: creator.stats.responseRate },
-              { label: 'Avg Speed', value: creator.stats.avgResponseTime },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -229,6 +243,33 @@ export default function CreatorProfilePage() {
                 <span className="text-[10px] text-white/35 uppercase tracking-wider mt-0.5">{stat.label}</span>
               </div>
             ))}
+          </div>
+
+          {/* Domain tags + multi-domain callout */}
+          <div className="mb-6 flex flex-col gap-3">
+            <div className="flex flex-wrap gap-2">
+              {creator.domains.map((d) => (
+                <span
+                  key={d}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
+                  style={{ background: domainMeta[d].bg, color: domainMeta[d].color, border: `1px solid ${domainMeta[d].color}30` }}
+                >
+                  {domainMeta[d].icon} {d}
+                </span>
+              ))}
+              {creator.domains.length > 1 && (
+                <span className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 text-white/50 border border-white/10">
+                  🎭 multi-domain creator
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/[0.02]">
+              <span className="text-base">🎭</span>
+              <p className="text-xs text-white/45 leading-relaxed">
+                <span className="text-white/70 font-medium">This creator spans multiple domains.</span>{' '}
+                Each persona covers a different area of expertise — finance, education, coaching, and more — so you get the full picture.
+              </p>
+            </div>
           </div>
 
           {/* Tabs */}
@@ -388,7 +429,7 @@ export default function CreatorProfilePage() {
               </div>
             </div>
 
-            {/* Right: Trust + Certs + Quick Personas */}
+            {/* Right: Trust + Quick Personas */}
             <div className="flex flex-col gap-6">
 
               {/* Trust Signals */}
@@ -401,7 +442,7 @@ export default function CreatorProfilePage() {
                   Trust & Safety
                 </h3>
                 <div className="space-y-3">
-                  {creator.trustSignals.map((signal, i) => (
+                  {creator.trustSignals.slice(0, 1).map((signal, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <div
                         className="w-7 h-7 rounded-lg flex items-center justify-center text-xs flex-shrink-0 mt-0.5"
@@ -413,29 +454,6 @@ export default function CreatorProfilePage() {
                         <p className="text-xs font-semibold text-white/80">{signal.label}</p>
                         <p className="text-[11px] text-white/35 mt-0.5 leading-relaxed">{signal.detail}</p>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Certifications */}
-              <div
-                className="rounded-2xl p-5"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-                  <span className="w-1 h-3.5 rounded-full" style={{ background: 'linear-gradient(#f59e0b, #ef4444)' }} />
-                  Certifications
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {creator.certifications.map((cert, i) => (
-                    <div
-                      key={i}
-                      className="rounded-xl p-3 text-center"
-                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    >
-                      <p className="text-[11px] font-semibold text-white/70 leading-tight">{cert.name}</p>
-                      <p className="text-[10px] text-white/30 mt-1">{cert.year}</p>
                     </div>
                   ))}
                 </div>
@@ -462,7 +480,7 @@ export default function CreatorProfilePage() {
                   {activePersonas.slice(0, 4).map((p) => (
                     <Link
                       key={p.id}
-                      href={`/chat/${p.slug}`}
+                      href={`/creator/${params?.username || 'personamatrix'}/persona/${p.slug}`}
                       className="flex items-center gap-3 p-2.5 rounded-xl transition-all hover:bg-white/5 group"
                     >
                       <div
@@ -487,34 +505,8 @@ export default function CreatorProfilePage() {
         {/* ── PERSONAS TAB ── */}
         {activeTab === 'personas' && (
           <div>
-            {/* Filter row */}
-            <div className="flex items-center gap-2 mb-6 flex-wrap">
-              {['All', 'active', 'training', 'draft', 'paused'].map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setPersonaFilter(f)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${
-                    personaFilter === f
-                      ? 'text-white' :'text-white/40 border border-white/8 hover:text-white/70'
-                  }`}
-                  style={
-                    personaFilter === f
-                      ? {
-                          background: 'linear-gradient(135deg, rgba(124,58,237,0.25), rgba(59,130,246,0.15))',
-                          border: '1px solid rgba(124,58,237,0.4)',
-                        }
-                      : {}
-                  }
-                >
-                  {f}
-                </button>
-              ))}
-              <span className="ml-auto text-xs text-white/30">{filteredPersonas.length} personas</span>
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredPersonas.map((persona) => {
-                const statusColor = statusColors[persona.status] || '#6b7280';
                 const isActive = persona.status === 'active';
                 return (
                   <div
@@ -536,55 +528,14 @@ export default function CreatorProfilePage() {
                         {persona.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-semibold text-white truncate">{persona.name}</h3>
-                          <span
-                            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-semibold uppercase tracking-wider flex-shrink-0"
-                            style={{
-                              background: `${statusColor}18`,
-                              color: statusColor,
-                              border: `1px solid ${statusColor}30`,
-                            }}
-                          >
-                            <span className="w-1 h-1 rounded-full" style={{ background: statusColor }} />
-                            {persona.status}
-                          </span>
-                        </div>
-                        <p className="text-xs text-white/40 mt-0.5 line-clamp-2 leading-relaxed">{persona.description}</p>
+                        <h3 className="text-sm font-semibold text-white truncate mb-1">{persona.name}</h3>
+                        <p className="text-xs text-white/40 line-clamp-3 leading-relaxed">{persona.description}</p>
                       </div>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70">{persona.knowledgeChunks > 0 ? `${(persona.knowledgeChunks / 1000).toFixed(1)}K` : '—'}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Knowledge</p>
-                      </div>
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70">{persona.messagesTotal > 0 ? `${(persona.messagesTotal / 1000).toFixed(0)}K` : '—'}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Chats</p>
-                      </div>
-                      <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                        <p className="text-xs font-semibold text-white/70 truncate">{persona.language.split(',')[0]}</p>
-                        <p className="text-[9px] text-white/25 uppercase tracking-wider mt-0.5">Lang</p>
-                      </div>
-                    </div>
-
-                    {/* Channels */}
-                    <div className="flex flex-wrap gap-1">
-                      {persona.channels.map((ch) => (
-                        <span
-                          key={ch}
-                          className="text-[10px] text-white/30 bg-white/5 border border-white/8 px-1.5 py-0.5 rounded-md"
-                        >
-                          {ch}
-                        </span>
-                      ))}
                     </div>
 
                     {isActive ? (
                       <Link
-                        href={`/chat/${persona.slug}`}
+                        href={`/creator/${params?.username || 'personamatrix'}/persona/${persona.slug}`}
                         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                         style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
                       >
@@ -595,136 +546,12 @@ export default function CreatorProfilePage() {
                       </Link>
                     ) : (
                       <div className="w-full flex items-center justify-center py-2.5 rounded-xl text-sm text-white/25 bg-white/4 border border-white/8 cursor-not-allowed">
-                        {persona.status === 'training' ? 'Training in progress…' : 'Unavailable'}
+                        Unavailable
                       </div>
                     )}
                   </div>
                 );
               })}
-            </div>
-          </div>
-        )}
-
-        {/* ── KNOWLEDGE TAB ── */}
-        {activeTab === 'knowledge' && (
-          <div className="flex flex-col gap-6">
-            {/* Knowledge stats bento */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {creator.knowledgeSources.map((ks, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl p-5 flex flex-col gap-3"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <span className="text-2xl">{ks.icon}</span>
-                  <div>
-                    <p className="text-2xl font-bold text-white">{ks.count}</p>
-                    <p className="text-xs font-semibold text-white/60 mt-0.5">{ks.label}</p>
-                    <p className="text-[11px] text-white/30 mt-1 leading-relaxed">{ks.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Knowledge methodology */}
-            <div
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <h2 className="text-base font-semibold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full" style={{ background: 'linear-gradient(#7c3aed, #3b82f6)' }} />
-                How We Build Knowledge
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  {
-                    step: '01',
-                    title: 'Domain Research',
-                    desc: 'We start with deep industry research — collecting authoritative sources, expert documentation, and real-world use cases specific to each persona\'s domain.',
-                    color: '#7c3aed',
-                  },
-                  {
-                    step: '02',
-                    title: 'Knowledge Curation',
-                    desc: 'Raw data is cleaned, structured, and chunked into semantic units. We remove noise, resolve contradictions, and ensure factual accuracy before ingestion.',
-                    color: '#3b82f6',
-                  },
-                  {
-                    step: '03',
-                    title: 'Persona Training',
-                    desc: 'Each persona is fine-tuned on curated data with specific tone, personality, and response style guidelines. We run hundreds of test conversations before launch.',
-                    color: '#14b8a6',
-                  },
-                  {
-                    step: '04',
-                    title: 'Continuous Improvement',
-                    desc: 'Live conversations feed back into the knowledge base. We monitor accuracy, flag gaps, and update knowledge weekly to keep personas current and reliable.',
-                    color: '#f59e0b',
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.step}
-                    className="flex gap-4 p-4 rounded-xl"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
-                  >
-                    <div
-                      className="text-xs font-black flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
-                      style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
-                    >
-                      {item.step}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white/80 mb-1">{item.title}</p>
-                      <p className="text-xs text-white/45 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Per-persona knowledge breakdown */}
-            <div
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <h2 className="text-base font-semibold text-white mb-5 flex items-center gap-2">
-                <span className="w-1 h-4 rounded-full" style={{ background: 'linear-gradient(#7c3aed, #3b82f6)' }} />
-                Persona Knowledge Breakdown
-              </h2>
-              <div className="space-y-3">
-                {personas.filter((p) => p.knowledgeChunks > 0).sort((a, b) => b.knowledgeChunks - a.knowledgeChunks).map((p) => {
-                  const maxChunks = 12400;
-                  const pct = Math.round((p.knowledgeChunks / maxChunks) * 100);
-                  return (
-                    <div key={p.id} className="flex items-center gap-3">
-                      <div
-                        className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
-                      >
-                        {p.avatar}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium text-white/70 truncate">{p.name}</span>
-                          <span className="text-xs text-white/35 flex-shrink-0 ml-2">{p.knowledgeChunks.toLocaleString()} chunks</span>
-                        </div>
-                        <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                          <div
-                            className="h-full rounded-full transition-all"
-                            style={{
-                              width: `${pct}%`,
-                              background: 'linear-gradient(90deg, #7c3aed, #3b82f6)',
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           </div>
         )}
@@ -809,8 +636,8 @@ export default function CreatorProfilePage() {
             >
               <p className="text-lg font-bold text-white mb-2">Ready to experience it yourself?</p>
               <p className="text-sm text-white/50 mb-5">Start a free conversation with any persona — no sign-up required.</p>
-              <Link
-                href="/creators"
+              <button
+                onClick={() => setActiveTab('personas')}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
               >
@@ -818,7 +645,7 @@ export default function CreatorProfilePage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-              </Link>
+              </button>
             </div>
           </div>
         )}

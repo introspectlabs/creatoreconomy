@@ -9,7 +9,7 @@ const channelIcon = (ch: string) => {
   const map: Record<string, string> = {
     WhatsApp: '📱',
     'Web Chat': '💬',
-    SIP: '📞',
+    'Voice AI': '🎙️',
     API: '⚡',
   };
   return map[ch] || '🔗';

@@ -25,6 +25,218 @@ interface IndustryData {
 }
 
 const industryData: Record<string, IndustryData> = {
+  'finance-trading': {
+    name: 'Finance & Trading Creators',
+    tagline: 'Scale Your Trading Knowledge Without Scaling Your Time',
+    description:
+      'PersonaMatrix turns your trading strategies, market analysis, and investment frameworks into an AI persona your followers can learn from 24/7 — in your voice, with your insights.',
+    color: '#10b981',
+    bg: 'rgba(16,185,129,0.12)',
+    border: 'rgba(16,185,129,0.3)',
+    useCases: [
+      {
+        title: 'Your AI Trading Mentor, Always On',
+        description:
+          'Create an AI version of yourself that answers questions about your strategies, explains market concepts, and shares your frameworks — without you being available around the clock.',
+        capabilities: ['Strategy Q&A in your voice', 'Market concept explanations', '24/7 follower engagement'],
+        channels: ['Web Chat', 'WhatsApp', 'API'],
+        demoPersona: 'Finance Creator AI',
+        demoMessages: [
+          { role: 'user', text: "Hey! I saw your video on options trading. What's the safest strategy for beginners?" },
+          { role: 'ai', text: "Great question! For beginners, I always recommend starting with covered calls — you already own the stock, so your risk is capped. It's the strategy I used in my first year to generate consistent income without big downside exposure. Want me to walk you through a real example from my portfolio?" },
+          { role: 'user', text: 'Yes! And do you have a course that covers this in depth?' },
+          { role: 'ai', text: "I do — my 'Options Income Blueprint' covers covered calls, cash-secured puts, and the wheel strategy with real trade examples. Over 8,000 students have used it to generate their first options income. I can share the full curriculum and a free preview module right now." },
+        ],
+      },
+      {
+        title: 'Monetize Your Market Analysis',
+        description:
+          'Turn your daily market commentary, watchlists, and trade setups into a paid AI experience. Followers pay to access your AI for deeper analysis and personalized guidance.',
+        capabilities: ['Course preview conversations', 'Enrollment Q&A', 'Upsell to premium tiers'],
+        channels: ['Web', 'WhatsApp', 'Landing Page Embed'],
+        demoPersona: 'Course Sales AI',
+        demoMessages: [
+          { role: 'user', text: "I want to learn web development but I'm a complete beginner. Is your course right for me?" },
+          { role: 'ai', text: "Absolutely — my course was designed specifically for complete beginners. We start from zero: no prior coding experience needed. By the end, you'll have built 5 real projects you can show employers. 94% of my students with no background complete the course and land their first freelance project within 3 months. Want me to share the full curriculum?" },
+          { role: 'user', text: 'How much does it cost and is there a free trial?' },
+          { role: 'ai', text: "The full course is $199, but I offer a 7-day free trial — you get access to the first 3 modules with no credit card required. If you love it, you continue. If not, no charge. I can start your trial right now. Ready?" },
+        ],
+      },
+      {
+        title: 'Reduce Support & Boost Completion',
+        description:
+          'Most students drop out because they get stuck and don\'t get help fast enough. Your AI tutor answers instantly — keeping students moving forward and dramatically improving completion rates.',
+        capabilities: ['Instant homework help', 'Progress check-ins', 'Completion rate improvement'],
+        channels: ['Web Chat', 'Email Follow-up', 'LMS Integration'],
+        demoPersona: 'Student Success AI',
+        demoMessages: [
+          { role: 'user', text: "I haven't logged in for 2 weeks. I feel like I'm falling behind and might quit." },
+          { role: 'ai', text: "I'm glad you reached out — this is exactly the moment most students give up, but you don't have to. You've already completed 60% of the course, which is the hardest part. The remaining modules are shorter and more hands-on. Let's get you back on track: I'll create a 15-minute daily plan that fits your schedule. Can you commit to 15 minutes today?" },
+          { role: 'user', text: "Yes, I can do 15 minutes. Where should I start?" },
+          { role: 'ai', text: "Perfect. Start with Module 4, Lesson 2 — it's a quick 12-minute video and you'll build something you can actually use. I'll check in with you tomorrow to see how it went. You're closer to the finish line than you think. Go get it! 🚀" },
+        ],
+      },
+    ],
+  },
+  'education-courses': {
+    name: 'Education & Course Creators',
+    tagline: 'Turn Your Course Content Into an Interactive AI Tutor',
+    description:
+      'PersonaMatrix transforms your lessons, videos, and expertise into an AI that students can learn from interactively — reducing your support load while increasing course completion and sales.',
+    color: '#3b82f6',
+    bg: 'rgba(59,130,246,0.12)',
+    border: 'rgba(59,130,246,0.3)',
+    useCases: [
+      {
+        title: 'AI Tutor From Your Course Content',
+        description:
+          'Your students get instant answers from your actual course material — no more waiting for office hours or digging through modules. Your AI explains concepts in your teaching style.',
+        capabilities: ['Lesson Q&A from your content', 'Concept explanations in your style', 'Student support automation'],
+        channels: ['Web Chat', 'LMS Embed', 'WhatsApp'],
+        demoPersona: 'Course AI Tutor',
+        demoMessages: [
+          { role: 'user', text: "I'm stuck on Module 3 — I don't understand how compound interest actually works." },
+          { role: 'ai', text: "No worries — this trips up a lot of students! Compound interest is interest earned on both your original money AND the interest you've already earned. Think of it as a snowball rolling downhill — it gets bigger as it picks up more snow. In Module 3, I use the example of $1,000 at 10% annually: after year 1 you have $1,100, but year 2 you earn 10% on $1,100 not $1,000. Want me to walk through the full calculation from the lesson?" },
+          { role: 'user', text: 'Yes! And is there a formula I should memorize?' },
+          { role: 'ai', text: "The formula is A = P(1 + r/n)^(nt) — I cover this in detail in the Module 3 worksheet with 5 practice problems. I've also got a shortcut called the 'Rule of 72' that lets you estimate doubling time in your head. Want me to explain that too?" },
+        ],
+      },
+      {
+        title: 'Sell More Courses Through Conversations',
+        description:
+          'Your AI persona answers prospective students\' questions, shares course previews, and guides them to enroll — turning curious visitors into paying students automatically.',
+        capabilities: ['Course preview conversations', 'Enrollment Q&A', 'Upsell to premium tiers'],
+        channels: ['Web', 'WhatsApp', 'Landing Page Embed'],
+        demoPersona: 'Course Sales AI',
+        demoMessages: [
+          { role: 'user', text: "I want to learn web development but I'm a complete beginner. Is your course right for me?" },
+          { role: 'ai', text: "Absolutely — my course was designed specifically for complete beginners. We start from zero: no prior coding experience needed. By the end, you'll have built 5 real projects you can show employers. 94% of my students with no background complete the course and land their first freelance project within 3 months. Want me to share the full curriculum?" },
+          { role: 'user', text: 'How much does it cost and is there a free trial?' },
+          { role: 'ai', text: "The full course is $199, but I offer a 7-day free trial — you get access to the first 3 modules with no credit card required. If you love it, you continue. If not, no charge. I can start your trial right now. Ready?" },
+        ],
+      },
+      {
+        title: 'Reduce Support & Boost Completion',
+        description:
+          'Most students drop out because they get stuck and don\'t get help fast enough. Your AI tutor answers instantly — keeping students moving forward and dramatically improving completion rates.',
+        capabilities: ['Instant homework help', 'Progress check-ins', 'Completion rate improvement'],
+        channels: ['Web Chat', 'Email Follow-up', 'LMS Integration'],
+        demoPersona: 'Student Success AI',
+        demoMessages: [
+          { role: 'user', text: "I haven't logged in for 2 weeks. I feel like I'm falling behind and might quit." },
+          { role: 'ai', text: "I'm glad you reached out — this is exactly the moment most students give up, but you don't have to. You've already completed 60% of the course, which is the hardest part. The remaining modules are shorter and more hands-on. Let's get you back on track: I'll create a 15-minute daily plan that fits your schedule. Can you commit to 15 minutes today?" },
+          { role: 'user', text: "Yes, I can do 15 minutes. Where should I start?" },
+          { role: 'ai', text: "Perfect. Start with Module 4, Lesson 2 — it's a quick 12-minute video and you'll build something you can actually use. I'll check in with you tomorrow to see how it went. You're closer to the finish line than you think. Go get it! 🚀" },
+        ],
+      },
+    ],
+  },
+  'coaches': {
+    name: 'Coaches — Fitness, Career & Business',
+    tagline: 'Scale Your Coaching Without Burning Out',
+    description:
+      'PersonaMatrix lets you handle client intake, share your frameworks, and keep clients engaged between sessions — so you can focus on high-value coaching work instead of repetitive questions.',
+    color: '#f59e0b',
+    bg: 'rgba(245,158,11,0.12)',
+    border: 'rgba(245,158,11,0.3)',
+    useCases: [
+      {
+        title: 'Automate Client Intake & Onboarding',
+        description:
+          'Your AI handles the first conversation with every potential client — qualifying them, explaining your programs, and booking discovery calls — so you only spend time with the right people.',
+        capabilities: ['Lead qualification', 'Program explanation', 'Discovery call booking'],
+        channels: ['Web Chat', 'WhatsApp', 'Landing Page'],
+        demoPersona: 'Coaching Intake AI',
+        demoMessages: [
+          { role: 'user', text: "I'm interested in your business coaching. What do you offer?" },
+          { role: 'ai', text: "Great to meet you! I work with founders and executives who want to scale from 6 to 7 figures without working more hours. My 90-day program covers revenue strategy, team building, and systems. Before I tell you more — what's your biggest challenge right now: revenue growth, team issues, or time management?" },
+          { role: 'user', text: "Definitely revenue. I'm stuck at $30k/month and can't seem to break through." },
+          { role: 'ai', text: "That's a very common ceiling — and it's almost always a positioning and offer problem, not a hustle problem. I've helped 40+ founders break through exactly this. I'd love to get you on a 30-minute strategy call with me to map out your specific path. I have slots this Thursday and Friday — which works better?" },
+        ],
+      },
+      {
+        title: 'Keep Clients Engaged Between Sessions',
+        description:
+          'Clients get the most value when they stay consistent. Your AI reinforces your frameworks, answers questions between sessions, and keeps clients accountable — extending your impact without your time.',
+        capabilities: ['Framework Q&A', 'Accountability check-ins', 'Between-session support'],
+        channels: ['WhatsApp', 'Web Chat', 'App Embed'],
+        demoPersona: 'Fitness Coach AI',
+        demoMessages: [
+          { role: 'user', text: "I skipped the gym 3 days this week. I feel terrible about it." },
+          { role: 'ai', text: "First — don't beat yourself up. Missing 3 days doesn't undo your progress. What matters is what you do today. Remember what we talked about in our last session: consistency over perfection. One missed week doesn't define your journey. What's one thing that got in the way this week? Let's solve that together." },
+          { role: 'user', text: "Work got crazy. I just didn't have energy after long days." },
+          { role: 'ai', text: "That's real — and it's exactly why we built your 20-minute 'low energy' workout option. It's in your program under Week 4. On high-stress days, that's your go-to. It keeps the habit alive without draining you further. Can you commit to that version tomorrow morning before work starts?" },
+        ],
+      },
+      {
+        title: 'Deliver Your Frameworks at Scale',
+        description:
+          'Your coaching methodology is your most valuable asset. Your AI teaches your frameworks to hundreds of clients simultaneously — giving everyone the benefit of your expertise without you repeating yourself.',
+        capabilities: ['Framework teaching', 'Methodology Q&A', 'Scalable group coaching'],
+        channels: ['Web', 'WhatsApp', 'Community Embed'],
+        demoPersona: 'Career Coach AI',
+        demoMessages: [
+          { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
+          { role: 'ai', text: "Love that you found us! The big difference: we formulate everything without the 12 most common irritants — no parabens, sulfates, synthetic fragrance, or alcohol. Our founder started the brand after struggling with sensitive skin for years and couldn't find anything that worked. Every product is dermatologist-tested and we publish all our ingredient sourcing. What's your main skin concern? I'll point you to exactly the right product." },
+          { role: 'user', text: "I have dry skin and some redness around my nose." },
+          { role: 'ai', text: "That combination is really common — dry skin often triggers redness as your skin tries to compensate. Our Barrier Repair Serum was made for exactly this: it rebuilds your skin's moisture barrier and calms redness within 2 weeks. 89% of customers with your skin type see visible improvement. I can set you up with a starter kit that includes the serum plus our gentle cleanser — it's 20% off for first-time customers." },
+        ],
+      },
+    ],
+  },
+  'd2c-commerce': {
+    name: 'D2C Brands & Commerce Creators',
+    tagline: 'Give Every Customer a Personal Shopping Assistant',
+    description:
+      'PersonaMatrix creates an AI that knows your products inside out — answering questions, handling objections, and guiding buyers from discovery to checkout automatically.',
+    color: '#ec4899',
+    bg: 'rgba(236,72,153,0.12)',
+    border: 'rgba(236,72,153,0.3)',
+    useCases: [
+      {
+        title: 'AI That Sells Your Products 24/7',
+        description:
+          'Your AI knows every product detail, handles common objections, and guides customers to the right purchase — even when you\'re asleep. No more lost sales from unanswered questions.',
+        capabilities: ['Product Q&A', 'Objection handling', '24/7 purchase guidance'],
+        channels: ['Web Chat', 'WhatsApp', 'Shopify Embed'],
+        demoPersona: 'D2C Sales AI',
+        demoMessages: [
+          { role: 'user', text: "I'm looking for a protein powder but I'm lactose intolerant. Do any of yours work for me?" },
+          { role: 'ai', text: "Absolutely — our Plant Power Blend is 100% dairy-free and perfect for lactose intolerance. It's made from pea and rice protein, gives you 25g of protein per serving, and has no artificial sweeteners. It's our #1 seller for customers with dietary restrictions. Would you like the chocolate or vanilla flavor? Both are equally popular." },
+          { role: 'user', text: "Chocolate sounds good. How does it taste compared to whey protein?" },
+          { role: 'ai', text: "Most customers say it's actually creamier than whey — we use coconut milk powder for texture. We have a 94% satisfaction rate and a 30-day money-back guarantee, so there's zero risk. I can add the chocolate Plant Power Blend to your cart right now with free shipping on your first order. Ready?" },
+        ],
+      },
+      {
+        title: 'Reduce Returns & Support Tickets',
+        description:
+          'Most returns happen because customers bought the wrong product. Your AI asks the right questions upfront, recommends the perfect fit, and dramatically reduces costly returns and support volume.',
+        capabilities: ['Pre-purchase guidance', 'Size & fit recommendations', 'Return reduction'],
+        channels: ['Web', 'WhatsApp', 'Product Page Widget'],
+        demoPersona: 'Product Advisor AI',
+        demoMessages: [
+          { role: 'user', text: "I want to buy the running shoes but I'm not sure which size to get. I'm usually a 10 but sometimes a 10.5." },
+          { role: 'ai', text: "Great question — our running shoes run slightly narrow, so if you're between sizes, I always recommend going up. For a 10/10.5, I'd suggest the 10.5. Also, are you planning to use them for road running or trail? That affects which model I'd recommend for you." },
+          { role: 'user', text: "Road running, mostly 5k distances." },
+          { role: 'ai', text: "Perfect — for road 5k, our CloudStride model in size 10.5 is your best match. It's our most cushioned road shoe and the top choice for distances under 10k. It comes with free returns if the fit isn't right, but 97% of customers who follow my sizing guide keep their first order. Want me to add the 10.5 CloudStride to your cart?" },
+        ],
+      },
+      {
+        title: 'Turn Followers Into Repeat Buyers',
+        description:
+          'Your content builds trust — your AI converts that trust into sales. Engage your social audience with an AI that knows your brand story, your products, and how to turn a curious follower into a loyal customer.',
+        capabilities: ['Brand story conversations', 'Follower-to-customer conversion', 'Repeat purchase campaigns'],
+        channels: ['Web', 'WhatsApp', 'Instagram Link'],
+        demoPersona: 'Brand Commerce AI',
+        demoMessages: [
+          { role: 'user', text: "I found you on Instagram. What makes your skincare different from other brands?" },
+          { role: 'ai', text: "Love that you found us! The big difference: we formulate everything without the 12 most common irritants — no parabens, sulfates, synthetic fragrance, or alcohol. Our founder started the brand after struggling with sensitive skin for years and couldn't find anything that worked. Every product is dermatologist-tested and we publish all our ingredient sourcing. What's your main skin concern? I'll point you to exactly the right product." },
+          { role: 'user', text: "I have dry skin and some redness around my nose." },
+          { role: 'ai', text: "That combination is really common — dry skin often triggers redness as your skin tries to compensate. Our Barrier Repair Serum was made for exactly this: it rebuilds your skin's moisture barrier and calms redness within 2 weeks. 89% of customers with your skin type see visible improvement. I can set you up with a starter kit that includes the serum plus our gentle cleanser — it's 20% off for first-time customers." },
+        ],
+      },
+    ],
+  },
   'creator-economy': {
     name: 'Creator Economy',
     tagline: 'Turn Your Content into a Scalable AI Persona',
@@ -78,151 +290,6 @@ const industryData: Record<string, IndustryData> = {
       },
     ],
   },
-  healthcare: {
-    name: 'Healthcare',
-    tagline: 'Informed patients, better outcomes',
-    description:
-      'AI personas that help patients understand conditions, navigate care pathways, and access clinical knowledge — with compliance guardrails built in.',
-    color: '#14b8a6',
-    bg: 'rgba(20,184,166,0.12)',
-    border: 'rgba(20,184,166,0.3)',
-    useCases: [
-      {
-        title: 'Patient Education Persona',
-        description:
-          'A knowledgeable, empathetic AI that explains diagnoses, medications, and procedures in plain language — trained on your clinical content library.',
-        capabilities: ['Plain-language explanations', 'Medication guidance', 'Compliance guardrails'],
-        channels: ['Web Portal', 'WhatsApp', 'Voice'],
-        demoPersona: 'HealthGuide',
-        demoMessages: [
-          { role: 'user', text: "My doctor mentioned I have Type 2 diabetes. What does that actually mean?" },
-          { role: 'ai', text: "Type 2 diabetes means your body isn't using insulin effectively, causing blood sugar to stay elevated. The good news: it's highly manageable with lifestyle changes and, if needed, medication. Would you like me to explain what your daily routine might look like?" },
-          { role: 'user', text: 'Yes please, and what foods should I avoid?' },
-          { role: 'ai', text: "Focus on reducing refined carbs and sugary drinks — those spike blood sugar fastest. I'll share a simple food guide. But first, has your doctor mentioned an HbA1c target for you?" },
-        ],
-      },
-      {
-        title: 'Symptom Triage Assistant',
-        description:
-          'A first-response AI that helps patients assess symptom urgency and routes them to the right care level — reducing unnecessary ER visits.',
-        capabilities: ['Symptom assessment', 'Urgency routing', 'Appointment booking'],
-        channels: ['Web', 'WhatsApp', 'Voice (SIP)'],
-        demoPersona: 'CareNavigator',
-        demoMessages: [
-          { role: 'user', text: "I've had a headache for 3 days and some neck stiffness." },
-          { role: 'ai', text: "I want to make sure you're okay. Neck stiffness combined with a persistent headache can sometimes indicate something that needs prompt attention. Are you also experiencing fever, sensitivity to light, or nausea?" },
-          { role: 'user', text: 'A little light sensitivity, yes.' },
-          { role: 'ai', text: "Please seek medical attention today — not an emergency room necessarily, but an urgent care visit is recommended. I can help you find the nearest clinic and book an appointment right now." },
-        ],
-      },
-    ],
-  },
-  education: {
-    name: 'Education',
-    tagline: 'From inquiry to enrollment — guided by AI',
-    description:
-      'PersonaMatrix transforms course content, lecture videos, placement data, and FAQs into an AI-powered admission and student lifecycle platform — guiding students from discovery to enrollment and beyond.',
-    color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.3)',
-    useCases: [
-      {
-        title: 'AI Admission Counselor',
-        description:
-          'Improves conversion from inquiry to enrollment by delivering personalized course recommendations based on student background, goals, and career aspirations. Reduces drop-offs by engaging students at every step with data-driven insights on career outcomes and ROI. Guides students with data-driven insights on career outcomes and ROI.',
-        capabilities: ['Course recommendations', 'Career path guidance', 'ROI & placement data'],
-        channels: ['Web Chat', 'WhatsApp', 'Voice'],
-        demoPersona: 'AdmissionBot',
-        demoMessages: [
-          { role: 'user', text: "I'm a commerce graduate interested in data analytics. Which course is right for me?" },
-          { role: 'ai', text: "Great fit! Our PG Program in Data Analytics is designed for non-engineering backgrounds. 87% of our commerce graduates land roles in business intelligence and product analytics within 3 months. Average salary jump is 2.4x. Want me to walk you through the curriculum and placement stats?" },
-          { role: 'user', text: 'Yes, and what about the MBA in Business Analytics?' },
-          { role: 'ai', text: "The PG in Data Analytics is more technical — Python, SQL, Power BI — and faster (6 months vs 18 months for the MBA). The MBA suits those targeting management roles, while the PG is better if you want hands-on analyst roles. Based on your profile, I'd recommend the PG. Shall I connect you with an alumni who made the same choice?" },
-        ],
-      },
-      {
-        title: 'Enrollment Funnel Assistant',
-        description:
-          'Tracks student intent across every touchpoint, identifies drop-offs in the application journey, and re-engages prospects automatically with personalized nudges. Ensures no prospective student is lost due to delayed responses.',
-        capabilities: ['Program comparison', 'Application guidance', 'Drop-off re-engagement'],
-        channels: ['Web', 'WhatsApp', 'Email'],
-        demoPersona: 'EnrollGuide',
-        demoMessages: [
-          { role: 'user', text: "I started the application last week but got stuck on the essay section." },
-          { role: 'ai', text: "I noticed you paused at Step 3 — the Statement of Purpose. Here's a simple framework: 3 sentences on your background, 2 on why this program, 1 on your career goal. Want me to share a sample SOP from a successful applicant in a similar profile?" },
-          { role: 'user', text: 'That would really help. Also, when is the next intake?' },
-          { role: 'ai', text: "Next intake is July 15th — applications close June 30th, so you have 3 weeks. I'm sending you the SOP sample now. If you complete your application today, you'll also qualify for the early-bird scholarship worth ₹25,000." },
-        ],
-      },
-      {
-        title: 'AI Course Tutor',
-        description:
-          'A personalized learning assistant available 24/7 that improves student engagement and retention by answering questions, explaining concepts, and generating practice problems. Transforms static course content into interactive learning experiences.',
-        capabilities: ['Concept explanation', 'Practice generation', 'Progress tracking'],
-        channels: ['LMS Embed', 'Web', 'WhatsApp'],
-        demoPersona: 'Prof. Ada (Physics)',
-        demoMessages: [
-          { role: 'user', text: "I don't understand why objects fall at the same rate regardless of mass." },
-          { role: 'ai', text: "Great question — this trips up a lot of students. Gravity pulls harder on heavier objects, but heavier objects also resist acceleration more (inertia). These two effects cancel out perfectly, so all objects accelerate at 9.8 m/s² in a vacuum. Want to see the math?" },
-          { role: 'user', text: 'Yes, show me the equation.' },
-          { role: 'ai', text: "F = ma, and F_gravity = mg. So: mg = ma → g = a. Mass cancels! That's why a feather and a hammer fall together on the Moon (no air resistance). Try this: what would happen if you doubled the mass?" },
-        ],
-      },
-    ],
-  },
-  'real-estate': {
-    name: 'Real Estate',
-    tagline: 'Smarter property journeys, faster closings',
-    description:
-      'PersonaMatrix transforms real estate content — brochures, walkthrough videos, pricing sheets, and CRM data — into an AI Property Advisor that understands buyer intent, enables conversational property discovery, and leverages video and CRM intelligence to guide users from inquiry to site visit.',
-    color: '#10b981',
-    bg: 'rgba(16,185,129,0.12)',
-    border: 'rgba(16,185,129,0.3)',
-    useCases: [
-      {
-        title: 'AI Property Advisor',
-        description:
-          'Delivers faster property discovery and better matching by understanding buyer intent — budget, location, urgency — and recommending best-fit properties instantly. Guides buyers through objection handling and decision-making, and schedules site visits without manual follow-up. Recommends best-fit properties instantly and guides buyers to schedule site visits.',
-        capabilities: ['Intent-based recommendations', 'Objection handling', 'Site visit scheduling'],
-        channels: ['Web Chat', 'WhatsApp', 'Voice'],
-        demoPersona: 'HomeFind AI',
-        demoMessages: [
-          { role: 'user', text: "I'm looking for a 3-bedroom home near good schools, budget around ₹80L." },
-          { role: 'ai', text: "Based on your budget and school preference, I've shortlisted 3 properties in Whitefield and Sarjapur — both are top-rated school zones. The closest match is a 3BHK at ₹78L with a large garden and 2 covered parking spots. Want me to schedule a site visit this weekend?" },
-          { role: 'user', text: 'Yes, Saturday afternoon works. Also, is the price negotiable?' },
-          { role: 'ai', text: "The builder has offered a 2% flexibility on ready-to-move units — so you could potentially close at ₹76.4L. I've booked a site visit for Saturday at 2 PM with our advisor Priya. I'll send you the property brochure, location map, and a checklist of what to verify during the visit." },
-        ],
-      },
-      {
-        title: 'Lead Scoring & Qualification Bot',
-        description:
-          'Identifies high-intent buyers by automatically engaging inbound leads and qualifying their financing readiness and purchase timeline. Prioritizes leads as hot, warm, or cold so sales teams focus only on high-value prospects — improving sales efficiency and reducing time wasted on unqualified inquiries.',
-        capabilities: ['Hot/warm/cold lead scoring', 'Financing pre-check', 'Conversion trend insights'],
-        channels: ['Web', 'WhatsApp', 'Facebook Messenger'],
-        demoPersona: 'LeadQual',
-        demoMessages: [
-          { role: 'user', text: "I saw your listing on MG Road. Is it still available?" },
-          { role: 'ai', text: "Yes, the MG Road property is still available! It's a 4BHK listed at ₹1.2Cr. Are you looking to buy in the next 1–3 months, or still in the early research phase?" },
-          { role: 'user', text: "We're ready to move. Pre-approved for ₹1.3Cr." },
-          { role: 'ai', text: "Excellent — you're a hot lead and in a strong position. I'm flagging you for our senior advisor right now. In the meantime, would you like a full property report including recent comparable sales and neighborhood insights?" },
-        ],
-      },
-      {
-        title: 'Virtual Tour & FAQ Guide',
-        description:
-          'Delivers real-time answers to buyer questions during virtual property tours — covering listings, neighborhoods, and amenities with consistent, scalable engagement. Handles unlimited concurrent buyer interactions across chat, voice, and WhatsApp without additional staffing.',
-        capabilities: ['Virtual tour narration', 'Neighborhood insights', 'Instant FAQ'],
-        channels: ['Web', 'WhatsApp', 'Voice'],
-        demoPersona: 'TourGuide AI',
-        demoMessages: [
-          { role: 'user', text: "What are the maintenance charges for this apartment?" },
-          { role: 'ai', text: "Maintenance is ₹4/sq ft per month — for a 1,200 sq ft unit that's ₹4,800/month. This covers 24/7 security, gym, swimming pool, and landscaping. There's also a one-time sinking fund deposit of ₹50,000. Want a full breakdown of all charges?" },
-          { role: 'user', text: "How's the connectivity to the tech park?" },
-          { role: 'ai', text: "Very convenient — the property is 4 km from Electronic City Phase 1 and 6 km from Whitefield IT hub. There's a dedicated shuttle service from the complex. Average commute during peak hours is 20–25 minutes. Want me to show the route on a map?" },
-        ],
-      },
-    ],
-  },
 };
 
 function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 'ai'; text: string }[]; persona: string; slug?: string }) {
@@ -234,7 +301,7 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
     setIsPlaying(true);
   };
 
-  const tryDemoLabel = slug === 'creator-economy' ? 'Talk to an AI Creator' : slug === 'education' ? 'Get Course Recommendations' : 'Find Your Ideal Property';
+  const tryDemoLabel = 'Try Demo';
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -250,7 +317,6 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
 
   return (
     <div className="rounded-2xl border border-white/10 bg-[#0d0f18] overflow-hidden">
-      {/* Chat header */}
       <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8 bg-white/[0.02]">
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#3b82f6] flex items-center justify-center text-xs font-bold text-white">
           AI
@@ -269,7 +335,6 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
         </div>
       </div>
 
-      {/* Messages */}
       <div className="p-4 space-y-3 min-h-[200px]">
         {messages.slice(0, visibleCount).map((msg, i) => (
           <div
@@ -301,135 +366,37 @@ function MockChatDemo({ messages, persona, slug }: { messages: { role: 'user' | 
         )}
         {!isPlaying && visibleCount === 0 && (
           <div className="flex items-center justify-center h-32 text-white/30 text-sm">
-            Click "Try Demo" to see a live preview
+            Click &quot;Try Demo&quot; to see a live preview
           </div>
         )}
       </div>
 
-      {/* Input bar */}
       <div className="px-4 py-3 border-t border-white/8 flex items-center gap-3">
         <div className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/8 text-sm text-white/30">
           Type a message...
         </div>
         <button
           onClick={startDemo}
-          className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary flex-shrink-0"
+          className="px-4 py-2 rounded-xl text-sm font-semibold text-white btn-primary shrink-0"
         >
-          {isPlaying ? 'Playing...' : visibleCount > 0 ? 'Replay' : tryDemoLabel}
+          {isPlaying ? 'Playing…' : tryDemoLabel}
         </button>
       </div>
     </div>
   );
 }
 
-function UseCaseCard({ useCase, color, isFirst, slug }: { useCase: UseCase; color: string; isFirst: boolean; slug?: string }) {
-  const [expanded, setExpanded] = useState(isFirst);
-
-  const primaryCTALabel = slug === 'creator-economy' ? 'Experience the Persona' : slug === 'education' ? 'Try Admission Counselor AI' : 'Try AI Property Advisor';
-
-  return (
-    <div
-      className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden transition-all duration-300"
-      style={{ borderColor: expanded ? `${color}40` : undefined }}
-    >
-      <button
-        className="w-full text-left p-6 flex items-start gap-4"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <div
-          className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center mt-0.5"
-          style={{ background: `${color}22`, color }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </div>
-        <div className="flex-1">
-          <h3 className="font-semibold text-white text-lg mb-1">{useCase.title}</h3>
-          <p className="text-sm text-white/50 leading-relaxed">{useCase.description}</p>
-        </div>
-        <svg
-          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-          className={`flex-shrink-0 mt-1 text-white/30 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-
-      {expanded && (
-        <div className="px-6 pb-6 space-y-6">
-          {/* Capabilities + Channels */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Capabilities</p>
-              <div className="flex flex-wrap gap-2">
-                {useCase.capabilities.map((cap) => (
-                  <span
-                    key={cap}
-                    className="px-3 py-1 rounded-full text-xs font-medium border"
-                    style={{ background: `${color}15`, borderColor: `${color}30`, color }}
-                  >
-                    {cap}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Channels</p>
-              <div className="flex flex-wrap gap-2">
-                {useCase.channels.map((ch) => (
-                  <span
-                    key={ch}
-                    className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-white/60"
-                  >
-                    {ch}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Demo */}
-          <div>
-            <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Live Preview</p>
-            <MockChatDemo messages={useCase.demoMessages} persona={useCase.demoPersona} slug={slug} />
-          </div>
-
-          {/* CTAs */}
-          <div className="flex gap-3">
-            <Link
-              href="/register"
-              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary"
-            >
-              {primaryCTALabel}
-            </Link>
-            <Link
-              href="/register"
-              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200"
-            >
-              Try Sample
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function IndustryDetailPage() {
+export default function IndustrySlugPage() {
   const params = useParams();
-  const slug = params?.slug as string;
+  const slug = params['slug'] as string;
   const industry = industryData[slug];
 
   if (!industry) {
     return (
       <div className="min-h-screen bg-[#0a0c12] text-white flex items-center justify-center">
-        <PublicHeader />
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Industry not found</h1>
-          <Link href="/industries" className="text-[#7c3aed] hover:underline">
-            ← Back to Industries
-          </Link>
+          <h1 className="text-2xl font-bold mb-4">Industry not found</h1>
+          <Link href="/industries" className="text-[#7c3aed] hover:underline">← Back to Industries</Link>
         </div>
       </div>
     );
@@ -439,291 +406,254 @@ export default function IndustryDetailPage() {
     <div className="min-h-screen bg-[#0a0c12] text-white">
       <PublicHeader />
 
-      {/* Header */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <div
-          className="absolute top-0 left-0 right-0 h-full pointer-events-none"
-          style={{
-            background: `radial-gradient(ellipse at 50% 0%, ${industry.color}18 0%, transparent 60%)`,
-          }}
+          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-10 pointer-events-none"
+          style={{ background: `radial-gradient(circle, ${industry.color} 0%, transparent 70%)` }}
         />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Link
-            href="/industries"
-            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors mb-8"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <Link href="/industries" className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors mb-8">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 5l-7 7 7 7" />
             </svg>
-            All Industries
+            All Creator Verticals
           </Link>
 
-          <div className="flex items-start gap-5 mb-6">
+          <div className="max-w-3xl">
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{ background: industry.bg, color: industry.color, border: `1px solid ${industry.border}` }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium mb-6"
+              style={{ borderColor: industry.border, background: industry.bg, color: industry.color }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: industry.color }} />
+              Creator Economy
             </div>
-            <div>
-              <div
-                className="text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: industry.color }}
-              >
-                {industry.name}
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-3">
-                {industry.tagline}
-              </h1>
-              <p className="text-lg text-white/50 max-w-2xl leading-relaxed">{industry.description}</p>
-              {slug === 'real-estate' && (
-                <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
-                  Powered by multimodal AI that understands buyer intent, preferences, and decision context.
-                </p>
-              )}
-              {slug === 'creator-economy' && (
-                <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
-                  Powered by video-first multimodal AI with memory, context, and personality. Be present for every fan, without being online.
-                </p>
-              )}
-              {slug === 'education' && (
-                <p className="text-sm font-medium mt-4 max-w-2xl leading-relaxed" style={{ color: industry.color }}>
-                  Powered by multimodal AI that understands student intent, goals, and decision context.
-                </p>
-              )}
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.1] mb-4">
+              {industry.tagline}
+            </h1>
+            <p className="text-base sm:text-lg text-white/50 leading-relaxed mb-8 max-w-2xl">
+              {industry.description}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary w-fit">
+                Get Started Free
+              </Link>
+              <Link href="/pricing" className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200 w-fit">
+                View Pricing
+              </Link>
             </div>
-          </div>
-
-          <div className="flex gap-4 mt-8">
-            <Link
-              href="/register"
-              className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary"
-            >
-              Get Started
-            </Link>
-            <Link
-              href="/register"
-              className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200"
-            >
-              Book Demo
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Why PersonaMatrix for Creator Economy — Comparison Table */}
-      {slug === 'creator-economy' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-10">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Differentiation</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Why PersonaMatrix for Creators</h2>
-              <p className="text-sm text-white/40 mt-2">See how creators can engage and scale their audience in real time.</p>
-            </div>
-            <div className="overflow-x-auto rounded-2xl border border-white/8">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/8">
-                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Capability</th>
-                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Traditional Creator Tools</th>
-                    <th className="text-left px-6 py-4 font-semibold uppercase tracking-widest text-xs w-1/3 rounded-t-xl" style={{ color: '#7c3aed', background: 'rgba(124,58,237,0.08)' }}>PersonaMatrix</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      capability: 'Audience Engagement',
-                      traditional: 'Scheduled posts, delayed replies, limited reach',
-                      pm: 'AI persona engages every fan instantly, 24/7, in your voice and style',
-                    },
-                    {
-                      capability: 'Monetization Potential',
-                      traditional: 'Ad revenue, sponsorships — dependent on algorithm',
-                      pm: 'Conversational monetization from courses, content, and expertise on demand',
-                    },
-                    {
-                      capability: 'Personalization',
-                      traditional: 'Generic broadcasts to entire audience',
-                      pm: 'Personalized 1:1 conversations tailored to each fan\'s interests and history',
-                    },
-                    {
-                      capability: 'Availability',
-                      traditional: 'Only when you\'re online or posting',
-                      pm: 'Always-on AI persona available across all channels, every hour of the day',
-                    },
-                    {
-                      capability: 'Interaction Depth',
-                      traditional: 'Comments, likes, and surface-level engagement',
-                      pm: 'Deep, contextual conversations that build loyalty and drive action',
-                    },
-                  ].map((row, i) => (
-                    <tr key={i} className="border-b border-white/6 last:border-0">
-                      <td className="px-6 py-4 text-white/70 font-medium">{row.capability}</td>
-                      <td className="px-6 py-4 text-white/40">{row.traditional}</td>
-                      <td className="px-6 py-4 font-medium" style={{ color: '#7c3aed', background: 'rgba(124,58,237,0.05)' }}>{row.pm}</td>
-                    </tr>
+      {/* Use Cases */}
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="mb-12">
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Use Cases</p>
+          <h2 className="text-3xl font-bold text-white">How {industry.name} use PersonaMatrix</h2>
+        </div>
+
+        <div className="flex flex-col gap-16">
+          {industry.useCases.map((useCase, i) => (
+            <div key={useCase.title} className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-start ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              <div className="flex flex-col gap-5">
+                <div
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold w-fit"
+                  style={{ background: industry.bg, color: industry.color, border: `1px solid ${industry.border}` }}
+                >
+                  Use Case {String(i + 1).padStart(2, '0')}
+                </div>
+                <h3 className="text-2xl font-bold text-white">{useCase.title}</h3>
+                <p className="text-white/55 leading-relaxed">{useCase.description}</p>
+
+                <div className="flex flex-col gap-2">
+                  <p className="text-xs font-semibold text-white/30 uppercase tracking-wider">Capabilities</p>
+                  <ul className="flex flex-col gap-2">
+                    {useCase.capabilities.map((cap) => (
+                      <li key={cap} className="flex items-center gap-2 text-sm text-white/60">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <circle cx="7" cy="7" r="6" fill="rgba(255,255,255,0.06)" />
+                          <path d="M4.5 7l2 2 3-3" stroke={industry.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        {cap}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {useCase.channels.map((ch) => (
+                    <span
+                      key={ch}
+                      className="px-3 py-1 rounded-full text-xs font-medium border border-white/10 bg-white/5 text-white/50"
+                    >
+                      {ch}
+                    </span>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Why PersonaMatrix for Real Estate — Comparison Table */}
-      {slug === 'real-estate' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-10">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Differentiation</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Why PersonaMatrix for Real Estate</h2>
-            </div>
-            <div className="overflow-x-auto rounded-2xl border border-white/8">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/8">
-                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Capability</th>
-                    <th className="text-left px-6 py-4 text-white/40 font-semibold uppercase tracking-widest text-xs w-1/3">Traditional CRM / Tools</th>
-                    <th className="text-left px-6 py-4 font-semibold uppercase tracking-widest text-xs w-1/3 rounded-t-xl" style={{ color: '#10b981', background: 'rgba(16,185,129,0.08)' }}>PersonaMatrix</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      capability: 'Property Discovery',
-                      traditional: 'Manual search filters, static listings',
-                      pm: 'Conversational AI that understands intent and recommends best-fit properties instantly',
-                    },
-                    {
-                      capability: 'Lead Qualification',
-                      traditional: 'Form fills, manual follow-up calls',
-                      pm: 'Automated scoring — identifies hot, warm, cold leads in real time',
-                    },
-                    {
-                      capability: 'Customer Engagement',
-                      traditional: 'Email blasts, delayed responses, scripted responses',
-                      pm: 'Personalized, real-time conversations across chat, voice, and WhatsApp',
-                    },
-                    {
-                      capability: 'Follow-ups',
-                      traditional: 'Scheduled reminders, agent-dependent',
-                      pm: 'Proactive AI-driven follow-ups triggered by buyer behavior and intent signals',
-                    },
-                    {
-                      capability: 'Channels',
-                      traditional: 'Website forms or phone calls only',
-                      pm: 'Web, WhatsApp, Voice, Facebook Messenger — all from one platform',
-                    },
-                  ].map((row, i) => (
-                    <tr key={i} className="border-b border-white/6 last:border-0">
-                      <td className="px-6 py-4 text-white/70 font-medium">{row.capability}</td>
-                      <td className="px-6 py-4 text-white/40">{row.traditional}</td>
-                      <td className="px-6 py-4 font-medium" style={{ color: '#10b981', background: 'rgba(16,185,129,0.05)' }}>{row.pm}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Business Impact — Real Estate */}
-      {slug === 'real-estate' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Outcomes</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Business Impact</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { icon: '📈', text: 'Increase qualified leads by engaging every inbound inquiry instantly — no lead left behind.' },
-                { icon: '🏠', text: 'Improve site visit conversion rates with AI-guided property matching and instant scheduling.' },
-                { icon: '⚡', text: 'Reduce response time from hours to seconds across all buyer touchpoints.' },
-                { icon: '🤝', text: 'Accelerate deal closures by keeping buyers engaged and informed throughout the decision journey.' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.02]">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.text}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Business Impact — Creator Economy */}
-      {slug === 'creator-economy' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Outcomes</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Business Impact</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { icon: '🚀', text: 'Engage thousands of fans simultaneously — without being online.' },
-                { icon: '💰', text: 'Generate new revenue from your content and expertise through conversational AI experiences.' },
-                { icon: '🔁', text: 'Increase audience retention and loyalty with personalized, always-on interactions.' },
-                { icon: '📈', text: 'Scale your personal brand without scaling your effort or time.' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.02]">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Business Impact — Education */}
-      {slug === 'education' && (
-        <section className="py-16 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-3">Outcomes</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Business Impact</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { icon: '📈', text: 'Increase enrollment conversion rates by guiding every prospective student from inquiry to application with personalized AI support.' },
-                { icon: '🎯', text: 'Reduce admission drop-offs by automatically re-engaging students who pause or abandon the application journey.' },
-                { icon: '📚', text: 'Improve student engagement and retention with 24/7 AI tutoring that transforms static content into interactive learning.' },
-                { icon: '💰', text: 'Reduce operational and support costs by automating counseling, FAQs, and enrollment guidance at scale.' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.02]">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Student Lifecycle AI — Education */}
-      {slug === 'education' && (
-        <section className="py-12 border-t border-white/6">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(245,158,11,0.12)', color: '#f59e0b' }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
               </div>
+
+              <MockChatDemo messages={useCase.demoMessages} persona={useCase.demoPersona} slug={slug} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Shopify Integration — D2C only */}
+      {slug === 'd2c-commerce' && (
+        <section className="py-16 border-t border-white/6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            {/* Section header */}
+            <div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <div>
-                <h3 className="text-lg font-bold text-white mb-1">Student Lifecycle AI</h3>
-                <p className="text-white/50 text-sm leading-relaxed">
-                  PersonaMatrix provides continuous AI guidance across the entire student journey — from the moment a student discovers your institution to long after they enroll.
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold mb-4"
+                  style={{ borderColor: 'rgba(236,72,153,0.3)', background: 'rgba(236,72,153,0.12)', color: '#ec4899' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                  Shopify Integration
+                </div>
+                <h2 className="text-3xl font-bold text-white">Connect Your Shopify Store</h2>
+                <p className="text-white/50 mt-3 max-w-xl leading-relaxed">
+                  D2C brands can plug PersonaMatrix directly into their Shopify store. Your AI learns your product catalog, handles customer questions, and guides shoppers to checkout — all without leaving your store.
                 </p>
+              </div>
+              <div className="shrink-0">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#96bf48]/10 border border-[#96bf48]/25 text-[#96bf48] text-sm font-semibold">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.337 23.979l7.453-1.667S19.948 7.486 19.93 7.348c-.018-.139-.14-.231-.264-.231-.122 0-2.293-.046-2.293-.046s-1.527-1.485-1.688-1.643v18.551zM12.396 6.9s-.937-.275-2.473-.275c-3.937 0-5.836 2.469-5.836 4.896 0 2.696 1.763 4.01 3.395 5.133 1.27.867 1.688 1.47 1.688 2.258 0 .9-.72 1.413-1.895 1.413-1.31 0-2.55-.418-2.55-.418l-.464 2.143s1.12.418 1.96.418c.74 0 1.3-.32 1.3-.97 0-2.14-2.57-2.01-2.57-4.87 0-2.51 1.8-4.94 5.42-4.94.7 0 1.82.23 1.82.23z"/>
+                  </svg>
+                  Shopify Compatible
+                </span>
+              </div>
+            </div>
+
+            {/* How it works steps */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+              {[
+                {
+                  step: '01',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <rect x="2" y="3" width="20" height="14" rx="2" />
+                      <path d="M8 21h8M12 17v4" />
+                    </svg>
+                  ),
+                  title: 'Connect Your Store',
+                  desc: 'Link your Shopify store to PersonaMatrix in one click. No coding required.',
+                },
+                {
+                  step: '02',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M4 7h16M4 12h10M4 17h7" />
+                      <circle cx="19" cy="17" r="3" />
+                    </svg>
+                  ),
+                  title: 'AI Learns Your Catalog',
+                  desc: 'Your product names, descriptions, prices, and variants are automatically loaded into your AI.',
+                },
+                {
+                  step: '03',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                  ),
+                  title: 'Customers Chat & Buy',
+                  desc: 'Shoppers ask questions, get recommendations, and are guided to the right product — all in chat.',
+                },
+                {
+                  step: '04',
+                  icon: (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                  ),
+                  title: 'Track & Optimise',
+                  desc: 'See which questions drive the most sales and improve your AI over time from your dashboard.',
+                },
+              ].map(({ step, icon, title, desc }) => (
+                <div key={step} className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-6 flex flex-col gap-4 hover:border-[#ec4899]/30 transition-colors duration-200">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-[#ec4899]"
+                      style={{ background: 'rgba(236,72,153,0.12)', border: '1px solid rgba(236,72,153,0.2)' }}>
+                      {icon}
+                    </div>
+                    <span className="text-3xl font-black text-white/5">{step}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white mb-1">{title}</h4>
+                    <p className="text-xs text-white/45 leading-relaxed">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Feature highlights */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left: feature list */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-white">What your AI can do inside Shopify</h3>
+                <ul className="flex flex-col gap-4">
+                  {[
+                    { label: 'Answer product questions instantly', detail: 'Ingredients, sizing, materials, compatibility — your AI knows it all.' },
+                    { label: 'Recommend the right product', detail: 'Based on what the customer tells you, the AI suggests the best match from your catalog.' },
+                    { label: 'Handle objections & close sales', detail: 'Price concerns, comparison questions, return policy — your AI responds confidently.' },
+                    { label: 'Upsell & cross-sell naturally', detail: 'Suggest bundles, accessories, or complementary products in a conversational way.' },
+                    { label: 'Reduce support tickets', detail: 'Common post-purchase questions (shipping, tracking, returns) are answered automatically.' },
+                  ].map(({ label, detail }) => (
+                    <li key={label} className="flex items-start gap-3">
+                      <div className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: 'rgba(236,72,153,0.15)', border: '1px solid rgba(236,72,153,0.25)' }}>
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M2 5l2.5 2.5 3.5-4" stroke="#ec4899" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white/85">{label}</p>
+                        <p className="text-xs text-white/40 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: embed preview card */}
+              <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-white">Embed anywhere in your store</h3>
+                <p className="text-sm text-white/45 leading-relaxed">
+                  Add your AI as a chat widget on any page — product pages, collection pages, the cart, or the homepage. Customers get help exactly where they need it.
+                </p>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { page: 'Product Page', desc: 'Answer questions before the customer bounces', badge: 'Most Popular' },
+                    { page: 'Collection Page', desc: 'Help shoppers narrow down the right product', badge: '' },
+                    { page: 'Cart Page', desc: 'Reduce abandonment with last-minute reassurance', badge: '' },
+                    { page: 'Homepage', desc: 'Greet new visitors and guide them to bestsellers', badge: '' },
+                  ].map(({ page, desc, badge }) => (
+                    <div key={page} className="flex items-center gap-4 px-4 py-3 rounded-xl border border-white/6 bg-white/[0.03]">
+                      <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#ec4899' }} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-semibold text-white/80">{page}</span>
+                          {badge && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                              style={{ background: 'rgba(236,72,153,0.15)', color: '#ec4899' }}>
+                              {badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-white/35 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-auto pt-4 border-t border-white/6">
+                  <p className="text-xs text-white/30 leading-relaxed">
+                    Installation takes under 5 minutes. Copy a single script tag into your Shopify theme — no developer needed.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -733,42 +663,18 @@ export default function IndustryDetailPage() {
       {/* CTA */}
       <section className="py-20 border-t border-white/6">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          {slug === 'creator-economy' && (
-            <p className="text-xs font-medium text-white/40 mb-4">
-              Deploy your AI persona across websites, apps, and messaging platforms in minutes.
-            </p>
-          )}
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {slug === 'creator-economy' ? 'Build Your AI Persona' : `Ready to build for ${industry.name}?`}
-          </h2>
-          <p className="text-white/50 mb-8 max-w-lg mx-auto">
-            {slug === 'creator-economy' ?'Start free and launch your AI creator persona in minutes. No technical skills required.'
-              : `Start with a pre-configured ${industry.name} persona template and go live in under 30 minutes.`}
+          <h2 className="text-3xl font-bold text-white mb-4">Ready to build your AI persona?</h2>
+          <p className="text-white/50 mb-8">
+            Join creators already using PersonaMatrix to scale their audience and income.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/register"
-              className="px-8 py-3.5 rounded-xl font-semibold text-white text-sm btn-primary"
-            >
-              {slug === 'creator-economy' ? 'Build Your AI Persona' : 'Start Free'}
+            <Link href="/register" className="px-6 py-3 rounded-xl font-semibold text-white text-sm btn-primary">
+              Get Started Free
             </Link>
-            <Link
-              href="/register"
-              className="px-8 py-3.5 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200"
-            >
-              {slug === 'creator-economy' ? 'Request Demo' : 'Explore Other Industries'}
+            <Link href="/industries" className="px-6 py-3 rounded-xl font-semibold text-sm text-white/70 border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-200">
+              ← All Creator Verticals
             </Link>
           </div>
-          {slug === 'creator-economy' && (
-            <p className="mt-6 text-xs text-white/30">
-              Create your first persona — free, no credit card required.
-            </p>
-          )}
-          {slug === 'education' && (
-            <p className="mt-6 text-xs text-white/30">
-              Enterprise-ready, scalable, and built for modern education institutions.
-            </p>
-          )}
         </div>
       </section>
 

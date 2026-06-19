@@ -76,7 +76,7 @@ const API_SPEC: {
     { name: 'Knowledge Base', description: 'File upload, crawling, and KB management' },
     { name: 'Conversations', description: 'Conversation history and messages' },
     { name: 'Analytics', description: 'Usage analytics and reporting' },
-    { name: 'Channels', description: 'WhatsApp and SIP channel assignments' },
+    { name: 'Channels', description: 'WhatsApp channel assignments' },
     { name: 'Services', description: 'External service integrations' },
     { name: 'Plugins', description: 'Embeds and plugin management' },
     { name: 'API Keys', description: 'API key generation and revocation' },
@@ -240,9 +240,9 @@ const API_SPEC: {
           description: 'Array of daily message volume data points',
           example: {
             data: [
-              { date: '2024-05-25', whatsapp: 320, sip: 85, web: 210 },
-              { date: '2024-05-26', whatsapp: 410, sip: 92, web: 275 },
-              { date: '2024-05-27', whatsapp: 290, sip: 78, web: 195 },
+              { date: '2024-05-25', whatsapp: 320, web: 210 },
+              { date: '2024-05-26', whatsapp: 410, web: 275 },
+              { date: '2024-05-27', whatsapp: 290, web: 195 },
             ],
             totalDays: 14,
           },
@@ -678,7 +678,7 @@ const API_SPEC: {
       auth: true,
       queryParams: {
         personaId: { type: 'string', description: 'Filter by persona' },
-        channel: { type: 'string', enum: ['whatsapp', 'sip', 'web'], description: 'Filter by channel' },
+        channel: { type: 'string', enum: ['whatsapp', 'web'], description: 'Filter by channel' },
         status: { type: 'string', enum: ['active', 'resolved', 'escalated'], description: 'Filter by status' },
         from: { type: 'string', description: 'Start date (ISO 8601)', example: '2024-01-01' },
         to: { type: 'string', description: 'End date (ISO 8601)', example: '2024-12-31' },
@@ -827,7 +827,7 @@ const API_SPEC: {
       method: 'GET',
       path: '/api/channels',
       summary: 'List channel groups and assignments',
-      description: 'Returns all channel groups (WhatsApp, SIP) and their current persona assignments.',
+      description: 'Returns all channel groups (WhatsApp) and their current persona assignments.',
       tag: 'Channels',
       status: 'planned',
       auth: true,
@@ -841,12 +841,6 @@ const API_SPEC: {
                 type: 'whatsapp',
                 assignments: [
                   { personaId: 'p_abc123', personaName: 'Support Agent', phoneNumber: '+2234567890', assignedAt: '2024-05-01T08:00:00Z' },
-                ],
-              },
-              {
-                type: 'sip',
-                assignments: [
-                  { personaId: 'p_def456', personaName: 'Sales Bot', phoneNumber: 'sip:sales@pbx.example.com', assignedAt: '2024-05-10T09:00:00Z' },
                 ],
               },
             ],
@@ -867,12 +861,12 @@ const API_SPEC: {
       tag: 'Channels',
       status: 'planned',
       auth: true,
-      pathParams: { type: { type: 'string', enum: ['whatsapp', 'sip'], description: 'Channel type', required: true } },
+      pathParams: { type: { type: 'string', enum: ['whatsapp'], description: 'Channel type', required: true } },
       requestBody: {
         type: 'object',
         properties: {
           personaId: { type: 'string', description: 'Persona to assign', required: true },
-          phoneNumber: { type: 'string', description: 'Phone number or SIP address', required: true },
+          phoneNumber: { type: 'string', description: 'Phone number', required: true },
         },
         example: { personaId: 'p_abc123', phoneNumber: '+2234567890' },
       },
@@ -898,7 +892,7 @@ const API_SPEC: {
       status: 'planned',
       auth: true,
       pathParams: {
-        type: { type: 'string', enum: ['whatsapp', 'sip'], description: 'Channel type', required: true },
+        type: { type: 'string', enum: ['whatsapp'], description: 'Channel type', required: true },
         personaId: { type: 'string', description: 'Persona ID to unassign', required: true },
       },
       responses: [

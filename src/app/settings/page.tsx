@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import AppLayout from '@/components/AppLayout';
 import { User, Bell, Shield, Key, Globe, Palette, Save, Camera } from 'lucide-react';
+import Topbar from '@/components/Topbar';
 
 interface SettingsTab {
   id: string;
@@ -30,13 +31,11 @@ export default function SettingsPage() {
 
   return (
     <AppLayout>
+      <Topbar
+        title="Settings"
+        subtitle="Manage your account preferences and configurations"
+      />
       <div className="max-w-5xl mx-auto overflow-x-hidden">
-        {/* Header */}
-        <div className="mb-5 sm:mb-8">
-          <h1 className="text-xl sm:text-2xl font-bold text-white">Settings</h1>
-          <p className="text-white/50 text-sm mt-1">Manage your account preferences and configurations</p>
-        </div>
-
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           {/* Tab Nav — horizontal scroll on mobile/tablet, vertical on desktop */}
           <div className="lg:w-52 lg:flex-shrink-0 w-full overflow-x-auto">
@@ -115,7 +114,7 @@ export default function SettingsPage() {
                       <label className="block text-xs text-white/50 mb-1.5">Organization</label>
                       <input
                         type="text"
-                        defaultValue="PersonaMatrix Inc."
+                        defaultValue="Creator Economy Studio"
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary/50 transition-all"
                       />
                     </div>
@@ -123,7 +122,7 @@ export default function SettingsPage() {
                       <label className="block text-xs text-white/50 mb-1.5">Bio</label>
                       <textarea
                         rows={3}
-                        defaultValue="AI persona builder and product strategist."
+                        defaultValue="Finance creator, course builder, and coach — helping my audience build wealth and grow their skills."
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary/50 transition-all resize-none"
                       />
                     </div>
@@ -137,10 +136,10 @@ export default function SettingsPage() {
                   <h2 className="text-base font-semibold text-white mb-4">Notification Preferences</h2>
                   {[
                     { label: 'Email Notifications', desc: 'Receive updates via email', defaultChecked: true },
-                    { label: 'Persona Activity Alerts', desc: 'Get notified when personas are triggered', defaultChecked: true },
-                    { label: 'Knowledge Base Sync', desc: 'Alerts when knowledge sync completes or fails', defaultChecked: false },
+                    { label: 'Persona Activity Alerts', desc: 'Get notified when your creator personas receive new audience messages', defaultChecked: true },
+                    { label: 'Knowledge Base Sync', desc: 'Alerts when your content sync completes or fails', defaultChecked: false },
                     { label: 'Billing & Usage', desc: 'Invoices and usage threshold alerts', defaultChecked: true },
-                    { label: 'Product Updates', desc: 'New features and announcements', defaultChecked: false },
+                    { label: 'Product Updates', desc: 'New features and creator tools announcements', defaultChecked: false },
                   ].map((item) => (
                     <div key={item.label} className="flex items-center justify-between gap-4 py-3 border-b border-white/5 last:border-0">
                       <div className="min-w-0 flex-1">
